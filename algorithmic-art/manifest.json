@@ -1,0 +1,13 @@
+{
+  "name": "algorithmic-art",
+  "version": "1.0.0",
+  "type": "composite",
+  "harness_compatibility": ["pi", "gemini", "claude"],
+  "dependencies": [
+    "hyperframes"
+  ],
+  "metadata": {
+    "model": "inherit",
+    "description": "Generates high-fidelity interactive algorithmic/generative art using p5.js."
+  }
+}

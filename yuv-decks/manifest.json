@@ -1,0 +1,15 @@
+{
+  "name": "yuv-decks",
+  "version": "1.0.0",
+  "type": "composite",
+  "harness_compatibility": ["pi", "gemini", "claude"],
+  "dependencies": [
+    "yuv-design-system",
+    "theme-factory",
+    "article-illustrations"
+  ],
+  "metadata": {
+    "model": "inherit",
+    "description": "Build cinematic, narrative-driven presentation decks in Yuval Avidani's signature style using @open-slide/core."
+  }
+}

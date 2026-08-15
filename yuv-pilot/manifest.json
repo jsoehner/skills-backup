@@ -1,0 +1,16 @@
+{
+  "name": "yuv-pilot",
+  "version": "1.0.0",
+  "type": "composite",
+  "harness_compatibility": ["pi", "gemini", "claude"],
+  "dependencies": [
+    "yuv-decks",
+    "yuv-design-system",
+    "yuv-viral-video",
+    "yuv-brand-orchestrator"
+  ],
+  "metadata": {
+    "model": "inherit",
+    "description": "Top-of-pyramid orchestrator for Yuval Avidani's YUV.AI brand work. Apply when the user wants YUV.AI output and the medium is ambiguous or multi-medium, or for strategic planning."
+  }
+}

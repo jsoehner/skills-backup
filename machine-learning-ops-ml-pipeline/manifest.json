@@ -1,0 +1,19 @@
+{
+  "name": "machine-learning-ops-ml-pipeline",
+  "version": "1.0.0",
+  "type": "composite",
+  "harness_compatibility": ["pi", "gemini", "claude"],
+  "dependencies": [
+    "data-engineer",
+    "data-scientist",
+    "ml-engineer",
+    "python-pro",
+    "mlops-engineer",
+    "kubernetes-architect",
+    "observability-engineer"
+  ],
+  "metadata": {
+    "model": "inherit",
+    "description": "Design and implement a complete ML pipeline for: $ARGUMENTS"
+  }
+}

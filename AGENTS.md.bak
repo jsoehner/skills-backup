@@ -1,0 +1,21 @@
+# OpenCode Skills Repository
+
+A collection of specialized AI agent skills for the OpenCode platform. Each skill is a self-contained directory providing specific domain expertise or functional capabilities.
+
+## Core Workflow
+- **Installation**: Skills are restored to `~/.opencode/skills` using `python restore_skills.py . --client opencode`.
+- **Structure**: Each skill directory must contain a `SKILL.md` at its root. 
+- **Maintenance**: Use `update_readme.py` for documentation and `restore_skills.py` for environment syncing.
+
+## High-Signal Facts
+- **Flattening**: Ensure no nested `skills/` directories exist. All skills must reside directly under `~/.opencode/skills/`.
+- **Self-Containment**: Skills should be self-contained. Avoid external references unless explicitly created during the skill's execution.
+- **Skill Types**: Includes AI engineering, DevOps, Security, Data Science, and Creative tools (Video/Art/Design).
+
+## Commands
+- **Restore Skills**: `python restore_skills.py . --client opencode`
+- **Update Docs**: `python update_readme.py`
+
+## Testing & Verification
+- Verify skill installation by checking the `~/.opencode/skills` directory.
+- Use `skill-judge` to audit the quality of new skill definitions.

@@ -1,0 +1,5 @@
+No API key found for llama-server=http://127.0.0.1:8080.
+
+Use /login to log into a provider via OAuth or API key. See:
+  C:\Users\jsoehner\AppData\Roaming\npm\node_modules\@earendil-works\pi-coding-agent\docs\providers.md
+  C:\Users\jsoehner\AppData\Roaming\npm\node_modules\@earendil-works\pi-coding-agent\docs\models.md

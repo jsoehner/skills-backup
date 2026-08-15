@@ -1,0 +1,17 @@
+{
+  "name": "performance-optimization-orchestrator",
+  "version": "1.0.0",
+  "type": "composite",
+  "harness_compatibility": ["pi", "gemini", "claude"],
+  "dependencies": [
+    "sql-optimization-patterns",
+    "spark-optimization",
+    "vector-index-tuning",
+    "performance-engineer",
+    "performance-testing-review-ai-review"
+  ],
+  "metadata": {
+    "model": "inherit",
+    "description": "Orchestrates performance optimization across the stack, including SQL, Spark, Vector Indices, and application-level profiling."
+  }
+}
