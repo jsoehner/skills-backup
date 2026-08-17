@@ -127,12 +127,12 @@ python3 scripts/bigquery_dts.py --project_id=<PROJECT_ID>
         generate an OAuth URI. Ask the user to visit this URL to authorize. Once
         the user provides the versionInfo code, use the code as
         `definition.versionInfo` in `deployment.yaml` and then you can proceed.
-    -   If any parameters are related to authentication, explicitly ask the user
+    - If any parameters are related to authentication, explicitly ask the user
         to provide the Secret Manager Resource ID (e.g.,
         projects/my-project/secrets/my-secret) for these parameters
-    -   Present every required parameter to the user BEFORE generating config
+    - Present every required parameter to the user BEFORE generating config
         files.
-    -   Ask for verification of assets/tables to be ingested.
+    - Ask for verification of assets/tables to be ingested.
 
 3.  **Wait for User Response**: You **MUST NOT** proceed until parameters are
     confirmed.
@@ -197,3 +197,10 @@ of the tasks.
 
 - NEVER use imperative CLI commands to create resources; always deploy DTS configs declaratively.
 - NEVER hardcode transfer schedules without verifying timezones and backfill implications.
+
+## Knowledge Capture Requirement
+When completing a task that involves a significant architectural decision, a complex bug fix, or a new infrastructure pattern, you MUST:
+1. Synthesize the decision/fix into a concise summary (3-5 sentences).
+2. Classify it as either **OKF** (High-level policy, architectural rule, or cross-cutting standard) or **CHROMA** (Technical context, implementation detail, or specific bug fix).
+3. Execute `capture_knowledge.py` with the appropriate `--type` flag.
+4. Ensure the captured knowledge is deduplicated and properly chunked using the `smart_chunk` logic.

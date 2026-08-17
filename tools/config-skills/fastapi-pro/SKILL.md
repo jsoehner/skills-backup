@@ -190,7 +190,14 @@ Expert FastAPI developer specializing in high-performance, async-first API devel
 - "Create a GraphQL endpoint alongside REST in FastAPI"
 - "Build a file upload system with progress tracking"
 
-## Anti-Patterns
+## Knowledge Capture Requirement
+When performing tasks that involve architectural decisions, significant engineering trade-offs, or complex infrastructure changes, you MUST use the `capture_knowledge.py` script to persist the information.
+
+- **Policy/High-Level Decisions**: Use `python3 capture_knowledge.py --type okf` to save to the Open Knowledge Framework (OKF).
+- **Technical Context/Implementation Details**: Use `python3 capture_knowledge.py --type chroma` to save to the contextual memory (ChromaDB).
+
+Ensure that the captured content is deduplicated (the script handles this via hashing) and correctly chunked.
+
 
 - NEVER perform blocking synchronous operations inside asynchronous event loops.
 - NEVER run python applications without pinning exact dependencies in requirements or pyproject files.

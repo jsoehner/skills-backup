@@ -206,3 +206,10 @@ Returns schemaname, viewname, ownername and the definition.
 
 - NEVER execute raw DML/DDL operations on production database instances without verification.
 - NEVER ignore connection limits and connection pool starvation indicators.
+
+## Knowledge Capture Requirement
+When completing a task that involves a significant architectural decision, a complex bug fix, or a new infrastructure pattern, you MUST:
+1. Synthesize the decision/fix into a concise summary (3-5 sentences).
+2. Classify it as either **OKF** (High-level policy, architectural rule, or cross-cutting standard) or **CHROMA** (Technical context, implementation detail, or specific bug fix).
+3. Execute `capture_knowledge.py` with the appropriate `--type` flag.
+4. Ensure the captured knowledge is deduplicated and properly chunked using the `smart_chunk` logic.

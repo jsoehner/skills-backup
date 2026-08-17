@@ -60,7 +60,12 @@ ls conductor/index.md conductor/product.md conductor/tech-stack.md conductor/wor
 Example: feature_user_auth_20250115
 ```
 
-## Anti-Patterns
+## Knowledge Capture Requirement
+When performing tasks that involve architectural decisions, significant engineering trade-offs, or complex infrastructure changes, you MUST use the `capture_knowledge.py` script to persist the information.
 
-- NEVER skip clean-up routines (teardowns) to prevent test state leakage between runs.
-- NEVER assert on unstable UI selectors or variable network latencies without proper wait mechanisms.
+- **Policy/High-Level Decisions**: Use `python3 capture_knowledge.py --type okf` to save to the Open Knowledge Framework (OKF).
+- **Technical Context/Implementation Details**: Use `python3 capture_knowledge.py --type chroma` to save to the contextual memory (ChromaDB).
+
+Ensure that the captured content is deduplicated (the script handles this via hashing) and correctly chunked.
+
+## Anti-Patterns

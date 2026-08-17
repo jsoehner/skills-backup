@@ -1,0 +1,21 @@
+{
+  "name": "architecture-governance-orchestrator",
+  "version": "1.0.0",
+  "type": "composite",
+  "harness_compatibility": ["pi", "gemini", "claude"],
+  "dependencies": [
+    "adr-authoring",
+    "adr-discovery",
+    "adr-lifecycle-management",
+    "c4-architecture",
+    "c4-architecture-c4-architecture",
+    "c4-code",
+    "c4-component",
+    "c4-container",
+    "c4-context"
+  ],
+  "metadata": {
+    "model": "inherit",
+    "description": "Orchestrates architectural governance, including ADR management, C4 modeling, and multi-platform architecture design."
+  }
+}

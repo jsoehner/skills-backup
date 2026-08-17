@@ -1,0 +1,21 @@
+{
+  "name": "full-stack-orchestration-full-stack-feature",
+  "version": "1.0.0",
+  "type": "composite",
+  "harness_compatibility": ["pi", "gemini", "claude"],
+  "dependencies": [
+    "database-architect",
+    "backend-architect",
+    "frontend-developer",
+    "python-pro",
+    "sql-pro",
+    "test-automator",
+    "security-auditor",
+    "deployment-engineer",
+    "performance-engineer"
+  ],
+  "metadata": {
+    "model": "inherit",
+    "description": "Use when working with full stack orchestration full stack feature"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "tdd-orchestrator",
+  "version": "1.0.0",
+  "type": "composite",
+  "harness_compatibility": ["pi", "gemini", "claude"],
+  "dependencies": [
+    "test-automator",
+    "unit-testing-test-generate"
+  ],
+  "metadata": {
+    "model": "opus",
+    "description": "Master TDD orchestrator specializing in red-green-refactor discipline, multi-agent workflow coordination, and comprehensive test-driven development practices."
+  }
+}

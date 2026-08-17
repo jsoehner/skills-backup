@@ -41,6 +41,14 @@ $ARGUMENTS
 
 - `resources/implementation-playbook.md` for detailed audit steps, tooling, and remediation examples.
 
+## Knowledge Capture Requirement
+When performing tasks that involve architectural decisions, significant engineering trade-offs, or complex infrastructure changes, you MUST use the `capture_knowledge.py` script to persist the information.
+
+- **Policy/High-Level Decisions**: Use `python3 capture_knowledge.py --type okf` to save to the Open Knowledge Framework (OKF).
+- **Technical Context/Implementation Details**: Use `python3 capture_knowledge.py --type chroma` to save to the contextual memory (ChromaDB).
+
+Ensure that the captured content is deduplicated (the script handles this via hashing) and correctly chunked.
+
 ## Anti-Patterns
 
 - NEVER rely solely on automated accessibility scanners (like Axe or Lighthouse); they miss up to 70% of WCAG violations.

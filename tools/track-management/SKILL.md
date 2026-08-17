@@ -41,3 +41,10 @@ Guide for creating, managing, and completing Conductor tracks - the logical work
 
 - NEVER deploy code changes without validating them against target test suites.
 - NEVER skip documenting non-obvious code assumptions, constraints, and side effects.
+
+## Knowledge Capture Requirement
+
+After completing a significant architectural decision, security policy update, or complex bug fix, you **must** capture this knowledge. 
+1. Synthesize the decision/fix into a concise summary.
+2. Run `capture_knowledge.py` (or the orchestrator) to persist this to the project's knowledge base.
+3. Confirm the save to the user.

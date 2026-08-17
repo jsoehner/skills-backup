@@ -90,8 +90,8 @@ Perform these checks **before** generating the `implementation_plan.md`.
             `project.dataset.table` for BigQuery tables and
             `project.catalog.namespace.table` for BigLake Iceberg tables.
 
-3.  **Fetch Schema & Samples** — Use `bq` commands to fetch schema and sample
-    data for **both** source and destination tables.
+    -   **Fetch Schema & Samples** — Use `bq` commands to fetch schema and sample
+        data for **both** source and destination tables.
 
 ### Step 1.5: Implementation Plan Requirements
 
@@ -273,3 +273,10 @@ Include a summary of all quality review steps and profiling evidence.
 
 - NEVER deploy code changes without validating them against target test suites.
 - NEVER skip documenting non-obvious code assumptions, constraints, and side effects.
+
+## Knowledge Capture Requirement
+When completing a task that involves a significant architectural decision, a complex bug fix, or a new infrastructure pattern, you MUST:
+1. Synthesize the decision/fix into a concise summary (3-5 sentences).
+2. Classify it as either **OKF** (High-level policy, architectural rule, or cross-cutting standard) or **CHROMA** (Technical context, implementation detail, or specific bug fix).
+3. Execute `capture_knowledge.py` with the appropriate `--type` flag.
+4. Ensure the captured knowledge is deduplicated and properly chunked using the `smart_chunk` logic.

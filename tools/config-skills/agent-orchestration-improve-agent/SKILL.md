@@ -348,6 +348,14 @@ Establish regular improvement cadence:
 
 Remember: Agent optimization is an iterative process. Each cycle builds upon previous learnings, gradually improving performance while maintaining stability and safety.
 
+## Knowledge Capture Requirement
+When performing tasks that involve architectural decisions, significant engineering trade-offs, or complex infrastructure changes, you MUST use the `capture_knowledge.py` script to persist the information.
+
+- **Policy/High-Level Decisions**: Use `python3 capture_knowledge.py --type okf` to save to the Open Knowledge Framework (OKF).
+- **Technical Context/Implementation Details**: Use `python3 capture_knowledge.py --type chroma` to save to the contextual memory (ChromaDB).
+
+Ensure that the captured content is deduplicated (the script handles this via hashing) and correctly chunked.
+
 ## Anti-Patterns
 
 - NEVER deploy prompt updates without testing for regressions on golden path test cases.

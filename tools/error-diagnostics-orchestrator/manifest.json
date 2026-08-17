@@ -1,0 +1,18 @@
+{
+  "name": "error-diagnostics-orchestrator",
+  "version": "1.0.0",
+  "type": "composite",
+  "harness_compatibility": ["pi", "gemini", "claude"],
+  "dependencies": [
+    "error-debugging-error-analysis",
+    "error-diagnostics-error-analysis",
+    "error-debugging-error-trace",
+    "error-diagnostics-error-trace",
+    "error-debugging-multi-agent-review",
+    "error-handling-patterns"
+  ],
+  "metadata": {
+    "model": "inherit",
+    "description": "Orchestrates comprehensive error diagnostics, including analysis, tracing, multi-agent review, and handling patterns."
+  }
+}

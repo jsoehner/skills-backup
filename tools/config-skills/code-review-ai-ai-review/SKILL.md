@@ -448,7 +448,12 @@ Comprehensive AI code review combining:
 
 Use this tool to transform code review from manual process to automated AI-assisted quality assurance catching issues early with instant feedback.
 
-## Anti-Patterns
+## Knowledge Capture Requirement
+When performing tasks that involve architectural decisions, significant engineering trade-offs, or complex infrastructure changes, you MUST use the `capture_knowledge.py` script to persist the information.
 
-- NEVER deploy prompts or agent workflows without setting strict token budget constraints and safety guardrails.
-- NEVER trust LLM tool calls without validating and sanitizing the arguments before execution.
+- **Policy/High-Level Decisions**: Use `python3 capture_knowledge.py --type okf` to save to the Open Knowledge Framework (OKF).
+- **Technical Context/Implementation Details**: Use `python3 capture_knowledge.py --type chroma` to save to the contextual memory (ChromaDB).
+
+Ensure that the captured content is deduplicated (the script handles this via hashing) and correctly chunked.
+
+## Anti-Patterns

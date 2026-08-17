@@ -37,3 +37,10 @@ Comprehensive guidance for writing comprehensive unit tests for shell scripts us
 
 - NEVER write Bats tests without proper cleanup traps; left-over test files can pollute subsequent runs.
 - NEVER assert on stdout alone when verifying command failures; always verify exit codes explicitly.
+
+## Knowledge Capture Requirement
+When completing a task that involves a significant architectural decision, a complex bug fix, or a new infrastructure pattern, you MUST:
+1. Synthesize the decision/fix into a concise summary (3-5 sentences).
+2. Classify it as either **OKF** (High-level policy, architectural rule, or cross-cutting standard) or **CHROMA** (Technical context, implementation detail, or specific bug fix).
+3. Execute `capture_knowledge.py` with the appropriate `--type` flag.
+4. Ensure the captured knowledge is deduplicated and properly chunked using the `smart_chunk` logic.

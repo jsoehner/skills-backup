@@ -6,13 +6,19 @@ import argparse
 def main():
     parser = argparse.ArgumentParser(description="Restore skills to the correct directory based on the AI client.")
     parser.add_argument("source_root", help="The directory containing the skill backups.")
-    parser.add_argument("--client", choices=["opencode", "pi"], default="opencode", help="The AI client to restore skills for (default: opencode).")
+    parser.add_argument("--client", choices=["opencode", "pi", "gemini", "claude"], default="opencode", help="The AI client to restore skills for (default: opencode).")
     args = parser.parse_args()
 
     source_root = os.path.abspath(args.source_root)
     
     if args.client == "opencode":
         target_root = os.path.expanduser('~/.opencode')
+        skills_dir = os.path.join(target_root, 'skills')
+    elif args.client == "gemini":
+        target_root = os.path.expanduser('~/.gemini/config')
+        skills_dir = os.path.join(target_root, 'skills')
+    elif args.client == "claude":
+        target_root = os.path.expanduser('~/.claude')
         skills_dir = os.path.join(target_root, 'skills')
     else:
         target_root = os.path.expanduser('~/.pi/agent')

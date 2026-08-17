@@ -1,0 +1,14 @@
+{
+  "name": "yuv-viral-video",
+  "version": "1.0.0",
+  "type": "composite",
+  "harness_compatibility": ["pi", "gemini", "claude"],
+  "dependencies": [
+    "hyperframes",
+    "video-use"
+  ],
+  "metadata": {
+    "model": "inherit",
+    "description": "Edit any selfie or screen-share footage into a viral short-form video in YUV.AI's signature style — Apple-style liquid-glass cards (real CSS backdrop-filter), dark-mode polish, MrBeast-paced cuts, video-title karaoke captions, premium GSAP motion graphics, no fake content, never covering the speaker's face."
+  }
+}

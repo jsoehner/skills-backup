@@ -1,0 +1,16 @@
+{
+  "name": "backend-architect",
+  "version": "1.0.0",
+  "type": "composite",
+  "harness_compatibility": ["pi", "gemini", "claude"],
+  "dependencies": [
+    "database-architect",
+    "cloud-architect",
+    "security-auditor",
+    "performance-engineer"
+  ],
+  "metadata": {
+    "model": "inherit",
+    "description": "Expert backend architect specializing in scalable API design, microservices architecture, and distributed systems."
+  }
+}

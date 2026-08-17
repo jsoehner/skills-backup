@@ -154,7 +154,11 @@ Expert backend security developer with comprehensive knowledge of secure coding 
 - "Implement rate limiting and DDoS protection for public API endpoints"
 - "Design secure external service integration with allowlist validation"
 
-## Anti-Patterns
+## Knowledge Capture Requirement
 
+After completing a significant architectural decision, security policy update, or complex bug fix, you **must** capture this knowledge. 
+1. Synthesize the decision/fix into a concise summary.
+2. Run `capture_knowledge.py` (or the orchestrator) to persist this to the project's knowledge base.
+3. Confirm the save to the user.
 - NEVER trust client-side validation; always perform comprehensive schema validation on the backend.
 - NEVER log authentication tokens, raw credentials, or PII.
