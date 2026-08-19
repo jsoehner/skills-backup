@@ -205,4 +205,14 @@ Remember: Your goal is to create reference documentation that answers every poss
 - NEVER load massive datasets directly into client memory; use pagination or infinite scroll.
 - NEVER use generic, unstyled components or default browser styling in production-ready UIs.
 
+## 6) Memory Sync
 
+After a technical reference, API documentation, or configuration guide is completed, you **MUST** trigger the local memory capture. 
+
+1. Save the final documentation as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   ```bash
+   python C:\\Users\\jsoehner\\memory_system\\capture_knowledge.py <file_path>
+   ```
+3. This ensures that new parameters, standards, and architectural rules are automatically routed to the correct storage (OKF or ChromaDB).
+",path:

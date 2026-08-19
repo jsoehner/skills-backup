@@ -411,4 +411,10 @@ Focus on creating production-ready, accessible, and maintainable components that
 - NEVER load massive datasets directly into client memory; use pagination or infinite scroll.
 - NEVER use generic, unstyled components or default browser styling in production-ready UIs.
 
+## 6) Memory Sync
 
+Execute the following steps to sync knowledge to the memory system:
+1. Use `capture_knowledge.py` to route information to the correct storage (OKF or ChromaDB).
+2. Ensure that high-level architectural rules, policies, and decisions are stored in the OKF (Open Knowledge Format) directory.
+3. Ensure that ephemeral data, logs, and specific technical notes are stored in the ChromaDB instance.
+4. Verify that the `MEMORY_SYSTEM_ROOT` and `MEMORY_INBOX_DIR` environment variables are correctly configured.
