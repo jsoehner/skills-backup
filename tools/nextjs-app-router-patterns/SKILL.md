@@ -27,6 +27,7 @@ Comprehensive patterns for Next.js 14+ App Router architecture, Server Component
 - Apply relevant best practices and validate outcomes.
 - Provide actionable steps and verification.
 - If detailed examples are required, open `resources/implementation-playbook.md`.
+- Trigger the `capture_knowledge.py` script to record Next.js App Router architectural decisions, Server Component patterns, and data fetching optimizations.
 
 ## Resources
 

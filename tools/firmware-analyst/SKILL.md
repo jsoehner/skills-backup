@@ -10,11 +10,14 @@ metadata:
 ---
 
 # Download from vendor
+
 wget http://vendor.com/firmware/update.bin
 
 # Extract from device via debug interface
+
 # UART console access
 screen /dev/ttyUSB0 115200
+
 # Copy firmware partition
 dd if=/dev/mtd0 of=/tmp/firmware.bin
 
@@ -90,7 +93,7 @@ unsquashfs filesystem.squashfs
 jefferson filesystem.jffs2 -d output/
 
 # UBIFS
-ubireader_extract_images firmware.ubi
+ubi_reader_extract_images firmware.ubi
 
 # YAFFS
 unyaffs filesystem.yaffs
@@ -138,15 +141,6 @@ mipsel-linux-gnu-gcc exploit.c -o exploit
 ## Common Vulnerability Classes
 
 ### Authentication Issues
-```
-Hardcoded credentials     - Default passwords in firmware
-Backdoor accounts         - Hidden admin accounts
-Weak password hashing     - MD5, no salt
-Authentication bypass     - Logic flaws in login
-Session management        - Predictable tokens
-```
-
-### Command Injection
 ```c
 // Vulnerable pattern
 char cmd[256];
@@ -161,26 +155,34 @@ $(id)
 ```
 
 ### Memory Corruption
-```
-Stack buffer overflow    - strcpy, sprintf without bounds
-Heap overflow           - Improper allocation handling
-Format string           - printf(user_input)
-Integer overflow        - Size calculations
-Use-after-free          - Improper memory management
+```c
+// Stack buffer overflow
+strcpy(buf, user_input);
+sprintf(buf, "%s", user_input);
+// Heap overflow
+// Improper allocation handling
+// Use-after-free
+// Integer overflow
+// Format string
+printf(user_input);
 ```
 
 ### Information Disclosure
-```
-Debug interfaces        - UART, JTAG left enabled
-Verbose errors          - Stack traces, paths
-Configuration files     - Exposed credentials
-Firmware updates        - Unencrypted downloads
+```c
+// Debug interfaces
+// UART, JTAG left enabled
+// Firmware updates
+// Unencrypted downloads
+// Configuration files
+// Exposed credentials
+// Verbose errors
+// Stack traces, paths
 ```
 
 ## Tool Proficiency
 
 ### Extraction Tools
-```
+```bash
 binwalk v3           - Firmware extraction and analysis (Rust rewrite, faster, fewer false positives)
 firmware-mod-kit     - Firmware modification toolkit
 jefferson            - JFFS2 extraction
@@ -189,7 +191,7 @@ sasquatch            - SquashFS with non-standard features
 ```
 
 ### Analysis Tools
-```
+```bash
 Ghidra               - Multi-architecture disassembly
 IDA Pro              - Commercial disassembler
 Binary Ninja         - Modern RE platform
@@ -199,7 +201,7 @@ FACT                 - Firmware Analysis and Comparison Tool
 ```
 
 ### Emulation
-```
+```bash
 QEMU                 - Full system and user-mode emulation
 Firmadyne            - Automated firmware emulation
 EMUX                 - ARM firmware emulator
@@ -208,7 +210,7 @@ Unicorn              - CPU emulation framework
 ```
 
 ### Hardware Tools
-```
+```bash
 Bus Pirate           - Universal serial interface
 Logic analyzer       - Protocol analysis
 JTAGulator           - JTAG/UART discovery
@@ -318,14 +320,18 @@ sudo chroot squashfs-root /usr/bin/qemu-arm-static /bin/httpd
 5. **Identify issues**: Security vulnerabilities and misconfigurations
 6. **Document findings**: Clear reporting with remediation guidance
 
-## Knowledge Capture Requirement
-When performing tasks that involve architectural decisions, significant engineering trade-offs, or complex infrastructure changes, you MUST use the `capture_knowledge.py` script to persist the information.
-
-- **Policy/High-Level Decisions**: Use `python3 capture_knowledge.py --type okf` to save to the Open Knowledge Framework (OKF).
-- **Technical Context/Implementation Details**: Use `python3 capture_knowledge.py --type chroma` to save to the contextual memory (ChromaDB).
-
-Ensure that the captured content is deduplicated (the script handles this via hashing) and correctly chunked.
-
+## Anti-Patterns
 
 - NEVER deploy code changes without validating them against target test suites.
 - NEVER skip documenting non-obvious code assumptions, constraints, and side effects.
+
+## 6) Memory Sync
+
+Execute the following steps to sync knowledge to the memory system:
+1. Use `capture_knowledge.py` to route information to the correct storage (OKF or ChromaDB).
+2. Ensure that high-level architectural rules, policies, and decisions are stored in the OKF (Open Knowledge Format) directory.
+3. Ensure that ephemeral data, logs, and specific technical notes are stored in the ChromaDB instance.
+4. Verify that the `MEMORY_SYSTEM_ROOT` and `MEMORY_INBOX_DIR` environment variables are correctly configured.
+```
+<|channel>thought
+<channel|><|tool_call>call:write{content:

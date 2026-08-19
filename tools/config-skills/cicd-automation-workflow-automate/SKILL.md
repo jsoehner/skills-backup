@@ -54,3 +54,9 @@ $ARGUMENTS
 
 - NEVER deploy code changes without validating them against target test suites.
 - NEVER skip documenting non-obvious code assumptions, constraints, and side effects.
+
+## 6) Memory Sync
+
+After a CI/CD pipeline design, GitHub Actions workflow, or automated development process is completed, you **MUST** trigger the local memory capture. 
+
+1. Save the final pipeline design, workflow definition, or automation map as a Markdown file in the project directory.\n2. Invoke the capture script: \n   ```bash\n   python C:\\Users\\jsoehner\\memory_system\\capture_knowledge.py <file_path>\n   ```\n3. This ensures that new CI/CD patterns, automated workflows, and delivery standards are automatically routed to the correct storage (OKF or ChromaDB).

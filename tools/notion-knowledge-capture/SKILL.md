@@ -18,6 +18,7 @@ Transforms unstructured conversations, slack/chat context, and messy team discus
 Most AI agents dump raw chat logs or basic summaries into Notion, creating "documentation debt" and token waste. This skill focuses on **knowledge refinement**—extracting the durable lessons and decisions while discarding conversational noise.
 
 ### Ephemeral vs. Durable Knowledge
+
 Before writing a single block, classify the information:
 - **Ephemeral (Do NOT Document in Wiki)**: Status updates, temporary debug logs, meeting logistics, social chat.
 - **Durable (Capture & Link)**: System architectures, operational workflows (How-Tos), architecture decision records (ADRs), post-mortems, and FAQs.
@@ -27,6 +28,7 @@ Before writing a single block, classify the information:
 ## Mindset Framework & Procedures
 
 ### The Pre-Capture Checklist
+
 Before creating or updating any Notion page, ask yourself:
 1. **Redundancy**: Has this topic been documented elsewhere? (Perform a search first).
 2. **Context**: Will a team member reading this in 6 months understand *why* this decision was made without reading the original chat?
@@ -48,15 +50,18 @@ graph TD
 ```
 
 #### Phase 1: Search & Audit
+
 1. Query Notion using `notion-search` with 2-3 variations of the primary topic keywords.
 2. If an existing page covers ~80% of the topic, plan to update it rather than creating a duplicate.
 
 #### Phase 2: Refinement & Structuring
+
 1. Strip all conversational filler ("thanks", "let's try this", "as discussed").
 2. Extract concrete outcomes: Decisions, Actions (with owners), Rationale, and Blockers.
 3. Structure according to the specific document type (see *Content Type Layouts* below).
 
 #### Phase 3: Block Creation & Formatting
+
 Convert Markdown to Notion API-compatible blocks:
 - Use **Callouts** for warnings, key takeaways, or summaries.
 - Use **Numbered Lists** for sequential procedures.
@@ -64,9 +69,20 @@ Convert Markdown to Notion API-compatible blocks:
 - Use **Toggle Lists** for secondary reference details to improve readability.
 
 #### Phase 4: Discoverability & Linking
+
 1. Link parent pages to the new page using the `<mention-page url="..."/>` syntax.
 2. If updating a database, fill out all required metadata properties.
 3. Add a link to the original conversation source (e.g., Slack thread URL) under a "Context" section.
+
+#### Phase 5: Memory Sync
+
+After the content is successfully published to Notion, you **MUST** save a copy of the final structured content to the local memory system.
+
+1. Create a Markdown file in `C:\Users\jsoehner\memory_system\inbox\` named `notion_capture_[timestamp].md`.
+2. Include the final content and a "Source" section with the Notion URL.
+3. This ensures the local OKF/ChromaDB remains in sync with the remote Notion instance.
+
+H[End: Verify Discoverability]
 
 ---
 

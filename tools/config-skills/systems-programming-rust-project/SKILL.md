@@ -301,7 +301,6 @@ edition = "2021"
 rust-version = "1.75"
 authors = ["Your Name <email@example.com>"]
 license = "MIT OR Apache-2.0"
-repository = "https://github.com/user/project-name"
 
 [workspace.dependencies]
 tokio = { version = "1.36", features = ["full"] }
@@ -310,93 +309,6 @@ serde = { version = "1.0", features = ["derive"] }
 [profile.release]
 opt-level = 3
 lto = true
-codegen-units = 1
-```
-
-**src/main.rs (Axum)**:
-```rust
-use anyhow::Result;
-use clap::Parser;
-
-mod cli;
-mod commands;
-mod config;
-mod error;
-
-use cli::Cli;
-
-#[tokio::main]
-async fn main() -> Result<()> {
-    let cli = Cli::parse();
-
-    match cli.command {
-        cli::Commands::Init(args) => commands::init::execute(args).await?,
-        cli::Commands::Run(args) => commands::run::execute(args).await?,
-    }
-
-    Ok(())
-}
-```
-
-**src/cli.rs**:
-```rust
-use clap::{Parser, Subcommand};
-
-#[derive(Parser)]
-#[command(name = "project-name")]
-#[command(about = "Project description", long_about = None)]
-pub struct Cli {
-    #[command(subcommand)]
-    pub command: Commands,
-}
-
-#[derive(Subcommand)]
-pub enum Commands {
-    /// Initialize a new project
-    Init(InitArgs),
-    /// Run the application
-    Run(RunArgs),
-}
-
-#[derive(Parser)]
-pub struct InitArgs {
-    /// Project name
-    #[arg(short, long)]
-    pub name: String,
-}
-
-#[derive(Parser)]
-pub struct RunArgs {
-    /// Enable verbose output
-    #[arg(short, long)]
-    pub verbose: bool,
-}
-```
-
-**src/error.rs**:
-```rust
-use std::fmt;
-
-#[derive(Debug)]
-pub enum AppError {
-    NotFound(String),
-    InvalidInput(String),
-    IoError(std::io::Error),
-}
-
-impl fmt::Display for AppError {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        match self {
-            AppError::NotFound(msg) => write!(f, "Not found: {}", msg),
-            AppError::InvalidInput(msg) => write!(f, "Invalid input: {}", msg),
-            AppError::IoError(e) => write!(f, "IO error: {}", e),
-        }
-    }
-}
-
-impl std::error::Error for AppError {}
-
-pub type Result<T> = std::result::Result<T, AppError>;
 ```
 
 ### 6. Generate Web API Structure (Axum)
@@ -475,67 +387,6 @@ async fn main() {
 }
 ```
 
-**src/cli.rs**:
-```rust
-use clap::{Parser, Subcommand};
-
-#[derive(Parser)]
-#[command(name = "project-name")]
-#[command(about = "Project description", long_about = None)]
-pub struct Cli {
-    #[command(subcommand)]
-    pub command: Commands,
-}
-
-#[derive(Subcommand)]
-pub enum Commands {
-    /// Initialize a new project
-    Init(InitArgs),
-    /// Run the application
-    Run(RunArgs),
-}
-
-#[derive(Parser)]
-pub struct InitArgs {
-    /// Project name
-    #[arg(short, long)]
-    pub name: String,
-}
-
-#[derive(Parser)]
-pub struct RunArgs {
-    /// Enable verbose output
-    #[arg(short, long)]
-    pub verbose: bool,
-}
-```
-
-**src/error.rs**:
-```rust
-use std::fmt;
-
-#[derive(Debug)]
-pub enum AppError {
-    NotFound(String),
-    InvalidInput(String),
-    IoError(std::io::Error),
-}
-
-impl fmt::Display for AppError {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        match self {
-            AppError::NotFound(msg) => write!(f, "Not found: {}", msg),
-            AppError::InvalidInput(msg) => write!(f, "Invalid input: {}", msg),
-            AppError::IoError(e) => write!(f, "IO error: {}", e),
-        }
-    }
-}
-
-impl std::error::Error for AppError {}
-
-pub type Result<T> = std::result::Result<T, AppError>;
-```
-
 ### 7. Configure Development Tools
 
 **Makefile**:
@@ -588,17 +439,18 @@ cognitive-complexity-threshold = 30
 
 Focus on creating idiomatic Rust projects with strong type safety, proper error handling, and comprehensive testing setup.
 
-## Knowledge Capture Requirement
-When performing tasks that involve architectural decisions, significant engineering trade-offs, or complex infrastructure changes, you MUST use the `capture_knowledge.py` script to persist the information.
+## Anti-Patterns
 
-- **Policy/High-Level Decisions**: Use `python3 capture_knowledge.py --type okf` to save to the Open Knowledge Framework (OKF).
-- **Technical Context/Implementation Details**: Use `python3 capture_knowledge.py --type chroma` to save to the contextual memory (ChromaDB).
+- NEVER deploy code changes without validating them against target test suites.
+- NEVER skip documenting non-obvious code assumptions, constraints, and side effects.
 
-Ensure that the captured content is deduplicated (the script handles this via hashing) and correctly chunked.
+## 6) Capture Knowledge
 
-## Knowledge Capture Requirement
-When completing a task that involves a significant architectural decision, a complex bug fix, or a new infrastructure pattern, you MUST:
-1. Synthesize the decision/fix into a concise summary (3-5 sentences).
-2. Classify it as either **OKF** (High-level policy, architectural rule, or cross-cutting standard) or **CHROMA** (Technical context, implementation detail, or specific bug fix).
-3. Execute `capture_knowledge.py` with the appropriate `--type` flag.
-4. Ensure the captured knowledge is deduplicated and properly chunked using the `smart_chunk` logic.
+After a security audit, risk assessment, or threat model is completed, automatically trigger the `capture_knowledge.py` script.
+The script will analyze the security findings to identify:
+- Key security rules, compliance standards, and risk profiles.
+- Critical vulnerabilities, threat vectors, and mitigation strategies.
+- Regulatory requirements (GDPR, HIPAA, etc.) and policy-level decisions.
+The script will then route this information to the appropriate storage:
+- **OKF**: High-level security policies, compliance standards, and corporate security rules.
+- **ChromaDB**: Specific audit reports, vulnerability logs, and threat model details.

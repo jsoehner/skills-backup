@@ -202,7 +202,6 @@ jobs:
       run: pytest
 ```
 
-
 ## Workflow Best Practices
 
 1. **Use specific action versions** (@v4, not @latest)
@@ -245,6 +244,7 @@ jobs:
 ```
 
 **Use reusable workflow:**
+
 ```yaml
 jobs:
   call-test:
@@ -315,7 +315,7 @@ jobs:
       run: |
         echo "Deploying to production..."
         # Deployment commands here
-
+        
     - name: Notify Slack
       if: success()
       uses: slackapi/slack-github-action@v1
@@ -337,3 +337,10 @@ jobs:
 
 - NEVER deploy code changes without validating them against target test suites.
 - NEVER skip documenting non-obvious code assumptions, constraints, and side effects.
+
+## 6) Memory Sync
+
+After a GitHub Actions workflow is created or updated, automatically trigger the local memory capture. 
+
+1. Save the final workflow definition or pipeline map as a Markdown file in the project directory.\n2. Invoke the capture script: \n   ```bash\n   python C:\\Users\\jsoehner\\memory_system\\capture_knowledge.py <file_path>\n   ```\n3. This ensures that new CI/CD patterns, security pinning policies, and deployment rules are automatically routed to the correct storage (OKF or ChromaDB).
+",path:

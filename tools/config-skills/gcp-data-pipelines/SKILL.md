@@ -39,10 +39,10 @@ recommending anything:
 | **Dataflow**      | `.java` files containing `import org.apache.beam`, `.py` |
 :                   : files containing `import apache_beam`                    :
 | **Dataform**      | `workflow_settings.yaml` or `dataform.json`              |
-| **dbt**           | `dbt_project.yml`                                        |
+| **dbt**           | `dbt_project.yml`                                          |
 | **Spark**         | `.ipynb` or `.py` files containing `import pyspark`      |
-| **Airflow**       | `.py`                                                    |
-| **Provisioning**  | `deployment.yaml`                                        |
+| **Airflow**       | `.py`                                                        |
+| **Provisioning**  | `deployment.yaml`                                          |
 | **Orchestration** | `deployment.yaml` or `*-pipeline.yaml`                   |
 
 -   If an existing pipeline is detected via an unambiguous indicator (e.g.,
@@ -84,8 +84,6 @@ pipeline options with a brief summary to help them choose:
 :                   : processing;           :                                  :
 :                   : High-throughput       :                                  :
 :                   : Pubsub integration;   :                                  :
-:                   : ML Preprocessing and  :                                  :
-:                   : Inference at scale;   :                                  :
 :                   : Advanced              :                                  :
 :                   : observability;        :                                  :
 :                   : Serverless data       :                                  :
@@ -96,7 +94,7 @@ pipeline options with a brief summary to help them choose:
 :                   : for complex           :                                  :
 :                   : dependency management :                                  :
 | **Spark (Dataproc | Large-scale data;     | `gcp-spark`                      |
-: Serverless)**     : PySpark/Java/Scala;   :                                  :
+: Serverless)**     | PySpark/Java/Scala;   :                                  :
 :                   : ML preprocessing;     :                                  :
 :                   : Iceberg/BigLake       :                                  :
 | **Other**         | Data Fusion, or       | —                                |
@@ -119,13 +117,12 @@ multiple pipelines already in the repo:
 | **Provisioning** | Declarative GCP    | `gcp-pipeline-resource-provisioning` |
 :                  : resource creation  :                                      :
 :                  : (Datasets, DTS,    :                                      :
-:                  : Dataproc)          :                                      :
+:                  : Dataproc)           :                                      :
 
 > [!TIP]
 >
 > If the user mentions **scheduling**, **automating**, **cron**, or
-> **coordinating** existing scripts, queries, or notebooks — highlight **Cloud
-> Composer / Orchestration** as the most likely fit.
+> **coordinating** existing scripts, highlight **Cloud Composer / Orchestration** as the most likely fit.
 
 > [!NOTE]
 >
@@ -182,14 +179,15 @@ Provisioning  | `gcp-pipeline-resource-provisioning`
 Orchestration | `gcp-pipeline-orchestration`
 Other         | — (general GCP assistance)
 
-## Knowledge Capture Requirement
-When performing tasks that involve architectural decisions, significant engineering trade-offs, or complex infrastructure changes, you MUST use the `capture_knowledge.py` script to persist the information.
-
-- **Policy/High-Level Decisions**: Use `python3 capture_knowledge.py --type okf` to save to the Open Knowledge Framework (OKF).
-- **Technical Context/Implementation Details**: Use `python3 capture_knowledge.py --type chroma` to save to the contextual memory (ChromaDB).
-
-Ensure that the captured content is deduplicated (the script handles this via hashing) and correctly chunked.
-
+## Anti-Patterns
 
 - NEVER commit raw secrets or API keys to infrastructure code repositories.
 - NEVER deploy resources without setting clear resource limits (CPU/Memory/storage quotas).
+
+## 6) Memory Sync
+
+Execute the following steps to sync knowledge to the memory system:
+1. Use `capture_knowledge.py` to route information to the correct storage (OKF or ChromaDB).
+2. Ensure that high-level architectural rules, policies, and decisions are stored in the OKF (Open Knowledge Format) directory.
+3. Ensure that ephemeral data, logs, and specific technical notes are stored in the ChromaDB instance.
+4. Verify that the `MEMORY_SYSTEM_ROOT` and `MEMORY_INBOX_DIR` environment variables are correctly configured.

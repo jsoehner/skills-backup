@@ -89,18 +89,6 @@ If there is a second lesson worth noting (maximum 2 additional):
 **Takeaway:** [1 sentence]
 ```
 
-## Phase 5: Automatically Route Lesson to Memory RAG
-
-After presenting the lesson to the user, automatically persist the extracted lesson into the project knowledge system:
-
-1. Write the extracted lesson markdown into `C:\Users\jsoehner\memory_system\inbox\lesson_<timestamp>.md` or run:
-   ```bash
-   python C:\Users\jsoehner\memory_system\capture_knowledge.py <path_to_lesson_file>
-   ```
-2. Include standard classification header:
-   - For **Architectural Standards / Principles / Policies**: Use `# OKF Decision`
-   - For **Code Snippet / Debug Fix / Anti-Pattern**: Use `# Chroma Context`
-
 ## What NOT to Do
 
 | Avoid | Why | Instead |

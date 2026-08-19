@@ -4,8 +4,6 @@ description: |
   "Expert routing and synthesis for internal company communications, status updates, newsletters, and FAQ documents. Trigger this skill when asked to write, edit, format, or draft any internal workplace communications, leadership updates, or team reports. Keywords: 3P updates, company newsletter, status reports, leadership updates, project updates, incident reports, FAQ responses, internal communication, staff announcement, examples/."
 
   "Expert routing and synthesis for internal company communications, status updates, newsletters, and FAQ documents. Trigger this skill when asked to write, edit, format, or draft any internal workplace communications, leadership updates, or team reports. Keywords: 3P updates, company newsletter, status reports, leadership updates, project updates, incident reports, FAQ responses, internal communication, staff announcement, examples/."
-
-license: Complete terms in LICENSE.txt
 ---
 
 # Internal Communications Router
@@ -17,6 +15,7 @@ This is a **navigation skill**. You MUST load the corresponding detailed markdow
 ## Mindset & Thinking Framework
 
 Before writing any communication, ask yourself:
+
 1. **Who is the Audience?** (Executive leadership, direct team, cross-functional partners, or company-wide?)
 2. **What is the Core Message?** (What is the single most important takeaway? Put it in the first sentence or headline.)
 3. **What is the Action Required?** (Is this FYA - For Your Action, or FYI - For Your Information?)
@@ -63,3 +62,15 @@ You **MUST** identify the communication type and immediately load the correspond
 * **No direct match:** If the request doesn't match one of the template files (e.g., a post-mortem incident report), load [`examples/general-comms.md`](file:///home/jsoehner/yuv-skills-backup/internal-comms/examples/general-comms.md) as the default baseline.
 * **Missing Details:** If the user asks for an update but provides no data, do not invent achievements. Prompt the user:
   > "To draft this update, please provide: (1) Key achievements/launches this period, (2) Critical milestones for next period, and (3) Any blockers/problems you are facing."
+
+## 6) Capture Knowledge
+
+After a company-wide announcement or complex internal communication is finalized, automatically trigger the `capture_knowledge.py` script.
+The script will analyze the communication to identify:
+- New company-wide policies or project-wide rules.
+- Key stakeholder names and contact points.
+- Recurring communication patterns or feedback loops.
+The script will then route this information to the appropriate storage:
+- **OKF**: High-level communication standards, brand voice rules, and announcement templates.
+- **ChromaDB**: Specific communication logs, stakeholder summaries, and feedback-driven improvements.
+",path:

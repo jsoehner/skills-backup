@@ -217,3 +217,15 @@ Copyright (c) 2025 Vipin Singh. Licensed under the MIT License.
 
 - NEVER design illustrations that look like standard corporate PPT slide flowcharts.
 - NEVER allow the character Grav to stand or touch surfaces; Grav must always hover with a visible gap.
+
+## 6) Memory Sync
+
+After an illustration is planned, a shot list is generated, or a series of Grav-style images is finalized, you **MUST** trigger the local memory capture. 
+
+1. Save the shot list, illustration plan, or the final set of image prompts as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   ```bash
+   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   ```
+3. This ensures that illustration plans, shot lists, and visual metaphor decisions are automatically routed to the correct storage (OKF or ChromaDB).
+

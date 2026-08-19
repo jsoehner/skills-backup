@@ -42,3 +42,15 @@ Build secure, scalable authentication and authorization systems using industry-s
 
 - NEVER log raw passwords, access tokens, or sensitive API secrets in database fields or application logs.
 - NEVER store JWT secret keys in the application repository; use secure vault services or environment variables.
+
+## 6) Memory Sync
+
+After an auth system design, authorization policy mapping, or auth flow analysis is completed, you **MUST** trigger the local memory capture. 
+
+1. Save the final auth design, policy mapping, or flow analysis as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   ```bash
+   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   ```
+3. This ensures that auth architectures, policy models, and identity flow designs are automatically routed to the correct storage (OKF or ChromaDB).
+

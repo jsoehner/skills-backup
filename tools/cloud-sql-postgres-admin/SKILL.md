@@ -43,17 +43,17 @@ opertation status till it is marked DONE.
 :                         :        : pre-configured; :          :         :
 :                         :        : do not ask for  :          :         :
 :                         :        : it unless the   :          :         :
-:                         :        : user explicitly :          :         :\\
-:                         :        : provides a      :          :         :\\
-:                         :        : different one.  :          :         :\\
-| sourceInstanceName      | string | The name of the | Yes      |         |\\
-:                         :        : instance to be  :          :         :\\
-:                         :        : cloned.         :          :         :\\
-| destinationInstanceName | string | The name of the | Yes      |         |\\
-:                         :        : new instance    :          :         :\\
-:                         :        : that will be    :          :         :\\
-:                         :        : created by      :          :         :\\
-:                         :        : cloning the     :          :         :\\
+:                         :        : user explicitly :          :         :
+:                         :        : provides a      :          :         :
+:                         :        : different one.  :          :         :
+| sourceInstanceName      | string | The name of the | Yes      |         |
+:                         :        : instance to be  :          :         :
+:                         :        : cloned.         :          :         :
+| destinationInstanceName | string | The name of the | Yes      |         |
+:                         :        : new instance    :          :         :
+:                         :        : that will be     :          :         :
+:                         :        : created by       :          :         :
+:                         :        : cloning the      :          :         :\\
 :                         :        : source          :          :         :\\
 :                         :        : instance.       :          :         :\\
 | pointInTime             | string | The timestamp   | No       |         |\\
@@ -78,7 +78,7 @@ opertation status till it is marked DONE.
 
 | Name     | Type   | Description     | Required | Default |
 | :------- | :----- | :-------------- | :------- | :------ |
-| project  | string | The GCP project | No       |         |\\
+| project  | string | The GCP project | No       |         |
 :          :        : ID. This is     :          :         :\\
 :          :        : pre-configured; :          :         :\\
 :          :        : do not ask for  :          :         :\\
@@ -97,9 +97,9 @@ opertation status till it is marked DONE.
 :          :        : be unique       :          :         :\\
 :          :        : within the      :          :         :\\
 :          :        : instance.       :          :         :\\
-\\
+
 --------------------------------------------------------------------------------\\
-\\
+
 ### create_instance
 
 #### Parameters
@@ -118,8 +118,8 @@ opertation status till it is marked DONE.
 :                 :        : instance        :          :               :\\
 | databaseVersion | string | The database    | No       | `POSTGRES_17` |\\
 :                 :        : version for     :          :               :\\
-:                 :        : Postgres. If    :          :               :\\
-:                 :        : not specified,  :          :               :\\
+:                 :        : Postgres. If not :          :               :\\
+:                 :        : specified,      :          :               :\\
 :                 :        : defaults to the :          :               :\\
 :                 :        : latest          :          :               :\\
 :                 :        : available       :          :               :\\
@@ -140,9 +140,9 @@ opertation status till it is marked DONE.
 :                 :        : availability.   :          :               :\\
 :                 :        : Defaults to     :          :               :\\
 :                 :        : `Development`.  :          :               :\\
-\\
+
 --------------------------------------------------------------------------------\\
-\\
+
 ### create_user
 
 #### Parameters
@@ -174,15 +174,15 @@ opertation status till it is marked DONE.
 | iamUser  | boolean | Set to true to  | Yes      |         |\\
 :          :         : create a Cloud  :          :         :\\
 :          :         : IAM user.       :          :         :\\
-\\
+
 --------------------------------------------------------------------------------\\
-\\
+
 ### get_instance
 
 #### Parameters
 
 | Name       | Type   | Description     | Required | Default |
-| :--------- | :----- | :-------------- | :------- | :------ |
+| :--------- | :----- | :-------------- | :------- | :------ |\\
 | projectId  | string | The GCP project | No       |         |\\
 :            :        : ID. This is     :          :         :\\
 :            :        : pre-configured; :          :         :\\
@@ -192,9 +192,9 @@ opertation status till it is marked DONE.
 :            :        : provides a      :          :         :\\
 :            :        : different one.  :          :         :\\
 | instanceId | string | The instance ID | Yes      |         |\\
-\\
+
 --------------------------------------------------------------------------------\\
-\\
+
 ### list_databases
 
 Lists all databases for a Cloud SQL instance.
@@ -202,7 +202,7 @@ Lists all databases for a Cloud SQL instance.
 #### Parameters
 
 | Name     | Type   | Description     | Required | Default |
-| :------- | :----- | :-------------- | :------- | :------ |
+| :------- | :----- | :-------------- | :------- | :------ |\\
 | project  | string | The GCP project | No       |         |\\
 :          :        : ID. This is     :          :         :\\
 :          :        : pre-configured; :          :         :\\
@@ -212,9 +212,9 @@ Lists all databases for a Cloud SQL instance.
 :          :        : provides a      :          :         :\\
 :          :        : different one.  :          :         :\\
 | instance | string | The instance ID | Yes      |         |\\
-\\
+
 --------------------------------------------------------------------------------\\
-\\
+
 ### list_instances
 
 Lists all type of Cloud SQL instances for a project.
@@ -222,7 +222,7 @@ Lists all type of Cloud SQL instances for a project.
 #### Parameters
 
 | Name    | Type   | Description     | Required | Default |
-| :------ | :----- | :-------------- | :------- | :------ |
+| :------ | :----- | :-------------- | :------- | :------ |\\
 | project | string | The GCP project | No       |         |\\
 :         :        : ID. This is     :          :         :\\
 :         :        : pre-configured; :          :         :\\
@@ -231,15 +231,15 @@ Lists all type of Cloud SQL instances for a project.
 :         :        : user explicitly :          :         :\\
 :         :        : provides a      :          :         :\\
 :         :        : different one.  :          :         :\\
-\\
+
 --------------------------------------------------------------------------------\\
-\\
+
 ### wait_for_operation
 
 #### Parameters
 
 | Name      | Type   | Description     | Required | Default |
-| :-------- | :----- | :-------------- | :------- | :------ |
+| :-------- | :----- | :-------------- | :------- | :------ |\\
 | project   | string | The GCP project | No       |         |\\
 :           :        : ID. This is     :          :         :\\
 :           :        : pre-configured; :          :         :\\
@@ -250,17 +250,21 @@ Lists all type of Cloud SQL instances for a project.
 :           :        : different one.  :          :         :\\
 | operation | string | The operation   | Yes      |         |\\
 :           :        : ID              :          :         :\\
-\\
+
 --------------------------------------------------------------------------------\\
-\\
+
 ## Anti-Patterns
 
 - NEVER execute raw DML/DDL operations on production database instances without verification.
 - NEVER ignore connection limits and connection pool starvation indicators.
 
-## Knowledge Capture Requirement
-When completing a task that involves a significant architectural decision, a complex bug fix, or a new infrastructure pattern, you MUST:
-1. Synthesize the decision/fix into a concise summary (3-5 sentences).
-2. Classify it as either **OKF** (High-level policy, architectural rule, or cross-cutting standard) or **CHROMA** (Technical context, implementation detail, or specific bug fix).
-3. Execute `capture_knowledge.py` with the appropriate `--type` flag.
-4. Ensure the captured knowledge is deduplicated and properly chunked using the `smart_chunk` logic.
+## 6) Memory Sync
+
+After a database provision, user creation, or instance status check is completed, you **MUST** trigger the local memory capture. 
+
+1. Save the final database schema, instance details, or user permissions as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   ```bash
+   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   ```
+3. This ensures that database infrastructure changes, user roles, and instance configurations are automatically routed to the correct storage (OKF or ChromaDB).

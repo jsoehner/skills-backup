@@ -215,3 +215,9 @@ production based on predictive power, robustness, and viability.
 
 - NEVER deploy code changes without validating them against target test suites.
 - NEVER skip documenting non-obvious code assumptions, constraints, and side effects.
+
+## 6) Memory Sync
+
+After a data analysis, ML model, or statistical report is completed, you **MUST** trigger the local memory capture. 
+
+1. Save the final analysis, model summary, or report as a Markdown file in the project directory.\n2. Invoke the capture script: \n   ```bash\n   python C:\\Users\\jsoehner\\memory_system\\capture_knowledge.py <file_path>\n   ```\n3. This ensures that new insights, model parameters, and statistical findings are automatically routed to the correct storage (OKF or ChromaDB).

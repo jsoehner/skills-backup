@@ -7,7 +7,7 @@ description: "Build and deploy the same feature consistently across web, mobile,
 
 Build and deploy the same feature consistently across web, mobile, and desktop platforms using API-first architecture and parallel implementation strategies.
 
-[Extended thinking: This workflow orchestrates multiple specialized agents to ensure feature parity across platforms while maintaining platform-specific optimizations. The coordination strategy emphasizes shared contracts and parallel development with regular synchronization points. By establishing API contracts and data models upfront, teams can work independently while ensuring consistency. The workflow benefits include faster time-to-market, reduced integration issues, and maintainable cross-platform codebases.]
+[Extended thinking: This workflow orchestrates multiple specialized agents to ensure feature parity across platforms while maintaining platform-specific optimizations. The coordination strategy emphasizes shared contracts and data models upfront, allowing teams to work independently while ensuring consistency. The workflow benefits include faster time-to-market, reduced integration issues, and maintainable cross-platform codebases.]
 
 ## Use this skill when
 
@@ -24,6 +24,7 @@ Build and deploy the same feature consistently across web, mobile, and desktop p
 - Clarify goals, constraints, and required inputs.
 - Apply relevant best practices and validate outcomes.
 - Provide actionable steps and verification.
+- Trigger the `capture_knowledge.py` script to record multi-platform architecture decisions, API contracts, cross-platform design system specs, and platform-specific optimization strategies.
 
 ## Phase 1: Architecture and API Design (Sequential)
 
@@ -137,6 +138,7 @@ Build and deploy the same feature consistently across web, mobile, and desktop p
   - SDK examples for each platform
   - Authentication flow diagrams
   - Rate limiting and quota information
+  - Error response formats and codes
   - Postman/Insomnia collections
   - WebSocket connection examples
   - Error handling best practices
@@ -177,7 +179,7 @@ Build and deploy the same feature consistently across web, mobile, and desktop p
 
 - **--platforms**: Specify target platforms (web,ios,android,desktop)
 - **--api-first**: Generate API before UI implementation (default: true)
-- **--shared-code**: Use Kotlin Multiplatform or similar (default: evaluate)
+- **--shared-code**: Use Kotlin Multiplatform for mobile or TypeScript for web/desktop sharing (default: evaluate)
 - **--design-system**: Use existing or create new (default: create)
 - **--testing-strategy**: Unit, integration, e2e (default: all)
 

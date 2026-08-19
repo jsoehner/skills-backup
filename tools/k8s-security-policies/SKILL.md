@@ -347,3 +347,14 @@ kubectl auth can-i '*' '*' --as system:serviceaccount:default:my-sa
 
 - NEVER leak credentials, private keys, or API tokens in code repositories or application logs.
 - NEVER trust client-side inputs without performing strict server-side validation.
+
+## 6) Capture Knowledge
+
+After generating Kubernetes security policies or implementing network isolation, automatically trigger the `capture_knowledge.py` script.
+The script will analyze the security configuration to identify:
+- Specific NetworkPolicy rules and logic.
+- RBAC configurations and least-privilege adjustments.
+- Security context and admission control rules (e.g., OPA Gatekeeper constraints).
+The script will then route this information to the appropriate storage:
+- **OKF**: Standardized Kubernetes security patterns, RBAC best practices, and compliance-aligned policies.
+- **ChromaDB**: Specific security configurations, IP allowlists, and environment-specific RBAC bindings.

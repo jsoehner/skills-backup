@@ -9,38 +9,49 @@ Build reliable, fast, and maintainable end-to-end test suites that provide confi
 
 ## Use this skill when
 
-- Implementing end-to-end test automation
-- Debugging flaky or unreliable tests
-- Testing critical user workflows
-- Setting up CI/CD test pipelines
-- Testing across multiple browsers
-- Validating accessibility requirements
-- Testing responsive designs
-- Establishing E2E testing standards
+- Implementing end-to-end test automation\\
+- Debugging flaky or unreliable tests\\
+- Testing critical user workflows\\
+- Setting up CI/CD test pipelines\\
+- Testing across multiple browsers\\
+- Validating accessibility requirements\\
+- Testing responsive designs\\
+- Establishing E2E testing standards\\
 
-## Do not use this skill when
+## Do not use this skill when\\
 
-- You only need unit or integration tests
-- The environment cannot support stable UI automation
-- You cannot provision safe test accounts or data
+- You only need unit or integration tests\\
+- The environment cannot support stable UI automation\\
+- You cannot provision safe test accounts or data\\
 
-## Instructions
+## Instructions\\
 
-1. Identify critical user journeys and success criteria.
-2. Build stable selectors and test data strategies.
-3. Implement tests with retries, tracing, and isolation.
-4. Run in CI with parallelization and artifact capture.
+1. Identify critical user journeys and success criteria.\\
+2. Build stable selectors and test data strategies.\\
+3. Implement tests with retries, tracing, and isolation.\\
+4. Run in CI with parallelization and artifact capture.\\
 
-## Safety
+## Safety\\
 
-- Avoid running destructive tests against production.
-- Use dedicated test data and scrub sensitive output.
+- Avoid running destructive tests against production.\\
+- Use dedicated test data and scrub sensitive output.\\
 
-## Resources
+## Resources\\
 
-- `resources/implementation-playbook.md` for detailed E2E patterns and templates.
+- `resources/implementation-playbook.md` for detailed E2E patterns and templates.\\
 
-## Anti-Patterns
+## Anti-Patterns\\
 
-- NEVER skip clean-up routines (teardowns) to prevent test state leakage between runs.
-- NEVER assert on unstable UI selectors or variable network latencies without proper wait mechanisms.
+- NEVER skip clean-up routines (teardowns) to prevent test state leakage between runs.\\
+- NEVER assert on unstable UI selectors or variable network latencies without proper wait mechanisms.\\
+
+## 6) Memory Sync
+
+After a technical manual, architecture guide, or deep-dive documentation is completed, you **MUST** trigger the local memory capture. 
+
+1. Save the final documentation as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   ```bash
+   python $MEMORY_SYSTEM_ROOT/capture_knowledge.py <file_path>
+   ```
+3. This ensures that new high-level architectural rules, system designs, and technical standards are automatically routed to the correct storage (OKF or ChromaDB).

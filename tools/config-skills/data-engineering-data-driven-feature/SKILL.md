@@ -180,14 +180,13 @@ monitoring:
 
 Feature to develop with data-driven approach: $ARGUMENTS
 
-## Knowledge Capture Requirement
-When performing tasks that involve architectural decisions, significant engineering trade-offs, or complex infrastructure changes, you MUST use the `capture_knowledge.py` script to persist the information.
-
-- **Policy/High-Level Decisions**: Use `python3 capture_knowledge.py --type okf` to save to the Open Knowledge Framework (OKF).
-- **Technical Context/Implementation Details**: Use `python3 capture_knowledge.py --type chroma` to save to the contextual memory (ChromaDB).
-
-Ensure that the captured content is deduplicated (the script handles this via hashing) and correctly chunked.
-
+## Anti-Patterns
 
 - NEVER deploy code changes without validating them against target test suites.
 - NEVER skip documenting non-obvious code assumptions, constraints, and side effects.
+
+## 6) Memory Sync
+
+After a data-driven feature architecture, experiment design, or analytics instrumentation plan is completed, you **MUST** trigger the local memory capture. 
+
+1. Save the final design, experiment plan, or analytics schema as a Markdown file in the project directory.\n2. Invoke the capture script: \n   ```bash\n   python C:\\Users\\jsoehner\\memory_system\\capture_knowledge.py <file_path>\n   ```\n3. This ensures that new feature requirements, experiment designs, and analytics schemas are automatically routed to the correct storage (OKF or ChromaDB).

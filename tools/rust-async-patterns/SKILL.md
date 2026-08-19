@@ -35,4 +35,16 @@ Production patterns for async Rust programming with Tokio runtime, including tas
 ## Anti-Patterns
 
 - NEVER perform blocking synchronous operations inside asynchronous event loops.
+- NEVER perform blocking synchronous operations inside asynchronous event loops.
 - NEVER run python applications without pinning exact dependencies in requirements or pyproject files.
+
+## 6) Capture Knowledge
+
+After a Rust async pattern implementation or concurrent system design is completed, automatically trigger the `capture_knowledge.py` script.
+The script will analyze the async patterns to identify:
+- Key async task structures and channel types.
+- Error handling strategies and result types.
+- Concurrency patterns and shared state management.
+The script will then route this information to the appropriate storage:
+- **OKF**: High-level async patterns, concurrency standards, and system designs.
+- **ChromaDB**: Specific task definitions, error handling logic, and performance notes.

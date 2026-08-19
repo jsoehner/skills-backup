@@ -293,20 +293,68 @@ docker_image = rule(
 ```bash
 # Find all dependencies of a target
 bazel query "deps(//apps/web:web)"
+
 # Find reverse dependencies (what depends on this)
 bazel query "rdeps(//..., //libs/utils:utils)"
+
 # Find all targets in a package
 bazel query "//libs/..."
+
 # Find changed targets since commit
 bazel query "rdeps(//..., set($(git diff --name-only HEAD~1 | sed 's/.*/"&"/' | tr '\n' ' ')))"
+
 # Generate dependency graph
 bazel query "deps(//apps/web:web)" --output=graph | dot -Tpng > deps.png
+
 # Find all test targets
 bazel query "kind('.*_test', //...)"
+
 # Find targets with specific tag
 bazel query "attr(tags, 'integration', //...)"
+
 # Compute build graph size
 bazel query "deps(//...)" --output=package | wc -l
+```
+
+### Template 7: Remote Execution Setup
+
+```python
+# platforms/BUILD.bazel
+platform(
+    name = "linux_x86_64",
+    constraint_values = [
+        "@platforms//os:linux",
+        "@platforms//cpu:x86_64",
+    ],
+    exec_properties = {
+        "container-image": "docker://gcr.io/myproject/bazel-worker:latest",
+        "OSFamily": "Linux",
+    },
+)
+
+platform(
+    name = "remote_linux",
+    parents = [":linux_x86_64"],
+    exec_properties = {
+        "Pool": "default",
+        "dockerNetwork": "standard",
+    },
+)
+
+# toolchains/BUILD.bazel
+toolchain(
+    name = "cc_toolchain_linux",
+    exec_compatible_with = [
+        "@platforms//os:linux",
+        "@platforms//cpu:x86_64",
+    ],
+    target_compatible_with = [
+        "@platforms//os:linux",
+        "@platforms//cpu:x86_64",
+    ],
+    toolchain = "@remotejdk11_linux//:jdk",
+    toolchain_type = "@bazel_tools//tools/jdk:runtime_toolchain_type",
+)
 ```
 
 ## Performance Optimization
@@ -315,10 +363,13 @@ bazel query "deps(//...)" --output=package | wc -l
 # Profile build
 bazel build //... --profile=profile.json
 bazel analyze-profile profile.json
+
 # Identify slow actions
 bazel build //... --execution_log_json_file=exec_log.json
+
 # Memory profiling
 bazel build //... --memory_profile=memory.json
+
 # Skip analysis cache
 bazel build //... --notrack_incremental_state
 ```
@@ -348,11 +399,15 @@ bazel build //... --notrack_incremental_state
 
 - NEVER use glob patterns for target dependencies; always declare dependencies explicitly.
 - NEVER omit version pinning for external rules and compiler toolchains.
-```
 
-## Knowledge Capture Requirement
-When completing a task that involves a significant architectural decision, a complex bug fix, or a new infrastructure pattern, you MUST:
-1. Synthesize the decision/fix into a concise summary (3-5 sentences).
-2. Classify it as either **OKF** (High-level policy, architectural rule, or cross-cutting standard) or **CHROMA** (Technical context, implementation detail, or specific bug fix).
-3. Execute `capture_knowledge.py` with the appropriate `--type` flag.
-4. Ensure the captured knowledge is deduplicated and properly chunked using the `smart_chunk` logic.
+## 6) Memory Sync
+
+After a Bazel build profile is analyzed, a remote execution configuration is designed, or a build optimization plan is completed, you **MUST** trigger the local memory capture. 
+
+1. Save the final build profile, remote execution config, or optimization plan as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   ```bash
+   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   ```
+3. This ensures that build profiles, remote execution configurations, and optimization plans are automatically routed to the correct storage (OKF or ChromaDB).
+

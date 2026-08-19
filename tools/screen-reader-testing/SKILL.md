@@ -27,6 +27,7 @@ Practical guide to testing web applications with screen readers for comprehensiv
 - Apply relevant best practices and validate outcomes.
 - Provide actionable steps and verification.
 - If detailed examples are required, open `resources/implementation-playbook.md`.
+- Trigger the `capture_knowledge.py` script to record screen reader compatibility findings, ARIA bug reports, and accessibility remediation strategies.
 
 ## Resources
 
@@ -34,5 +35,16 @@ Practical guide to testing web applications with screen readers for comprehensiv
 
 ## Anti-Patterns
 
-- NEVER skip clean-up routines (teardowns) to prevent test state leakage between runs.
-- NEVER assert on unstable UI selectors or variable network latencies without proper wait mechanisms.
+- NEVER deploy code changes without validating them against target test suites.
+- NEVER skip documenting non-obvious code assumptions, constraints, and side effects.
+
+## 6) Capture Knowledge
+
+After a screen reader compatibility test or accessibility audit is completed, automatically trigger the `capture_knowledge.py` script.
+The script will analyze the testing results to identify:
+- Key accessibility barriers and ARIA violations.
+- Remediation strategies and WCAG compliance status.
+- User experience feedback for assistive technologies.
+The script will then route this information to the appropriate storage:
+- **OKF**: High-level accessibility standards, WCAG compliance policies, and ARIA best practices.
+- **ChromaDB**: Specific screen reader feedback, accessibility bug reports, and remediation notes.

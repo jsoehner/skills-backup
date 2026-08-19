@@ -1,14 +1,6 @@
 ---
 name: ml-pipeline-workflow
 description: Build end-to-end MLOps pipelines from data preparation through model training, validation, and production deployment. Use when creating ML pipelines, implementing MLOps practices, or automating model training and deployment workflows.
-metadata:
-  model: inherit
-dependencies:
-  - data-engineer
-  - data-scientist
-  - ml-engineer
-  - python-pro
-  - mlops-engineer
 ---
 
 # ML Pipeline Workflow

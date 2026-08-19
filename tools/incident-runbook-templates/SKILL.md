@@ -40,7 +40,7 @@ Production-ready templates for incident response runbooks covering detection, tr
 
 ### 2. Runbook Structure
 
-```
+```markdown
 1. Overview & Impact
 2. Detection & Alerts
 3. Initial Triage
@@ -143,8 +143,9 @@ kubectl exec -n payments deploy/payment-service -- \
 psql -h $DB_HOST -U $DB_USER -c "
   SELECT pid, now() - query_start AS duration, query
   FROM pg_stat_activity
-  WHERE state = 'active' AND duration > interval '5 seconds'
-  ORDER BY duration DESC;"
+  WHERE state != 'idle'
+  ORDER BY query_start;
+"
 
 # Step 3: Kill long-running queries if needed
 psql -h $DB_HOST -U $DB_USER -c "SELECT pg_terminate_backend(pid);"
@@ -250,7 +251,7 @@ curl -X POST https://api.company.com/internal/feature-flags \
 ## Communication Templates
 
 ### Initial Notification (Internal)
-```
+```1
 🚨 INCIDENT: Payment Service Degradation
 
 Severity: SEV2
@@ -268,7 +269,7 @@ Updates in #payments-incidents
 ```
 
 ### Status Update
-```
+```1
 📊 UPDATE: Payment Service Incident
 
 Status: Mitigating
@@ -287,7 +288,7 @@ ETA to Resolution: ~15 minutes
 ```
 
 ### Resolution Notification
-```
+```1
 ✅ RESOLVED: Payment Service Incident
 
 Duration: 45 minutes
@@ -302,8 +303,7 @@ Follow-up:
 - Postmortem scheduled for [DATE]
 - Bug fix in progress
 ```
-```
-
+```1
 ### Template 2: Database Incident Runbook
 
 ```markdown
@@ -370,14 +370,14 @@ psql -c "VACUUM FULL large_table;"
 # If emergency, delete old data or expand disk
 ```
 ```
-
+```
 ## Best Practices
 
 ### Do's
 - **Keep runbooks updated** - Review after every incident
 - **Test runbooks regularly** - Game days, chaos engineering
 - **Include rollback steps** - Always have an escape hatch
-- **Document assumptions** - What must be true for steps to work
+- **Document assumptions** - Write for 3 AM brain
 - **Link to dashboards** - Quick access during stress
 
 ### Don'ts
@@ -397,3 +397,12 @@ psql -c "VACUUM FULL large_table;"
 
 - NEVER deploy code changes without validating them against target test suites.
 - NEVER skip documenting non-obvious code assumptions, constraints, and side effects.
+```
+
+## 6) Capture Knowledge
+
+Execute the following steps to sync knowledge to the memory system:
+1. Use `capture_knowledge.py` to route information to the correct storage (OKF or ChromaDB).
+2. Ensure that high-level architectural rules, policies, and decisions are stored in the OKF (Open Knowledge Format) directory.
+3. Ensure that ephemeral data, logs, and specific technical notes are stored in the ChromaDB instance.
+4. Verify that the `MEMORY_SYSTEM_ROOT` and `MEMORY_INBOX_DIR` environment variables are correctly configured.

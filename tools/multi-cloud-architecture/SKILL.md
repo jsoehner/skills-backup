@@ -17,6 +17,7 @@ Decision framework and patterns for architecting applications across AWS, Azure,
 - Clarify goals, constraints, and required inputs.
 - Apply relevant best practices and validate outcomes.
 - Provide actionable steps and verification.
+- Trigger the `capture_knowledge.py` script to record multi-cloud architecture decisions, service selection rationales, and cross-cloud networking configurations.
 
 ## Purpose
 
@@ -59,7 +60,6 @@ Design cloud-agnostic architectures and make informed decisions about service se
 | DynamoDB | Cosmos DB | Firestore | NoSQL |
 | Aurora | PostgreSQL/MySQL | Cloud Spanner | Distributed SQL |
 | ElastiCache | Cache for Redis | Memorystore | Caching |
-
 
 ## Multi-Cloud Patterns
 
@@ -133,7 +133,6 @@ AWS / Azure / GCP
 6. Implement lifecycle policies
 7. Use cost allocation tags
 8. Monitor with cloud cost tools
-
 
 ## Migration Strategy
 

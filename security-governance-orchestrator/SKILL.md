@@ -4,17 +4,6 @@ description: "Orchestrates security governance, including audits, compliance, th
 version: 1
 created: "2026-07-31"
 updated: "2026-07-31"
-metadata:
-  model: inherit
-dependencies:
-  - security-auditor
-  - security-compliance-compliance-check
-  - threat-modeling-expert
-  - stride-analysis-patterns
-  - security-scanning-security-dependencies
-  - security-scanning-security-hardening
-  - security-scanning-security-sast
-  - security-requirement-extraction
 ---
 ## When to Use
 Use for any task involving security auditing, compliance, threat modeling, or vulnerability scanning.
@@ -25,14 +14,21 @@ Use for any task involving security auditing, compliance, threat modeling, or vu
 3. For Threat Modeling: Use `threat-modeling-expert` and `stride-analysis-patterns` to identify potential attack vectors.
 4. For Vulnerability Scanning: Use `security-scanning-security-dependencies`, `security-scanning-security-hardening`, and `security-scanning-security-sast`.
 5. For Requirement Extraction: Use `security-requirement-extraction`.
-6. Synthesize the security posture into a comprehensive report with actionable remediation steps.
+6. Trigger the `capture_knowledge.py` script to record high-level security governance decisions, compliance findings, and threat modeling results.
+7. Synthesize the security posture into a comprehensive report with actionable remediation steps.
 
-## Pitfalls
-- Never skip a security audit for production-ready code.
-- Ensure threat models are updated as the architecture evolves.
-- Do not ignore compliance requirements (GDPR, HIPAA, etc.).
+## Anti-Patterns
 
-## Verification
-1. Security audit report is comprehensive and accurate.
-2. Threat model accurately reflects the current architecture.
-3. Vulnerability scan results are reviewed and acted upon.
+- NEVER deploy code changes without validating them against target test suites.
+- NEVER skip documenting non-obvious code assumptions, constraints, and side effects.
+
+## 6) Capture Knowledge
+
+After a security audit, risk assessment, or threat model is completed, automatically trigger the `capture_knowledge.py` script.
+The script will analyze the security findings to identify:
+- Key security rules, compliance standards, and risk profiles.
+- Critical vulnerabilities, threat vectors, and mitigation strategies.
+- Regulatory requirements (GDPR, HIPAA, etc.) and policy-level decisions.
+The script will then route this information to the appropriate storage:
+- **OKF**: High-level security policies, compliance standards, and corporate security rules.
+- **ChromaDB**: Specific audit reports, vulnerability logs, and threat model details.

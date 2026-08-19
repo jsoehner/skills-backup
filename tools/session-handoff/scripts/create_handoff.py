@@ -22,6 +22,7 @@ import os
 import re
 import subprocess
 import sys
+import shutil
 from datetime import datetime
 from pathlib import Path
 
@@ -39,6 +40,17 @@ def run_cmd(cmd: list[str], cwd: str = None) -> tuple[bool, str]:
         return result.returncode == 0, result.stdout.strip()
     except (subprocess.TimeoutExpired, FileNotFoundError):
         return False, ""
+
+
+def copy_to_inbox(filepath: str):
+    inbox_path = Path(r"C:\Users\jsoehner\memory_system\inbox")
+    try:
+        inbox_path.mkdir(parents=True, exist_ok=True)
+        dest = inbox_path / filepath.name
+        shutil.copy2(filepath, dest)
+        print(f"✅ Memory synced: Copied handoff to {dest}")
+    except Exception as e:
+        print(f"⚠️ Warning: Failed to sync to memory inbox: {e}")
 
 
 def get_git_info(project_path: str) -> dict:
@@ -212,128 +224,24 @@ def generate_handoff(
 
     # Handoff chain section
     if prev_handoff.get("exists"):
-        chain_section = f"""## Handoff Chain
-
-- **Continues from**: [{prev_handoff['filename']}](./{prev_handoff['filename']})
-  - Previous title: {prev_handoff.get('title', 'Unknown')}
-- **Supersedes**: [list any older handoffs this replaces, or "None"]
-
-> Review the previous handoff for full context before filling this one."""
-    else:
-        chain_section = """## Handoff Chain
-
-- **Continues from**: None (fresh start)
-- **Supersedes**: None
-
-> This is the first handoff for this task."""
-
+        chain_section = f"""## Handoff Chain\n
+\n- **Continues from**: [{prev_handoff['filename']}](./{prev_handoff['filename']})\n
+  - Previous title: {prev_handoff.get('title', 'Unknown')}\n
+- **Supersedes**: [list any older handoffs this replaces, or "None"]\n
+\n> Review the previous handoff for full context before filling this one."""\n    else:
+        chain_section = """## Handoff Chain\n
+\n- **Continues from**: None (fresh start)\n- **Supersedes**: None\n
+\n> This is the first handoff for this task."""\n    
     # Generate the document
-    content = f"""# Handoff: [TASK_TITLE - replace this]
-
-## Session Metadata
-- Created: {timestamp}
-- Project: {project_path}
-- Branch: {branch_line}
-- Session duration: [estimate how long you worked]
-
-### Recent Commits (for context)
-{commits_section}
-
-{chain_section}
-
-## Current State Summary
-
-[TODO: Write one paragraph describing what was being worked on, current status, and where things left off]
-
-## Codebase Understanding
-
-### Architecture Overview
-
-[TODO: Document key architectural insights discovered during this session]
-
-### Critical Files
-
-| File | Purpose | Relevance |
-|------|---------|-----------|
-| [TODO: Add critical files] | | |
-
-### Key Patterns Discovered
-
-[TODO: Document important patterns, conventions, or idioms found in this codebase]
-
-## Work Completed
-
-### Tasks Finished
-
-- [ ] [TODO: List completed tasks]
-
-### Files Modified
-
-| File | Changes | Rationale |
-|------|---------|-----------|
-{modified_section}
-
-### Decisions Made
-
-| Decision | Options Considered | Rationale |
-|----------|-------------------|-----------|
-| [TODO: Document key decisions] | | |
-
-## Pending Work
-
-### Immediate Next Steps
-
-1. [TODO: Most critical next action]
-2. [TODO: Second priority]
-3. [TODO: Third priority]
-
-### Blockers/Open Questions
-
-- [ ] [TODO: List any blockers or open questions]
-
-### Deferred Items
-
-- [TODO: Items deferred and why]
-
-## Context for Resuming Agent
-
-### Important Context
-
-[TODO: This is the MOST IMPORTANT section - write critical information the next agent MUST know]
-
-### Assumptions Made
-
-- [TODO: List assumptions made during this session]
-
-### Potential Gotchas
-
-- [TODO: Document things that might trip up a new agent]
-
-## Environment State
-
-### Tools/Services Used
-
-- [TODO: List relevant tools and their configuration]
-
-### Active Processes
-
-- [TODO: Note any running processes, servers, etc.]
-
-### Environment Variables
-
-- [TODO: List relevant env var NAMES only - NEVER include actual values/secrets]
-
-## Related Resources
-
-- [TODO: Add links to relevant docs and files]
-
----
-
-**Security Reminder**: Before finalizing, run `validate_handoff.py` to check for accidental secret exposure.
-"""
-
+    content = f"""# Handoff: [TASK_TITLE - replace this]\n
+\n## Session Metadata\n
+- Created: {timestamp}\n
+- Project: {project_path}\n- Branch: {branch_line}\n- Session duration: [estimate how long you worked]\n\n### Recent Commits (for context)\n{commits_section}\n\n{chain_section}\n\n## Current State Summary\n\n[TODO: Write one paragraph describing what was being worked on, current status, and where things left off]\n\n## Codebase Understanding\n\n### Architecture Overview\n\n[TODO: Document key architectural insights discovered during this session]\n\n### Critical Files\n\n| File | Purpose | Relevance |\n|------|---------|-----------|\n| [TODO: Add critical files] | | |\n\n### Key Patterns Discovered\n\n[TODO: Document important patterns, conventions, or idioms found in this codebase]\n\n## Work Completed\n\n### Tasks Finished\n\n- [ ] [TODO: List completed tasks]\n\n### Files Modified\n\n| File | Changes | Rationale |\n|------|---------|-----------|\n{modified_section}\n\n### Decisions Made\n\n| Decision | Options Considered | Rationale |\n|----------|-------------------|-----------|\n| [TODO: Document key decisions] | | |\n\n## Pending Work\n\n### Immediate Next Steps\n\n1. [TODO: Most critical next action]\n2. [TODO: Second priority]\n3. [TODO: Third priority]\n\n### Blockers/Open Questions\n\n- [ ] [TODO: List any blockers or open questions]\n\n### Deferred Items\n\n- [TODO: Items deferred and why]\n\n## Context for Resuming Agent\n\n### Important Context\n\n[TODO: This is the MOST IMPORTANT section - write critical information the next agent MUST know]\n\n### Assumptions Made\n\n- [TODO: List assumptions made during this session]\n\n### Potential Gotchas\n\n- [TODO: Document things that might trip up a new agent]\n\n## Environment State\n\n### Tools/Services Used\n\n- [TODO: List relevant tools and their configuration]\n\n### Active Processes\n\n- [TODO: Note any running processes, servers, etc.]\n\n### Environment Variables\n\n- [TODO: List relevant env var NAMES only - NEVER include actual values/secrets]\n\n## Related Resources\n\n- [TODO: Add links to relevant docs and files]\n\n---\n\n**Security Reminder**: Before finalizing, run `validate_handoff.py` to check for accidental secret exposure.\n"""
     # Write the file
     filepath.write_text(content)
+
+    # Sync to memory system
+    copy_to_inbox(str(filepath))
 
     return str(filepath)
 

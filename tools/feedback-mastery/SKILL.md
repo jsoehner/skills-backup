@@ -92,7 +92,7 @@ High emotional intensity reduces cognitive processing by 30%. Before the convers
 | Accusatory | Constructive |
 | --- | --- |
 | "You always miss deadlines and it slows everyone down" | "I've noticed some recent delays and want to understand any challenges you're facing" |
-| "You never test your code properly" | "I've seen a few bugs slip through recently. Let's talk about our testing process" |
+| "You never test your code properly" | "I've seen a few bugs slip through recently. Let's talk about what happened and how we can improve" |
 
 ## Delivery Phase
 
@@ -143,7 +143,7 @@ Even successful conversations need follow-through to create lasting change.
 ### Follow-up Checklist
 
 - [ ] **Document agreed-upon action items** - What specifically will change?
-- [ ] **Set check-in dates** - When will you revisit this?
+- [ ] **Set check-in dates** - When will we revisit this?
 - [ ] **Provide ongoing support** - How will you help them succeed?
 - [ ] **Celebrate progress** - Recognize improvements when they happen
 
@@ -285,7 +285,6 @@ When you're on the receiving end:
 - `references/difficult-conversation-scripts.md` - Opening lines and responses
 - `references/expectation-alignment.md` - Managing stakeholder expectations
 
-
 ## Recommended Reading
 
 - "Crucial Conversations" by Kerry Patterson & Joseph Grenny
@@ -307,5 +306,10 @@ When you're on the receiving end:
 - Before preparing structured critical feedback or organizing script boundaries, you **MUST** read [difficult-conversation-scripts.md](references/difficult-conversation-scripts.md) and [feedback-sbi-model.md](references/feedback-sbi-model.md) fully.
 - **Do NOT load** templates or references if you are merely compiling positive praise cards.
 
+## 6) Memory Sync
 
----
+Execute the following steps to sync knowledge to the memory system:
+1. Use `capture_knowledge.py` to route information to the correct storage (OKF or ChromaDB).
+2. Ensure that high-level architectural rules, policies, and decisions are stored in the OKF (Open Knowledge Format) directory.
+3. Ensure that ephemeral data, logs, and specific technical notes are stored in the ChromaDB instance.
+4. Verify that the `MEMORY_SYSTEM_ROOT` and `MEMORY_INBOX_DIR` environment variables are correctly configured.

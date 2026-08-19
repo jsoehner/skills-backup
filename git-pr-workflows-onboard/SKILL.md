@@ -201,17 +201,17 @@ Structured progress monitoring and feedback:
    - Manager feedback session and adjustment
 
 2. **60-Day Milestone**
-   - Own a small feature end-to-end
-   - Participate in on-call rotation shadow
-   - Contribute to technical design discussion
-   - Establish working relationships across teams
+   - Own first small feature (2-3 day effort)
+   - Participate in technical design review
+   - Shadow on-call engineer for 1 shift
+   - Build relationship with cross-teams
    - Self-assessment and goal setting
 
 3. **90-Day Milestone**
    - Independent feature delivery
    - Active code review participation
    - Mentor a newer team member
-   - Propose process improvement
+   - Propose one process improvement
    - Performance review and permanent role confirmation
 
 ## Feedback Loops and Continuous Improvement
@@ -245,26 +245,34 @@ Ensuring onboarding effectiveness and iteration:
 
 **Pre-Start (1 week before)**
 - [ ] Laptop shipped with tracking confirmation
-- [ ] Accounts created: GitHub, Slack, Jira, AWS
+- [ ] Accounts created: GitHub, Slack, AWS
 - [ ] Welcome email with Day 1 agenda sent
 - [ ] Buddy assigned and introduced via email
 - [ ] Manager prep: role doc, first tasks identified
 
 **Day 1-7: Foundation**
 - [ ] IT setup and security training (Day 1)
-- [ ] Team introductions and role overview (Day 1)
+- [ ] Manager 1:1 welcome and culture overview (Day 1)
+- [ ] Team introductions and virtual coffee chats (Day 1)
+- [ ] Role expectations and success criteria discussion (Day 1)
+- [ ] Review of first-week schedule (Day 1)
 - [ ] Development environment setup (Day 2-3)
+- [ ] Password manager and security tools (Day 2-3)
+- [ ] Communication tools (Slack workspaces, channels) (Day 2-3)
+- [ ] Calendar and meeting tools configuration (Day 2-3)
 - [ ] First PR merged (good first issue) (Day 4-5)
 - [ ] Architecture overview sessions (Day 5-7)
-- [ ] Daily buddy check-ins (15 min)
+- [ ] Daily buddy check-ins (15 min) (Day 1-7)
 
 **Week 2-4: Immersion**
 - [ ] Complete 5+ PR reviews as observer
 - [ ] Shadow senior engineer for 1 full day
 - [ ] Attend all team ceremonies
-- [ ] Complete product deep-dive sessions
+- [ ] Product deep-dive sessions
 - [ ] Document one unclear process
 - [ ] Set up local development for all services
+- [ ] Pair programming session on simple fix (Day 2-4)
+- [ ] Participate in first code review (Day 5)
 
 **Day 30 Checkpoint:**
 - 10+ commits merged
@@ -277,9 +285,13 @@ Ensuring onboarding effectiveness and iteration:
 - [ ] Own first small feature (2-3 day effort)
 - [ ] Participate in technical design review
 - [ ] Shadow on-call engineer for 1 shift
-- [ ] Present tech talk on previous experience
-- [ ] Pair program with 3+ team members
+- [ ] Build relationship with cross-teams
 - [ ] Contribute to team documentation
+- [ ] Lead first team ceremony (retro or planning)
+- [ ] Own critical technical decision
+- [ ] Establish 1:1 cadence with team members
+- [ ] Propose initial technical improvements
+- [ ] Submit first major architectural proposal
 
 **Day 60 Checkpoint:**
 - First feature shipped to production
@@ -292,9 +304,11 @@ Ensuring onboarding effectiveness and iteration:
 - [ ] Lead a small project independently
 - [ ] Participate in planning and estimation
 - [ ] Handle on-call issues with supervision
-- [ ] Mentor newer team member
+- [ ] Mentor a newer team member
 - [ ] Propose one process improvement
 - [ ] Build relationship with product/design
+- [ ] Participate in cross-functional meetings
+- [ ] Complete 90-day review and goal setting
 
 **Day 90 Final Review:**
 - Fully autonomous on team tasks
@@ -358,8 +372,8 @@ Ensuring onboarding effectiveness and iteration:
 - [ ] Lead first team ceremony (retro or planning)
 - [ ] Own critical technical decision
 - [ ] Establish 1:1 cadence with team members
-- [ ] Define technical vision alignment
-- [ ] Start mentoring program participation
+- [ ] Mentor a newer team member
+- [ ] Propose one process improvement
 - [ ] Submit first major architectural proposal
 
 **30-Day Deliverables:**
@@ -368,8 +382,6 @@ Ensuring onboarding effectiveness and iteration:
 - Relationship map established
 - First major PR merged
 - Technical roadmap contribution
-
-## Reference Examples
 
 ### Complete Day 1 Checklist
 
@@ -386,22 +398,22 @@ Ensuring onboarding effectiveness and iteration:
 **Afternoon (1:00 PM - 5:00 PM)**
 ```checklist
 - [ ] Lunch with buddy and team (60 min)
-- [ ] Laptop setup with IT support (90 min)
+- [ ] IT-guided laptop configuration (90 min)
 - [ ] Slack and communication tools (30 min)
+- [ ] Calendar and meeting tools configuration (30 min)
 - [ ] First Git commit ceremony (30 min)
-- [ ] Team happy hour or social (30 min)
 - [ ] Day 1 feedback survey (10 min)
 ```
 
 ### Buddy Responsibility Matrix
 
 | Week | Frequency | Activities | Time Commitment |
-|------|-----------|------------|----------------|
+|------|-----------|------------|------------------|
 | 1 | Daily | Morning check-in, pair programming, question answering | 2 hours/day |
 | 2-3 | 3x/week | Code review together, architecture discussions, social lunch | 1 hour/day |
 | 4 | 2x/week | Project collaboration, introduction facilitation | 30 min/day |
-| 5-8 | Weekly | Progress check-in, career development chat | 1 hour/week |
-| 9-12 | Bi-weekly | Mentorship transition, success celebration | 30 min/week |
+| 5-8 | Weekly | Mentorship transition, career development chat | 1 hour/week |
+| 9-12 | Bi-weekly | Mentorship-transition, success celebration | 30 min/week |
 
 ## Execution Guidelines
 
@@ -418,3 +430,11 @@ Remember: Great onboarding reduces time-to-productivity from months to weeks whi
 
 - NEVER deploy code changes without validating them against target test suites.
 - NEVER skip documenting non-obvious code assumptions, constraints, and side effects.
+
+## 6) Memory Sync
+
+Execute the following steps to sync knowledge to the memory system:
+1. Use `capture_knowledge.py` to route information to the correct storage (OKF or ChromaDB).
+2. Ensure that high-level architectural rules, policies, and decisions are stored in the OKF (Open Knowledge Format) directory.
+3. Ensure that ephemeral data, logs, and specific technical notes are stored in the ChromaDB instance.
+4. Verify that the `MEMORY_SYSTEM_ROOT` and `MEMORY_INBOX_DIR` environment variables are correctly configured.

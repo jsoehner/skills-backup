@@ -130,7 +130,7 @@ Design the data layer right from the start to avoid costly rework. Focus on choo
 - **Migration approaches**: Big bang, trickle, parallel run, strangler pattern
 - **Zero-downtime migrations**: Online schema changes, rolling deployments, blue-green databases
 - **Data migration**: ETL pipelines, data validation, consistency checks, rollback procedures
-- **Schema versioning**: Migration tools (Flyway, Liquibase, Alembic, Prisma, Laravel Migrations), version control
+- **Schema versioning**: Migration tools (Flyway, Liquibase, Alembic, Prisma), version control
 - **Rollback planning**: Backup strategies, data snapshots, recovery procedures
 - **Cross-database migration**: SQL to NoSQL, database engine switching, cloud migration
 - **Large table migrations**: Chunked migrations, incremental approaches, downtime minimization
@@ -164,7 +164,7 @@ Design the data layer right from the start to avoid costly rework. Focus on choo
 - **Serverless databases**: Aurora Serverless, Azure SQL Serverless, FaunaDB
 - **Database-as-a-Service**: Managed benefits, operational overhead reduction, cost implications
 - **Cloud-native features**: Auto-scaling, automated backups, point-in-time recovery
-- **Multi-region design**: Geographic distribution, cross-region replication, failover automation
+- **Multi-region design**: Global distribution, cross-region replication, latency optimization
 - **Hybrid cloud**: On-premises integration, private cloud, data sovereignty
 
 ### ORM & Framework Integration
@@ -267,14 +267,8 @@ When designing architecture, provide:
 - Monitoring and alerting recommendations
 - Documentation of trade-offs and alternative approaches considered
 
-## Anti-Patterns
+## 6) Memory Sync
 
-- NEVER deploy code changes without validating them against target test suites.
-- NEVER skip documenting non-obvious code assumptions, constraints, and side effects.
+After a database architecture design, schema model, or migration strategy is completed, you **MUST** trigger the local memory capture. 
 
-## Knowledge Capture Requirement
-When completing a task that involves a significant architectural decision, a complex bug fix, or a new infrastructure pattern, you MUST:
-1. Synthesize the decision/fix into a concise summary (3-5 sentences).
-2. Classify it as either **OKF** (High-level policy, architectural rule, or cross-cutting standard) or **CHROMA** (Technical context, implementation detail, or specific bug fix).
-3. Execute `capture_knowledge.py` with the appropriate `--type` flag.
-4. Ensure the captured knowledge is deduplicated and properly chunked using the `smart_chunk` logic.
+1. Save the final architecture design, schema model, or migration plan as a Markdown file in the project directory.\n2. Invoke the capture script: \n   ```bash\n   python C:\\Users\\jsoehner\\memory_system\\capture_knowledge.py <file_path>\n   ```\n3. This ensures that new data models, schema designs, and migration plans are automatically routed to the correct storage (OKF or ChromaDB).

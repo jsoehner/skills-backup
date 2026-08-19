@@ -9,41 +9,48 @@ You are a debugging expert specializing in setting up comprehensive debugging en
 
 ## Use this skill when
 
-- Setting up debugging workflows for teams
-- Implementing distributed tracing and observability
-- Diagnosing production or multi-service issues
-- Establishing logging and diagnostics standards
+- Setting up debugging workflows for teams\\
+- Implementing distributed tracing and observability\\
+- Diagnosing production or multi-service issues\\
+- Establishing logging and diagnostics standards\\
 
 ## Do not use this skill when
 
-- The system is single-process and simple debugging suffices
-- You cannot modify logging, tracing, or runtime configs
-- The task is unrelated to debugging or observability
+- The system is single-process and simple debugging suffices\\
+- You cannot modify logging, tracing, or runtime configs\\
+- The task is unrelated to debugging or observability\\
 
-## Context
-The user needs to set up debugging and tracing capabilities to efficiently diagnose issues, track down bugs, and understand system behavior. Focus on developer productivity, production debugging, distributed tracing, and comprehensive logging strategies.
+## Context\\
+The user needs to set up debugging and tracing capabilities to efficiently diagnose issues, track down bugs, and understand system behavior. Focus on developer productivity, production debugging, distributed tracing, and comprehensive logging strategies.\\
 
-## Requirements
-$ARGUMENTS
+## Requirements\\
+$ARGUMENTS\\
 
-## Instructions
+## Instructions\\
 
-- Identify services, trace boundaries, and key spans.
-- Configure local debugging and production-safe tracing.
-- Standardize log/trace fields and correlation IDs.
-- Validate end-to-end trace coverage and sampling.
-- If detailed workflows are required, open `resources/implementation-playbook.md`.
+- Identify services, trace boundaries, and key spans.\\
+- Configure local debugging and production-safe tracing.\\
+- Standardize log/trace fields and correlation IDs.\\
+- Validate end-to-end trace coverage and sampling.\\
+- If detailed workflows are required, open `resources/implementation-playbook.md`.\\
 
-## Safety
+## Safety\\
 
-- Avoid enabling verbose tracing in production without safeguards.
-- Redact secrets and PII from logs and traces.
+- Avoid enabling verbose tracing in production without safeguards.\\
+- Redact secrets and PII from logs and traces.\\
 
-## Resources
+## Resources\\
 
-- `resources/implementation-playbook.md` for detailed tooling and configuration patterns.
+- `resources/implementation-playbook.md` for detailed tooling and configuration patterns.\\
 
-## Anti-Patterns
+## Anti-Patterns\\
 
-- NEVER deploy code changes without validating them against target test suites.
-- NEVER skip documenting non-obvious code assumptions, constraints, and side effects.
+- NEVER deploy code changes without validating them against target test suites.\\
+- NEVER skip documenting non-obvious code assumptions, constraints, and side effects.\\
+
+## 6) Memory Sync
+
+After capturing knowledge, ensure all high-level architectural decisions, new technical standards, and key documentation are synced to the persistent memory system.
+1. Run `capture_knowledge.py` to route findings to the appropriate storage (OKF for policies, ChromaDB for logs).
+2. Ensure all new architectural "Hard Rules" are reflected in the `policy_memory_routing.md` if they represent significant system-wide constraints.
+3. Verify that all newly created diagrams and documentation are stored in the standardized directory structure using relative paths.

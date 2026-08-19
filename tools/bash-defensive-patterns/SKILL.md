@@ -48,9 +48,14 @@ Refer to `resources/implementation-playbook.md` for detailed patterns, checklist
 - NEVER use backticks for command substitution; always use `$()`.
 - NEVER parse file lists using `for f in $(ls)`; use `find` with NUL delimiters or loops instead.
 
-## Knowledge Capture Requirement
-When completing a task that involves a significant architectural decision, a complex bug fix, or a new infrastructure pattern, you MUST:
-1. Synthesize the decision/fix into a concise summary (3-5 sentences).
-2. Classify it as either **OKF** (High-level policy, architectural rule, or cross-cutting standard) or **CHROMA** (Technical context, implementation detail, or specific bug fix).
-3. Execute `capture_knowledge.py` with the appropriate `--type` flag.
-4. Ensure the captured knowledge is deduplicated and properly chunked using the `smart_chunk` logic.
+## 6) Memory Sync
+
+After a defensive Bash script is designed, a production automation is planned, or a CI/CD pipeline script is completed, you **MUST** trigger the local memory capture. 
+
+1. Save the final script design, automation plan, or CI/CD configuration as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   ```bash
+   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   ```
+3. This ensures that Bash scripts, automation plans, and CI/CD configurations are automatically routed to the correct storage (OKF or ChromaDB).
+

@@ -346,17 +346,25 @@ Option C - Autonomous with Ralphy (external CLI):
   ralphy --prd <planning_dir>/claude-ralphy-prd.md
   # Or: cp <planning_dir>/claude-ralphy-prd.md ./PRD.md && ralphy
 
-## References & Loading Triggers
-
-**MANDATORY - LOADING TRIGGERS**:
-- Before running codebase or web queries in Step 5, you **MUST** read [research-protocol.md](references/research-protocol.md) fully.
-- Before executing the Q&A interview in Step 6, you **MUST** read [interview-protocol.md](references/interview-protocol.md).
-- Before creating section indexes in Step 13, you **MUST** read [section-index.md](references/section-index.md).
-- **Do NOT load** any reference markdown files during Steps 1-3 to preserve initial context tokens.
-
-### Directory Creation & External Review Fallbacks
-1. **Directory check**: In Step 10, verify that the `reviews/` directory is explicitly created before launching subagents.
-2. **Review failures**: If Codex or Gemini subagents fail or return non-zero in Step 10, proceed with plan synthesis using default main-context critique checks instead of halting the state machine.
-
 ═══════════════════════════════════════════════════════════════
 ```
+
+## References & Loading Triggers
+
+**MANDATORY - Self-containment Directive**:
+
+This is a self-contained skill. Do NOT load external files or reference directories unless explicitly created during the execution of this workflow.
+
+### Directory Creation & External Review Fallbacks
+
+1. **Directory check**: In Step 10, verify that the `reviews/` directory is explicitly created before launching subagents.
+2. **Review failures**: If Codex or Gemini subagents fail or return non-zero in Step 10, proceed with plan synthesis using default main-context critique checks instead of halting the state machine.
+3. **Read-Only First**: Do NOT attempt to fix the code immediately. You must first prove the root cause using logs and remote code.
+
+## 6) Memory Sync
+
+Execute the following steps to sync knowledge to the memory system:
+1. Use `capture_knowledge.py` to route information to the correct storage (OKF or ChromaDB).
+2. Ensure that high-level architectural rules, policies, and decisions are stored in the OKF (Open Knowledge Format) directory.
+3. Ensure that ephemeral data, logs, and specific technical notes are stored in the ChromaDB instance.
+4. Verify that the `MEMORY_SYSTEM_ROOT` and `MEMORY_INBOX_DIR` environment variables are correctly configured.

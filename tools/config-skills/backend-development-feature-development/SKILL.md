@@ -184,9 +184,14 @@ Feature description: $ARGUMENTS
 - NEVER release backend features directly to production without staging validation and automated tests.
 - NEVER run data migrations in production without first performing a dry-run and verifying rollback steps.
 
-## Knowledge Capture Requirement
-When completing a task that involves a significant architectural decision, a complex bug fix, or a new infrastructure pattern, you MUST:
-1. Synthesize the decision/fix into a concise summary (3-5 sentences).
-2. Classify it as either **OKF** (High-level policy, architectural rule, or cross-cutting standard) or **CHROMA** (Technical context, implementation detail, or specific bug fix).
-3. Execute `capture_knowledge.py` with the appropriate `--type` flag.
-4. Ensure the captured knowledge is deduplicated and properly chunked using the `smart_chunk` logic.
+## 6) Memory Sync
+
+After a backend feature is planned, developed, tested, or deployed, you **MUST** trigger the local memory capture. 
+
+1. Save the final feature specification, architecture design, test results, or deployment report as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   ```bash
+   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   ```
+3. This ensures that feature specifications, architectural designs, test results, and deployment reports are automatically routed to the correct storage (OKF or ChromaDB).
+

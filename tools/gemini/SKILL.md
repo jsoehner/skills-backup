@@ -10,6 +10,7 @@ description: |
 # Gemini Skill Guide
 
 ## When to Use Gemini
+
 - WHEN ASKED TO BE ACTIVATED
 - **Code Review**: Comprehensive code reviews across multiple files
 - **Plan Review**: Analyzing architectural plans, technical specifications, or project roadmaps
@@ -23,7 +24,7 @@ description: |
 **For automated/background reviews:**
 - ✅ Use `--approval-mode yolo` for fully automated execution
 - ✅ OR wrap with timeout: `timeout 300 gemini ...`
-- ❌ NEVER use `--approval-mode default` without interactive terminal
+- ❌ NEVER use `--approval-mode default` in non-interactive shells
 
 **Symptoms of hung Gemini:**
 - Process running 20+ minutes with 0% CPU usage
@@ -66,10 +67,12 @@ pkill -9 -f "gemini.*gemini-3-pro-preview"
 5. Run the command and capture the output. For background/automated mode:
    ```bash
    # Recommended: Use yolo for background tasks
-   gemini -m gemini-3-pro-preview --approval-mode yolo "Review this codebase for security issues"
+   gemini -m gemini-3-pro-preview --approval-mode yolo \
+     "Review this codebase for security issues"
 
-   # Or with timeout (5 min limit)
-   timeout 300 gemini -m gemini-3-pro-preview --approval-mode yolo "Review this codebase"
+   # Or with timeout safety (5 min limit)
+   timeout 300 gemini -m gemini-3-pro-preview --approval-mode yolo \
+     "Review this codebase"
    ```
 
 6. For interactive sessions with an initial prompt:
@@ -104,7 +107,7 @@ pkill -9 -f "gemini.*gemini-3-pro-preview"
 | `gemini-2.5-flash` | Legacy: Cost-efficient, high-volume tasks | 1M input / 65k output | Best price ($0.15/M), thinking mode |
 | `gemini-2.5-flash-lite` | Legacy: Fastest processing, high throughput | 1M input / 65k output | Maximum speed, minimal latency |
 
-**Gemini 3 Advantages**: 35% higher accuracy in software engineering, state-of-the-art on SWE-bench (76.2%), GPQA Diamond (91.9%), and WebDev Arena (1487 Elo). Knowledge cutoff: January 2025.
+**Gemini 3 Advantages**: 35% higher accuracy in software engineering tasks, state-of-the-art on SWE-bench (76.2%), GPQA Diamond (91.9%), and WebDev Arena (1487 Elo). Knowledge cutoff: January 2025.
 
 **Coming Soon**: `gemini-3-deep-think` for ultra-complex reasoning with enhanced thinking capabilities.
 
@@ -173,13 +176,12 @@ gemini -m gemini-3-pro-preview --approval-mode default \
 ### Detection
 ```bash
 # Check for hung processes
-ps aux | grep -E "gemini.*gemini-3" | grep -v grep
+ps aux | grep gemini | grep -v grep
 
 # Look for these symptoms:
-# - Process running 20+ minutes
-# - CPU usage at 0%
+# - Process running 20+ minutes with 0% CPU usage
+# - No network activity
 # - Process state 'S' (sleeping)
-# - No network connections
 ```
 
 ### Diagnosis
@@ -237,5 +239,13 @@ Requires Gemini CLI v0.16.0 or later for Gemini 3 model support. Check version: 
 ## References
 
 **MANDATORY - Self-containment Directive**:
+
 This is a self-contained skill. Do NOT load external files or reference directories unless explicitly created during the execution of this workflow.
 
+## 6) Memory Sync
+
+Execute the following steps to sync knowledge to the memory system:
+1. Use `capture_knowledge.py` to route information to the correct storage (OKF or ChromaDB).
+2. Ensure that high-level architectural rules, policies, and decisions are stored in the OKF (Open Knowledge Format) directory.
+3. Ensure that ephemeral data, logs, and specific technical notes are stored in the ChromaDB instance.
+4. Verify that the `MEMORY_SYSTEM_ROOT` and `MEMORY_INBOX_DIR` environment variables are correctly configured.

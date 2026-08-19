@@ -68,7 +68,7 @@ graph TD
   * **Bundling Pipeline**: You must use `scripts/bundle-artifact.sh` and preserve the `.parcelrc` configurations. Custom webpack/esbuild configurations are prohibited.
   * **Core Output Name**: The compilation output must always build to a file named `bundle.html` in the target directory.
 * **HIGH FREEDOM (Creative Development)**:
-  * **Application Architecture**: Complete freedom over context configurations, helper utility libraries, hooks, charts (e.g., Recharts), and state machine definitions.
+  * **Application Architecture**: Complete freedom over context configurations, helper utility libraries, hooks, state machine definitions.
   * **Aesthetics & Branding**: Absolute liberty to develop bespoke layout designs, micro-interactions, responsive sidebars, custom grids, and interactive canvas overlays.
 
 ---
@@ -81,6 +81,17 @@ graph TD
 | **NEVER write vanilla inline CSS styles** | Disables tailwind customization and breaks CSS media-queries / dark modes. | Tailwind configuration systems are standard here; use Tailwind classes to ensure theme synchronization. |
 | **NEVER import external JS scripts dynamically in React lifecycle** | Creates race conditions and runtime execution bugs. | All dependencies must be defined in `package.json` and compiled statically during the Parcel bundling phase. |
 | **NEVER leave console logs or source-maps active in production compile** | Bloats file size and leaks implementation internals. | Parcel must be configured to trim development variables and source maps during final bundling. |
+
+## 6) Memory Sync
+
+After a complex dashboard, game, or multi-stage tool is scaffolded or bundled, you **MUST** trigger the local memory capture. 
+
+1. Save the final project specifications, architectural design, or bundle summary as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   ```bash
+   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   ```
+3. This ensures that artifact designs, dashboard structures, and bundled project specifications are automatically routed to the correct storage (OKF or ChromaDB).
 
 ---
 

@@ -29,6 +29,7 @@ Build efficient, scalable monorepos that enable code sharing, consistent tooling
 - Apply relevant best practices and validate outcomes.
 - Provide actionable steps and verification.
 - If detailed examples are required, open `resources/implementation-playbook.md`.
+- Trigger the `capture_knowledge.py` script to record monorepo configuration changes, workspace structure updates, and shared dependency modifications.
 
 ## Resources
 

@@ -58,5 +58,16 @@ Expert service mesh architect specializing in Istio, Linkerd, and cloud-native n
 
 ## Anti-Patterns
 
-- NEVER commit raw secrets or API keys to infrastructure code repositories.
-- NEVER deploy resources without setting clear resource limits (CPU/Memory/storage quotas).
+- NEVER deploy code changes without validating them against target test suites.
+- NEVER skip documenting non-obvious code assumptions, constraints, and side effects.
+
+## 6) Capture Knowledge
+
+After a security audit, risk assessment, or threat model is completed, automatically trigger the `capture_knowledge.py` script.
+The script will analyze the security findings to identify:
+- Key security rules, compliance standards, and risk profiles.
+- Critical vulnerabilities, threat vectors, and mitigation strategies.
+- Regulatory requirements (GDPR, HIPAA, etc.) and policy-level decisions.
+The script will then route this information to the appropriate storage:
+- **OKF**: High-level security policies, compliance standards, and corporate security rules.
+- **ChromaDB**: Specific audit reports, vulnerability logs, and threat model details.

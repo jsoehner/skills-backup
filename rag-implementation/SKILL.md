@@ -424,3 +424,14 @@ def evaluate_rag_system(qa_chain, test_cases):
 
 - NEVER deploy prompts or agent workflows without setting strict token budget constraints and safety guardrails.
 - NEVER trust LLM tool calls without validating and sanitizing the arguments before execution.
+
+## 6) Capture Knowledge
+
+After implementing a RAG system, automatically trigger the `capture_knowledge.py` script.
+The script will analyze the RAG pipeline to identify:
+- Embedding model choices and chunking parameters.
+- Retrieval strategies used (e.g., Hybrid, Multi-Query, Reranking).
+- Vector store configurations and metadata filtering rules.
+The script will then route this information to the appropriate storage:
+- **OKF**: RAG architectural standards, chunking best practices, and retrieval strategies.
+- **ChromaDB**: Specific embedding models, vector store configs, and retrieval performance logs.

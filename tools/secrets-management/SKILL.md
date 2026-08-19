@@ -360,3 +360,14 @@ secret-scan:
 
 - NEVER leak credentials, private keys, or API tokens in code repositories or application logs.
 - NEVER trust client-side inputs without performing strict server-side validation.
+
+## 6) Capture Knowledge
+
+After a secrets management policy or rotation workflow is established, automatically trigger the `capture_knowledge.py` script.
+The script will analyze the secrets management configuration to identify:
+- Secret rotation policies and schedules.
+- Access control models (RBAC, IAM).
+- Backend integration specifics (Vault, AWS, GCP).
+The script will then route this information to the appropriate storage:
+- **OKF**: High-level security policies, secrets management standards, and compliance requirements.
+- **ChromaDB**: Specific rotation procedures, secret naming conventions, and infrastructure details.

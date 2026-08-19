@@ -35,6 +35,7 @@ Use this skill to execute SQL.
 Name | Type   | Description         | Required | Default
 :--- | :----- | :------------------ | :------- | :------
 sql  | string | The sql to execute. | Yes      |
+ 
 
 --------------------------------------------------------------------------------
 
@@ -49,6 +50,7 @@ effectiveness of existing indexes and evalueate new ones.
 Name          | Type   | Description                   | Required | Default
 :------------ | :----- | :---------------------------- | :------- | :------
 sql_statement | string | The sql statement to explain. | Yes      |
+ 
 
 --------------------------------------------------------------------------------
 
@@ -71,6 +73,7 @@ schema.
 :                   :         : seconds                   :          :         :
 | limit             | integer | Optional: The maximum     | No       | `100`   |
 :                   :         : number of rows to return. :          :         :
+ 
 
 --------------------------------------------------------------------------------
 
@@ -91,12 +94,12 @@ tables in user schemas.
 :               :        : names. If       :          :            :
 :               :        : empty, details  :          :            :
 :               :        : for all tables  :          :            :
-:               :        : will be listed. :          :            :
 | output_format | string | Optional: Use   | No       | `detailed` |
 :               :        : 'simple' for    :          :            :
 :               :        : names only or   :          :            :
 :               :        : 'detailed' for  :          :            :
 :               :        : full info.      :          :            :
+ 
 
 --------------------------------------------------------------------------------
 
@@ -104,3 +107,14 @@ tables in user schemas.
 
 - NEVER execute raw DML/DDL operations on production database instances without verification.
 - NEVER ignore connection limits and connection pool starvation indicators.
+
+## 6) Memory Sync
+
+After a database exploration, schema audit, or SQL query execution is completed, you **MUST** trigger the local memory capture. 
+
+1. Save the final database schema, audit findings, or query results as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   ```bash
+   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   ```
+3. This ensures that database structures, schema objects, and query results are automatically routed to the correct storage (OKF or ChromaDB).

@@ -16,6 +16,7 @@ metadata:
 This skill provides comprehensive guidance for BigQuery services, optimizations,
 and data handling. It acts as a routing table for specialized BigQuery topics.
 
+
 > [!IMPORTANT]
 >
 > You MUST check the data size before deciding on which libraries to use. Use
@@ -81,9 +82,8 @@ Guidelines and best practices for querying property graphs in BigQuery.
 - NEVER run SELECT * queries on large tables; prune columns to control query costs.
 - NEVER perform cross-region queries without verifying dataset location parameters.
 
-## Knowledge Capture Requirement
-When completing a task that involves a significant architectural decision, a complex bug fix, or a new infrastructure pattern, you MUST:
-1. Synthesize the decision/fix into a concise summary (3-5 sentences).
-2. Classify it as either **OKF** (High-level policy, architectural rule, or cross-cutting standard) or **CHROMA** (Technical context, implementation detail, or specific bug fix).
-3. Execute `capture_knowledge.py` with the appropriate `--type` flag.
-4. Ensure the captured knowledge is deduplicated and properly chunked using the `smart_chunk` logic.
+## 6) Memory Sync
+
+After a BigQuery query optimization, ML model definition, or graph analytics plan is completed, you **MUST** trigger the local memory capture. 
+
+1. Save the final query plan, ML model definition, or graph schema as a Markdown file in the project directory.\n2. Invoke the capture script: \n   ```bash\n   python C:\\Users\\jsoehner\\memory_system\\capture_knowledge.py <file_path>\n   ```\n3. This ensures that new SQL patterns, ML model definitions, and graph schemas are automatically routed to the correct storage (OKF or ChromaDB).

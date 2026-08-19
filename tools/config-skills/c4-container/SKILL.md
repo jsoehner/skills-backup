@@ -173,3 +173,10 @@ When synthesizing containers, provide:
 
 - NEVER deploy prompts or agent workflows without setting strict token budget constraints and safety guardrails.
 - NEVER trust LLM tool calls without validating and sanitizing the arguments before execution.
+
+## 6) Memory Sync
+
+After capturing knowledge, ensure all high-level architectural decisions, new technical standards, and key documentation are synced to the persistent memory system.
+1. Run \`capture_knowledge.py\` to route findings to the appropriate storage (OKF for policies, ChromaDB for logs).
+2. Ensure all new architectural \"Hard Rules\" are reflected in the \`policy_memory_routing.md\` if they represent significant system-wide constraints.
+3. Verify that all newly created diagrams and documentation are stored in the standardized directory structure using relative paths.

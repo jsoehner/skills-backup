@@ -447,14 +447,15 @@ Capacity: On-demand or provisioned based on throughput needs
 - [Marten Events](https://martendb.io/events/)
 - [Event Sourcing Pattern](https://docs.microsoft.com/en-us/azure/architecture/patterns/event-sourcing)
 
-## Knowledge Capture Requirement
-When performing tasks that involve architectural decisions, significant engineering trade-offs, or complex infrastructure changes, you MUST use the `capture_knowledge.py` script to persist the information.
+## Anti-Patterns
 
-- **Policy/High-Level Decisions**: Use `python3 capture_knowledge.py --type okf` to save to the Open Knowledge Framework (OKF).
-- **Technical Context/Implementation Details**: Use `python3 capture_knowledge.py --type chroma` to save to the contextual memory (ChromaDB).
+- NEVER deploy code changes without validating them against target test suites.
+- NEVER skip documenting non-obvious code assumptions, constraints, and side effects.
 
-Ensure that the captured content is deduplicated (the script handles this via hashing) and correctly chunked.
+## 6) Memory Sync
 
-
-- NEVER load massive datasets directly into client memory; use pagination or infinite scroll.
-- NEVER use generic, unstyled components or default browser styling in production-ready UIs.
+Execute the following steps to sync knowledge to the memory system:
+1. Use `capture_knowledge.py` to route information to the correct storage (OKF or ChromaDB).
+2. Ensure that high-level architectural rules, policies, and decisions are stored in the OKF (Open Knowledge Format) directory.
+3. Ensure that ephemeral data, logs, and specific technical notes are stored in the ChromaDB instance.
+4. Verify that the `MEMORY_SYSTEM_ROOT` and `MEMORY_INBOX_DIR` environment variables are correctly configured.

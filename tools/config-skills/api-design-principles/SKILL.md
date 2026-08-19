@@ -41,3 +41,15 @@ Refer to `resources/implementation-playbook.md` for detailed patterns, checklist
 - NEVER release a public API without defining a clear versioning strategy (e.g., `/v1/` URI prefix).
 - NEVER expose internal database keys or implementation details directly in API responses.
 - NEVER return generic 500 error messages to API consumers; always provide structured, actionable error schemas.
+
+## 6) Memory Sync
+
+After an API design, specification review, or standard establishment is completed, you **MUST** trigger the local memory capture. 
+
+1. Save the final API design, specification, or standards document as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   ```bash
+   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   ```
+3. This ensures that API designs, specifications, and standards are automatically routed to the correct storage (OKF or ChromaDB).
+

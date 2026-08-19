@@ -4,12 +4,6 @@ description: "Orchestrates dependency management, including security audits, ver
 version: 1
 created: "2026-07-31"
 updated: "2026-07-31"
-metadata:
-  model: inherit
-dependencies:
-  - dependency-management-deps-audit
-  - dependency-updater
-  - dependency-upgrade
 ---
 ## When to Use
 Use for any task involving project dependencies, including security audits, version upgrades, and general dependency health management.

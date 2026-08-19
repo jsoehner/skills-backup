@@ -38,7 +38,7 @@ Effects are an **escape hatch** from React. They let you synchronize with extern
 
 ## Decision Tree
 
-```
+```d
 Need to respond to something?
 ├── User interaction (click, submit, drag)?
 │   └── Use EVENT HANDLER
@@ -66,3 +66,15 @@ Need to respond to something?
 ### SSR Hydration & Infinite Render Loops
 1. **Hydration alerts**: Under Server Components architectures (SSR), remember that `useEffect` hooks only run on the client side. Ensure no server-rendered layouts rely on state variables initialized inside Effects.
 2. **Loop safety checks**: Guard all state updates within an Effect with explicit condition bounds (e.g. comparing current vs previous variables values) to prevent infinite loops.
+
+## 6) Capture Knowledge
+
+After a complex `useEffect` refactor or a state synchronization pattern is finalized, automatically trigger the `capture_knowledge.py` script.
+The script will analyze the refactored logic to identify:
+- Complex `useEffect` cleanup patterns or `useSyncExternalStore` implementations.
+- Identification of "hidden" side effects or synchronization logic.
+- Key architectural shifts (e.g., moving from `useEffect` to `useMemo` or `key` prop).
+The script will then route this information to the appropriate storage:
+- **OKF**: High-level rules for when to use (and not use) Effects, and state synchronization standards.
+- **ChromaDB**: Specific complex `useEffect` implementations, cleanup logic, and sync patterns.
+",path:

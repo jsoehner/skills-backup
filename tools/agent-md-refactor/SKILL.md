@@ -17,6 +17,7 @@ Refactor bloated agent instruction files (AGENTS.md, CLAUDE.md, COPILOT.md, etc.
 ## Triggers
 
 Use this skill when:
+
 - "refactor my AGENTS.md" / "refactor my CLAUDE.md"
 - "split my agent instructions"
 - "organize my CLAUDE.md file"
@@ -45,12 +46,14 @@ Use this skill when:
 Identify any instructions that conflict with each other.
 
 **Look for:**
+
 - Contradictory style guidelines (e.g., "use semicolons" vs "no semicolons")
 - Conflicting workflow instructions
 - Incompatible tool preferences
 - Mutually exclusive patterns
 
 **For each contradiction found:**
+
 ```markdown
 ## Contradiction Found
 
@@ -69,6 +72,7 @@ Ask the user to resolve before proceeding.
 Extract ONLY what belongs in the root agent file. The root should be minimal - information that applies to **every single task**.
 
 **Essential content (keep in root):**
+
 | Category | Example |
 |----------|---------|
 | Project description | One sentence: "A React dashboard for analytics" |
@@ -78,6 +82,7 @@ Extract ONLY what belongs in the root agent file. The root should be minimal - i
 | Universal rules | Applies to 100% of tasks |
 
 **NOT essential (move to linked files):**
+
 - Language-specific conventions
 - Testing guidelines
 - Code style details
@@ -92,6 +97,7 @@ Extract ONLY what belongs in the root agent file. The root should be minimal - i
 Organize remaining instructions into logical categories.
 
 **Common categories:**
+
 | Category | Contents |
 |----------|----------|
 | `typescript.md` | TS conventions, type patterns, strict mode rules |
@@ -104,6 +110,7 @@ Organize remaining instructions into logical categories.
 | `performance.md` | Optimization rules, caching, lazy loading |
 
 **Grouping rules:**
+
 1. Each file should be self-contained for its topic
 2. Aim for 3-8 files (not too granular, not too broad)
 3. Name files clearly: `{topic}.md`
@@ -114,6 +121,7 @@ Organize remaining instructions into logical categories.
 ### Phase 4: Create the File Structure
 
 **Output structure:**
+
 ```
 project-root/
 ├── CLAUDE.md (or AGENTS.md)     # Minimal root with links
@@ -126,6 +134,7 @@ project-root/
 ```
 
 **Root file template:**
+
 ```markdown
 # Project Name
 
@@ -141,6 +150,7 @@ One-sentence description of the project.
 ## Detailed Instructions
 
 For specific guidelines, see:
+
 - [TypeScript Conventions](.claude/typescript.md)
 - [Testing Guidelines](.claude/testing.md)
 - [Code Style](.claude/code-style.md)
@@ -149,33 +159,46 @@ For specific guidelines, see:
 ```
 
 **Each linked file template:**
+
 ```markdown
 # {Topic} Guidelines
 
 ## Overview
+
 Brief context for when these guidelines apply.
 
 ## Rules
 
 ### Rule Category 1
+
 - Specific, actionable instruction
 - Another specific instruction
 
 ### Rule Category 2
+
 - Specific, actionable instruction
 
 ## Examples
 
 ### Good
-\`\`\`typescript
+
+```typescript
 // Example of correct pattern
-\`\`\`
+```
 
 ### Avoid
-\`\`\`typescript
+
+```typescript
 // Example of what not to do
-\`\`\`
 ```
+```
+
+**Grouping rules:**
+
+1. Each file should be self-contained for its topic
+2. Aim for 3-8 files (not too granular, not too broad)
+3. Name files clearly: `{topic}.md`
+4. Include only actionable instructions
 
 ---
 
@@ -184,6 +207,7 @@ Brief context for when these guidelines apply.
 Identify instructions that should be removed entirely.
 
 **Delete if:**
+
 | Criterion | Example | Why Delete |
 |-----------|---------|------------|
 | Redundant | "Use TypeScript" (in a .ts project) | Agent already knows |
@@ -193,6 +217,7 @@ Identify instructions that should be removed entirely.
 | Outdated | References deprecated APIs | No longer applies |
 
 **Output format:**
+
 ```markdown
 ## Flagged for Deletion
 
@@ -237,20 +262,22 @@ Identify instructions that should be removed entirely.
 ## References
 
 **MANDATORY - Self-containment Directive**:
-This is a self-contained skill. Do NOT load external files or reference directories unless explicitly created during the execution of this workflow.
 
+This is a self-contained skill. Do NOT load external files or reference directories unless explicitly created during the execution of this workflow.
 
 ---
 
 ## Examples
 
 ### Before (Bloated Root)
+
 ```markdown
 # CLAUDE.md
 
 This is a React project.
 
 ## Code Style
+
 - Use 2 spaces
 - Use semicolons
 - Prefer const over let
@@ -258,27 +285,32 @@ This is a React project.
 ... (200 more lines)
 
 ## Testing
+
 - Use Jest
 - Coverage > 80%
 ... (100 more lines)
 
 ## TypeScript
+
 - Enable strict mode
 ... (150 more lines)
 ```
 
 ### After (Progressive Disclosure)
+
 ```markdown
 # CLAUDE.md
 
 React dashboard for real-time analytics visualization.
 
 ## Commands
+
 - `pnpm dev` - Start development server
 - `pnpm test` - Run tests with coverage
 - `pnpm build` - Production build
 
 ## Guidelines
+
 - [Code Style](.claude/code-style.md)
 - [Testing](.claude/testing.md)
 - [TypeScript](.claude/typescript.md)
@@ -298,3 +330,14 @@ After refactoring, verify:
 6. **Self-contained files** - Each linked file stands alone
 
 ---
+
+## 6) Memory Sync
+
+After refactoring the agent instruction files (e.g., CLAUDE.md, AGENTS.md), you **MUST** trigger the local memory capture. 
+
+1. Save the final refactored structure or the list of flagged deletions as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   ```bash
+   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   ```
+3. This ensures that agent configuration changes and structural refactors are automatically routed to the correct storage (OKF or ChromaDB).

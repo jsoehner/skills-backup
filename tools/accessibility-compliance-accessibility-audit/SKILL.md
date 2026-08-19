@@ -34,7 +34,7 @@ $ARGUMENTS
 - Run automated scans to collect baseline violations and coverage gaps.
 - Perform manual checks (keyboard, screen reader, focus order, contrast).
 - Map findings to WCAG criteria, severity, and user impact.
-- Provide remediation steps and re-test after fixes.
+- Trigger the local memory capture using the standardized capture script.
 - If detailed procedures are required, open `resources/implementation-playbook.md`.
 
 ## Resources
@@ -47,3 +47,14 @@ $ARGUMENTS
 - NEVER use color alone to convey meaning or state changes.
 - NEVER trap keyboard focus; users must always be able to navigate into and out of all interactive elements.
 - NEVER skip manual verification with a screen reader (e.g., VoiceOver/NVDA) on critical user journeys.
+
+## 6) Memory Sync
+
+After a compliance audit, accessibility report, or audit plan is completed, you **MUST** trigger the local memory capture. 
+
+1. Save the final audit report, accessibility plan, or compliance checklist as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   ```bash
+   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   ```
+3. This ensures that new compliance requirements, accessibility standards, and audit findings are automatically routed to the correct storage (OKF or ChromaDB).

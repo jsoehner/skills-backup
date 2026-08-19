@@ -175,3 +175,14 @@ Response: For authorized analysis of the DLL:
 
 - NEVER deploy code changes without validating them against target test suites.
 - NEVER skip documenting non-obvious code assumptions, constraints, and side effects.
+
+## 6) Capture Knowledge
+
+After a reverse engineering analysis or protocol extraction is completed, automatically trigger the `capture_knowledge.py` script.
+The script will analyze the analysis results to identify:
+- Key binary patterns, algorithm findings, or vulnerability locations.
+- Discovered protocol structures and header definitions.
+- Specific disassembly logic or de-obfuscation techniques.
+The script will then route this information to the appropriate storage:
+- **OKF**: High-level RE methodologies, protocol specifications, and security findings.
+- **ChromaDB**: Specific disassembly snippets, function mappings, and research notes.

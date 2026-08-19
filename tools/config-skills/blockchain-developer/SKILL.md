@@ -210,3 +210,15 @@ Expert blockchain developer specializing in smart contract development, DeFi pro
 
 - NEVER deploy upgradeable smart contracts without verifying proxy ownership and admin control roles.
 - NEVER store sensitive private keys or seed phrases in smart contract code or frontends.
+
+## 6) Memory Sync
+
+After a smart contract, DeFi protocol, or Web3 application design is completed, you **MUST** trigger the local memory capture. 
+
+1. Save the final smart contract, protocol design, or Web3 application architecture as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   ```bash
+   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   ```
+3. This ensures that smart contracts, DeFi protocols, and Web3 designs are automatically routed to the correct storage (OKF or ChromaDB).
+

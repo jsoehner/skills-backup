@@ -157,3 +157,14 @@ print(f"Audit Trail: Total Unique Entries: {len(unique_entrants)}, Drawn Value: 
 3. **Tie / Multi-Winner Exclusions**:
    - *Scenario*: Drawing multiple winners and the same user gets picked twice.
    - *Fallback*: Maintain a list of already selected winners. If a duplicate is drawn, discard it and rerun the selection function until a unique winner is chosen.
+
+## 6) Capture Knowledge
+
+After a raffle or giveaway is conducted, automatically trigger the `capture_knowledge.py` script.
+The script will analyze the drawing to identify:
+- Total number of entrants and unique entries.
+- Distribution of weights (if applicable).
+- Random seed/value used for the draw.
+The script will then route this information to the appropriate storage:
+- **OKF**: Raffle fairness standards, weighted selection rules, and audit trail requirements.
+- **ChromaDB**: Specific drawing results, winner lists, and randomness verification logs.

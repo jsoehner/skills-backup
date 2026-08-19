@@ -92,17 +92,16 @@ git bisect good v1.0.0
 git bisect good  # or: git bisect bad
 
 # Continue until bug found
-# When done
 git bisect reset
-```
 
-**Automated Bisect:**
-```bash
+# Automated Bisect:
 # Use script to test automatically
 git bisect start HEAD v1.0.0
 git bisect run ./test.sh
 
 # test.sh should exit 0 for good, 1-127 (except 125) for bad
+# When done
+git bisect reset
 ```
 
 ### 4. Worktrees
@@ -141,7 +140,9 @@ git reflog show feature/branch
 git reflog
 # Find commit hash
 git checkout abc123
-git branch recovered-branch
+
+# Create branch from lost commit
+git branch recovery def456
 
 # Restore deleted branch
 git reflog
@@ -296,7 +297,6 @@ Automatically squash fixup commits during rebase.
 git commit -m "feat: add user authentication"
 
 # Later, fix something in that commit
-# Stage changes
 git commit --fixup HEAD  # or specify commit hash
 
 # Make more changes
@@ -376,7 +376,7 @@ git reset --hard backup-branch
 - **Losing Work in Rebase**: Resolve conflicts carefully, test after rebase
 - **Forgetting Worktree Cleanup**: Orphaned worktrees consume disk space
 - **Not Backing Up Before Experiment**: Always create safety branch
-- **Bisect on Dirty Working Directory**: Commit or stash before bisecting
+- **Bisecting on Dirty Working Directory**: Commit or stash before bisecting
 
 ## Recovery Commands
 
@@ -414,3 +414,11 @@ git branch recovered-branch abc123
 
 - NEVER deploy code changes without validating them against target test suites.
 - NEVER skip documenting non-obvious code assumptions, constraints, and side effects.
+
+## 6) Memory Sync
+
+Execute the following steps to sync knowledge to the memory system:
+1. Use `capture_knowledge.py` to route information to the correct storage (OKF or ChromaDB).
+2. Ensure that high-level architectural rules, policies, and decisions are stored in the OKF (Open Knowledge Format) directory.
+3. Ensure that ephemeral data, logs, and specific technical notes are stored in the ChromaDB instance.
+4. Verify that the `MEMORY_SYSTEM_ROOT` and `MEMORY_INBOX_DIR` environment variables are correctly configured.

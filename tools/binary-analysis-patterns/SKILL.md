@@ -23,14 +23,7 @@ Comprehensive patterns and techniques for analyzing compiled binaries, understan
 - Apply relevant best practices and validate outcomes.
 - Provide actionable steps and verification.
 
-## Knowledge Capture Requirement
-When performing tasks that involve architectural decisions, significant engineering trade-offs, or complex infrastructure changes, you MUST use the `capture_knowledge.py` script to persist the information.
-
-- **Policy/High-Level Decisions**: Use `python3 capture_knowledge.py --type okf` to save to the Open Knowledge Framework (OKF).
-- **Technical Context/Implementation Details**: Use `python3 capture_knowledge.py --type chroma` to save to the contextual memory (ChromaDB).
-
-Ensure that the captured content is deduplicated (the script handles this via hashing) and correctly chunked.
-
+## Disassembly Fundamentals
 
 ### x86-64 Instruction Patterns
 
@@ -459,3 +452,15 @@ def auto_rename():
 
 - NEVER execute analyzed binaries on production host networks; always run within a virtual sandbox.
 - NEVER perform analysis on binaries without validating written permission scope.
+
+## 6) Memory Sync
+
+After a binary analysis report, protection mechanism identification, or code pattern discovery is completed, you **MUST** trigger the local memory capture. 
+
+1. Save the final binary analysis report, protection findings, or code pattern summary as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   ```bash
+   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   ```
+3. This ensures that binary analysis results, protection mechanisms, and code patterns are automatically routed to the correct storage (OKF or ChromaDB).
+

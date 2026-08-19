@@ -1,17 +1,6 @@
 ---
 name: data-engineering-data-driven-feature
 description: "Build features guided by data insights, A/B testing, and continuous measurement using specialized agents for analysis, implementation, and experimentation."
-metadata:
-  model: inherit
-dependencies:
-  - data-scientist
-  - business-analyst
-  - backend-architect
-  - data-engineer
-  - frontend-developer
-  - ml-engineer
-  - deployment-engineer
-  - observability-engineer
 ---
 
 # Data-Driven Feature Development
@@ -195,3 +184,9 @@ Feature to develop with data-driven approach: $ARGUMENTS
 
 - NEVER deploy code changes without validating them against target test suites.
 - NEVER skip documenting non-obvious code assumptions, constraints, and side effects.
+
+## 6) Memory Sync
+
+After a data-driven feature architecture, experiment design, or analytics instrumentation plan is completed, you **MUST** trigger the local memory capture. 
+
+1. Save the final design, experiment plan, or analytics schema as a Markdown file in the project directory.\n2. Invoke the capture script: \n   ```bash\n   python C:\\Users\\jsoehner\\memory_system\\capture_knowledge.py <file_path>\n   ```\n3. This ensures that new feature requirements, experiment designs, and analytics schemas are automatically routed to the correct storage (OKF or ChromaDB).

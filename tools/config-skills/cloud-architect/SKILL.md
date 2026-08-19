@@ -138,9 +138,8 @@ Expert cloud architect with deep knowledge of AWS, Azure, GCP, and emerging clou
 - NEVER commit raw secrets or API keys to infrastructure code repositories.
 - NEVER deploy resources without setting clear resource limits (CPU/Memory/storage quotas).
 
-## Knowledge Capture Requirement
-When completing a task that involves a significant architectural decision, a complex bug fix, or a new infrastructure pattern, you MUST:
-1. Synthesize the decision/fix into a concise summary (3-5 sentences).
-2. Classify it as either **OKF** (High-level policy, architectural rule, or cross-cutting standard) or **CHROMA** (Technical context, implementation detail, or specific bug fix).
-3. Execute `capture_knowledge.py` with the appropriate `--type` flag.
-4. Ensure the captured knowledge is deduplicated and properly chunked using the `smart_chunk` logic.
+## 6) Memory Sync
+
+After a cloud architecture design, infrastructure plan, or cost optimization strategy is completed, you **MUST** trigger the local memory capture. 
+
+1. Save the final architecture design, IaC snippets, or cost analysis as a Markdown file in the project directory.\n2. Invoke the capture script: \n   ```bash\n   python C:\\Users\\jsoehner\\memory_system\\capture_knowledge.py <file_path>\n   ```\n3. This ensures that new infrastructure designs, cost models, and cloud standards are automatically routed to the correct storage (OKF or ChromaDB).

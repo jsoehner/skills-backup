@@ -309,15 +309,20 @@ metadata:
 - [Awesome Bash](https://github.com/awesome-lists/awesome-bash) - Curated list of Bash resources and tools
 - [Pure Bash Bible](https://github.com/dylanaraps/pure-bash-bible) - Collection of pure bash alternatives to external commands
 
-## Knowledge Capture Requirement
-When performing tasks that involve architectural decisions, significant engineering trade-offs, or complex infrastructure changes, you MUST use the `capture_knowledge.py` script to persist the information.
-
-- **Policy/High-Level Decisions**: Use `python3 capture_knowledge.py --type okf` to save to the Open Knowledge Framework (OKF).
-- **Technical Context/Implementation Details**: Use `python3 capture_knowledge.py --type chroma` to save to the contextual memory (ChromaDB).
-
-Ensure that the captured content is deduplicated (the script handles this via hashing) and correctly chunked.
-
+## Anti-Patterns
 
 - NEVER run scripts using `eval` on untrusted user inputs.
 - NEVER use backticks for command substitution; always use `$()`.
 - NEVER parse file lists using `for f in $(ls)`; use `find` with NUL delimiters or loops instead.
+
+## 6) Memory Sync
+
+After a defensive Bash script is designed, a production automation is planned, or a CI/CD pipeline script is completed, you **MUST** trigger the local memory capture. 
+
+1. Save the final script design, automation plan, or CI/CD configuration as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   ```bash
+   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   ```
+3. This ensures that Bash scripts, automation plans, and CI/CD configurations are automatically routed to the correct storage (OKF or ChromaDB).
+

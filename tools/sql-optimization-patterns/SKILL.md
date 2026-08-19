@@ -38,3 +38,14 @@ Transform slow database queries into lightning-fast operations through systemati
 
 - NEVER execute raw DML/DDL operations on production database instances without verification.
 - NEVER ignore connection limits and connection pool starvation indicators.
+
+## 6) Capture Knowledge
+
+After a security audit, risk assessment, or threat model is completed, automatically trigger the `capture_knowledge.py` script.
+The script will analyze the security findings to identify:
+- Key security rules, compliance standards, and risk profiles.
+- Critical vulnerabilities, threat vectors, and mitigation strategies.
+- Regulatory requirements (GDPR, HIPAA, etc.) and policy-level decisions.
+The script will then route this information to the appropriate storage:
+- **OKF**: High-level security policies, compliance standards, and corporate security rules.
+- **ChromaDB**: Specific audit reports, vulnerability logs, and threat model details.

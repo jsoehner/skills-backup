@@ -289,12 +289,24 @@ Use the `Write` tool to create or update this file. Derive `{version}` from the 
 - **Deliverables**: [Phase deliverables]
 - **Time**: [Estimated time]
 
----
+## 5) Knowledge Capture
+
+After the PRD is generated, automatically trigger the `capture_knowledge.py` script.
+The script will analyze the finalized PRD and identify:
+- Key architectural decisions and "Hard Rules" for the feature.
+- Critical security and performance constraints.
+- High-priority milestones and risks.
+The script will then route this information to the appropriate storage:
+- **OKF**: High-level "Source of Truth" rules and architecture-level decisions.
+- **ChromaDB**: Detailed functional requirements, edge case handling, and specific implementation constraints.
+
+## Conclusion
 
 **Document Version**: 1.0
 **Created**: {timestamp}
 **Clarification Rounds**: {clarification_rounds}
 **Quality Score**: {quality_score}/100
+
 ```
 
 ## Behavioral Guidelines
@@ -336,3 +348,13 @@ This is a self-contained skill. Do NOT load external files or reference director
 1. **Directory check**: Prior to generating the PRD file in Step 4, verify that the target `./docs/prds/` directory is explicitly created.
 2. **Conversational loop fallback**: If the user refuses to answer further questions and commands immediate file outputs, proceed to write the PRD using current known parameters rather than halting the workflow.
 
+## 6) Capture Knowledge
+
+After the PRD is generated, automatically trigger the `capture_knowledge.py` script.
+The script will analyze the finalized PRD and identify:
+- Key architectural decisions and "Hard Rules" for the feature.
+- Critical security and performance constraints.
+- High-priority milestones and risks.
+The script will then route this information to the appropriate storage:
+- **OKF**: High-level "Source of Truth" rules and architecture-level decisions.
+- **ChromaDB**: Detailed functional requirements, edge case handling, and specific implementation constraints.

@@ -489,3 +489,14 @@ What materials do you have?
 
 - NEVER deploy code changes without validating them against target test suites.
 - NEVER skip documenting non-obvious code assumptions, constraints, and side effects.
+
+## 6) Capture Knowledge
+
+After the analysis or business case is finalized, automatically trigger the `capture_knowledge.py` script.
+The script will analyze the findings and identify:
+- Key market opportunities and "10x" opportunities.
+- High-level strategic decisions and "Hard Rules" for the business model.
+- Key financial targets and unit economics milestones.
+The script will then route this information to the appropriate storage:
+- **OKF**: High-level strategy, market sizing conclusions, and business model rules.
+- **ChromaDB**: Specific financial model scenarios, competitive analysis details, and detailed startup metrics.

@@ -19,7 +19,7 @@ The registry provides reusable blocks and components installable via `hyperframe
 ```bash
 hyperframes add data-chart              # install a block
 hyperframes add grain-overlay           # install a component
-hyperframes add shimmer-sweep --dir .   # target a specific project
+hyperframes add data-chart --dir .      # target a specific project
 hyperframes add data-chart --json       # machine-readable output
 hyperframes add data-chart --no-clipboard  # skip clipboard (CI/headless)
 ```
@@ -77,7 +77,7 @@ See [wiring-blocks.md](./references/wiring-blocks.md) for full details.
 
 ## Wiring components
 
-Components are snippets — paste their HTML into your composition's markup, their CSS into your style block, and their JS into your script (if any):
+Components are snippets — paste their HTML into your composition's markup, their CSS into your composition's styles, and any JS into your composition's script (if any):
 
 1. Read the installed file (e.g., `compositions/components/grain-overlay.html`)
 2. Copy the HTML elements into your composition's `<div data-composition-id="...">`
@@ -102,7 +102,7 @@ See [discovery.md](./references/discovery.md) for details on filtering by type a
 
 ## Contributing a new block or component
 
-To author a NEW registry item (caption style, VFX block, transition, lower third, or a reusable component) and ship it as an upstream PR — not install an existing one — follow the full idea → scaffold → build → validate → preview → ship workflow in [contributing.md](./references/contributing.md). Copy-paste starter templates (caption / VFX / component / `registry-item.json`) are in [templates.md](./references/templates.md).
+To author a NEW registry item (caption style, VFX block, transition, lower third, or a reusable component) and ship it as an upstream PR — not install an existing one — follow the full idea → scaffold → build → validate → ship workflow in [contributing.md](./references/contributing.md). Copy-paste starter templates (caption / VFX block / component / `registry-item.json`) are in [templates.md](./references/templates.md).
 
 ## Anti-Patterns
 
@@ -115,7 +115,15 @@ To author a NEW registry item (caption style, VFX block, transition, lower third
 ## References & Loading Triggers
 
 **MANDATORY - LOADING TRIGGERS**:
+
 - Before creating a PR to contribute a new component or editing registry structures, you **MUST** read [contributing.md](./references/contributing.md) and [templates.md](./references/templates.md) fully.
 - Before installing layout variables, you **MUST** read [install-locations.md](./references/install-locations.md).
 - **Do NOT load** custom location reference files if using standard default build outputs.
 
+## 6) Memory Sync
+
+Execute the following steps to sync knowledge to the memory system:
+1. Use `capture_knowledge.py` to route information to the correct storage (OKF or ChromaDB).
+2. Ensure that high-level architectural rules, policies, and decisions are stored in the OKF (Open Knowledge Format) directory.
+3. Ensure that ephemeral data, logs, and specific technical notes are stored in the ChromaDB instance.
+4. Verify that the `MEMORY_SYSTEM_ROOT` and `MEMORY_INBOX_DIR` environment variables are correctly configured.

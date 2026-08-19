@@ -9,10 +9,17 @@ import yaml
 # Imports categories mapping from update_readme.py dynamically
 from update_readme import USER_CATEGORIES, CONFIG_CATEGORIES, extract_frontmatter, determine_category, repo_dir
 
-LOCAL_USER_SKILLS_DIR = os.path.expanduser("~/.gemini/skills")
-LOCAL_CONFIG_SKILLS_DIR = os.path.expanduser("~/.gemini/config/skills")
+def get_client_skills_dir(client):
+    if client == "opencode":
+        return os.path.expanduser("~/.opencode/skills")
+    elif client == "gemini":
+        return os.path.expanduser("~/.gemini/config/skills")
+    elif client == "claude":
+        return os.path.expanduser("~/.claude/skills")
+    else:
+        return os.path.expanduser("~/.pi/agent/skills")
 
-def get_all_skills_in_repo():
+def get_all_skills_in_repo(local_dir):
     skills = []
     seen = set()
     
@@ -32,17 +39,13 @@ def get_all_skills_in_repo():
                 continue
                 
             name = os.path.basename(root)
-            if name in seen:
-                continue
-            seen.add(name)
-            
             skill_md = os.path.join(root, "SKILL.md")
             info = extract_frontmatter(skill_md) or {}
             group_key = info.get("group") or determine_category(rel_path, is_config=False)
             skills.append({
                 "name": name,
                 "repo_path": root,
-                "local_path": os.path.join(LOCAL_USER_SKILLS_DIR, name),
+                "local_path": os.path.join(local_dir, name),
                 "is_config": False,
                 "group": group_key
             })
@@ -56,10 +59,6 @@ def get_all_skills_in_repo():
                 continue
             if "SKILL.md" in files:
                 name = os.path.basename(root)
-                if name in seen:
-                    continue
-                seen.add(name)
-                
                 skill_md = os.path.join(root, "SKILL.md")
                 rel_path = os.path.relpath(root, repo_dir)
                 info = extract_frontmatter(skill_md) or {}
@@ -67,7 +66,7 @@ def get_all_skills_in_repo():
                 skills.append({
                     "name": name,
                     "repo_path": root,
-                    "local_path": os.path.join(LOCAL_CONFIG_SKILLS_DIR, name),
+                    "local_path": os.path.join(local_dir, name),
                     "is_config": True,
                     "group": group_key
                 })
@@ -82,8 +81,9 @@ def list_groups():
         print(f"  - {key:<30} ({info['title']})")
     print("  - other                          (Uncategorized)")
 
-def sync_skills(direction, filter_group=None):
-    skills = get_all_skills_in_repo()
+def sync_skills(direction, client="pi", filter_group=None):
+    local_dir = get_client_skills_dir(client)
+    skills = get_all_skills_in_repo(local_dir)
     
     if filter_group:
         skills = [s for s in skills if s["group"] == filter_group]
@@ -91,9 +91,10 @@ def sync_skills(direction, filter_group=None):
             print(f"No skills found matching group '{filter_group}'.")
             return
             
-    print(f"Starting sync ({direction}) for {len(skills)} unique skills...")
+    print(f"Starting sync ({direction}) for client '{client}' [{local_dir}]...")
     
     success_count = 0
+    synced_names = set()
     for s in skills:
         src = s["repo_path"] if direction == "deploy" else s["local_path"]
         dst = s["local_path"] if direction == "deploy" else s["repo_path"]
@@ -115,16 +116,17 @@ def sync_skills(direction, filter_group=None):
                     os.remove(dst)
                     
             shutil.copytree(src, dst, ignore=shutil.ignore_patterns('skills', '__pycache__', '.git'))
-            print(f"  Synced: {s['name']} [{s['group']}]")
+            synced_names.add(s['name'])
             success_count += 1
         except Exception as e:
             print(f"  Error syncing {s['name']}: {e}")
             
-    print(f"Sync complete. Successfully synced {success_count} unique skills.")
+    print(f"Sync complete. Successfully processed {success_count} location updates for {len(synced_names)} unique skills.")
 
 def main():
-    parser = argparse.ArgumentParser(description="Synchronize skills between repo and local AGY directories.")
+    parser = argparse.ArgumentParser(description="Synchronize skills between repo and local AI client directories.")
     parser.add_argument("action", choices=["deploy", "save"], help="deploy: repo -> local; save: local -> repo")
+    parser.add_argument("--client", choices=["opencode", "pi", "gemini", "claude"], default="pi", help="Target AI client (default: pi)")
     parser.add_argument("-g", "--group", help="Filter by skill category/group name")
     parser.add_argument("-l", "--list-groups", action="store_true", help="List all available group names")
     
@@ -133,7 +135,7 @@ def main():
         sys.exit(0)
         
     args = parser.parse_args()
-    sync_skills(args.action, args.group)
+    sync_skills(args.action, args.client, args.group)
 
 if __name__ == "__main__":
     main()

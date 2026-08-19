@@ -498,3 +498,14 @@ class TimeoutSagaOrchestrator(SagaOrchestrator):
 
 - NEVER deploy prompts or agent workflows without setting strict token budget constraints and safety guardrails.
 - NEVER trust LLM tool calls without validating and sanitizing the arguments before execution.
+
+## 6) Capture Knowledge
+
+After a saga orchestration pattern is designed or implemented, automatically trigger the `capture_knowledge.py` script.
+The script will analyze the saga design to identify:
+- State transitions and step definitions.
+- Compensation logic for each step.
+- Orchestrator vs Choreography trade-offs.
+The script will then route this information to the appropriate storage:
+- **OKF**: High-level saga architecture, state machine rules, and distributed transaction policies.
+- **ChromaDB**: Specific step actions, compensation logic details, and correlation IDs.

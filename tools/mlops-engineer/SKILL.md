@@ -6,11 +6,6 @@ description: Build comprehensive ML pipelines, experiment tracking, and model
   for ML infrastructure, experiment management, or pipeline automation.
 metadata:
   model: inherit
-dependencies:
-  - cloud-architect
-  - workflow-patterns
-  - ml-pipeline-workflow
-  - data-engineer
 ---
 
 ## Use this skill when

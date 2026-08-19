@@ -41,7 +41,7 @@ Comprehensive guide to modern React state management patterns, from local compon
 
 ### 2. Selection Criteria
 
-```
+```d
 Small app, simple state → Zustand or Jotai
 Large app, complex state → Redux Toolkit
 Heavy server interaction → React Query + light client state
@@ -231,7 +231,6 @@ import { createUserSlice, UserSlice } from './slices/createUserSlice'
 import { createCartSlice, CartSlice } from './slices/createCartSlice'
 
 type StoreState = UserSlice & CartSlice
-
 export const useStore = create<StoreState>()((...args) => ({
   ...createUserSlice(...args),
   ...createCartSlice(...args),
@@ -443,3 +442,26 @@ const todosSlice = createSlice({
 
 - NEVER load massive datasets directly into client memory; use pagination or infinite scroll.
 - NEVER use generic, unstyled components or default browser styling in production-ready UIs.
+
+## 6) Capture Knowledge
+
+After the state management architecture or complex store logic is implemented, automatically trigger the `capture_knowledge.py` script.
+The script will analyze the store definitions, state transitions, and synchronization patterns to identify:
+- New global state schemas or atomic atoms.
+- Complex Redux Toolkit slices or Zustand store configurations.
+- Custom React Query hooks and optimistic update logic.
+The script will then route this information to the appropriate storage:
+- **OKF**: High-level state management rules, store naming conventions, and architecture patterns.
+- **ChromaDB**: Specific store implementations, complex action types, and custom hook logic.
+
+## 6) Capture Knowledge
+
+After the state management architecture or complex store logic is implemented, automatically trigger the `capture_knowledge.py` script.
+The script will analyze the store definitions, state transitions, and synchronization patterns to identify:
+- New global state schemas or atomic atoms.
+- Complex Redux Toolkit slices or Zustand store configurations.
+- Custom React Query hooks and optimistic update logic.
+The script will then route this information to the appropriate storage:
+- **OKF**: High-level state management rules, store naming conventions, and architecture patterns.
+- **ChromaDB**: Specific store implementations, complex action types, and custom hook logic.
+",path:

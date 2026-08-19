@@ -169,14 +169,14 @@ When synthesizing containers, provide:
 - Infrastructure requirements and scaling considerations
 - Consistent documentation format across all containers
 
-## Knowledge Capture Requirement
-When performing tasks that involve architectural decisions, significant engineering trade-offs, or complex infrastructure changes, you MUST use the `capture_knowledge.py` script to persist the information.
-
-- **Policy/High-Level Decisions**: Use `python3 capture_knowledge.py --type okf` to save to the Open Knowledge Framework (OKF).
-- **Technical Context/Implementation Details**: Use `python3 capture_knowledge.py --type chroma` to save to the contextual memory (ChromaDB).
-
-Ensure that the captured content is deduplicated (the script handles this via hashing) and correctly chunked.
-
+## Anti-Patterns
 
 - NEVER deploy prompts or agent workflows without setting strict token budget constraints and safety guardrails.
 - NEVER trust LLM tool calls without validating and sanitizing the arguments before execution.
+
+## 6) Memory Sync
+
+After capturing knowledge, ensure all high-level architectural decisions, new technical standards, and key documentation are synced to the persistent memory system.
+1. Run \`capture_knowledge.py\` to route findings to the appropriate storage (OKF for policies, ChromaDB for logs).
+2. Ensure all new architectural \"Hard Rules\" are reflected in the \`policy_memory_routing.md\` if they represent significant system-wide constraints.
+3. Verify that all newly created diagrams and documentation are stored in the standardized directory structure using relative paths.

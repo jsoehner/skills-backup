@@ -35,6 +35,7 @@ Use this skill to execute a single SQL statement.
 Name | Type   | Description         | Required | Default
 :--- | :----- | :------------------ | :------- | :------
 sql  | string | The sql to execute. | Yes      |
+ 
 
 --------------------------------------------------------------------------------
 
@@ -52,15 +53,15 @@ index scans, and a boolean indicating if the index has been used at least once.
 
 | Name        | Type    | Description                     | Required | Default |
 | :---------- | :------ | :------------------------------ | :------- | :------ |
-| schema_name | string  | Optional: a text to filter      | No       |         |
+| schema_name | string  | Optional: A text to filter      | No       |         |
 :             :         : results by schema name. The     :          :         :
 :             :         : input is used within a LIKE     :          :         :
 :             :         : clause.                         :          :         :
-| table_name  | string  | Optional: a text to filter      | No       |         |
+| table_name  | string  | Optional: A text to filter      | No       |         |
 :             :         : results by table name. The      :          :         :
 :             :         : input is used within a LIKE     :          :         :
 :             :         : clause.                         :          :         :
-| index_name  | string  | Optional: a text to filter      | No       |         |
+| index_name  | string  | Optional: A text to filter      | No       |         |
 :             :         : results by index name. The      :          :         :
 :             :         : input is used within a LIKE     :          :         :
 :             :         : clause.                         :          :         :
@@ -152,7 +153,6 @@ lists all tables in user schemas.
 :               :        : names. If       :          :            :
 :               :        : empty, details  :          :            :
 :               :        : for all tables  :          :            :
-:               :        : will be listed. :          :            :
 | output_format | string | Optional: Use   | No       | `detailed` |
 :               :        : 'simple' for    :          :            :
 :               :        : names only or   :          :            :
@@ -172,7 +172,7 @@ function executed by the trigger and full definition.
 #### Parameters
 
 | Name         | Type    | Description                  | Required | Default |
-| :----------- | :------ | :--------------------------- | :------- | :------ |
+| :----------- | :------ | :-------------------------- | :------- | :------ |
 | trigger_name | string  | Optional: A specific trigger | No       |         |
 :              :         : name pattern to search for.  :          :         :
 | schema_name  | string  | Optional: A specific schema  | No       |         |
@@ -206,3 +206,14 @@ Returns schemaname, viewname, ownername and the definition.
 
 - NEVER execute raw DML/DDL operations on production database instances without verification.
 - NEVER ignore connection limits and connection pool starvation indicators.
+
+## 6) Memory Sync
+
+After a database exploration, schema audit, or SQL query execution is completed, you **MUST** trigger the local memory capture. 
+
+1. Save the final database schema, audit findings, or query results as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   ```bash
+   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   ```
+3. This ensures that database structures, schema objects, and query results are automatically routed to the correct storage (OKF or ChromaDB).

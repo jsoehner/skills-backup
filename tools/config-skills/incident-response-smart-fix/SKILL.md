@@ -32,3 +32,14 @@ description: "[Extended thinking: This workflow implements a sophisticated debug
 
 - NEVER deploy code changes without validating them against target test suites.
 - NEVER skip documenting non-obvious code assumptions, constraints, and side effects.
+
+## 6) Capture Knowledge
+
+After a complex issue is resolved using the multi-agent smart-fix pipeline, automatically trigger the `capture_knowledge.py` script.
+The script will analyze the resolution path to identify:
+- Root cause analysis (RCA) findings and contributing factors.
+- Specific technical fixes, architectural changes, or performance optimizations.
+- New monitoring alerts, runbook updates, or regression tests created.
+The script will then route this information to the appropriate storage:
+- **OKF**: High-level RCA summaries, system-wide prevention rules, and incident-related architectural standards.
+- **ChromaDB**: Detailed technical logs, specific code fixes, and "before and after" debugging evidence.

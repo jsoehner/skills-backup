@@ -20,14 +20,6 @@ metadata:
 > **STOP AND VERIFY**: Before running any command or tool that results in
 > irreversible data loss, you **MUST** obtain explicit user consent.
 
-## Knowledge Capture Requirement
-When performing tasks that involve architectural decisions, significant engineering trade-offs, or complex infrastructure changes, you MUST use the `capture_knowledge.py` script to persist the information.
-
-- **Policy/High-Level Decisions**: Use `python3 capture_knowledge.py --type okf` to save to the Open Knowledge Framework (OKF).
-- **Technical Context/Implementation Details**: Use `python3 capture_knowledge.py --type chroma` to save to the contextual memory (ChromaDB).
-
-Ensure that the captured content is deduplicated (the script handles this via hashing) and correctly chunked.
-
 ## Mandatory Procedure
 
 1.  **Halt Execution**: Do **not** execute the command.
@@ -37,3 +29,15 @@ Ensure that the captured content is deduplicated (the script handles this via ha
     -   A request for their **explicit approval** to proceed.
 3.  **Wait**: Only proceed if the user provides clear, affirmative consent in
     the conversation.
+4.  **Capture Context**: Trigger the standardized capture script to record the reason for the data loss request and the user's consent decision.
+
+## 6) Memory Sync
+
+After a data loss risk assessment or a consent-based deletion is completed, you **MUST** trigger the local memory capture. 
+
+1. Save the final risk assessment or the summary of the consent-based deletion as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   ```bash
+   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   ```
+3. This ensures that high-risk operations and their associated approvals/justifications are automatically routed to the correct storage (OKF or ChromaDB).

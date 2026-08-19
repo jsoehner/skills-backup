@@ -4,15 +4,6 @@ description: "Orchestrates comprehensive error diagnostics, including analysis, 
 version: 1
 created: "2026-07-31"
 updated: "2026-07-31"
-metadata:
-  model: inherit
-dependencies:
-  - error-debugging-error-analysis
-  - error-diagnostics-error-analysis
-  - error-debugging-error-trace
-  - error-diagnostics-error-trace
-  - error-debugging-multi-agent-review
-  - error-handling-patterns
 ---
 ## When to Use
 Use for any task involving error diagnosis, debugging, tracing, or implementing robust error-handling patterns.
@@ -34,3 +25,11 @@ Use for any task involving error diagnosis, debugging, tracing, or implementing 
 1. Root cause is clearly identified and documented.
 2. Trace information is correlated with the error.
 3. Fix plan is comprehensive and addresses the underlying issue.
+
+## 6) Memory Sync
+
+Execute the following steps to sync knowledge to the memory system:
+1. Use `capture_knowledge.py` to route information to the correct storage (OKF or ChromaDB).
+2. Ensure that high-level architectural rules, policies, and decisions are stored in the OKF (Open Knowledge Format) directory.
+3. Ensure that ephemeral data, logs, and specific technical notes are stored in the ChromaDB instance.
+4. Verify that the `MEMORY_SYSTEM_ROOT` and `MEMORY_INBOX_DIR` environment variables are correctly configured.

@@ -200,14 +200,13 @@ ingester.save_dead_letter_queue('s3://lake/dlq/orders')
 - Schema evolution without downtime
 - End-to-end data lineage tracked
 
-## Knowledge Capture Requirement
-When performing tasks that involve architectural decisions, significant engineering trade-offs, or complex infrastructure changes, you MUST use the `capture_knowledge.py` script to persist the information.
-
-- **Policy/High-Level Decisions**: Use `python3 capture_knowledge.py --type okf` to save to the Open Knowledge Framework (OKF).
-- **Technical Context/Implementation Details**: Use `python3 capture_knowledge.py --type chroma` to save to the contextual memory (ChromaDB).
-
-Ensure that the captured content is deduplicated (the script handles this via hashing) and correctly chunked.
-
+## Anti-Patterns
 
 - NEVER commit raw secrets or API keys to infrastructure code repositories.
 - NEVER deploy resources without setting clear resource limits (CPU/Memory/storage quotas).
+
+## 6) Memory Sync
+
+After a data pipeline architecture, ELT/ETL flow, or data quality framework is completed, you **MUST** trigger the local memory capture. 
+
+1. Save the final architecture design, pipeline map, or data model as a Markdown file in the project directory.\n2. Invoke the capture script: \n   ```bash\n   python C:\\Users\\jsoehner\\memory_system\\capture_knowledge.py <file_path>\n   ```\n3. This ensures that new data models, pipeline designs, and data engineering standards are automatically routed to the correct storage (OKF or ChromaDB).

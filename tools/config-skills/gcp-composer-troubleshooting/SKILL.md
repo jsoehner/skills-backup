@@ -89,10 +89,11 @@ Follow this strict process:
 ### 1. Code Consistency Check (CRITICAL)
 
 **Always** verify if the local DAG file matches the version running in the
-Composer environment before analyzing.
+Composer environment.
 
 *   **Match**: Proceed with using local files for context.
-*   **Mismatch**: You must align on which version to analyze.
+*   **Mismatch**: Ask the user: *"Should I sync your local DAG to the remote
+    environment and retry the run?"*
 
 ### 2. Troubleshooting Scenarios
 
@@ -105,7 +106,8 @@ If the remote DAG is different:
 2.  **Download Option**: If the user wants to debug the *current* remote failure
     without syncing:
     *   Ask the user to provide or confirm a **temporary folder** (e.g.,
-        `tmp_debug/`) to download the remote DAGs.
+        `tmp_debug/`) to download the remote DAGs there to perform the RCA on the
+        actual running code.
     *   Download the remote DAGs there to perform the RCA on the actual running
         code.
 
@@ -207,6 +209,8 @@ actions:
       select_models:
         - <model_name_1>
         - <model_name_2>
+    dependsOn:
+      - <dbt_action_name>
 
   # Example PySpark Action
   - name: <pyspark_action_name>
@@ -243,21 +247,21 @@ actions:
       destinationTable: "<project_id>.<dataset>.<table>"
     dependsOn:
       - <pyspark_action_name>
-```
 
 ## IMPORTANT
 
 *   Do not modify the code. Just analyze and provide the RCA report. Unless user
     explicitly asks to fix the code.
 
-## Knowledge Capture Requirement
-When performing tasks that involve architectural decisions, significant engineering trade-offs, or complex infrastructure changes, you MUST use the `capture_knowledge.py` script to persist the information.
-
-- **Policy/High-Level Decisions**: Use `python3 capture_knowledge.py --type okf` to save to the Open Knowledge Framework (OKF).
-- **Technical Context/Implementation Details**: Use `python3 capture_knowledge.py --type chroma` to save to the contextual memory (ChromaDB).
-
-Ensure that the captured content is deduplicated (the script handles this via hashing) and correctly chunked.
-
+## Anti-Patterns
 
 - NEVER commit raw secrets or API keys to infrastructure code repositories.
 - NEVER deploy resources without setting clear resource limits (CPU/Memory/storage quotas).
+
+## 6) Memory Sync
+
+Execute the following steps to sync knowledge to the memory system:
+1. Use `capture_knowledge.py` to route information to the correct storage (OKF or ChromaDB).
+2. Ensure that high-level architectural rules, policies, and decisions are stored in the OKF (Open Knowledge Format) directory.
+3. Ensure that ephemeral data, logs, and specific technical notes are stored in the ChromaDB instance.
+4. Verify that the `MEMORY_SYSTEM_ROOT` and `MEMORY_INBOX_DIR` environment variables are correctly configured.

@@ -298,6 +298,22 @@ For each step:
 - No error classification (retry validation errors)
 - Ignoring payload limits (2MB per argument)
 
+### Operational Considerations
+
+**Monitoring**:
+
+- Workflow execution duration
+- Activity failure rates
+- Retry attempts and backoff
+- Pending workflow counts
+
+**Scalability**:
+
+- Horizontal scaling with workers
+- Task queue partitioning
+- Child workflow decomposition
+- Activity batching when appropriate
+
 ## Additional Resources
 
 **Official Documentation**:
@@ -319,11 +335,3 @@ For each step:
 
 - NEVER deploy prompts or agent workflows without setting strict token budget constraints and safety guardrails.
 - NEVER trust LLM tool calls without validating and sanitizing the arguments before execution.
-
-## Knowledge Capture Requirement
-When performing tasks that involve architectural decisions, significant engineering trade-offs, or complex infrastructure changes, you MUST use the `capture_knowledge.py` script to persist the information.
-
-- **Policy/High-Level Decisions**: Use `python3 capture_knowledge.py --type okf` to save to the Open Knowledge Framework (OKF).
-- **Technical Context/Implementation Details**: Use `python3 capture_knowledge.py --type chroma` to save to the contextual memory (ChromaDB).
-
-Ensure that the captured content is deduplicated (the script handles this via hashing) and correctly chunked.

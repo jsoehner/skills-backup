@@ -137,3 +137,9 @@ Expert cloud architect with deep knowledge of AWS, Azure, GCP, and emerging clou
 
 - NEVER commit raw secrets or API keys to infrastructure code repositories.
 - NEVER deploy resources without setting clear resource limits (CPU/Memory/storage quotas).
+
+## 6) Memory Sync
+
+After a cloud architecture design, infrastructure plan, or cost optimization strategy is completed, you **MUST** trigger the local memory capture. 
+
+1. Save the final architecture design, IaC snippets, or cost analysis as a Markdown file in the project directory.\n2. Invoke the capture script: \n   ```bash\n   python C:\\Users\\jsoehner\\memory_system\\capture_knowledge.py <file_path>\n   ```\n3. This ensures that new infrastructure designs, cost models, and cloud standards are automatically routed to the correct storage (OKF or ChromaDB).

@@ -1,6 +1,7 @@
 ---
 name: startup-analyst
-description: Expert startup business analyst specializing in market sizing,
+description: |
+  Expert startup business analyst specializing in market sizing,
   financial modeling, competitive analysis, and strategic planning for
   early-stage companies. Use PROACTIVELY when the user asks about market
   opportunity, TAM/SAM/SOM, financial projections, unit economics, competitive
@@ -9,6 +10,8 @@ description: Expert startup business analyst specializing in market sizing,
 metadata:
   model: inherit
 ---
+
+# Startup Analyst Skill
 
 ## Use this skill when
 
@@ -201,28 +204,6 @@ Expert business analyst focused exclusively on startup-stage companies, providin
 - "How do I decide between freemium and sales-led go-to-market?"
 - "What pricing strategy makes sense for my stage?"
 
-## When to Use This Agent
-
-**Trigger proactively for:**
-- Market sizing questions (TAM, SAM, SOM)
-- Financial projections and modeling
-- Unit economics analysis
-- Competitive landscape assessment
-- Team composition and hiring plans
-- Startup metrics and KPIs
-- Business strategy for early-stage companies
-- Fundraising preparation
-- Investor materials and analysis
-
-**Especially useful for:**
-- Pre-seed to Series A founders
-- First-time founders needing guidance
-- Fundraising preparation
-- Board meeting prep
-- Strategic planning sessions
-- Hiring and org design decisions
-- Competitive positioning work
-
 ## Integration with Commands
 
 This agent works seamlessly with plugin commands:
@@ -322,11 +303,29 @@ Provide:
 - Series A VCs: Proven unit economics, growth rate, efficiency metrics
 - Corporate VCs: Strategic fit, partnership potential, technology
 
----
-
-Your goal is to provide startup founders with the analytical rigor of a top-tier strategy consultant combined with the practical, startup-specific knowledge of an experienced operator. Help them make data-driven decisions, avoid common pitfalls, and build compelling cases for their businesses.
-
 ## Anti-Patterns
 
 - NEVER deploy code changes without validating them against target test suites.
 - NEVER skip documenting non-obvious code assumptions, constraints, and side effects.
+
+## 6) Capture Knowledge
+
+After the analysis or business case is finalized, automatically trigger the `capture_knowledge.py` script.
+The script will analyze the findings and identify:
+- Key market opportunities and "10x" opportunities.
+- High-level strategic decisions and "Hard Rules" for the business model.
+- Key financial targets and unit economics milestones.
+The script will then route this information to the appropriate storage:
+- **OKF**: High-level strategy, market sizing conclusions, and business model rules.
+- **ChromaDB**: Specific financial model scenarios, competitive analysis details, and detailed startup metrics.
+## 6) Capture Knowledge
+
+After the analysis or business case is finalized, automatically trigger the `capture_knowledge.py` script.
+The script will analyze the findings and identify:
+- Key market opportunities and "10x" opportunities.
+- High-level strategic decisions and "Hard Rules" for the business model.
+- Key financial targets and unit economics milestones.
+The script will then route this information to the appropriate storage:
+- **OKF**: High-level strategy, market sizing conclusions, and business model rules.
+- **ChromaDB**: Specific financial model scenarios, competitive analysis details, and detailed startup metrics.
+",path:

@@ -37,3 +37,15 @@ Production patterns for Godot 4.x game development with GDScript, covering archi
 
 - NEVER run shell scripts with unquoted variable expansions.
 - NEVER use eval on untrusted user inputs.
+
+## 6) Capture Knowledge
+
+After a game system or scene architecture is designed or implemented, automatically trigger the `capture_knowledge.py` script.
+The script will analyze the GDScript patterns to identify:
+- New game system architectures or state machine designs.
+- Custom signals, scene relationships, or optimization techniques.
+- Unique GDScript patterns for game mechanics or UI.
+The script will then route this information to the appropriate storage:
+- **OKF**: High-level game architecture rules, state management standards, and scene design principles.
+- **ChromaDB**: Specific GDScript implementations, signal connections, and optimization techniques.
+",path:

@@ -56,9 +56,13 @@ Use pandas, numpy, and scipy. Include realistic assumptions about market microst
 - NEVER deploy code changes without validating them against target test suites.
 - NEVER skip documenting non-obvious code assumptions, constraints, and side effects.
 
-## Knowledge Capture Requirement
-When completing a task that involves a significant architectural decision, a complex bug fix, or a new infrastructure pattern, you MUST:
-1. Synthesize the decision/fix into a concise summary (3-5 sentences).
-2. Classify it as either **OKF** (High-level policy, architectural rule, or cross-cutting standard) or **CHROMA** (Technical context, implementation detail, or specific bug fix).
-3. Execute `capture_knowledge.py` with the appropriate `--type` flag.
-4. Ensure the captured knowledge is deduplicated and properly chunked using the `smart_chunk` logic.
+## 6) Capture Knowledge
+
+After a trading strategy is backtested or a financial model is built, automatically trigger the `capture_knowledge.py` script.
+The script will analyze the quantitative analysis to identify:
+- Strategy logic and key parameters.
+- Risk metrics and performance outcomes (Sharpe, Drawdown, etc.).
+- Assumptions made about market microstructure or data quality.
+The script will then route this information to the appropriate storage:
+- **OKF**: Trading strategy frameworks, risk management rules, and portfolio optimization standards.
+- **ChromaDB**: Backtest results, specific parameter sets, and data-driven research notes.

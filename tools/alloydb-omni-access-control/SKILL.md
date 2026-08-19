@@ -38,20 +38,17 @@ connections in use.
 
 #### Parameters
 
-| Name         | Type    | Description   | Required | Default |
-| :----------- | :------ | :------------ | :------- | :------ |
-| setting_name | string  | Optional: A   | No       |         |
-:              :         : specific      :          :         :
-:              :         : configuration :          :         :
-:              :         : parameter     :          :         :
-:              :         : name pattern  :          :         :
-:              :         : to search     :          :         :
-:              :         : for.          :          :         :
-| limit        | integer | Optional: The | No       | `50`    |
-:              :         : maximum       :          :         :
-:              :         : number of     :          :         :
-:              :         : rows to       :          :         :
-:              :         : return.       :          :         :
+| Name         | Type    | Description                     | Required | Default |
+| :----------- | :------ | :------------------------------ | :------- | :------ |
+| setting_name | string  | Optional: A                   | No       |         |
+:              :         : specific                      :          :         :
+:              :         : configuration                   :          :         :
+:              :         : parameter                      :          :         :
+:              :         : name pattern                   :          :         :
+:              :         : to search                      :          :         :
+:              :         : for.                            :          :         :
+| limit        | integer | Optional: The maximum number of | No       | `50`    |
+:              :         : rows to return. Default is 10   :          :         :
 
 --------------------------------------------------------------------------------
 
@@ -77,15 +74,18 @@ and a list of other roles/groups that this role is a member of.
 
 --------------------------------------------------------------------------------
 
-## Knowledge Capture Requirement
-When performing tasks that involve architectural decisions, significant engineering trade-offs, or complex infrastructure changes, you MUST use the `capture_knowledge.py` script to persist the information.
-
-- **Policy/High-Level Decisions**: Use `python3 capture_knowledge.py --type okf` to save to the Open Knowledge Framework (OKF).
-- **Technical Context/Implementation Details**: Use `python3 capture_knowledge.py --type chroma` to save to the contextual memory (ChromaDB).
-
-Ensure that the captured content is deduplicated (the script handles this via hashing) and correctly chunked.
-
 ## Anti-Patterns
 
 - NEVER execute raw DML/DDL operations on production database instances without verification.
 - NEVER ignore connection limits and connection pool starvation indicators.
+
+## 6) Memory Sync
+
+After a security audit, role permission review, or access control configuration is completed, you **MUST** trigger the local memory capture. 
+
+1. Save the final audit report, role mapping, or security policy as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   ```bash
+   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   ```
+3. This ensures that security-related roles, permissions, and access control decisions are automatically routed to the correct storage (OKF or ChromaDB).

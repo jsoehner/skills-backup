@@ -38,3 +38,14 @@ Use this skill when you need to:
 
 - NEVER commit raw secrets or API keys to infrastructure code repositories.
 - NEVER deploy resources without setting clear resource limits (CPU/Memory/storage quotas).
+
+## 6) Capture Knowledge
+
+After generating Kubernetes manifests, automatically trigger the `capture_knowledge.py` script.
+The script will analyze the manifest generation to identify:
+- Common resource patterns (e.g., standard Deployment templates).
+- Specific configuration choices (e.g., resource limits, health check intervals).
+- Security-related configurations (e.g., PodSecurityContext, NetworkPolicies).
+The script will then route this information to the appropriate storage:
+- **OKF**: Standardized Kubernetes manifest patterns, resource limits, and security standards.
+- **ChromaDB**: Specific manifest configurations, environment-specific values, and custom resource definitions.

@@ -18,7 +18,16 @@ Generate software architecture documentation using C4 model diagrams in Mermaid 
 3. **Generate diagrams** - Create Mermaid C4 diagrams at appropriate abstraction levels
 4. **Document** - Write diagrams to markdown files with explanatory context
 
-## C4 Diagram Levels
+## 5) Capture Knowledge
+
+After the architecture diagrams are finalized and saved, automatically trigger the `capture_knowledge.py` script.
+The script will analyze the architecture diagrams and the accompanying documentation to identify:
+- Key architectural decisions and trade-offs.
+- New trust boundaries and system components.
+- Infrastructure choices and deployment patterns.
+The script will then route this information to the correct storage:
+- **OKF**: High-level architectural decisions, "Hard Rules" for system structure, and core trust boundaries.
+- **ChromaDB**: Detailed component interaction flows, specific technology stacks, and "Soft Context" for implementation details.
 
 Select the appropriate level based on the documentation need:
 
@@ -205,108 +214,134 @@ Use `$offsetX` and `$offsetY` to fix overlapping relationship labels.
 2. **Use unidirectional arrows only** - Bidirectional arrows create ambiguity
 3. **Label arrows with action verbs** - "Sends email using", "Reads from", not just "uses"
 4. **Include technology labels** - "JSON/HTTPS", "JDBC", "gRPC"
-5. **Stay under 20 elements per diagram** - Split complex systems into multiple diagrams
+5. **Stay under 20 elements per diagram** - Split complex systems into multiple diagrams\\
 
 ### Clarity Guidelines
+\\
+1. **Start at Level 1** - Context diagrams help frame the system scope\\
+2. **One diagram per file** - Keep diagrams focused on a single abstraction level\\
+3. **Meaningful aliases** - Use descriptive aliases (e.g., `orderService` not `s1`)\\
+4. **Concise descriptions** - Keep descriptions under 50 characters when possible\\
+5. **Always include a title** - "System Context diagram for [System Name]"\\
+\\
+### What to Avoid\\
+\\
+See [references/common-mistakes.md](references/common-mistakes.md) for detailed anti-patterns:\\
+- Confusing containers (deployable) vs components (non-deployable)\\
+- Modeling shared libraries as containers\\
+- Showing message brokers as single containers instead of individual topics\\
+- Adding undefined abstraction levels like "subcomponents"\\
+- Removing type labels to "simplify" diagrams\\
+\\
+## Microservices Guidelines\\
+\\
+### Single Team Ownership\\
+Model each microservice as a **container** (or container group):\\
+```mermaid\\
+C4Container\\
+  title Microservices - Single Team\\
+\\
+  System_Boundary(platform, "E-commerce Platform") {\\
+    Container(orderApi, "Order Service", "Spring Boot", "Order processing")\\
+    ContainerDb(orderDb, "Order DB", "PostgreSQL", "Order data")\\
+    Container(inventoryApi, "Inventory Service", "Node.js", "Stock management")\\
+    ContainerDb(inventoryDb, "Inventory DB", "MongoDB", "Stock data")\\
+  }\\
+```\\
+\\
+### Multi-Team Ownership\\
+Promote microservices to **software systems** when owned by separate teams:\\
+```mermaid\\
+C4Context\\
+  title Microservices - Multi-Team\\
+\\
+  Person(customer, "Customer", "Places orders")\\
+  System(orderSystem, "Order System", "Team Alpha")\\
+  System(inventorySystem, "Inventory System", "Team Beta")\\
+  System(paymentSystem, "Payment System", "Team Gamma")\\
+\\
+  Rel(customer, orderSystem, "Places orders")\\
+  Rel(orderSystem, inventorySystem, "Checks stock")\\
+  Rel(orderSystem, paymentSystem, "Processes payment")\\
+```\\
+\\
+### Event-Driven Architecture\\
+Show individual topics/queues as containers, NOT a single "Kafka" box:\\
+```mermaid\\
+C4Container\\
+  title Event-Driven Architecture\\
+\\
+  Container(orderService, "Order Service", "Java", "Creates orders")\\
+  Container(stockService, "Stock Service", "Java", "Manages inventory")\\
+  ContainerQueue(orderTopic, "order.created", "Kafka", "Order events")\\
+  ContainerQueue(stockTopic, "stock.reserved", "Kafka", "Stock events")\\
+\\
+  Rel(orderService, orderTopic, "Publishes to")\\
+  Rel(stockService, orderTopic, "Subscribes to")\\
+  Rel(stockService, stockTopic, "Publishes to")\\
+  Rel(orderService, stockTopic, "Subscribes to")\\
+```\\
+\\
+## Output Location\\
+\\
+Write architecture documentation to `docs/architecture/` with naming convention:\\
+- `c4-context.md` - System context diagram\\
+- `c4-containers.md` - Container diagram\\
+- `c4-components-{feature}.md` - Component diagrams per feature\\
+- `c4-deployment.md` - Deployment diagram\\
+- `c4-dynamic-{flow}.md` - Dynamic diagrams for specific flows\\
+\\
+## Audience-Appropriate Detail\\
+\\
+| Audience | Recommended Diagrams |\\
+|----------|---------------------|\\
+| Executives | System Context only |\\
+| Product Managers | Context + Container |\\
+| Architects | Context + Container + key Components |\\
+| Developers | All levels as needed |\\
+| DevOps | Container + Deployment |\\
+\\
+## References\\
+\\
+**MANDATORY - LOADING TRIGGERS**:\\
+- Before writing a new diagram or selecting aliases/types, you **MUST** read [c4-syntax.md](references/c4-syntax.md) and [common-mistakes.md](references/common-mistakes.md) fully to verify syntax and mapping.\\
+- If you are building microservices or event-driven systems, you **MUST** load [advanced-patterns.md](references/advanced-patterns.md).\\
+- **Do NOT Load** these references for simple single-system designs where context is obvious to prevent context overhead.\\
+\\
+### Managing Graph Layouts & Large Diagrams\\
+1. If a diagram exceeds 15-20 nodes, split the elements into sub-diagrams instead of styling.\\
+2. Adjust layout direction with `UpdateLayoutConfig` or split paths explicitly to avoid layout overlaps.\\
+\\
+\\
+---\\
+\\
+## 5) Capture Knowledge\\
+\\
+After the architecture diagrams are finalized and saved, automatically trigger the `capture_knowledge.py` script.
+The script will analyze the architecture diagrams and the accompanying documentation to identify:
+- Key architectural decisions and trade-offs.
+- New trust boundaries and system components.
+- Infrastructure choices and deployment patterns.
+The script will then route this information to the correct storage:
+- **OKF**: High-level architectural decisions, "Hard Rules" for system structure, and core trust boundaries.
+- **ChromaDB**: Detailed component interaction flows, specific technology stacks, and "Soft Context" for implementation details.
 
-1. **Start at Level 1** - Context diagrams help frame the system scope
-2. **One diagram per file** - Keep diagrams focused on a single abstraction level
-3. **Meaningful aliases** - Use descriptive aliases (e.g., `orderService` not `s1`)
-4. **Concise descriptions** - Keep descriptions under 50 characters when possible
-5. **Always include a title** - "System Context diagram for [System Name]"
+Select the appropriate level based on the documentation need:
 
-### What to Avoid
+| Level | Diagram Type | Audience | Shows | When to Create |
+|-------|-------------|----------|-------|----------------|
+| 1 | **C4Context** | Everyone | System + external actors | Always (required) |
+| 2 | **C4Container** | Technical | Apps, databases, services | Always (required) |
+| 3 | **C4Component** | Developers | Internal components | Only if adds value |
+| 4 | **C4Deployment** | DevOps | Infrastructure nodes | For production systems |
+| - | **C4Dynamic** | Technical | Request flows (numbered) | For complex workflows |
 
-See [references/common-mistakes.md](references/common-mistakes.md) for detailed anti-patterns:
-- Confusing containers (deployable) vs components (non-deployable)
-- Modeling shared libraries as containers
-- Showing message brokers as single containers instead of individual topics
-- Adding undefined abstraction levels like "subcomponents"
-- Removing type labels to "simplify" diagrams
+**Key Insight:** "Context + Container diagrams are sufficient for most software development teams." Only create Component/Code diagrams when they genuinely add value.
 
-## Microservices Guidelines
+## 6) Memory Sync
 
-### Single Team Ownership
-Model each microservice as a **container** (or container group):
-```mermaid
-C4Container
-  title Microservices - Single Team
-
-  System_Boundary(platform, "E-commerce Platform") {
-    Container(orderApi, "Order Service", "Spring Boot", "Order processing")
-    ContainerDb(orderDb, "Order DB", "PostgreSQL", "Order data")
-    Container(inventoryApi, "Inventory Service", "Node.js", "Stock management")
-    ContainerDb(inventoryDb, "Inventory DB", "MongoDB", "Stock data")
-  }
+After capturing knowledge, ensure all high-level architectural decisions, new technical standards, and key documentation are synced to the persistent memory system.
+1. Run `capture_knowledge.py` to route findings to the appropriate storage (OKF for policies, ChromaDB for logs).
+2. Ensure all new architectural "Hard Rules" are reflected in the `policy_memory_routing.md` if they represent significant system-wide constraints.
+3. Verify that all newly created diagrams and documentation are stored in the standardized directory structure using relative paths.
 ```
-
-### Multi-Team Ownership
-Promote microservices to **software systems** when owned by separate teams:
-```mermaid
-C4Context
-  title Microservices - Multi-Team
-
-  Person(customer, "Customer", "Places orders")
-  System(orderSystem, "Order System", "Team Alpha")
-  System(inventorySystem, "Inventory System", "Team Beta")
-  System(paymentSystem, "Payment System", "Team Gamma")
-
-  Rel(customer, orderSystem, "Places orders")
-  Rel(orderSystem, inventorySystem, "Checks stock")
-  Rel(orderSystem, paymentSystem, "Processes payment")
-```
-
-### Event-Driven Architecture
-Show individual topics/queues as containers, NOT a single "Kafka" box:
-```mermaid
-C4Container
-  title Event-Driven Architecture
-
-  Container(orderService, "Order Service", "Java", "Creates orders")
-  Container(stockService, "Stock Service", "Java", "Manages inventory")
-  ContainerQueue(orderTopic, "order.created", "Kafka", "Order events")
-  ContainerQueue(stockTopic, "stock.reserved", "Kafka", "Stock events")
-
-  Rel(orderService, orderTopic, "Publishes to")
-  Rel(stockService, orderTopic, "Subscribes to")
-  Rel(stockService, stockTopic, "Publishes to")
-  Rel(orderService, stockTopic, "Subscribes to")
-```
-
-## Output Location
-
-Write architecture documentation to `docs/architecture/` with naming convention:
-- `c4-context.md` - System context diagram
-- `c4-containers.md` - Container diagram
-- `c4-components-{feature}.md` - Component diagrams per feature
-- `c4-deployment.md` - Deployment diagram
-- `c4-dynamic-{flow}.md` - Dynamic diagrams for specific flows
-
-## Knowledge Capture Requirement
-When performing tasks that involve architectural decisions, significant engineering trade-offs, or complex infrastructure changes, you MUST use the `capture_knowledge.py` script to persist the information.
-
-- **Policy/High-Level Decisions**: Use `python3 capture_knowledge.py --type okf` to save to the Open Knowledge Framework (OKF).
-- **Technical Context/Implementation Details**: Use `python3 capture_knowledge.py --type chroma` to save to the contextual memory (ChromaDB).
-
-Ensure that the captured content is deduplicated (the script handles this via hashing) and correctly chunked.
-
-
-| Audience | Recommended Diagrams |
-|----------|---------------------|
-| Executives | System Context only |
-| Product Managers | Context + Container |
-| Architects | Context + Container + key Components |
-| Developers | All levels as needed |
-| DevOps | Container + Deployment |
-
-## References
-
-**MANDATORY - LOADING TRIGGERS**:
-- Before writing a new diagram or selecting aliases/types, you **MUST** read [c4-syntax.md](references/c4-syntax.md) and [common-mistakes.md](references/common-mistakes.md) fully to verify syntax and mapping.
-- If you are building microservices or event-driven systems, you **MUST** load [advanced-patterns.md](references/advanced-patterns.md).
-- **Do NOT Load** these references for simple single-system designs where context is obvious to prevent context overhead.
-
-### Managing Graph Layouts & Large Diagrams
-1. If a diagram exceeds 15-20 nodes, split the elements into sub-diagrams instead of styling.
-2. Adjust layout direction with `UpdateLayoutConfig` or split paths explicitly to avoid layout overlaps.
-

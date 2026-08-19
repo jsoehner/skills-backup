@@ -282,12 +282,11 @@ export async function updateUser(userId: string, formData: FormData) {
 'use client';
 
 import { useActionState } from 'react';
-import { updateUser } from '@/actions/user';
 
-function UserForm({ userId }: { userId: string }) {
-  const [state, formAction, isPending] = useActionState(
-    (prev, formData) => updateUser(userId, formData), {}
-  );
+type FormState = { errors?: string[]; success?: boolean };
+
+function Form() {
+  const [state, formAction, isPending] = useActionState(submitAction, {});
   return <form action={formAction}>...</form>;
 }
 ```
@@ -303,8 +302,9 @@ async function Page() {
 
 // Client: unwrap with use()
 'use client';
+
 function UserProfile({ userPromise }: { userPromise: Promise<User> }) {
-  const user = use(userPromise);
+  const user = use(userPromise); // Suspends until resolved
   return <div>{user.name}</div>;
 }
 ```
@@ -387,7 +387,7 @@ NEVER:
 - [hooks.md](references/hooks.md) - useState, useRef, useReducer, useContext, custom hooks
 - [event-handlers.md](references/event-handlers.md) - all event types, generic handlers
 - [react-19-patterns.md](references/react-19-patterns.md) - useActionState, use(), useOptimistic, migration
-- [generic-components.md](examples/generic-components.md) - Table, Select, List, Modal patterns
+- [generic-components.md](examples/generic-components.md) - Table, Select, List, Modal, FormField patterns
 - [server-components.md](examples/server-components.md) - async components, Server Actions, streaming
 - [tanstack-router.md](references/tanstack-router.md) - TanStack Router typed routes, search params, navigation
 - [react-router.md](references/react-router.md) - React Router v7 loaders, actions, type generation, forms
@@ -406,5 +406,14 @@ NEVER:
 - Before constructing generic UI grids, you **MUST** read [generic-components.md](examples/generic-components.md).
 - **Do NOT load** router reference files unless integrating route paths.
 
+## 6) Capture Knowledge
 
-</references>
+After the React component architecture or UI pattern is implemented, automatically trigger the `capture_knowledge.py` script.
+The script will analyze the component structure, type definitions, and state management patterns to identify:
+- New reusable UI components or hooks.
+- Complex type definitions or discriminated unions.
+- React 19 specific patterns or performance optimizations.
+The script will then route this information to the appropriate storage:
+- **OKF**: High-level UI patterns, component naming conventions, and state management rules.
+- **ChromaDB**: Specific component implementations, prop types, and complex hook logic.
+",path:

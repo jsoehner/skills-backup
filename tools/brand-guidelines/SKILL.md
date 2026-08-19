@@ -13,6 +13,7 @@ license: Complete terms in LICENSE.txt
 This skill defines the visual identity specifications, layout rules, color relationships, and typographic hierarchies matching Anthropic’s aesthetic.
 
 > [!NOTE]
+
 > This is a self-contained skill. Do NOT load external style files or reference directories. Apply these rules directly in your code generator engines (e.g. python-pptx, HTML templates, CSS sheets).
 
 ---
@@ -68,44 +69,16 @@ graph TD
 | :--- | :--- | :--- |
 | **NEVER use pure black (#000) or pure white (#fff)** | Creates harsh, cheap contrast that looks unpolished and causes eye strain. | Warm off-whites (`#faf9f5`) and charcoal-blacks (`#141413`) create a premium, editorial paper feel. |
 | **NEVER pair Lora with Lora or Poppins with Poppins for body/headings** | Visual monotony; eliminates typographic hierarchy and breaks scanning patterns. | Sans-serif headings (Poppins) provide modern structure, while serif body (Lora) provides readable editorial flow. |
-| **NEVER use rounded corners greater than 8px (`rounded-lg`)** | Gives UI cards an amateur, overly bubbly, generic SaaS look. | Anthropic's style prefers sharp or subtly rounded (2px-6px) corners to maintain architectural stability. |
+| **NEVER use rounded corners greater than 8px (rounded-lg)** | Gives UI cards an amateur, overly bubbly, generic SaaS look. | Anthropic's style prefers sharp or subtly rounded (2px-6px) corners to maintain architectural stability. |
 | **NEVER overload the canvas with multiple accent colors at once** | Dilutes call-to-actions and causes visual confusion. | Accents are functional highlights, not decorative paint. Use one accent per visual module. |
 
----
+## 6) Memory Sync
 
-## 🛠️ Step-by-Step Styling Execution Procedure
+After a brand-guided design, visual identity specification, or style guide update is completed, you **MUST** trigger the local memory capture. 
 
-### Step 1: Establish the Theme Foundation
-Configure base elements. In CSS, load standard variables:
-```css
-:root {
-  --color-dark: #141413;
-  --color-light: #faf9f5;
-  --color-gray-mid: #b0aea5;
-  --color-gray-light: #e8e6dc;
-  --color-accent-orange: #d97757;
-  --font-heading: 'Poppins', 'Arial', sans-serif;
-  --font-body: 'Lora', 'Georgia', serif;
-}
-```
-
-### Step 2: Set Hierarchy Proportions
-Set your margins and paddings using a strict 8px (0.5rem) grid system. Elements must align to increments of `8px`, `16px`, `24px`, `32px`, `48px`, or `64px`.
-
-### Step 3: Apply the 60-30-10 Color Principle
-* **60% Dominance**: Set the canvas background to Light (or Dark for dark mode).
-* **30% Structure**: Set borders, cards, and textual content using the contrasting primary.
-* **10% Accent**: Allocate to key focus zones (active tab, main button).
-
----
-
-## 🚨 Typography & Render Fallbacks
-
-If Poppins or Lora are not pre-installed or CDN links fail:
-* **Heading Fallback**: Use `Arial` or system-default Sans-serif (`-apple-system`, `BlinkMacSystemFont`, `Segoe UI`).
-* **Body Fallback**: Use `Georgia` or system-default Serif (`Times New Roman`, serif).
-* **CSS Font Stack Rule**:
-  ```css
-  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  font-family: 'Lora', Georgia, 'Times New Roman', serif;
-  ```
+1. Save the final brand guidelines, style sheet, or design system specs as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   ```bash
+   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   ```
+3. This ensures that brand guidelines, typographic scales, and color systems are automatically routed to the correct storage (OKF or ChromaDB).

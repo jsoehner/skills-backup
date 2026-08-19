@@ -4,14 +4,6 @@ description: "Orchestrates performance optimization across the stack, including 
 version: 1
 created: "2026-07-31"
 updated: "2026-07-31"
-metadata:
-  model: inherit
-dependencies:
-  - sql-optimization-patterns
-  - spark-optimization
-  - vector-index-tuning
-  - performance-engineer
-  - performance-testing-review-ai-review
 ---
 ## When to Use
 Use for any task involving performance optimization, profiling, or tuning of databases, data pipelines, or vector search.

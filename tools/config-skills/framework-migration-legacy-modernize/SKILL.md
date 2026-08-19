@@ -40,7 +40,7 @@ Orchestrate a comprehensive legacy system modernization using the strangler fig 
 
 ### 3. Business Impact and Risk Assessment
 - Use Task tool with subagent_type="business-analytics::business-analyst"
-- Prompt: "Evaluate business impact of modernizing each component identified. Create risk assessment matrix considering: business criticality (revenue impact), user traffic patterns, data sensitivity, regulatory requirements, and fallback complexity. Prioritize components using a weighted scoring system: (Business Value × 0.4) + (Technical Risk × 0.3) + (Quick Win Potential × 0.3). Define rollback strategies for each component."
+- Prompt: "Evaluate business impact of modernizing each component. Create risk assessment matrix considering: business criticality (revenue impact), user traffic patterns, data sensitivity, regulatory requirements, and fallback complexity. Prioritize components using a weighted scoring system: (Business Value × 0.4) + (Technical Risk × 0.3) + (Quick Win Potential × 0.3). Define rollback strategies for each component."
 - Context from previous: Component inventory, dependency mapping
 - Expected output: Prioritized migration roadmap with risk mitigation strategies
 
@@ -130,14 +130,15 @@ Orchestrate a comprehensive legacy system modernization using the strangler fig 
 
 Target: $ARGUMENTS
 
-## Knowledge Capture Requirement
-When performing tasks that involve architectural decisions, significant engineering trade-offs, or complex infrastructure changes, you MUST use the `capture_knowledge.py` script to persist the information.
-
-- **Policy/High-Level Decisions**: Use `python3 capture_knowledge.py --type okf` to save to the Open Knowledge Framework (OKF).
-- **Technical Context/Implementation Details**: Use `python3 capture_knowledge.py --type chroma` to save to the contextual memory (ChromaDB).
-
-Ensure that the captured content is deduplicated (the script handles this via hashing) and correctly chunked.
-
+## Anti-Patterns
 
 - NEVER deploy code changes without validating them against target test suites.
 - NEVER skip documenting non-obvious code assumptions, constraints, and side effects.
+
+## 6) Memory Sync
+
+Execute the following steps to sync knowledge to the memory system:
+1. Use `capture_knowledge.py` to route information to the correct storage (OKF or ChromaDB).
+2. Ensure that high-level architectural rules, policies, and decisions are stored in the OKF (Open Knowledge Format) directory.
+3. Ensure that ephemeral data, logs, and specific technical notes are stored in the ChromaDB instance.
+4. Verify that the `MEMORY_SYSTEM_ROOT` and `MEMORY_INBOX_DIR` environment variables are correctly configured.

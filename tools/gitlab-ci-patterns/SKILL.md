@@ -280,3 +280,15 @@ trigger-child:
 
 - NEVER deploy code changes without validating them against target test suites.
 - NEVER skip documenting non-obvious code assumptions, constraints, and side effects.
+
+## 6) Capture Knowledge
+
+After a GitLab CI pipeline is updated or a new complex workflow is defined, automatically trigger the `capture_knowledge.py` script.
+The script will analyze the pipeline changes to identify:
+- New CI/CD patterns, environment variables, or custom scripts.
+- Specific runner configurations, caching strategies, and artifacts.
+- Complex multi-stage logic or dynamic child pipeline triggers.
+The script will then route this information to the appropriate storage:
+- **OKF**: High-level CI/CD standards, deployment rules, and environment definitions.
+- **ChromaDB**: Specific YAML snippets, runner configurations, and caching keys.
+",path:

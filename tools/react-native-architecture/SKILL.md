@@ -36,3 +36,15 @@ Production-ready patterns for React Native development with Expo, including navi
 
 - NEVER load massive datasets directly into client memory; use pagination or infinite scroll.
 - NEVER use generic, unstyled components or default browser styling in production-ready UIs.
+
+## 6) Capture Knowledge
+
+After the React Native architecture or mobile-specific pattern is finalized, automatically trigger the `capture_knowledge.py` script.
+The script will analyze the mobile architecture, navigation flow, and native integration points to identify:
+- New cross-platform architectural patterns or native module interfaces.
+- Offline-first sync strategies and local storage schemas.
+- Mobile-specific performance optimizations or navigation optimizations.
+The script will then route this information to the appropriate storage:
+- **OKF**: High-level mobile architecture rules, navigation standards, and cross-platform policies.
+- **ChromaDB**: Specific native module definitions, offline sync logic, and mobile-specific configuration details.
+",path:

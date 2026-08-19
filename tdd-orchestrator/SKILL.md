@@ -7,9 +7,6 @@ description: Master TDD orchestrator specializing in red-green-refactor
   implementation and governance.
 metadata:
   model: opus
-dependencies:
-  - test-automator
-  - unit-testing-test-generate
 ---
 
 ## Use this skill when

@@ -4,13 +4,6 @@ description: "Orchestrates all Notion-based workflows including knowledge captur
 version: 1
 created: "2026-07-31"
 updated: "2026-07-31"
-metadata:
-  model: inherit
-dependencies:
-  - notion-knowledge-capture
-  - notion-meeting-intelligence
-  - notion-research-documentation
-  - notion-spec-to-implementation
 ---
 ## When to Use
 Use for any task involving Notion: capturing team decisions (ADRs), extracting insights from meetings, conducting multi-source research, or decomposing product specifications into engineering tasks.

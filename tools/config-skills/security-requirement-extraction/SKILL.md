@@ -26,6 +26,7 @@ Transform threat analysis into actionable security requirements.
 - Clarify goals, constraints, and required inputs.
 - Apply relevant best practices and validate outcomes.
 - Provide actionable steps and verification.
+- Trigger the `capture_knowledge.py` script to record security requirements, user stories, and test case specifications.
 - If detailed examples are required, open `resources/implementation-playbook.md`.
 
 ## Resources

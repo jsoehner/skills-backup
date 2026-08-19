@@ -2,12 +2,6 @@
 name: algorithmic-art
 description: |
   Generates high-fidelity interactive algorithmic/generative art using p5.js based on custom-developed aesthetic philosophies and custom UI parameter tuning. Trigger when generating visual art via code, p5.js, canvas scripts, flow fields, particle systems, or mathematical designs. Keywords: p5.js, p5.min.js, templates/viewer.html, templates/generator_template.js, randomSeed, noiseSeed, setup, draw, Perlin noise.
-dependencies:
-  - hyperframes
----
-dependencies:
-  - hyperframes
----
 
   Generates high-fidelity interactive algorithmic/generative art using p5.js based on custom-developed aesthetic philosophies and custom UI parameter tuning. Trigger when generating visual art via code, p5.js, canvas scripts, flow fields, particle systems, or mathematical designs. Keywords: p5.js, p5.min.js, templates/viewer.html, templates/generator_template.js, randomSeed, noiseSeed, setup, draw, Perlin noise.
 
@@ -30,8 +24,9 @@ This is **not** a self-contained skill. It relies on pre-configured templates an
 ## 🧠 Mindset & Thinking Framework
 
 Before writing a single line of code or drafting your art movement manifesto, ask yourself:
+
 * **The Conceptual Seed**: What is the subtle, underlying conceptual thread of the user's request? How can I embed it as a sophisticated, hidden reference (like a musical quotation) that only domain experts would recognize, while laypeople enjoy the visual beauty?
-* **Aesthetic Movement**: What mathematical or organic rules govern this visual world? (e.g., flow fields, orbital mechanics, cellular automata, chaotic attractors, recursive subdivisions).
+* **Aesthetic Movement**: What mathematical or organic rules govern this visual world? (e.g., flow fields, orbital mechanics, cellular automata, chaotic attractors, recursive subdivisions, etc.)
 * **System Boundaries**: What parameters represent the "DNA" of the generative system? How do they balance each other (e.g., density vs. lifespan)?
 
 ---
@@ -95,16 +90,21 @@ graph TD
 ## 🛠️ Step-by-Step Implementation Procedure
 
 ### Step 1: Conceptualization & Philosophy Formulation
+
 Write a 4-6 paragraph manifesto for the visual movement (e.g., "Quantum Harmonics"). Emphasize craftsmanship, optimization, and aesthetic intent. Highlight that the system represents master-level execution.
 
 ### Step 2: Extract Template Structure
+
 Load `templates/viewer.html`. Isolate the variable areas:
+
 * The parameter configurations (Vite/browser script parameters).
 * The custom p5.js script inside the `<script>` section.
 * The sidebar HTML inputs within the designated container.
 
 ### Step 3: Implement Seeded Core
+
 Ensure your initialization block explicitly configures randomness:
+
 ```javascript
 let params = {
   seed: 12345,
@@ -123,7 +123,9 @@ function setup() {
 ```
 
 ### Step 4: Map Variable UI Inputs
+
 Inject the matching control elements into the sidebar HTML. Tie the `oninput` events directly to parameter state changes and trigger a sketch redraw:
+
 ```html
 <div class="control-group">
   <label for="speed-slider">Flow Velocity</label>
@@ -144,3 +146,14 @@ Inject the matching control elements into the sidebar HTML. Tie the `oninput` ev
 * **Issue: HTML layout breaks on resizing**
   * *Cause*: Hardcoded CSS canvas sizing.
   * *Fallback*: Target the container dimension in setup using CSS properties, and hook the window resizing listener to resize the canvas dynamically with `resizeCanvas()`.
+
+## 6) Memory Sync
+
+After generating a high-fidelity algorithmic art piece, a visual movement manifesto, or a technical rendering report, you **MUST** trigger the local memory capture. 
+
+1. Save the final art manifesto, parameter configuration, or technical rendering report as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   ```bash
+   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   ```
+3. This ensures that algorithmic art philosophies, generative parameters, and visual movement definitions are automatically routed to the correct storage (OKF or ChromaDB).

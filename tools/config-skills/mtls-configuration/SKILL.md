@@ -17,6 +17,7 @@ Comprehensive guide to implementing mutual TLS for zero-trust service mesh commu
 - Clarify goals, constraints, and required inputs.
 - Apply relevant best practices and validate outcomes.
 - Provide actionable steps and verification.
+- Trigger the `capture_knowledge.py` script to record mTLS configurations, certificate rotation policies, and zero-trust networking decisions.
 
 ## Use this skill when
 
@@ -244,7 +245,8 @@ data:
         }
       }
     }
----
+```
+
 # SPIRE Agent DaemonSet (abbreviated)
 apiVersion: apps/v1
 kind: DaemonSet
@@ -276,21 +278,9 @@ spec:
 # Linkerd enables mTLS automatically
 # Verify with:
 # linkerd viz edges deployment -n my-namespace
-
-# For external services without mTLS
-apiVersion: policy.linkerd.io/v1beta1
-kind: Server
-metadata:
-  name: external-api
-  namespace: my-namespace
-spec:
-  podSelector:
-    matchLabels:
-      app: my-app
-  port: external-api
-  proxyProtocol: HTTP/1  # or TLS for passthrough
+linkerd identity -n my-namespace
 ---
-# Skip TLS for specific port
+# Skip TLS for external service
 apiVersion: v1
 kind: Service
 metadata:

@@ -2,12 +2,6 @@
 name: yuv-pilot
 description: |
   Top-of-pyramid orchestrator for Yuval Avidani's YUV.AI brand work. Apply when the user wants YUV.AI output and the medium is ambiguous or multi-medium, or for strategic planning. Triggers: "for YUV.AI", "for my brand", "YUV.AI launch", "ship something for me", "orchestrate", "cross-channel", "multi-platform for me", "yuv-pilot", Hebrew השקה, מולטי-פלטפורמה ל-יובל. It routes intent to the correct downstream YUV.AI skills (decks, design-system, viral-video, etc.) and handles multi-artifact composition.
-dependencies:
-  - yuv-decks
-  - yuv-design-system
-  - yuv-viral-video
-  - yuv-brand-orchestrator
----
 
 ---
 

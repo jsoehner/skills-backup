@@ -162,7 +162,7 @@ Cloud Router:
 
 ## Security Best Practices
 
-1. **Use private connectivity** (Direct Connect/ExpressRoute)
+1. **Use private connectivity** (Direct Connect, ExpressRoute)
 2. **Implement encryption** for VPN tunnels
 3. **Use VPC endpoints** to avoid internet routing
 4. **Configure network ACLs** and security groups
@@ -219,7 +219,7 @@ az network vpn-connection show-device-config-script
 ## Cost Optimization
 
 1. **Right-size connections** based on traffic
-2. **Use VPN for low-bandwidth** workloads
+2- **Use VPN for low-bandwidth** workloads
 3. **Consolidate traffic** through fewer connections
 4. **Minimize data transfer** costs
 5. **Use Direct Connect** for high bandwidth
@@ -234,3 +234,11 @@ az network vpn-connection show-device-config-script
 
 - NEVER commit raw secrets or API keys to infrastructure code repositories.
 - NEVER deploy resources without setting clear resource limits (CPU/Memory/storage quotas).
+
+## 6) Memory Sync
+
+Execute the following steps to sync knowledge to the memory system:
+1. Use `capture_knowledge.py` to route information to the correct storage (OKF or ChromaDB).
+2. Ensure that high-level architectural rules, policies, and decisions are stored in the OKF (Open Knowledge Format) directory.
+3. Ensure that ephemeral data, logs, and specific technical notes are stored in the ChromaDB instance.
+4. Verify that the `MEMORY_SYSTEM_ROOT` and `MEMORY_INBOX_DIR` environment variables are correctly configured.

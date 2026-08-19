@@ -64,7 +64,7 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 
 ### 2. Repository Structure
 
-```
+```yaml
 gitops-repo/
 ├── apps/
 │   ├── production/
@@ -183,6 +183,7 @@ spec:
 ### Auto-Sync Configuration
 
 **ArgoCD:**
+
 ```yaml
 syncPolicy:
   automated:
@@ -198,6 +199,7 @@ syncPolicy:
 ```
 
 **Flux:**
+
 ```yaml
 spec:
   interval: 1m
@@ -286,12 +288,14 @@ kubeseal --format yaml < secret.yaml > sealed-secret.yaml
 ## Troubleshooting
 
 **Sync failures:**
+
 ```bash
 argocd app get my-app
 argocd app sync my-app --prune
 ```
 
 **Out of sync status:**
+
 ```bash
 argocd app diff my-app
 argocd app sync my-app --force
@@ -306,3 +310,15 @@ argocd app sync my-app --force
 
 - NEVER deploy code changes without validating them against target test suites.
 - NEVER skip documenting non-obvious code assumptions, constraints, and side effects.
+
+## 6) Capture Knowledge
+
+After a GitOps deployment or complex reconciliation pattern is finalized, automatically trigger the `capture_knowledge.py` script.
+The script will analyze the GitOps configuration to identify:
+- New infrastructure-as-code patterns or sync policies.
+- Complex ArgoCD/Flux application definitions or multi-cluster logic.
+- Specific secret management integrations or promotion flows.
+The script will then route this information to the appropriate storage:
+- **OKF**: High-level GitOps standards, cluster-wide sync policies, and environment rules.
+- **ChromaDB**: Specific Kustomization/Application YAMLs, sync logic, and ArgoCD/Flux configurations.
+",path:

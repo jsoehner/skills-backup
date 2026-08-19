@@ -51,26 +51,26 @@ opertation status till it is marked DONE.
 :                         :        : cloned.         :          :         :
 | destinationInstanceName | string | The name of the | Yes      |         |
 :                         :        : new instance    :          :         :
-:                         :        : that will be    :          :         :
-:                         :        : created by      :          :         :
-:                         :        : cloning the     :          :         :
-:                         :        : source          :          :         :
-:                         :        : instance.       :          :         :
-| pointInTime             | string | The timestamp   | No       |         |
-:                         :        : in RFC 3339     :          :         :
-:                         :        : format to which :          :         :
-:                         :        : the source      :          :         :
-:                         :        : instance should :          :         :
-:                         :        : be cloned.      :          :         :
-| preferredZone           | string | The preferred   | No       |         |
-:                         :        : zone for the    :          :         :
-:                         :        : new instance.   :          :         :
-| preferredSecondaryZone  | string | The preferred   | No       |         |
-:                         :        : secondary zone  :          :         :
-:                         :        : for the new     :          :         :
-:                         :        : instance.       :          :         :
+:                         :        : that will be     :          :         :
+:                         :        : created by       :          :         :
+:                         :        : cloning the      :          :         :\\
+:                         :        : source          :          :         :\\
+:                         :        : instance.       :          :         :\\
+| pointInTime             | string | The timestamp   | No       |         |\\
+:                         :        : in RFC 3339     :          :         :\\
+:                         :        : format to which :          :         :\\
+:                         :        : the source      :          :         :\\
+:                         :        : instance should :          :         :\\
+:                         :        : be cloned.      :          :         :\\
+| preferredZone           | string | The preferred   | No       |         |\\
+:                         :        : zone for the    :          :         :\\
+:                         :        : new instance.   :          :         :\\
+| preferredSecondaryZone  | string | The preferred   | No       |         |\\
+:                         :        : secondary zone  :          :         :\\
+:                         :        : for the new     :          :         :\\
+:                         :        : instance.       :          :         :\\
 
---------------------------------------------------------------------------------
+--------------------------------------------------------------------------------\\
 
 ### create_database
 
@@ -79,26 +79,26 @@ opertation status till it is marked DONE.
 | Name     | Type   | Description     | Required | Default |
 | :------- | :----- | :-------------- | :------- | :------ |
 | project  | string | The GCP project | No       |         |
-:          :        : ID. This is     :          :         :
-:          :        : pre-configured; :          :         :
-:          :        : do not ask for  :          :         :
-:          :        : it unless the   :          :         :
-:          :        : user explicitly :          :         :
-:          :        : provides a      :          :         :
-:          :        : different one.  :          :         :
-| instance | string | The ID of the   | Yes      |         |
-:          :        : instance where  :          :         :
-:          :        : the database    :          :         :
-:          :        : will be         :          :         :
-:          :        : created.        :          :         :
-| name     | string | The name for    | Yes      |         |
-:          :        : the new         :          :         :
-:          :        : database. Must  :          :         :
-:          :        : be unique       :          :         :
-:          :        : within the      :          :         :
-:          :        : instance.       :          :         :
+:          :        : ID. This is     :          :         :\\
+:          :        : pre-configured; :          :         :\\
+:          :        : do not ask for  :          :         :\\
+:          :        : it unless the   :          :         :\\
+:          :        : user explicitly :          :         :\\
+:          :        : provides a      :          :         :\\
+:          :        : different one.  :          :         :\\
+| instance | string | The ID of the   | Yes      |         |\\
+:          :        : instance where  :          :         :\\
+:          :        : the database    :          :         :\\
+:          :        : will be         :          :         :\\
+:          :        : created.        :          :         :\\
+| name     | string | The name for    | Yes      |         |\\
+:          :        : the new         :          :         :\\
+:          :        : database. Must  :          :         :\\
+:          :        : be unique       :          :         :\\
+:          :        : within the      :          :         :\\
+:          :        : instance.       :          :         :\\
 
---------------------------------------------------------------------------------
+--------------------------------------------------------------------------------\\
 
 ### create_instance
 
@@ -106,42 +106,42 @@ opertation status till it is marked DONE.
 
 | Name            | Type   | Description     | Required | Default       |
 | :-------------- | :----- | :-------------- | :------- | :------------ |
-| project         | string | The GCP project | No       |               |
-:                 :        : ID. This is     :          :               :
-:                 :        : pre-configured; :          :               :
-:                 :        : do not ask for  :          :               :
-:                 :        : it unless the   :          :               :
-:                 :        : user explicitly :          :               :
-:                 :        : provides a      :          :               :
-:                 :        : different one.  :          :               :
-| name            | string | The name of the | Yes      |               |
-:                 :        : instance        :          :               :
-| databaseVersion | string | The database    | No       | `POSTGRES_17` |
-:                 :        : version for     :          :               :
-:                 :        : Postgres. If    :          :               :
-:                 :        : not specified,  :          :               :
-:                 :        : defaults to the :          :               :
-:                 :        : latest          :          :               :
-:                 :        : available       :          :               :
-:                 :        : version (e.g.,  :          :               :
-:                 :        : POSTGRES_17).   :          :               :
-| rootPassword    | string | The root        | Yes      |               |
-:                 :        : password for    :          :               :
-:                 :        : the instance    :          :               :
-| editionPreset   | string | The edition of  | No       | `Development` |
-:                 :        : the instance.   :          :               :
-:                 :        : Can be          :          :               :
-:                 :        : `Production` or :          :               :
-:                 :        : `Development`.  :          :               :
-:                 :        : This determines :          :               :
-:                 :        : the default     :          :               :
-:                 :        : machine type    :          :               :
-:                 :        : and             :          :               :
-:                 :        : availability.   :          :               :
-:                 :        : Defaults to     :          :               :
-:                 :        : `Development`.  :          :               :
+| project         | string | The GCP project | No       |               |\\
+:                 :        : ID. This is     :          :               :\\
+:                 :        : pre-configured; :          :               :\\
+:                 :        : do not ask for  :          :               :\\
+:                 :        : it unless the   :          :               :\\
+:                 :        : user explicitly :          :               :\\
+:                 :        : provides a      :          :               :\\
+:                 :        : different one.  :          :               :\\
+| name            | string | The name of the | Yes      |               |\\
+:                 :        : instance        :          :               :\\
+| databaseVersion | string | The database    | No       | `POSTGRES_17` |\\
+:                 :        : version for     :          :               :\\
+:                 :        : Postgres. If not :          :               :\\
+:                 :        : specified,      :          :               :\\
+:                 :        : defaults to the :          :               :\\
+:                 :        : latest          :          :               :\\
+:                 :        : available       :          :               :\\
+:                 :        : version (e.g.,  :          :               :\\
+:                 :        : POSTGRES_17).   :          :               :\\
+| rootPassword    | string | The root        | Yes      |               |\\
+:                 :        : password for    :          :               :\\
+:                 :        : the instance    :          :               :\\
+| editionPreset   | string | The edition of  | No       | `Development` |\\
+:                 :        : the instance.   :          :               :\\
+:                 :        : Can be          :          :               :\\
+:                 :        : `Production` or :          :               :\\
+:                 :        : `Development`.  :          :               :\\
+:                 :        : This determines :          :               :\\
+:                 :        : the default     :          :               :\\
+:                 :        : machine type    :          :               :\\
+:                 :        : and             :          :               :\\
+:                 :        : availability.   :          :               :\\
+:                 :        : Defaults to     :          :               :\\
+:                 :        : `Development`.  :          :               :\\
 
---------------------------------------------------------------------------------
+--------------------------------------------------------------------------------\\
 
 ### create_user
 
@@ -149,51 +149,51 @@ opertation status till it is marked DONE.
 
 | Name     | Type    | Description     | Required | Default |
 | :------- | :------ | :-------------- | :------- | :------ |
-| project  | string  | The GCP project | No       |         |
-:          :         : ID. This is     :          :         :
-:          :         : pre-configured; :          :         :
-:          :         : do not ask for  :          :         :
-:          :         : it unless the   :          :         :
-:          :         : user explicitly :          :         :
-:          :         : provides a      :          :         :
-:          :         : different one.  :          :         :
-| instance | string  | The ID of the   | Yes      |         |
-:          :         : instance where  :          :         :
-:          :         : the user will   :          :         :
-:          :         : be created.     :          :         :
-| name     | string  | The name for    | Yes      |         |
-:          :         : the new user.   :          :         :
-:          :         : Must be unique  :          :         :
-:          :         : within the      :          :         :
-:          :         : instance.       :          :         :
-| password | string  | A secure        | No       |         |
-:          :         : password for    :          :         :
-:          :         : the new user.   :          :         :
-:          :         : Not required    :          :         :
-:          :         : for IAM users.  :          :         :
-| iamUser  | boolean | Set to true to  | Yes      |         |
-:          :         : create a Cloud  :          :         :
-:          :         : IAM user.       :          :         :
+| project  | string  | The GCP project | No       |         |\\
+:          :         : ID. This is     :          :         :\\
+:          :         : pre-configured; :          :         :\\
+:          :         : do not ask for  :          :         :\\
+:          :         : it unless the   :          :         :\\
+:          :         : user explicitly :          :         :\\
+:          :         : provides a      :          :         :\\
+:          :         : different one.  :          :         :\\
+| instance | string  | The ID of the   | Yes      |         |\\
+:          :         : instance where  :          :         :\\
+:          :         : the user will   :          :         :\\
+:          :         : be created.     :          :         :\\
+| name     | string  | The name for    | Yes      |         |\\
+:          :         : the new user.   :          :         :\\
+:          :         : Must be unique  :          :         :\\
+:          :         : within the      :          :         :\\
+:          :         : instance.       :          :         :\\
+| password | string  | A secure        | No       |         |\\
+:          :         : password for    :          :         :\\
+:          :         : the new user.   :          :         :\\
+:          :         : Not required    :          :         :\\
+:          :         : for IAM users.  :          :         :\\
+| iamUser  | boolean | Set to true to  | Yes      |         |\\
+:          :         : create a Cloud  :          :         :\\
+:          :         : IAM user.       :          :         :\\
 
---------------------------------------------------------------------------------
+--------------------------------------------------------------------------------\\
 
 ### get_instance
 
 #### Parameters
 
 | Name       | Type   | Description     | Required | Default |
-| :--------- | :----- | :-------------- | :------- | :------ |
-| projectId  | string | The GCP project | No       |         |
-:            :        : ID. This is     :          :         :
-:            :        : pre-configured; :          :         :
-:            :        : do not ask for  :          :         :
-:            :        : it unless the   :          :         :
-:            :        : user explicitly :          :         :
-:            :        : provides a      :          :         :
-:            :        : different one.  :          :         :
-| instanceId | string | The instance ID | Yes      |         |
+| :--------- | :----- | :-------------- | :------- | :------ |\\
+| projectId  | string | The GCP project | No       |         |\\
+:            :        : ID. This is     :          :         :\\
+:            :        : pre-configured; :          :         :\\
+:            :        : do not ask for  :          :         :\\
+:            :        : it unless the   :          :         :\\
+:            :        : user explicitly :          :         :\\
+:            :        : provides a      :          :         :\\
+:            :        : different one.  :          :         :\\
+| instanceId | string | The instance ID | Yes      |         |\\
 
---------------------------------------------------------------------------------
+--------------------------------------------------------------------------------\\
 
 ### list_databases
 
@@ -202,18 +202,18 @@ Lists all databases for a Cloud SQL instance.
 #### Parameters
 
 | Name     | Type   | Description     | Required | Default |
-| :------- | :----- | :-------------- | :------- | :------ |
-| project  | string | The GCP project | No       |         |
-:          :        : ID. This is     :          :         :
-:          :        : pre-configured; :          :         :
-:          :        : do not ask for  :          :         :
-:          :        : it unless the   :          :         :
-:          :        : user explicitly :          :         :
-:          :        : provides a      :          :         :
-:          :        : different one.  :          :         :
-| instance | string | The instance ID | Yes      |         |
+| :------- | :----- | :-------------- | :------- | :------ |\\
+| project  | string | The GCP project | No       |         |\\
+:          :        : ID. This is     :          :         :\\
+:          :        : pre-configured; :          :         :\\
+:          :        : do not ask for  :          :         :\\
+:          :        : it unless the   :          :         :\\
+:          :        : user explicitly :          :         :\\
+:          :        : provides a      :          :         :\\
+:          :        : different one.  :          :         :\\
+| instance | string | The instance ID | Yes      |         |\\
 
---------------------------------------------------------------------------------
+--------------------------------------------------------------------------------\\
 
 ### list_instances
 
@@ -222,38 +222,49 @@ Lists all type of Cloud SQL instances for a project.
 #### Parameters
 
 | Name    | Type   | Description     | Required | Default |
-| :------ | :----- | :-------------- | :------- | :------ |
-| project | string | The GCP project | No       |         |
-:         :        : ID. This is     :          :         :
-:         :        : pre-configured; :          :         :
-:         :        : do not ask for  :          :         :
-:         :        : it unless the   :          :         :
-:         :        : user explicitly :          :         :
-:         :        : provides a      :          :         :
-:         :        : different one.  :          :         :
+| :------ | :----- | :-------------- | :------- | :------ |\\
+| project | string | The GCP project | No       |         |\\
+:         :        : ID. This is     :          :         :\\
+:         :        : pre-configured; :          :         :\\
+:         :        : do not ask for  :          :         :\\
+:         :        : it unless the   :          :         :\\
+:         :        : user explicitly :          :         :\\
+:         :        : provides a      :          :         :\\
+:         :        : different one.  :          :         :\\
 
---------------------------------------------------------------------------------
+--------------------------------------------------------------------------------\\
 
 ### wait_for_operation
 
 #### Parameters
 
 | Name      | Type   | Description     | Required | Default |
-| :-------- | :----- | :-------------- | :------- | :------ |
-| project   | string | The GCP project | No       |         |
-:           :        : ID. This is     :          :         :
-:           :        : pre-configured; :          :         :
-:           :        : do not ask for  :          :         :
-:           :        : it unless the   :          :         :
-:           :        : user explicitly :          :         :
-:           :        : provides a      :          :         :
-:           :        : different one.  :          :         :
-| operation | string | The operation   | Yes      |         |
-:           :        : ID              :          :         :
+| :-------- | :----- | :-------------- | :------- | :------ |\\
+| project   | string | The GCP project | No       |         |\\
+:           :        : ID. This is     :          :         :\\
+:           :        : pre-configured; :          :         :\\
+:           :        : do not ask for  :          :         :\\
+:           :        : it unless the   :          :         :\\
+:           :        : user explicitly :          :         :\\
+:           :        : provides a      :          :         :\\
+:           :        : different one.  :          :         :\\
+| operation | string | The operation   | Yes      |         |\\
+:           :        : ID              :          :         :\\
 
---------------------------------------------------------------------------------
+--------------------------------------------------------------------------------\\
 
 ## Anti-Patterns
 
 - NEVER execute raw DML/DDL operations on production database instances without verification.
 - NEVER ignore connection limits and connection pool starvation indicators.
+
+## 6) Memory Sync
+
+After a database provision, user creation, or instance status check is completed, you **MUST** trigger the local memory capture. 
+
+1. Save the final database schema, instance details, or user permissions as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   ```bash
+   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   ```
+3. This ensures that database infrastructure changes, user roles, and instance configurations are automatically routed to the correct storage (OKF or ChromaDB).

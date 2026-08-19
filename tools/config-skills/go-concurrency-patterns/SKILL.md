@@ -36,3 +36,15 @@ Production patterns for Go concurrency including goroutines, channels, synchroni
 
 - NEVER deploy code changes without validating them against target test suites.
 - NEVER skip documenting non-obvious code assumptions, constraints, and side effects.
+
+## 6) Capture Knowledge
+
+After a concurrent Go system or complex worker pool pattern is implemented, automatically trigger the `capture_knowledge.py` script.
+The script will analyze the concurrency model to identify:
+- New worker pool patterns or channel communication flows.
+- Complex `sync` primitive usage (WaitGroups, Mutexes, Conds).
+- Context-aware cancellation and timeout logic.
+The script will then route this information to the appropriate storage:
+- **OKF**: High-level concurrency safety rules, worker pool standards, and graceful shutdown policies.
+- **ChromaDB**: Specific goroutine implementations, channel-based pipelines, and sync-related logic.
+",path:

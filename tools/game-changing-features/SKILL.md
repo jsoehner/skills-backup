@@ -29,6 +29,7 @@ Not 10% better. Not "nice to have." Game-changing. The kind of thing that makes 
 ## Session Setup
 
 User provides:
+
 - **Product/Area**: What we're thinking about
 - **Current state** (optional): Brief description of what exists
 - **Constraints** (optional): Technical limits, timeline, team size
@@ -57,6 +58,7 @@ Think across three scales:
 Features that fundamentally expand what the product can do. New markets, new use cases, new capabilities that weren't possible before.
 
 Ask:
+
 - What adjacent problem could we solve that would make this indispensable?
 - What would make this a platform instead of a tool?
 - What would make users bring their team/friends/family?
@@ -66,6 +68,7 @@ Ask:
 Features that significantly enhance the core experience. Force multipliers on what already works.
 
 Ask:
+
 - What would make the core action 10x faster/easier?
 - What data do we have that we're not using?
 - What workflow is painful that we could automate?
@@ -75,8 +78,9 @@ Ask:
 Tiny changes that punch way above their weight. Often overlooked because they seem "too simple."
 
 Ask:
+
 - What single button/shortcut would save users minutes daily?
-- What information is users hunting for that we could surface?
+- What information are users hunting for that we could surface?
 - What anxiety do users have that we could eliminate with one indicator?
 - What's the thing users do manually that we could remember/automate?
 
@@ -94,6 +98,7 @@ For each idea, assess:
 | **Feasibility** | Can we actually build this? |
 
 Use a simple scoring:
+
 - 🔥 **Must do** — High impact, clearly worth it
 - 👍 **Strong** — Good impact, should prioritize
 - 🤔 **Maybe** — Interesting but needs more thought
@@ -104,16 +109,19 @@ Use a simple scoring:
 Look for:
 
 **Quick wins with outsized impact**
+
 - Small effort, big value
 - Often overlooked because they're "obvious"
 - Can ship fast, validate fast
 
 **Strategic bets**
+
 - Larger effort, potentially transformative
 - Opens new possibilities
 - Worth the investment if it works
 
 **Compounding features**
+
 - Get more valuable over time
 - Network effects, data effects, habit formation
 - Build moats
@@ -122,7 +130,7 @@ Look for:
 
 Don't just list ideas—stack rank them:
 
-```
+```markdown
 ## Recommended Priority
 
 ### Do Now (Quick wins)
@@ -138,9 +146,16 @@ Don't just list ideas—stack rank them:
 1. [Feature] — Why later: [reason]
 ```
 
----
+### 6) Capture Knowledge
 
-## Idea Categories to Explore
+After the 10x analysis and priority list are finalized, automatically trigger the `capture_knowledge.py` script.
+The script will analyze the 10x opportunities and identify:
+- New high-level strategic bets and "10x" opportunities.
+- Key "Quick wins" and "Do Now" items.
+- Core product strategy shifts.
+The script will then route this information to the appropriate storage:
+- **OKF**: High-level product strategy, 10x opportunities, and long-term roadmap shifts.
+- **ChromaDB**: Specific feature ideas, "Small Gems," and technical feasibility notes for 10x opportunities.
 
 Force yourself through each category:
 
@@ -163,12 +178,15 @@ Force yourself through each category:
 
 ```markdown
 # 10x Analysis: <Product/Area>
+
 Session N | Date: YYYY-MM-DD
 
 ## Current Value
+
 What the product does today and for whom.
 
 ## The Question
+
 What would make this 10x more valuable?
 
 ---
@@ -176,6 +194,7 @@ What would make this 10x more valuable?
 ## Massive Opportunities
 
 ### 1. [Feature Name]
+
 **What**: Description
 **Why 10x**: Why this is transformative
 **Unlocks**: What becomes possible
@@ -190,6 +209,7 @@ What would make this 10x more valuable?
 ## Medium Opportunities
 
 ### 1. [Feature Name]
+
 **What**: Description
 **Why 10x**: Why this matters more than it seems
 **Impact**: What changes for users
@@ -203,6 +223,7 @@ What would make this 10x more valuable?
 ## Small Gems
 
 ### 1. [Feature Name]
+
 **What**: Description (one line)
 **Why powerful**: Why this punches above its weight
 **Effort**: Low
@@ -215,12 +236,19 @@ What would make this 10x more valuable?
 ## Recommended Priority
 
 ### Do Now
+
 1. ...
 
 ### Do Next
+
 1. ...
 
 ### Explore
+
+1. ...
+
+### Backlog
+
 1. ...
 
 ---
@@ -228,12 +256,15 @@ What would make this 10x more valuable?
 ## Questions
 
 ### Answered
+
 - **Q**: ... **A**: ...
 
 ### Blockers
+
 - **Q**: ... (need user input)
 
 ## Next Steps
+
 - [ ] Validate assumption: ...
 - [ ] Research: ...
 - [ ] Decide: ...
@@ -261,7 +292,7 @@ If stuck, ask yourself:
 - "What would make a user tell their friend about this?"
 - "What's the thing users do every day that's slightly annoying?"
 - "What would we build if we had 10x the engineering team? 1/10th?"
-- "What would a competitor need to build to beat us?"
+- "What would make a competitor nervous?"
 - "What do power users do manually that we could make native?"
 - "What would make this addictive (in a good way)?"
 - "What's the feature that sounds crazy but might work?"
@@ -276,5 +307,15 @@ If stuck, ask yourself:
 ## References
 
 **MANDATORY - Self-containment Directive**:
+
 This is a self-contained skill. Do NOT load external files or reference directories unless explicitly created during the execution of this workflow.
 
+```
+## 6) Memory Sync
+
+Execute the following steps to sync knowledge to the memory system:
+1. Use `capture_knowledge.py` to route information to the correct storage (OKF or ChromaDB).
+2. Ensure that high-level architectural rules, policies, and decisions are stored in the OKF (Open Knowledge Format) directory.
+3. Ensure that ephemeral data, logs, and specific technical notes are stored in the ChromaDB instance.
+4. Verify that the `MEMORY_SYSTEM_ROOT` and `MEMORY_INBOX_DIR` environment variables are correctly configured.
+```

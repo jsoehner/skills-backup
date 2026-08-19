@@ -157,3 +157,15 @@ Performance optimization target: $ARGUMENTS
 
 - NEVER perform load testing against production systems without explicit, scheduled authorization and guardrails.
 - NEVER optimize database queries without first running EXPLAIN/ANALYZE to identify the actual index usage.
+
+## 6) Memory Sync
+
+After a performance optimization, load test, or monitoring setup is completed, you **MUST** trigger the local memory capture. 
+
+1. Save the final performance report, load test results, or monitoring configuration as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   ```bash
+   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   ```
+3. This ensures that performance metrics, scalability results, and monitoring standards are automatically routed to the correct storage (OKF or ChromaDB).
+

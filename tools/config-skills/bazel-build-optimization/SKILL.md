@@ -399,3 +399,15 @@ bazel build //... --notrack_incremental_state
 
 - NEVER use glob patterns for target dependencies; always declare dependencies explicitly.
 - NEVER omit version pinning for external rules and compiler toolchains.
+
+## 6) Memory Sync
+
+After a Bazel build profile is analyzed, a remote execution configuration is designed, or a build optimization plan is completed, you **MUST** trigger the local memory capture. 
+
+1. Save the final build profile, remote execution config, or optimization plan as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   ```bash
+   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   ```
+3. This ensures that build profiles, remote execution configurations, and optimization plans are automatically routed to the correct storage (OKF or ChromaDB).
+

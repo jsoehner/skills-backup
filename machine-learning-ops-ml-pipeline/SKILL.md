@@ -1,16 +1,6 @@
 ---
 name: machine-learning-ops-ml-pipeline
 description: "Design and implement a complete ML pipeline for: $ARGUMENTS"
-metadata:
-  model: inherit
-dependencies:
-  - data-engineer
-  - data-scientist
-  - ml-engineer
-  - python-pro
-  - mlops-engineer
-  - kubernetes-architect
-  - observability-engineer
 ---
 
 # Machine Learning Pipeline - Multi-Agent MLOps Orchestration

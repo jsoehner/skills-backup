@@ -48,41 +48,41 @@ Before listing requirements:
 
 1. **What is this?** — Screen, flow, component
 2. **Who uses it?** — User type, permissions
-3. **What's the goal?** — What does success look like?
+3. **What's the goal?** — What does success look like?\\
 
 ### Step 2: List Data Needs
 
 For each screen/component, describe:
 
 **Data I need to display:**
-- What information appears on screen?
-- What's the relationship between pieces?
-- What determines visibility/state?
+- What information appears on screen?\\
+- What's the relationship between pieces?\\
+- What determines visibility/state?\\
 
-**Actions user can perform:**
-- What can the user do?
-- What's the expected outcome?
-- What feedback should they see?
+**Actions user can perform:**\\
+- What can the user do?\\
+- What's the expected outcome?\\
+- What feedback should they see?\\
 
-**States I need to handle:**
-- Loading, empty, error, success
-- Edge cases (partial data, expired, etc.)
+**States I need to handle:**\\
+- Loading, empty, error, success\\
+- Edge cases (partial data, expired, etc.)\\
 
 ### Step 3: Surface Uncertainties
 
-List what you're unsure about:
-- Business rules you don't fully understand
-- Edge cases you're not sure how to handle
-- Places where you're guessing
+List what you're unsure about:\\
+- Business rules you don't fully understand\\
+- Edge cases you're not sure how to handle\\
+- Places where you're guessing\\
 
-**These invite backend to clarify or push back.**
+**These invite backend to clarify or push back.**\\
 
-### Step 4: Leave Room for Discussion
+### Step 4: Leave Room for Discussion\\
 
-End with open questions:
-- "Would it make sense to...?"
-- "Should I expect...?"
-- "Is there a simpler way to...?"
+End with open questions:\\
+- "Would it make sense to...?"\\
+- "Should I expect...?"\\
+- "Is there a simpler way to...?"\\
 
 ---
 
@@ -99,42 +99,42 @@ Create `.claude/docs/ai/<feature-name>/backend-requirements.md`:
 ## Screens/Components
 
 ### <Screen/Component Name>
-**Purpose**: What this screen does
+**Purpose**: What this screen does\\
 
-**Data I need to display**:
-- [Description of data piece, not field name]
-- [Another piece]
-- [Relationships between pieces]
+**Data I need to display**:\\
+- [Description of data piece, not field name]\\
+- [Another piece]\\
+- [Relationships between pieces]\\
 
-**Actions**:
-- [Action description] → [Expected outcome]
-- [Another action] → [Expected outcome]
+**Actions**:\\
+- [Action description] → [Expected outcome]\\
+- [Another action] → [Expected outcome]\\
 
-**States to handle**:
-- **Empty**: [When/why this happens]
-- **Loading**: [What's being fetched]
-- **Error**: [What can go wrong, what user sees]
-- **Special**: [Any edge cases]
+**States to handle**:\\
+- **Empty**: [When/why this happens]\\
+- **Loading**: [What's being fetched]\\
+- **Error**: [What can go wrong, what user sees]\\
+- **Special**: [Any edge cases]\\
 
-**Business rules affecting UI**:
-- [Rule that changes what's visible/enabled]
-- [Permissions that affect actions]
+**Business rules affecting UI**:\\
+- [Rule that changes what's visible/enabled]\\
+- [Permissions that affect actions]\\
 
-### <Next Screen/Component>
-...
+### <Next Screen/Component>\\
+...\\
 
-## Uncertainties
-- [ ] Not sure if [X] should show when [Y]
-- [ ] Don't understand the business rule for [Z]
-- [ ] Guessing that [A] means [B]
+## Uncertainties\\
+- [ ] Not sure if [X] should show when [Y]\\
+- [ ] Don't understand the business rule for [Z]\\
+- [ ] Guessing that [A] means [B]\\
 
-## Questions for Backend
-- Would it make sense to combine [X] and [Y]?
-- Should I expect [Z] to always be present?
-- Is there existing data I can reuse for [W]?
+## Questions for Backend\\
+- Would it make sense to combine [X] and [Y]?\\
+- Should I expect [Z] to always be present?\\
+- Is there existing data I can reuse for [W]?\\
 
-## Discussion Log
-[Backend responses, decisions made, changes to requirements]
+## Discussion Log\\
+[Backend responses, decisions made, changes to requirements]\\
 ```
 
 ---
@@ -142,68 +142,75 @@ Create `.claude/docs/ai/<feature-name>/backend-requirements.md`:
 ## Good vs. Bad Requests
 
 ### Bad (Dictating Implementation)
-> "I need a GET /api/contracts endpoint that returns an array with fields: id, title, status, created_at"
+> "I need a GET /api/contracts endpoint that returns an array with fields: id, title, status, created_at"\\
 
 ### Good (Describing Needs)
-> "I need to show a list of contracts. Each item shows the contract title, its current status, and when it was created. User should be able to filter by status."
+> "I need to show a list of contracts. Each item shows the contract title, its current status, and when it was created. User should be able to filter by status."\\
 
 ### Bad (Assuming Structure)
-> "The provider object should be nested inside the contract response"
+> "The provider object should be nested inside the contract response"\\
 
 ### Good (Describing Relationship)
-> "For each contract, I need to show who the provider is (their name and maybe logo)"
+> "For each contract, I need to show who the provider is (their name and maybe logo)"\\
 
 ### Bad (No Context)
-> "I need contract data"
+> "I need contract data"\\
 
 ### Good (With Context)
-> "On the dashboard, there's a 'Recent Contracts' widget showing the 5 most recent contracts. User clicks one to go to detail page."
+> "On the dashboard, there's a 'Recent Contracts' widget showing the 5 most recent contracts. User clicks one to go to detail page."\\
 
 ---
 
-## Encouraging Pushback
+## Encouraging Pushback\\
 
-Include these prompts in your requirements:
+Include these prompts in your requirements:\\
 
-- "Let me know if this doesn't make sense for how the data is structured"
-- "Open to suggestions on a better approach"
-- "Not sure if this is the right way to think about it"
-- "Push back if this complicates things unnecessarily"
+- "Let me know if this doesn't make sense for how the data is structured"\\
+- "Open to suggestions on a better approach"\\
+- "Not sure if this is the right way to think about it"\\
+- "Push back if this complicates things unnecessarily"\\
 
-**Good collaboration = frontend describes the problem, backend proposes the solution.**
-
----
-
-## Rules
-
-- **NO IMPLEMENTATION DETAILS**—don't specify endpoints, methods, field names
-- **DESCRIBE, DON'T PRESCRIBE**—say what you need, not how to provide it
-- **INCLUDE CONTEXT**—why you need it helps backend make better choices
-- **SURFACE UNKNOWNS**—don't hide confusion, invite clarification
-- **INVITE PUSHBACK**—explicitly ask for backend's input
-- **UPDATE THE DOC**—add backend responses to Discussion Log
-- **STAY HUMBLE**—you're asking, not demanding
+**Good collaboration = frontend describes the problem, backend proposes the solution.**\\
 
 ---
 
-## After Backend Responds
+## Rules\\
 
-Update the requirements doc:
-1. Add responses to Discussion Log
-2. Adjust requirements based on feedback
-3. Mark resolved uncertainties
-4. Note any decisions made
+- **NO IMPLEMENTATION DETAILS**—don't specify endpoints, methods, field names\\
+- **DESCRIBE, DON'T PRESCRIBE**—say what you need, not how to provide it\\
+- **INCLUDE CONTEXT**—why you need it helps backend make better choices\\
+- **SURFACE UNKNOWNS**—don't hide confusion, invite clarification\\
+- **INVITE PUSHBACK**—explicitly ask for backend's input\\
+- **UPDATE THE DOC**—add backend responses to Discussion Log\\
+- **STAY HUMBLE**—you're asking, not demanding\\
 
-The doc becomes the source of truth for what was agreed.
+---
 
-### Change Management & Spec Modifications
-If frontend layout requirements change mid-implementation:
-1. Do **NOT** delete the previous agreement logs.
-2. Append a new section to the **Discussion Log** detailing the change and key design reasons, then update the target specification fields.
+## After Backend Responds\\
 
-## References
+Update the requirements doc:\\
+1. Add responses to Discussion Log\\
+2. Adjust requirements based on feedback\\
+3. Mark resolved uncertainties\\
+4. Note any decisions made\\
 
-**MANDATORY - Self-containment Directive**:
-This is a self-contained skill. Do NOT load external files or reference directories unless explicitly created during the execution of this workflow.
-**NEVER** construct raw mock JSON schemas within these files; leave API data structural layout details entirely to the backend developers.
+The doc becomes the source of truth for what was agreed.\\
 
+### Change Management & Spec Modifications\\
+If frontend layout requirements change mid-implementation:\\
+1. Do **NOT** delete the previous agreement logs.\\
+2. Append a new section to the **Discussion Log** detailing the change and key design reasons, then update the target specification fields.\\
+
+## References\\
+
+**MANDATORY - Self-containment Directive**:\\
+This is a self-contained skill. Do NOT load external files or reference directories unless explicitly created during the execution of this workflow.\\
+**NEVER** construct raw mock JSON schemas within these files; leave API data structural layout details entirely to the backend developers.\\
+
+## 6) Memory Sync
+
+Execute the following steps to sync knowledge to the memory system:
+1. Use `capture_knowledge.py` to route information to the correct storage (OKF or ChromaDB).
+2. Ensure that high-level architectural rules, policies, and decisions are stored in the OKF (Open Knowledge Format) directory.
+3. Ensure that ephemeral data, logs, and specific technical notes are stored in the ChromaDB instance.
+4. Verify that the `MEMORY_SYSTEM_ROOT` and `MEMORY_INBOX_DIR` environment variables are correctly configured.

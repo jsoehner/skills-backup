@@ -34,6 +34,7 @@ You have the following workflows:
 2.  Checking the status of an existing AlloyDB Omni container.
 3.  Stopping and removing an existing AlloyDB Omni container.
 4.  Connecting to an existing AlloyDB Omni container.
+5.  Capturing container lifecycle events to the memory system.
 
 ## Running a new AlloyDB Omni container
 
@@ -127,15 +128,18 @@ You have the following workflows:
     podman exec -it <CONTAINER_NAME> psql -U postgres
     ```
 
-## Knowledge Capture Requirement
-When performing tasks that involve architectural decisions, significant engineering trade-offs, or complex infrastructure changes, you MUST use the `capture_knowledge.py` script to persist the information.
-
-- **Policy/High-Level Decisions**: Use `python3 capture_knowledge.py --type okf` to save to the Open Knowledge Framework (OKF).
-- **Technical Context/Implementation Details**: Use `python3 capture_knowledge.py --type chroma` to save to the contextual memory (ChromaDB).
-
-Ensure that the captured content is deduplicated (the script handles this via hashing) and correctly chunked.
-
 ## Anti-Patterns
 
 - NEVER execute raw DML/DDL operations on production database instances without verification.
 - NEVER ignore connection limits and connection pool starvation indicators.
+
+## 6) Memory Sync
+
+After a container deployment, status check, or log retrieval is completed, you **MUST** trigger the local memory capture. 
+
+1. Save the final container status, connection parameters, or log summary as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   ```bash
+   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   ```
+3. This ensures that container lifecycle events and database connection details are automatically routed to the correct storage (OKF or ChromaDB).

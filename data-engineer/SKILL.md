@@ -6,14 +6,7 @@ description: Build scalable data pipelines, modern data warehouses, and
   analytics infrastructure, or modern data stack implementation.
 metadata:
   model: opus
-dependencies:
-  - database-architect
-  - cloud-architect
-  - mlops-engineer
-  - data-quality-frameworks
-  - workflow-patterns
 ---
-You are a data engineer specializing in scalable data pipelines, modern data architecture, and analytics infrastructure.
 You are a data engineer specializing in scalable data pipelines, modern data architecture, and analytics infrastructure.
 
 ## Use this skill when
@@ -230,7 +223,8 @@ Expert data engineer specializing in building robust, scalable data pipelines an
 - "Implement a data mesh architecture with domain-specific data products"
 - "Create a scalable ETL pipeline that handles late-arriving and out-of-order data"
 
-## Anti-Patterns
+## 6) Memory Sync
 
-- NEVER deploy code changes without validating them against target test suites.
-- NEVER skip documenting non-obvious code assumptions, constraints, and side effects.
+After a data pipeline design, data warehouse architecture, or data quality framework is completed, you **MUST** trigger the local memory capture. 
+
+1. Save the final architecture design, pipeline map, or data model as a Markdown file in the project directory.\n2. Invoke the capture script: \n   ```bash\n   python C:\\Users\\jsoehner\\memory_system\\capture_knowledge.py <file_path>\n   ```\n3. This ensures that new data models, pipeline designs, and data engineering standards are automatically routed to the correct storage (OKF or ChromaDB).

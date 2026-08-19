@@ -329,9 +329,11 @@ OrderShipped { orderId, trackingNumber, timestamp }
 ## 1. Regulatory Context & Business Drivers
 
 ### 1.1 Business Problem Statement
+
 [Describe the problem or architectural need being addressed.]
 
 ### 1.2 Regulatory & Legal Directives
+
 - **Regulation X (Clause Y)**: Requires immutable audit logging for all record modifications.
 - **Security Standard Z**: Mandates TLS 1.3 for all internal service communication.
 
@@ -340,9 +342,11 @@ OrderShipped { orderId, trackingNumber, timestamp }
 ## 2. System Boundaries & Architectural Viewpoint
 
 ### 2.1 Scope & Boundaries
+
 [Define the System of Interest (SoI). List included components and explicit out-of-scope boundaries.]
 
 ### 2.2 ISO 42010 Architectural Viewpoint
+
 - **Primary Viewpoint**: `[e.g., Security & Data Protection View | Storage Persistence View]`
 - **Key Stakeholder Concerns**: `[Auditability, Zero Data Loss, Latency SLA < 50ms]`
 
@@ -376,6 +380,7 @@ OrderShipped { orderId, trackingNumber, timestamp }
 > **We decision to adopt [Option 1 Name] for [System Scope] effective [Date].**
 
 ### Technical Architecture Details
+
 ```mermaid
 graph TD
     A[Client API] -->|TLS 1.3 mTLS| B[API Gateway]
@@ -399,9 +404,11 @@ graph TD
 ## 7. Consequences & Operational Blast Radius
 
 ### 7.1 Positive Impacts
+
 - Fully compliant audit trail capability meeting QMS requirements.
 
 ### 7.2 Trade-offs & Negative Consequences
+
 - Additional cloud WORM storage costs.
 
 ---
@@ -409,6 +416,7 @@ graph TD
 ## 8. Verification, Validation & Audit Evidence Strategy
 
 ### 8.1 Verification Protocol
+
 - **Automated Verification**: CI/CD pipeline enforces static security analysis (`gosec` / `semgrep`) and Terraform WORM configuration checks.
 - **Validation Execution**: System validation protocol `VAL-TP-2026-102` will execute load testing and database failure injection tests.
 
@@ -417,6 +425,7 @@ graph TD
 ## 9. Reversibility & Exit Strategy
 
 ### 9.1 Rollback Trigger Criteria
+
 - Failure to pass validation test protocol `VAL-TP-2026-102`.
 
 ---
@@ -473,11 +482,13 @@ python scripts/sync_qms_evidence.py --input docs/adr/ --target qms
 ## Best Practices & Anti-Patterns
 
 ### Do's
+
 - **Choose the right template**: Use lightweight MADRs for internal tech choices; use RADRs for compliance, safety, or security scope.
 - **Maintain 3-way traceability**: Always link RADRs to upstream SRS requirements and downstream test protocols.
 - **Enforce append-only discipline**: Never edit accepted/approved ADRs in-place; write a new ADR that supersedes the previous decision.
 
 ### Anti-Patterns
+
 - NEVER modify historical context of an approved decision; always supersede with a new record.
 - NEVER omit the Risk Assessment or Regulatory Control Mapping sections in a RADR.
 - NEVER leave approval matrices unassigned for safety-critical software choices.

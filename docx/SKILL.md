@@ -3,23 +3,16 @@ name: docx
 description: |
   Comprehensive document creation, editing, and analysis supporting tracked changes, comments, formatting preservation, and text extraction. Trigger when a user needs to: (1) Read, parse, or analyze Word documents (.docx), (2) Create new Word documents with specific templates, styles, or formatting, (3) Modify content using redlining or tracked changes, or (4) Convert documents to PDFs or images. Keywords: docx, word, ooxml, redline, tracked changes, pandoc, docx-js, libreoffice, openxml, unpack, pack, comment.
 
-
----
-
 # DOCX Creation, Editing, and Analysis
 
 This skill guides you through creating, reading, editing, and analyzing Word documents (.docx) using low-level OOXML manipulation, JS libraries, and command-line conversion tools.
 
----
-
 ## 1. Reference Loading & Progressive Disclosure
 
 This folder contains critical reference documentation. Follow these strict loading rules:
-- **For Creating New Documents**: You **MUST** read [docx-js.md](file:///home/jsoehner/yuv-skills-backup/document-skills/docx/docx-js.md) completely before generating any code.
-- **For Modifying Existing Documents**: You **MUST** read [ooxml.md](file:///home/jsoehner/yuv-skills-backup/document-skills/docx/ooxml.md) completely before executing scripts or modifying XML.
+- **For Creating New Documents**: You **MUST** read [docx-js.md](./docx-js.md) completely before generating any code.
+- **For Modifying Existing Documents**: You **MUST** read [ooxml.md](./ooxml.md) completely before executing scripts or modifying XML.
 - **NEVER** set range limits when loading these reference markdown files.
-
----
 
 ## 2. Trigger Scenarios & Decision Trees
 
@@ -41,15 +34,11 @@ graph TD
     G --> G1[Read ooxml.md -> Convert to MD -> Identify batches -> Implement precise edits -> Pack -> Verify]
 ```
 
----
-
 ## 3. Constraints & Freedom Calibration
 
 *   **XML Document Structure (Low Freedom)**: Elements in `word/document.xml` must strictly conform to the Open XML schema. Modifying node relationships or namespaces incorrectly will corrupt the document.
 *   **Tracked Changes / Redlining (Low Freedom)**: Do not delete large blocks of text and replace them with generic tags. You must use precise `<w:del>` and `<w:ins>` nodes, reusing existing run properties and RSIDs to avoid cluttered histories.
 *   **Styling and Formatting (Medium Freedom)**: Retain existing style definitions unless instructed to refactor. Match margins, paragraph spacing, and fonts of the original template.
-
----
 
 ## 4. Expert-Level Knowledge Delta
 
@@ -83,8 +72,6 @@ In Open XML, Revision Save IDs (RSIDs) are used to track which session created/m
 <w:r w:rsidR="001A2B3C"><w:t> units.</w:t></w:r>
 ```
 
----
-
 ## 5. Mindset & Actionable Procedures
 
 ### Self-Inquiry Framework
@@ -106,8 +93,6 @@ In Open XML, Revision Save IDs (RSIDs) are used to track which session created/m
     *   Repack: `python ooxml/scripts/pack.py unpacked_dir output.docx`.
     *   Generate a test markdown diff: `pandoc --track-changes=all output.docx -o verification.md` and check that the edits match specifications.
 
----
-
 ## 6. Anti-Patterns & Never-Lists
 
 | Action | Why Avoid It | Correction/Alternative |
@@ -117,8 +102,6 @@ In Open XML, Revision Save IDs (RSIDs) are used to track which session created/m
 | **NEVER** replace entire paragraphs to edit a single word or phrase. | Destroys original revision histories and run-level styles (bold, font properties). | Perform minimal, precise run splitting: `[Unchanged] + [Del] + [Ins] + [Unchanged]`. |
 | **NEVER** pack a document without running `validate.py`. | Uncaught XML schema violations will cause Word to report the file as corrupt on load. | Always execute `validate.py` in the unpacked directory before repacking. |
 | **NEVER** use standard xml libraries for untrusted files. | Vulnerable to XML Entity Expansion (Billion Laughs) and XXE attacks. | Use `defusedxml` or python-docx APIs that employ secure parsing defaults. |
-
----
 
 ## 7. Error Scenarios & Fallbacks
 
@@ -133,3 +116,14 @@ In Open XML, Revision Save IDs (RSIDs) are used to track which session created/m
 ### Missing RSID Suggestion
 *   *Scenario*: The `unpack.py` script fails or does not output an RSID suggestion.
 *   *Fallback*: Open `word/settings.xml` and locate the `<w:rsids>` element. Use any existing RSID from that list or use a fallback value (e.g., `00A1B2C3`) that does not clash with other runs.
+
+## 8) Memory Sync
+
+After a technical manual, architecture guide, or deep-dive documentation is completed, you **MUST** trigger the local memory capture. 
+
+1. Save the final documentation as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   ```bash
+   python $MEMORY_SYSTEM_ROOT/capture_knowledge.py <file_path>
+   ```
+3. This ensures that new high-level architectural rules, system designs, and technical standards are automatically routed to the correct storage (OKF or ChromaDB).

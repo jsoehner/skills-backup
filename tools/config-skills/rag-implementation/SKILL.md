@@ -146,7 +146,7 @@ retriever = MultiQueryRetriever.from_llm(
 )
 
 # Single query → multiple variations → combined results
-results = retriever.get_relevant_documents("query")
+results = retriever.get_relevant_documents("What is the main topic?")
 ```
 
 ### Pattern 3: Contextual Compression
@@ -425,9 +425,13 @@ def evaluate_rag_system(qa_chain, test_cases):
 - NEVER deploy prompts or agent workflows without setting strict token budget constraints and safety guardrails.
 - NEVER trust LLM tool calls without validating and sanitizing the arguments before execution.
 
-## Knowledge Capture Requirement
-When completing a task that involves a significant architectural decision, a complex bug fix, or a new infrastructure pattern, you MUST:
-1. Synthesize the decision/fix into a concise summary (3-5 sentences).
-2. Classify it as either **OKF** (High-level policy, architectural rule, or cross-cutting standard) or **CHROMA** (Technical context, implementation detail, or specific bug fix).
-3. Execute `capture_knowledge.py` with the appropriate `--type` flag.
-4. Ensure the captured knowledge is deduplicated and properly chunked using the `smart_chunk` logic.
+## 6) Capture Knowledge
+
+After implementing a RAG system, automatically trigger the `capture_knowledge.py` script.
+The script will analyze the RAG pipeline to identify:
+- Embedding model choices and chunking parameters.
+- Retrieval strategies used (e.g., Hybrid, Multi-Query, Reranking).
+- Vector store configurations and metadata filtering rules.
+The script will then route this information to the appropriate storage:
+- **OKF**: RAG architectural standards, chunking best practices, and retrieval strategies.
+- **ChromaDB**: Specific embedding models, vector store configs, and retrieval performance logs.

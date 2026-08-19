@@ -40,3 +40,15 @@ Refer to `resources/implementation-playbook.md` for detailed patterns, checklist
 
 - NEVER violate dependency rules in Clean/Hexagonal Architecture (e.g., outer layer infrastructure details must not bleed into core domains).
 - NEVER expose internal domain entities directly through public web APIs.
+
+## 6) Memory Sync
+
+After an architectural pattern selection, design blueprint, or refactoring plan is completed, you **MUST** trigger the local memory capture. 
+
+1. Save the final architecture blueprint, refactoring plan, or pattern selection as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   ```bash
+   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   ```
+3. This ensures that architectural patterns, design blueprints, and refactoring plans are automatically routed to the correct storage (OKF or ChromaDB).
+

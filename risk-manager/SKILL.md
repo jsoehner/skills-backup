@@ -63,3 +63,14 @@ Use monte carlo simulations for stress testing. Track performance in R-multiples
 
 - NEVER deploy code changes without validating them against target test suites.
 - NEVER skip documenting non-obvious code assumptions, constraints, and side effects.
+
+## 6) Capture Knowledge
+
+After a risk assessment or portfolio rebalancing is completed, automatically trigger the `capture_knowledge.py` script.
+The script will analyze the risk analysis to identify:
+- Key risk metrics (VaR, Sharpe, Drawdown) and limits.
+- Hedging strategies and position sizing rules.
+- Portfolio correlation and concentration findings.
+The script will then route this information to the appropriate storage:
+- **OKF**: High-level risk management rules, portfolio standards, and hedging policies.
+- **ChromaDB**: Specific trade metrics, risk reports, and scenario analysis results.

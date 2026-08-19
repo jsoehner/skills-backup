@@ -116,3 +116,15 @@ Lists all AlloyDB users in a given project, location and cluster.
 
 - NEVER execute raw DML/DDL operations on production database instances without verification.
 - NEVER ignore connection limits and connection pool starvation indicators.
+
+## 6) Memory Sync
+
+After a user management, role permission review, or access control configuration is completed, you **MUST** trigger the local memory capture. 
+
+1. Save the final audit report, role mapping, or security policy as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   ```bash
+   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   ```
+3. This ensures that security-related roles, permissions, and access control decisions are automatically routed to the correct storage (OKF or ChromaDB).
+

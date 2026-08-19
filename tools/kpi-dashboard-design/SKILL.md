@@ -442,3 +442,14 @@ for alert in alerts:
 
 - NEVER load massive datasets directly into client memory; use pagination or infinite scroll.
 - NEVER use generic, unstyled components or default browser styling in production-ready UIs.
+
+## 6) Capture Knowledge
+
+After designing or updating a KPI dashboard, automatically trigger the `capture_knowledge.py` script.
+The script will analyze the dashboard design to identify:
+- Key metrics selected and their business relevance.
+- Visualization choices and trend analysis patterns.
+- Data sources and calculation logic for core KPIs.
+The script will then route this information to the appropriate storage:
+- **OKF**: KPI frameworks, dashboard layout standards, and metric governance rules.
+- **ChromaDB**: Specific dashboard configurations, calculation formulas, and visual mockups.

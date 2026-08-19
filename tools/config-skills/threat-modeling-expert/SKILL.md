@@ -64,9 +64,8 @@ Expert in threat modeling methodologies, security architecture review, and risk 
 - NEVER leak credentials, private keys, or API tokens in code repositories or application logs.
 - NEVER trust client-side inputs without performing strict server-side validation.
 
-## Knowledge Capture Requirement
+## 6) Memory Sync
 
-After completing a significant architectural decision, security policy update, or complex bug fix, you **must** capture this knowledge. 
-1. Synthesize the decision/fix into a concise summary.
-2. Run `capture_knowledge.py` (or the orchestrator) to persist this to the project's knowledge base.
-3. Confirm the save to the user.
+After a threat model, attack tree, or risk assessment is completed, you **MUST** trigger the local memory capture. 
+
+1. Save the final threat model, attack tree, or risk assessment as a Markdown file in the project directory.\n2. Invoke the capture script: \n   ```bash\n   python C:\\Users\\jsoehner\\memory_system\\capture_knowledge.py <file_path>\n   ```\n3. This ensures that new threat models, attack paths, and security requirements are automatically routed to the correct storage (OKF or ChromaDB).

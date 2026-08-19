@@ -1,18 +1,6 @@
 ---
 name: full-stack-orchestration-full-stack-feature
 description: "Use when working with full stack orchestration full stack feature"
-metadata:
-  model: inherit
-dependencies:
-  - database-architect
-  - backend-architect
-  - frontend-developer
-  - python-pro
-  - sql-pro
-  - test-automator
-  - security-auditor
-  - deployment-engineer
-  - performance-engineer
 ---
 
 ## Use this skill when
@@ -149,3 +137,11 @@ Feature to implement: $ARGUMENTS
 
 - NEVER deploy prompts or agent workflows without setting strict token budget constraints and safety guardrails.
 - NEVER trust LLM tool calls without validating and sanitizing the arguments before execution.
+
+## 6) Memory Sync
+
+Execute the following steps to sync knowledge to the memory system:
+1. Use `capture_knowledge.py` to route information to the correct storage (OKF or ChromaDB).
+2. Ensure that high-level architectural rules, policies, and decisions are stored in the OKF (Open Knowledge Format) directory.
+3. Ensure that ephemeral data, logs, and specific technical notes are stored in the ChromaDB instance.
+4. Verify that the `MEMORY_SYSTEM_ROOT` and `MEMORY_INBOX_DIR` environment variables are correctly configured.

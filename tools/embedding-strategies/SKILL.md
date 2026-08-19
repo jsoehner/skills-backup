@@ -141,7 +141,6 @@ class LocalEmbedder:
         """Embed documents for indexing."""
         return self.embed(documents)
 
-
 # E5 model with instructions
 class E5Embedder:
     def __init__(self, model_name: str = "intfloat/multilingual-e5-large"):
@@ -372,7 +371,6 @@ class DomainEmbeddingPipeline:
 
         return processed
 
-
 # Code-specific pipeline
 class CodeEmbeddingPipeline:
     """Specialized pipeline for code embeddings."""
@@ -393,6 +391,7 @@ class CodeEmbeddingPipeline:
         """Embed code with surrounding context."""
         combined = f"Context: {context}\n\nCode:\n{chunk}"
         return get_embedding(combined, model=self.model)
+
 ```
 
 ### Template 5: Embedding Quality Evaluation
@@ -407,7 +406,6 @@ def evaluate_retrieval_quality(
     retrieved_docs: List[List[str]],  # List of retrieved doc IDs per query
     k: int = 10
 ) -> dict:
-    """Evaluate embedding quality for retrieval."""
 
     def precision_at_k(relevant: set, retrieved: List[str], k: int) -> float:
         retrieved_k = retrieved[:k]
@@ -449,7 +447,6 @@ def evaluate_retrieval_quality(
 
     return {name: np.mean(values) for name, values in metrics.items()}
 
-
 def compute_embedding_similarity(
     embeddings1: np.ndarray,
     embeddings2: np.ndarray,
@@ -489,14 +486,16 @@ def compute_embedding_similarity(
 - [Sentence Transformers](https://www.sbert.net/)
 - [MTEB Benchmark](https://huggingface.co/spaces/mteb/leaderboard)
 
-## Knowledge Capture Requirement
-When performing tasks that involve architectural decisions, significant engineering trade-offs, or complex infrastructure changes, you MUST use the `capture_knowledge.py` script to persist the information.
-
-- **Policy/High-Level Decisions**: Use `python3 capture_knowledge.py --type okf` to save to the Open Knowledge Framework (OKF).
-- **Technical Context/Implementation Details**: Use `python3 capture_knowledge.py --type chroma` to save to the contextual memory (ChromaDB).
-
-Ensure that the captured content is deduplicated (the script handles this via hashing) and correctly chunked.
-
+## Anti-Patterns
 
 - NEVER deploy code changes without validating them against target test suites.
 - NEVER skip documenting non-obvious code assumptions, constraints, and side effects.
+
+## 6) Memory Sync
+
+Execute the following steps to sync knowledge to the memory system:
+1. Use `capture_knowledge.py` to route information to the correct storage (OKF or ChromaDB).
+2. Ensure that high-level architectural rules, policies, and decisions are stored in the OKF (Open Knowledge Format) directory.
+3. Ensure that ephemeral data, logs, and specific technical notes are stored in the ChromaDB instance.
+4. Verify that the `MEMORY_SYSTEM_ROOT` and `MEMORY_INBOX_DIR` environment variables are correctly configured.
+```

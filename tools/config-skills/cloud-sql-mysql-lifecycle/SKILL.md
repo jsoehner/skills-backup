@@ -51,9 +51,9 @@ the opertation status till it is marked DONE.
 :                         :        : cloned.         :          :         :
 | destinationInstanceName | string | The name of the | Yes      |         |
 :                         :        : new instance    :          :         :
-:                         :        : that will be    :          :         :
-:                         :        : created by      :          :         :
-:                         :        : cloning the     :          :         :
+:                         :        : that will be     :          :         :
+:                         :        : created by       :          :         :
+:                         :        : cloning the      :          :         :
 :                         :        : source          :          :         :
 :                         :        : instance.       :          :         :
 | pointInTime             | string | The timestamp   | No       |         |
@@ -90,7 +90,7 @@ Creates a backup on a Cloud SQL instance.
 :                    :        : different one.  :          :         :
 | instance           | string | Cloud SQL       | Yes      |         |
 :                    :        : instance ID.    :          :         :
-:                    :        : This does not   :          :         :
+:                    :        : This does not    :          :         :
 :                    :        : include the     :          :         :
 :                    :        : project ID.     :          :         :
 | location           | string | Location of the | No       |         |
@@ -129,12 +129,12 @@ Lists all type of Cloud SQL instances for a project.
 | :------ | :----- | :-------------- | :------- | :------ |
 | project | string | The GCP project | No       |         |
 :         :        : ID. This is     :          :         :
-:         :        : pre-configured; :          :         :
-:         :        : do not ask for  :          :         :
-:         :        : it unless the   :          :         :
-:         :        : user explicitly :          :         :
-:         :        : provides a      :          :         :
-:         :        : different one.  :          :         :
+:         :        : pre-configured; :          :         :\\
+:         :        : do not ask for  :          :         :\\
+:         :        : it unless the   :          :         :\\
+:         :        : user explicitly :          :         :\\
+:         :        : provides a      :          :         :\\
+:         :        : different one.  :          :         :\\
 
 --------------------------------------------------------------------------------
 
@@ -147,49 +147,49 @@ Restores a backup on a Cloud SQL instance.
 | Name            | Type   | Description     | Required | Default |
 | :-------------- | :----- | :-------------- | :------- | :------ |
 | target_project  | string | The GCP project | No       |         |
-:                 :        : ID. This is     :          :         :
-:                 :        : pre-configured; :          :         :
-:                 :        : do not ask for  :          :         :
-:                 :        : it unless the   :          :         :
-:                 :        : user explicitly :          :         :
-:                 :        : provides a      :          :         :
-:                 :        : different one.  :          :         :
-| target_instance | string | Cloud SQL       | Yes      |         |
-:                 :        : instance ID of  :          :         :
-:                 :        : the target      :          :         :
-:                 :        : instance. This  :          :         :
-:                 :        : does not        :          :         :
-:                 :        : include the     :          :         :
-:                 :        : project ID.     :          :         :
-| backup_id       | string | Identifier of   | Yes      |         |
-:                 :        : the backup      :          :         :
-:                 :        : being restored. :          :         :
-:                 :        : Can be a        :          :         :
-:                 :        : BackupRun ID,   :          :         :
-:                 :        : backup name, or :          :         :
-:                 :        : BackupDR backup :          :         :
-:                 :        : name. Use the   :          :         :
-:                 :        : full backup ID  :          :         :
-:                 :        : as provided, do :          :         :
-:                 :        : not try to      :          :         :
-:                 :        : parse it        :          :         :
-| source_project  | string | GCP project ID  | No       |         |
-:                 :        : of the instance :          :         :
-:                 :        : that the backup :          :         :
-:                 :        : belongs to.     :          :         :
-:                 :        : Only required   :          :         :
-:                 :        : if the          :          :         :
-:                 :        : backup_id is a  :          :         :
-:                 :        : BackupRun ID.   :          :         :
-| source_instance | string | Cloud SQL       | No       |         |
-:                 :        : instance ID of  :          :         :
-:                 :        : the instance    :          :         :
-:                 :        : that the backup :          :         :
-:                 :        : belongs to.     :          :         :
-:                 :        : Only required   :          :         :
-:                 :        : if the          :          :         :
-:                 :        : backup_id is a  :          :         :
-:                 :        : BackupRun ID.   :          :         :
+:                 :        : ID. This is     :          :         :\\
+:                 :        : pre-configured; :          :         :\\
+:                 :        : do not ask for  :          :         :\\
+:                 :        : it unless the   :          :         :\\
+:                 :        : user explicitly :          :         :\\
+:                 :        : provides a      :          :         :\\
+:                 :        : different one.  :          :         :\\
+| target_instance | string | Cloud SQL       | Yes      |         |\\
+:                 :        : instance ID of  :          :         :\\
+:                 :        : the target      :          :         :\\
+:                 :        : instance. This  :          :         :\\
+:                 :        : does not        :          :         :\\
+:                 :        : include the     :          :         :\\
+:                 :        : project ID.     :          :         :\\
+| backup_id       | string | Identifier of   | Yes      |         |\\
+:                 :        : the backup      :          :         :\\
+:                 :        : being restored. :          :         :\\
+:                 :        : Can be a        :          :         :\\
+:                 :        : BackupRun ID,   :          :         :\\
+:                 :        : backup name, or :          :         :\\
+:                 :        : BackupDR backup :          :         :\\
+:                 :        : name. Use the   :          :         :\\
+:                 :        : full backup ID  :          :         :\\
+:                 :        : as provided, do :          :         :\\
+:                 :        : not try to parse :          :         :\\
+:                 :        : it.             :          :         :\\
+| source_project  | string | GCP project ID  | No       |         |\\
+:                 :        : of the instance :          :         :\\
+:                 :        : that the backup :          :         :\\
+:                 :        : belongs to.     :          :         :\\
+:                 :        : Only required   :          :         :\\
+:                 :        : if the          :          :         :\\
+:                 :        : backup_id is a  :          :         :\\
+:                 :        : BackupRun ID.   :          :         :\\
+| source_instance | string | Cloud SQL       | No       |         |\\
+:                 :        : instance ID of  :          :         :\\
+:                 :        : the instance    :          :         :\\
+:                 :        : that the backup :          :         :\\
+:                 :        : belongs to.     :          :         :\\
+:                 :        : Only required   :          :         :\\
+:                 :        : if the          :          :         :\\
+:                 :        : backup_id is a  :          :         :\\
+:                 :        : BackupRun ID.   :          :         :\\
 
 --------------------------------------------------------------------------------
 
@@ -200,15 +200,15 @@ Restores a backup on a Cloud SQL instance.
 | Name      | Type   | Description     | Required | Default |
 | :-------- | :----- | :-------------- | :------- | :------ |
 | project   | string | The GCP project | No       |         |
-:           :        : ID. This is     :          :         :
-:           :        : pre-configured; :          :         :
-:           :        : do not ask for  :          :         :
-:           :        : it unless the   :          :         :
-:           :        : user explicitly :          :         :
-:           :        : provides a      :          :         :
-:           :        : different one.  :          :         :
-| operation | string | The operation   | Yes      |         |
-:           :        : ID              :          :         :
+:           :        : ID. This is     :          :         :\\
+:           :        : pre-configured; :          :         :\\
+:           :        : do not ask for  :          :         :\\
+:           :        : it unless the   :          :         :\\
+:           :        : user explicitly :          :         :\\
+:           :        : provides a      :          :         :\\
+:           :        : different one.  :          :         :\\
+| operation | string | The operation   | Yes      |         |\\
+:           :        : ID              :          :         :\\
 
 --------------------------------------------------------------------------------
 
@@ -216,3 +216,14 @@ Restores a backup on a Cloud SQL instance.
 
 - NEVER execute raw DML/DDL operations on production database instances without verification.
 - NEVER ignore connection limits and connection pool starvation indicators.
+
+## 6) Memory Sync
+
+After a backup creation, restoration, or instance cloning is completed, you **MUST** trigger the local memory capture. 
+
+1. Save the final backup metadata, restoration logs, or cloning parameters as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   ```bash
+   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   ```
+3. This ensures that backup schedules, restoration procedures, and instance cloning history are automatically routed to the correct storage (OKF or ChromaDB).

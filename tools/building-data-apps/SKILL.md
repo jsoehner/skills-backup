@@ -156,14 +156,19 @@ If the user requests or agrees to the chat interface:
     expected?
 -   [ ] Is the dashboard visually appealing?
 
-## Knowledge Capture Requirement
-When performing tasks that involve architectural decisions, significant engineering trade-offs, or complex infrastructure changes, you MUST use the `capture_knowledge.py` script to persist the information.
-
-- **Policy/High-Level Decisions**: Use `python3 capture_knowledge.py --type okf` to save to the Open Knowledge Framework (OKF).
-- **Technical Context/Implementation Details**: Use `python3 capture_knowledge.py --type chroma` to save to the contextual memory (ChromaDB).
-
-Ensure that the captured content is deduplicated (the script handles this via hashing) and correctly chunked.
-
+## Anti-Patterns
 
 - NEVER execute frontend queries directly against backend database layers without validation middleware.
 - NEVER load huge datasets into browser memory; implement proper pagination or aggregation.
+
+## 6) Memory Sync
+
+After a data dashboard, interactive report, or chat interface is built, you **MUST** trigger the local memory capture. 
+
+1. Save the final dashboard design, data model, or chat configuration as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   ```bash
+   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   ```
+3. This ensures that data app designs, dashboard structures, and chat configurations are automatically routed to the correct storage (OKF or ChromaDB).
+

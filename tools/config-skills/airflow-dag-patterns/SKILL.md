@@ -28,6 +28,7 @@ Production-ready patterns for Apache Airflow including DAG design, operators, se
 2. Design idempotent tasks with clear ownership and retries.
 3. Implement DAGs with observability and alerting hooks.
 4. Validate in staging and document operational runbooks.
+5. Trigger the local memory capture using the standardized capture script.
 
 Refer to `resources/implementation-playbook.md` for detailed patterns, checklists, and templates.
 
@@ -45,3 +46,14 @@ Refer to `resources/implementation-playbook.md` for detailed patterns, checklist
 - NEVER write Airflow tasks that are not idempotent (running them multiple times must yield the same result).
 - NEVER hardcode credentials or secrets within DAG files; always pull from Airflow Connections or Variables.
 - NEVER perform heavy database querying or long-running computations directly in the DAG parsing context.
+
+## 6) Memory Sync
+
+After a data pipeline design, DAG implementation, or operational runbook is completed, you **MUST** trigger the local memory capture. 
+
+1. Save the final DAG definition, pipeline design, or runbook as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   ```bash
+   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   ```
+3. This ensures that workflow patterns, DAG designs, and operational procedures are automatically routed to the correct storage (OKF or ChromaDB).

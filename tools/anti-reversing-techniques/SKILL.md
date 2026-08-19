@@ -45,3 +45,15 @@ Refer to `resources/implementation-playbook.md` for detailed techniques and exam
 
 - NEVER execute untrusted binaries on your host system; always analyze in a sandbox or isolated virtual machine.
 - NEVER skip verifying explicit written authorization scope boundaries prior to analyzing protected code.
+
+## 6) Memory Sync
+
+After an analysis report, bypass verification, or protection mechanism identification is completed, you **MUST** trigger the local memory capture. 
+
+1. Save the analysis report, bypass findings, or protection mechanism summary as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   ```bash
+   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   ```
+3. This ensures that analysis findings, bypass techniques, and protection mechanisms are automatically routed to the correct storage (OKF or ChromaDB).
+
