@@ -189,8 +189,5 @@ Example: `2024-01-15-143022-implementing-auth.md`\\
 1. **Untracked files checks**: During staleness checks in Step 2, run a quick `git status --porcelain` command to verify if untracked files exist.\\
 2. **Summary length limits**: Restrict the "Current State Summary" block to under 3 paragraphs to preserve readability for the resuming agent.\\
 \\
-## 6) Memory Sync
 
-After a session handoff is created, you **MUST** trigger the local memory capture. 
 
-1. Save the handoff document as a Markdown file in the project directory.\n2. Invoke the capture script: \n   ```bash\n   python $MEMORY_SYSTEM_ROOT/capture_knowledge.py <file_path>\n   ```\n3. This ensures that session contexts and state transitions are automatically routed to the correct storage (OKF or ChromaDB).

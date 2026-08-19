@@ -197,8 +197,4 @@ Expert data scientist combining strong statistical foundations with modern machi
 - "Develop a recommendation system for e-commerce product suggestions"
 - "Investigate anomalies in financial transactions and build fraud detection models"
 
-## 6) Memory Sync
 
-After a data analysis, ML model, or statistical report is completed, you **MUST** trigger the local memory capture. 
-
-1. Save the final analysis, model summary, or report as a Markdown file in the project directory.\n2. Invoke the capture script: \n   ```bash\n   python C:\\Users\\jsoehner\\memory_system\\capture_knowledge.py <file_path>\n   ```\n3. This ensures that new insights, model parameters, and statistical findings are automatically routed to the correct storage (OKF or ChromaDB).

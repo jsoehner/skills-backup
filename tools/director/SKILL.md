@@ -142,9 +142,4 @@ Chapters 14–18 are dated mid-2026. Before recommending a specific model/featur
 ## References & Loading Triggers\\
 - **MANDATORY - LOADING TRIGGERS**: Read a reference file ONLY when the current phase needs it. During initial Intake (Phase 0), **do NOT load** references to preserve context tokens.\\
 
-## 6) Memory Sync
 
-After capturing knowledge, ensure all high-level architectural decisions, new technical standards, and key documentation are synced to the persistent memory system.
-1. Run `capture_knowledge.py` to route findings to the appropriate storage (OKF for policies, ChromaDB for logs).
-2. Ensure all new architectural "Hard Rules" are reflected in the `policy_memory_routing.md` if they represent significant system-wide constraints.
-3. Verify that all newly created diagrams and documentation are stored in the standardized directory structure using relative paths.

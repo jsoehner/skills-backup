@@ -245,13 +245,4 @@ Target Optimization: $ARGUMENTS
 - NEVER allow agents to communicate in unmonitored circular loops that drain token budgets.
 - NEVER hardcode model-specific context limits; always dynamically monitor token consumption.
 
-## 6) Memory Sync
 
-After completing a multi-agent optimization cycle, a performance report, or an orchestration strategy update, you **MUST** trigger the local memory capture. 
-
-1. Save the final optimization report, performance metrics, or orchestration plan as a Markdown file in the project directory.
-2. Invoke the capture script: 
-   ```bash
-   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
-   ```
-3. This ensures that multi-agent performance improvements, orchestration strategies, and cost-saving decisions are automatically routed to the correct storage (OKF or ChromaDB).

@@ -94,13 +94,4 @@ When a decision is replaced by a new one:
   2. Extract headers, date, and status from each file.
   3. Regenerate the markdown table in `docs/adr/README.md` automatically.
 
-## 6) Memory Sync
 
-After an ADR is created, updated, or superseded in the decision log, you **MUST** trigger the local memory capture. 
-
-1. Save the final ADR or the updated decision index as a Markdown file in the project directory.
-2. Invoke the capture script: 
-   ```bash
-   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
-   ```
-3. This ensures that changes to the decision log and architectural history are automatically routed to the correct storage (OKF or ChromaDB).

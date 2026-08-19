@@ -338,10 +338,4 @@ Select the appropriate level based on the documentation need:
 
 **Key Insight:** "Context + Container diagrams are sufficient for most software development teams." Only create Component/Code diagrams when they genuinely add value.
 
-## 6) Memory Sync
 
-After capturing knowledge, ensure all high-level architectural decisions, new technical standards, and key documentation are synced to the persistent memory system.
-1. Run `capture_knowledge.py` to route findings to the appropriate storage (OKF for policies, ChromaDB for logs).
-2. Ensure all new architectural "Hard Rules" are reflected in the `policy_memory_routing.md` if they represent significant system-wide constraints.
-3. Verify that all newly created diagrams and documentation are stored in the standardized directory structure using relative paths.
-```

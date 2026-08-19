@@ -147,13 +147,4 @@ Inject the matching control elements into the sidebar HTML. Tie the `oninput` ev
   * *Cause*: Hardcoded CSS canvas sizing.
   * *Fallback*: Target the container dimension in setup using CSS properties, and hook the window resizing listener to resize the canvas dynamically with `resizeCanvas()`.
 
-## 6) Memory Sync
 
-After generating a high-fidelity algorithmic art piece, a visual movement manifesto, or a technical rendering report, you **MUST** trigger the local memory capture. 
-
-1. Save the final art manifesto, parameter configuration, or technical rendering report as a Markdown file in the project directory.
-2. Invoke the capture script: 
-   ```bash
-   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
-   ```
-3. This ensures that algorithmic art philosophies, generative parameters, and visual movement definitions are automatically routed to the correct storage (OKF or ChromaDB).

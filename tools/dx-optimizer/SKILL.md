@@ -86,13 +86,5 @@ Remember: Great DX is invisible when it works and obvious when it doesn't. Aim f
 - NEVER deploy prompts or agent workflows without setting strict token budget constraints and safety guardrails.\\
 - NEVER trust LLM tool calls without validating and sanitizing the arguments before execution.\\
 \\
-## 6) Memory Sync
 
-After a technical manual, architecture guide, or deep-dive documentation is completed, you **MUST** trigger the local memory capture. 
 
-1. Save the final documentation as a Markdown file in the project directory.
-2. Invoke the capture script: 
-   ```bash
-   python $MEMORY_SYSTEM_ROOT/capture_knowledge.py <file_path>
-   ```
-3. This ensures that new high-level architectural rules, system designs, and technical standards are automatically routed to the correct storage (OKF or ChromaDB).

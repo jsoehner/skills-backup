@@ -43,14 +43,4 @@ Build robust, production-grade backtesting systems that avoid common pitfalls an
 - NEVER compute indicators using data from the future (look-ahead bias).
 - NEVER present backtest results without deducting transaction costs, slippage, and fees.
 
-## 6) Memory Sync
-
-After a backtesting framework is designed, a strategy is validated, or a backtest report is generated, you **MUST** trigger the local memory capture. 
-
-1. Save the final backtest report, strategy validation, or framework design as a Markdown file in the project directory.
-2. Invoke the capture script: 
-   ```bash
-   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
-   ```
-3. This ensures that backtesting results, strategy validations, and framework designs are automatically routed to the correct storage (OKF or ChromaDB).
 

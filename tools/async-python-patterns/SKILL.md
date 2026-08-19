@@ -43,14 +43,4 @@ Refer to `resources/implementation-playbook.md` for detailed patterns and exampl
 - NEVER execute blocking I/O calls (like standard `requests` or `time.sleep`) inside an async event loop thread; use `asyncio.to_thread` or non-blocking libraries.
 - NEVER use `asyncio.gather` without setting explicit timeouts or handling individual task exceptions.
 
-## 6) Memory Sync
-
-After an async system design, concurrent workload analysis, or non-blocking I/O optimization is completed, you **MUST** trigger the local memory capture. 
-
-1. Save the final async architecture, concurrency plan, or I/O optimization report as a Markdown file in the project directory.
-2. Invoke the capture script: 
-   ```bash
-   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
-   ```
-3. This ensures that async patterns, concurrency strategies, and non-blocking I/O plans are automatically routed to the correct storage (OKF or ChromaDB).
 

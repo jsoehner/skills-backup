@@ -337,13 +337,4 @@ When designing architecture, provide:
 - NEVER design service communication loops that can cause circular token exhaustion or cascade failures.
 - NEVER expose internal database structures directly through public REST API schemas.
 
-## 6) Memory Sync
 
-After a backend architecture design, API contract, or service boundary definition is completed, you **MUST** trigger the local memory capture. 
-
-1. Save the final architecture design, API schema, or service map as a Markdown file in the project directory.
-2. Invoke the capture script: 
-   ```bash
-   python C:\\Users\\jsoehner\\memory_system\\capture_knowledge.py <file_path>
-   ```
-3. This ensures that new service boundaries, API contracts, and backend standards are automatically routed to the correct storage (OKF or ChromaDB).

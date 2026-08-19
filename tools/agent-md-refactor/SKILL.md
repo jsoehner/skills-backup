@@ -331,13 +331,4 @@ After refactoring, verify:
 
 ---
 
-## 6) Memory Sync
 
-After refactoring the agent instruction files (e.g., CLAUDE.md, AGENTS.md), you **MUST** trigger the local memory capture. 
-
-1. Save the final refactored structure or the list of flagged deletions as a Markdown file in the project directory.
-2. Invoke the capture script: 
-   ```bash
-   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
-   ```
-3. This ensures that agent configuration changes and structural refactors are automatically routed to the correct storage (OKF or ChromaDB).

@@ -44,14 +44,4 @@ Production patterns for implementing data quality with Great Expectations, dbt t
 - NEVER deploy code changes without validating them against target test suites.
 - NEVER skip documenting non-obvious code assumptions, constraints, and side effects.
 
-## 6) Memory Sync
 
-After a data quality framework, validation rule set, or data contract is completed, you **MUST** trigger the local memory capture. 
-
-1. Save the final data quality framework, validation rules, or data contract as a Markdown file in the project directory.\n2. Invoke the capture script: \n   ```bash\n   python C:\\Users\\jsoehner\\memory_system\\capture_knowledge.py <file_path>\n   ```\n3. This ensures that new data quality standards, validation rules, and data contracts are automatically routed to the correct storage (OKF or ChromaDB).
-
-## 6) Memory Sync
-
-After a data quality framework, validation rule set, or data contract is completed, you **MUST** trigger the local memory capture. 
-
-1. Save the final data quality framework, validation rules, or data contract as a Markdown file in the project directory.\n2. Invoke the capture script: \n   ```bash\n   python C:\\Users\\jsoehner\\memory_system\\capture_knowledge.py <file_path>\n   ```\n3. This ensures that new data quality standards, validation rules, and data contracts are automatically routed to the correct storage (OKF or ChromaDB).

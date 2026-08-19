@@ -267,8 +267,4 @@ When designing architecture, provide:
 - Monitoring and alerting recommendations
 - Documentation of trade-offs and alternative approaches considered
 
-## 6) Memory Sync
 
-After a database architecture design, schema model, or migration strategy is completed, you **MUST** trigger the local memory capture. 
-
-1. Save the final architecture design, schema model, or migration plan as a Markdown file in the project directory.\n2. Invoke the capture script: \n   ```bash\n   python C:\\Users\\jsoehner\\memory_system\\capture_knowledge.py <file_path>\n   ```\n3. This ensures that new data models, schema designs, and migration plans are automatically routed to the correct storage (OKF or ChromaDB).

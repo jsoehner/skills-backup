@@ -50,14 +50,4 @@ $ARGUMENTS
 - NEVER leak production secrets or real user PII in mock responses; use generated placeholders or deterministic fixtures.
 - NEVER make mock endpoints indistinguishable from production endpoints; always use a dedicated prefix (e.g., `/mock/` or `.mock.`).
 
-## 6) Memory Sync
-
-After a mock API design, contract definition, or scenario mapping is completed, you **MUST** trigger the local memory capture. 
-
-1. Save the final mock API specification, test scenarios, or response fixtures as a Markdown file in the project directory.
-2. Invoke the capture script: 
-   ```bash
-   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
-   ```
-3. This ensures that API mock definitions, test scenarios, and mock schemas are automatically routed to the correct storage (OKF or ChromaDB).
 

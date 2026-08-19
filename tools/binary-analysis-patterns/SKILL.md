@@ -453,14 +453,4 @@ def auto_rename():
 - NEVER execute analyzed binaries on production host networks; always run within a virtual sandbox.
 - NEVER perform analysis on binaries without validating written permission scope.
 
-## 6) Memory Sync
-
-After a binary analysis report, protection mechanism identification, or code pattern discovery is completed, you **MUST** trigger the local memory capture. 
-
-1. Save the final binary analysis report, protection findings, or code pattern summary as a Markdown file in the project directory.
-2. Invoke the capture script: 
-   ```bash
-   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
-   ```
-3. This ensures that binary analysis results, protection mechanisms, and code patterns are automatically routed to the correct storage (OKF or ChromaDB).
 

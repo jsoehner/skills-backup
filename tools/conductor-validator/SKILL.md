@@ -1,78 +1,133 @@
 ---
+
 name: conductor-validator
+
 description: Validates Conductor project artifacts for completeness,
+
   consistency, and correctness. Use after setup, when diagnosing issues, or
+
   before implementation to verify project context.
+
 allowed-tools: Read Glob Grep Bash
+
 metadata:
+
   model: opus
+
   color: cyan
+
 ---
 
+
+
 # Check if conductor directory exists
+
 ls -la conductor/
 
+
+
 # Find all track directories
+
 ls -la conductor/tracks/
 
+
+
 # Check for required files
+
 ls conductor/index.md conductor/product.md conductor/tech-stack.md conductor/workflow.md conductor/tracks.md
+
 ```
+
+
 
 ## Use this skill when
 
+
+
 - Working on check if conductor directory exists tasks or workflows
+
 - Needing guidance, best practices, or checklists for check if conductor directory exists
+
+
 
 ## Do not use this skill when
 
+
+
 - The task is unrelated to check if conductor directory exists
+
 - You need a different domain or tool outside this scope
+
+
 
 ## Instructions
 
+
+
 - Clarify goals, constraints, and required inputs.
+
 - Apply relevant best practices and validate outcomes.
+
 - Provide actionable steps and verification.
+
+
 
 ## Pattern Matching
 
+
+
 **Status markers in tracks.md:**
 
+
+
 ```
+
 - [ ] Track Name  # Not started
+
 - [~] Track Name  # In progress
+
 - [x] Track Name  # Complete
+
 ```
+
+
 
 **Task markers in plan.md:**
 
+
+
 ```
+
 - [ ] Task description  # Pending
+
 - [~] Task description  # In progress
+
 - [x] Task description  # Complete
+
 ```
+
+
 
 **Track ID pattern:**
 
+
+
 ```
+
 <type>_<name>_<YYYYMMDD>
+
 Example: feature_user_auth_20250115
+
 ```
+
+
 
 ## Anti-Patterns
 
+
+
 - NEVER skip clean-up routines (teardowns) to prevent test state leakage between runs.
+
 - NEVER assert on unstable UI selectors or variable network latencies without proper wait mechanisms.
 
 
-## 6) Memory Sync
-
-After completing a task, key decision, or report, you **MUST** trigger the local memory capture. 
-
-1. Save the final document, report, or summary as a Markdown file in the project directory.
-2. Invoke the capture script: 
-   `ash
-   python \capture_knowledge.py <file_path>
-   `
-3. This ensures that new requirements, technical standards, and findings are automatically routed to the correct storage (OKF or ChromaDB).

@@ -198,14 +198,4 @@ of the tasks.
 - NEVER use imperative CLI commands to create resources; always deploy DTS configs declaratively.
 - NEVER hardcode transfer schedules without verifying timezones and backfill implications.
 
-## 6) Memory Sync
-
-After a BigQuery Data Transfer Service (DTS) configuration is discovered, provisioned, or a manual run is monitored, you **MUST** trigger the local memory capture. 
-
-1. Save the final DTS configuration, discovery parameters, or transfer run status as a Markdown file in the project directory.
-2. Invoke the capture script: 
-   ```bash
-   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
-   ```
-3. This ensures that DTS configurations, ingestion parameters, and transfer run results are automatically routed to the correct storage (OKF or ChromaDB).
 

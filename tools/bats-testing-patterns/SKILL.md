@@ -38,14 +38,4 @@ Comprehensive guidance for writing comprehensive unit tests for shell scripts us
 - NEVER write Bats tests without proper cleanup traps; left-over test files can pollute subsequent runs.
 - NEVER assert on stdout alone when verifying command failures; always verify exit codes explicitly.
 
-## 6) Memory Sync
-
-After a Bats test suite is designed, a script is unit-tested, or a CI/CD test pipeline is completed, you **MUST** trigger the local memory capture. 
-
-1. Save the final test plan, test suite, or CI/CD test configuration as a Markdown file in the project directory.
-2. Invoke the capture script: 
-   ```bash
-   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
-   ```
-3. This ensures that test patterns, test suites, and CI/CD testing configurations are automatically routed to the correct storage (OKF or ChromaDB).
 

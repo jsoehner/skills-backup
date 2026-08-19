@@ -133,13 +133,4 @@ This is a self-contained skill. Do NOT load external files or reference director
 
 Write the final markdown into the handoff file only—do not echo it in chat. (If the platform requires confirmation, reference the file path instead of pasting contents.)
 
-## 6) Memory Sync
 
-After a backend feature is planned, developed, tested, or deployed, you **MUST** trigger the local memory capture. 
-
-1. Save the final feature specification, architecture design, test results, or deployment report as a Markdown file in the project directory.
-2. Invoke the capture script: 
-   ```bash
-   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
-   ```
-3. This ensures that feature specifications, architectural designs, test results, and deployment reports are automatically routed to the correct storage (OKF or ChromaDB).

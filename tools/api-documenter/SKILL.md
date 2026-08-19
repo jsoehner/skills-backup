@@ -188,14 +188,4 @@ Expert API documentation specialist focusing on creating world-class developer e
 - NEVER write API descriptions that simply repeat the parameter name (e.g., "id: The ID"). Explain the format, constraints, and source.
 - NEVER publish an OpenAPI spec without including complete, valid JSON payload examples for both requests and responses.
 
-## 6) Memory Sync
-
-After an API specification, documentation review, or developer portal design is completed, you **MUST** trigger the local memory capture. 
-
-1. Save the final API specification, documentation plan, or portal design as a Markdown file in the project directory.
-2. Invoke the capture script: 
-   ```bash
-   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
-   ```
-3. This ensures that API specifications, documentation designs, and developer portal standards are automatically routed to the correct storage (OKF or ChromaDB).
 

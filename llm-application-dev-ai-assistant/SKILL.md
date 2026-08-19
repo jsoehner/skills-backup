@@ -41,13 +41,4 @@ $ARGUMENTS
 - NEVER deploy prompts or agent workflows without setting strict token budget constraints and safety guardrails.
 - NEVER trust LLM tool calls without validating and sanitizing the arguments before execution.
 
-## 6) Memory Sync
 
-After an AI assistant architecture, conversation flow, or tool-calling schema is designed, you **MUST** trigger the local memory capture. 
-
-1. Save the final assistant architecture, conversation flow, or tool-calling schema as a Markdown file in the project directory.
-2. Invoke the capture script: 
-   ```bash
-   python C:\\Users\\jsoehner\\memory_system\\capture_knowledge.py <file_path>
-   ```
-3. This ensures that new AI assistant designs, conversation standards, and tool-calling patterns are automatically routed to the correct storage (OKF or ChromaDB).

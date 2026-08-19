@@ -93,8 +93,4 @@ When drafting outreach, follow the **Hook-Problem-Value-CTA** sequence:
 
 ---
 
-## 6) Memory Sync
 
-After a lead research summary, target account list, or ICP definition is completed, you **MUST** trigger the local memory capture. 
-
-1. Save the final lead research report, account list, or ICP definition as a Markdown file in the project directory.\n2. Invoke the capture script: \n   ```bash\n   python C:\\Users\\jsoehner\\memory_system\\capture_knowledge.py <file_path>\n   ```\n3. This ensures that new target accounts, intent signals, and ICP definitions are automatically routed to the correct storage (OKF or ChromaDB).

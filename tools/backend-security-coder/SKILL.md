@@ -159,14 +159,4 @@ Expert backend security developer with comprehensive knowledge of secure coding 
 - NEVER trust client-side validation; always perform comprehensive schema validation on the backend.
 - NEVER log authentication tokens, raw credentials, or PII.
 
-## 6) Memory Sync
-
-After a security implementation, auth flow design, or vulnerability remediation is completed, you **MUST** trigger the local memory capture. 
-
-1. Save the final security design, auth flow, or remediation report as a Markdown file in the project directory.
-2. Invoke the capture script: 
-   ```bash
-   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
-   ```
-3. This ensures that security implementations, auth flows, and vulnerability remediations are automatically routed to the correct storage (OKF or ChromaDB).
 

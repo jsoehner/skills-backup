@@ -81,13 +81,4 @@ Check if the decision impacts any of the following criteria:
   2. Perform a lightweight risk analysis (impact vs. likelihood of failure).
   3. Default to creating a lightweight ADR (e.g., MADR format) if the team remains undecided.
 
-## 6) Memory Sync
 
-After an architectural significance evaluation or a decision to create/update an ADR is made, you **MUST** trigger the local memory capture. 
-
-1. Save the final ADR evaluation report or the recommendation summary as a Markdown file in the project directory.
-2. Invoke the capture script: 
-   ```bash
-   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
-   ```
-3. This ensures that architectural discovery notes and decision triggers are automatically routed to the correct storage (OKF or ChromaDB).

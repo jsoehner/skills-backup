@@ -82,8 +82,4 @@ Guidelines and best practices for querying property graphs in BigQuery.
 - NEVER run SELECT * queries on large tables; prune columns to control query costs.
 - NEVER perform cross-region queries without verifying dataset location parameters.
 
-## 6) Memory Sync
 
-After a BigQuery query optimization, ML model definition, or graph analytics plan is completed, you **MUST** trigger the local memory capture. 
-
-1. Save the final query plan, ML model definition, or graph schema as a Markdown file in the project directory.\n2. Invoke the capture script: \n   ```bash\n   python C:\\Users\\jsoehner\\memory_system\\capture_knowledge.py <file_path>\n   ```\n3. This ensures that new SQL patterns, ML model definitions, and graph schemas are automatically routed to the correct storage (OKF or ChromaDB).

@@ -64,8 +64,4 @@ Expert in threat modeling methodologies, security architecture review, and risk 
 - NEVER leak credentials, private keys, or API tokens in code repositories or application logs.
 - NEVER trust client-side inputs without performing strict server-side validation.
 
-## 6) Memory Sync
 
-After a threat model, attack tree, or risk assessment is completed, you **MUST** trigger the local memory capture. 
-
-1. Save the final threat model, attack tree, or risk assessment as a Markdown file in the project directory.\n2. Invoke the capture script: \n   ```bash\n   python C:\\Users\\jsoehner\\memory_system\\capture_knowledge.py <file_path>\n   ```\n3. This ensures that new threat models, attack paths, and security requirements are automatically routed to the correct storage (OKF or ChromaDB).

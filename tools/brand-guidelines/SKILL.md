@@ -72,13 +72,4 @@ graph TD
 | **NEVER use rounded corners greater than 8px (rounded-lg)** | Gives UI cards an amateur, overly bubbly, generic SaaS look. | Anthropic's style prefers sharp or subtly rounded (2px-6px) corners to maintain architectural stability. |
 | **NEVER overload the canvas with multiple accent colors at once** | Dilutes call-to-actions and causes visual confusion. | Accents are functional highlights, not decorative paint. Use one accent per visual module. |
 
-## 6) Memory Sync
 
-After a brand-guided design, visual identity specification, or style guide update is completed, you **MUST** trigger the local memory capture. 
-
-1. Save the final brand guidelines, style sheet, or design system specs as a Markdown file in the project directory.
-2. Invoke the capture script: 
-   ```bash
-   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
-   ```
-3. This ensures that brand guidelines, typographic scales, and color systems are automatically routed to the correct storage (OKF or ChromaDB).
