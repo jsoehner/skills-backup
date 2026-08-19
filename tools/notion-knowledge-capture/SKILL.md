@@ -163,3 +163,15 @@ Is the knowledge a sequence of actionable steps?
 3. **Notion API Block Limit Exceeded**:
    - *Scenario*: Page content is very long, leading to request timeouts or size limit errors.
    - *Fallback*: Split the content. Create a parent index page, then create child pages for each sub-topic, linking them bidirectionally.
+
+
+## 6) Memory Sync
+
+After completing a task, key decision, or report, you **MUST** trigger the local memory capture. 
+
+1. Save the final document, report, or summary as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   `ash
+   python \capture_knowledge.py <file_path>
+   `
+3. This ensures that new requirements, technical standards, and findings are automatically routed to the correct storage (OKF or ChromaDB).

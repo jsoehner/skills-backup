@@ -113,3 +113,15 @@ Analyze the copy hooks and group them into:
 * **Issue: Target competitor has hidden/private ads**
   * *Cause*: Platform privacy limits or account closures.
   * *Fallback*: Query secondary platforms (e.g., check Twitter/X posts, LinkedIn posts, or Google search ads) to rebuild the competitor's visual footprint.
+
+
+## 6) Memory Sync
+
+After completing a task, key decision, or report, you **MUST** trigger the local memory capture. 
+
+1. Save the final document, report, or summary as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   `ash
+   python \capture_knowledge.py <file_path>
+   `
+3. This ensures that new requirements, technical standards, and findings are automatically routed to the correct storage (OKF or ChromaDB).

@@ -432,3 +432,15 @@ If the user drops a video and asks for an edit, the output:
 8. Uses **hyperframes** for the visual composition (real CSS backdrop-filter, GSAP springy easing, Hollywood-grade animation).
 
 Get those right and you've delivered. Anything else is polish.
+
+
+## 6) Memory Sync
+
+After completing a task, key decision, or report, you **MUST** trigger the local memory capture. 
+
+1. Save the final document, report, or summary as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   `ash
+   python \capture_knowledge.py <file_path>
+   `
+3. This ensures that new requirements, technical standards, and findings are automatically routed to the correct storage (OKF or ChromaDB).

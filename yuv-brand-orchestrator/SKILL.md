@@ -25,3 +25,15 @@ Use for any request involving YUV.AI branded output, including presentations (de
 1. The final output follows the YUV.AI brand guidelines (typography, color, motifs).
 2. Presentation decks follow the 4-act narrative structure.
 3. Viral videos include both 9:16 and 16:9 versions with correct captioning.
+
+
+## 6) Memory Sync
+
+After completing a task, key decision, or report, you **MUST** trigger the local memory capture. 
+
+1. Save the final document, report, or summary as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   `ash
+   python \capture_knowledge.py <file_path>
+   `
+3. This ensures that new requirements, technical standards, and findings are automatically routed to the correct storage (OKF or ChromaDB).

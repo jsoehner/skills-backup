@@ -74,3 +74,14 @@ This moves the changes back to unstaged while preserving your code edits.
 - **MANDATORY**: If staging a complex feature with multi-paragraph messages, you **MUST** read [commit-message-template.md](references/commit-message-template.md) for layout guidelines.
 - **Do NOT load** external commit guidelines if creating standard short bugfix messages.
 
+
+## 6) Memory Sync
+
+After completing a task, key decision, or report, you **MUST** trigger the local memory capture. 
+
+1. Save the final document, report, or summary as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   `ash
+   python \capture_knowledge.py <file_path>
+   `
+3. This ensures that new requirements, technical standards, and findings are automatically routed to the correct storage (OKF or ChromaDB).

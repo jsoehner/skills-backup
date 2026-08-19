@@ -110,3 +110,15 @@ Check Markdown syntax. Add emoji headers. Output the changes structured by date 
 * **Issue: Version tag missing**
   * *Cause*: Repository does not leverage SemVer git tagging.
   * *Fallback*: Default to date range tracking (e.g., last 7 days or last 30 days) based on commit timestamps.
+
+
+## 6) Memory Sync
+
+After completing a task, key decision, or report, you **MUST** trigger the local memory capture. 
+
+1. Save the final document, report, or summary as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   `ash
+   python \capture_knowledge.py <file_path>
+   `
+3. This ensures that new requirements, technical standards, and findings are automatically routed to the correct storage (OKF or ChromaDB).

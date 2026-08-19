@@ -492,3 +492,15 @@ python scripts/sync_qms_evidence.py --input docs/adr/ --target qms
 - NEVER modify historical context of an approved decision; always supersede with a new record.
 - NEVER omit the Risk Assessment or Regulatory Control Mapping sections in a RADR.
 - NEVER leave approval matrices unassigned for safety-critical software choices.
+
+
+## 6) Memory Sync
+
+After completing a task, key decision, or report, you **MUST** trigger the local memory capture. 
+
+1. Save the final document, report, or summary as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   `ash
+   python \capture_knowledge.py <file_path>
+   `
+3. This ensures that new requirements, technical standards, and findings are automatically routed to the correct storage (OKF or ChromaDB).

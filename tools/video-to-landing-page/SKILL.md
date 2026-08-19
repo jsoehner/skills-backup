@@ -81,3 +81,14 @@ Final path: `~/Documents/yuv-projects/landings/<slug>/`. Tell the user where the
 1. **Local CORS warnings**: Opening the final `index.html` via the `file://` protocol in a browser will fail due to canvas CORS taint errors. Always use `python -m http.server` as instructed in Step 7.
 2. **Disk space validation**: Extracting 160 frames at HD resolutions can exceed 40MB. Verify target disk space availability prior to launching the build script.
 
+
+## 6) Memory Sync
+
+After completing a task, key decision, or report, you **MUST** trigger the local memory capture. 
+
+1. Save the final document, report, or summary as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   `ash
+   python \capture_knowledge.py <file_path>
+   `
+3. This ensures that new requirements, technical standards, and findings are automatically routed to the correct storage (OKF or ChromaDB).

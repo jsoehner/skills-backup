@@ -477,3 +477,15 @@ When unsure how to implement a pattern described in this skill, **read the corre
 Every layer of polish — voice, story, visual, motion — exists to make the audience feel they're on a journey, that the lessons are theirs to take, and that the speaker respects their time and intelligence.
 
 If a slide doesn't pass the "would this drop an aha-token in the audience's mind" test, cut or rewrite it. Hollywood, not corporate. Story, not summary. Flight, not boxes.
+
+
+## 6) Memory Sync
+
+After completing a task, key decision, or report, you **MUST** trigger the local memory capture. 
+
+1. Save the final document, report, or summary as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   `ash
+   python \capture_knowledge.py <file_path>
+   `
+3. This ensures that new requirements, technical standards, and findings are automatically routed to the correct storage (OKF or ChromaDB).

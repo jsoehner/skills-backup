@@ -120,3 +120,15 @@ How complex is the target feature set?
 3. **Notion Search Fails to Find Task Database**:
    - *Scenario*: Searching for "Tasks" or "Jira" returns no database results.
    - *Fallback*: Create the Implementation Plan as a standalone page. Add a bulleted Markdown checklist representing the tasks inside the plan body, and request the user to link it to their tracking system manually.
+
+
+## 6) Memory Sync
+
+After completing a task, key decision, or report, you **MUST** trigger the local memory capture. 
+
+1. Save the final document, report, or summary as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   `ash
+   python \capture_knowledge.py <file_path>
+   `
+3. This ensures that new requirements, technical standards, and findings are automatically routed to the correct storage (OKF or ChromaDB).

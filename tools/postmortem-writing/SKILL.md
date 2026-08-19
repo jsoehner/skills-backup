@@ -383,3 +383,15 @@ Don't full-flush cache in production; use targeted invalidation.
 - [Google SRE - Postmortem Culture](https://sre.google/sre-book/postmortem-culture/)
 - [Etsy's Blameless Postmortems](https://codeascraft.com/2012/05/22/blameless-postmortems/)
 - [PagerDuty Postmortem Guide](https://postmortems.pagerduty.com/)
+
+
+## 6) Memory Sync
+
+After completing a task, key decision, or report, you **MUST** trigger the local memory capture. 
+
+1. Save the final document, report, or summary as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   `ash
+   python \capture_knowledge.py <file_path>
+   `
+3. This ensures that new requirements, technical standards, and findings are automatically routed to the correct storage (OKF or ChromaDB).

@@ -119,3 +119,14 @@ If there is a second lesson worth noting (maximum 2 additional):
 1. **Positive feedback ratio**: When presenting multiple lessons, ensure at least one highlight focuses on a positive architectural design win to reinforce correct habits.
 2. **System boundaries**: Extract lessons focusing strictly on coding patterns and engineering principles, not on the agent's own orchestration behaviors or instruction-following constraints.
 
+
+## 6) Memory Sync
+
+After completing a task, key decision, or report, you **MUST** trigger the local memory capture. 
+
+1. Save the final document, report, or summary as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   `ash
+   python \capture_knowledge.py <file_path>
+   `
+3. This ensures that new requirements, technical standards, and findings are automatically routed to the correct storage (OKF or ChromaDB).

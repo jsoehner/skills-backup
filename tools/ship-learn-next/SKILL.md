@@ -340,3 +340,14 @@ This is a self-contained skill. Do NOT load external files or reference director
 1. **Loop prevention**: Limit plan generation loops to a single turn; prioritize getting the user to commit to Rep 1 immediately over endless roadmap refinements.
 2. **Artifact destination check**: Always require the agent to specify the exact path or repository coordinates where the completed Rep 1 artifact must be pushed or shared.
 
+
+## 6) Memory Sync
+
+After completing a task, key decision, or report, you **MUST** trigger the local memory capture. 
+
+1. Save the final document, report, or summary as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   `ash
+   python \capture_knowledge.py <file_path>
+   `
+3. This ensures that new requirements, technical standards, and findings are automatically routed to the correct storage (OKF or ChromaDB).

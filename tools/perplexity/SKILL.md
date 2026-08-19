@@ -139,3 +139,14 @@ This is a self-contained skill. Do NOT load external files or reference director
 1. **Query simplification**: Strip conversational filler expressions (such as "please find me the latest information about...") from input query strings to reduce search parsing costs.
 2. **Endpoint time out**: If Perplexity tools fail or time out, fallback to local workspace index checks before running external web queries.
 
+
+## 6) Memory Sync
+
+After completing a task, key decision, or report, you **MUST** trigger the local memory capture. 
+
+1. Save the final document, report, or summary as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   `ash
+   python \capture_knowledge.py <file_path>
+   `
+3. This ensures that new requirements, technical standards, and findings are automatically routed to the correct storage (OKF or ChromaDB).

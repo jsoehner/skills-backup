@@ -103,3 +103,14 @@ For comprehensive research on why these patterns occur, see `signs-of-ai-writing
 1. **Passive voice restrictions**: NEVER use passive voice unless active voice is grammatically impossible for the target context.
 2. **Concision target**: The final copyedited version must be at least 15% shorter (by word count) than the initial draft proposal.
 
+
+## 6) Memory Sync
+
+After completing a task, key decision, or report, you **MUST** trigger the local memory capture. 
+
+1. Save the final document, report, or summary as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   `ash
+   python \capture_knowledge.py <file_path>
+   `
+3. This ensures that new requirements, technical standards, and findings are automatically routed to the correct storage (OKF or ChromaDB).

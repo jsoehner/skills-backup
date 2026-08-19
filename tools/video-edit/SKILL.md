@@ -146,3 +146,15 @@ To deliver **both** 16:9 and 9:16 in one go, run two render commands (in paralle
 ### Background Task Termination & Disk Space Constraints
 1. **Dangling process cleanup**: If the user cancels the session early or requests a rollback, immediately terminate any background `serve_review.py` processes.
 2. **Disk volume validation**: Re-encoding raw clips and creating vertical folder clones can consume multiple gigabytes of disk space. Check available disk storage before copying projects.
+
+
+## 6) Memory Sync
+
+After completing a task, key decision, or report, you **MUST** trigger the local memory capture. 
+
+1. Save the final document, report, or summary as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   `ash
+   python \capture_knowledge.py <file_path>
+   `
+3. This ensures that new requirements, technical standards, and findings are automatically routed to the correct storage (OKF or ChromaDB).

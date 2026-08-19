@@ -209,3 +209,14 @@ References:
 1. **JQL search limits**: To prevent context overflow, always append a limit parameter (e.g., `--limit 10` in CLI, or query size limits in MCP) when performing searches.
 2. **Temporary description files**: In CLI mode, multi-line descriptions require writing to a file in `/tmp`. Always delete these temporary files once the ticket creation command completes.
 
+
+## 6) Memory Sync
+
+After completing a task, key decision, or report, you **MUST** trigger the local memory capture. 
+
+1. Save the final document, report, or summary as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   `ash
+   python \capture_knowledge.py <file_path>
+   `
+3. This ensures that new requirements, technical standards, and findings are automatically routed to the correct storage (OKF or ChromaDB).

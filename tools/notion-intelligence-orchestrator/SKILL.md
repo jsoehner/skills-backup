@@ -25,3 +25,15 @@ Use for any task involving Notion: capturing team decisions (ADRs), extracting i
 1. The resulting Notion page/database entry is correctly categorized and tagged.
 2. Task lists generated from specs are logically ordered and include clear acceptance criteria.
 3. Research reports include synthesis and actionable insights, not just raw data.
+
+
+## 6) Memory Sync
+
+After completing a task, key decision, or report, you **MUST** trigger the local memory capture. 
+
+1. Save the final document, report, or summary as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   `ash
+   python \capture_knowledge.py <file_path>
+   `
+3. This ensures that new requirements, technical standards, and findings are automatically routed to the correct storage (OKF or ChromaDB).

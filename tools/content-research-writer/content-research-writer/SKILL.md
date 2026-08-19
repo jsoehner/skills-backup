@@ -124,3 +124,15 @@ Before drafting or proposing changes, ask yourself:
 ### Flow Breakdown
 *   *Scenario*: The transition between two major sections feels jarring or disconnected.
 *   *Fallback*: Identify the logical gap. Create a "bridge" sentence or short paragraph at the end of the first section or the beginning of the second that explicitly links the two concepts together.
+
+
+## 6) Memory Sync
+
+After completing a task, key decision, or report, you **MUST** trigger the local memory capture. 
+
+1. Save the final document, report, or summary as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   `ash
+   python \capture_knowledge.py <file_path>
+   `
+3. This ensures that new requirements, technical standards, and findings are automatically routed to the correct storage (OKF or ChromaDB).

@@ -100,3 +100,15 @@ To ensure your MCP tools are discoverable and work as intended:
 ### 2. Transport Protocol Mismatch
 * **Failure**: Stdio streams polluted by server print statements or warnings.
 * **Fallback**: Standard logging (`print()`, `console.log()`) breaks MCP stdio communication. Convert all server-side logging statements to standard error streams (`sys.stderr` in Python, `console.error` in Node.js).
+
+
+## 6) Memory Sync
+
+After completing a task, key decision, or report, you **MUST** trigger the local memory capture. 
+
+1. Save the final document, report, or summary as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   `ash
+   python \capture_knowledge.py <file_path>
+   `
+3. This ensures that new requirements, technical standards, and findings are automatically routed to the correct storage (OKF or ChromaDB).

@@ -199,3 +199,14 @@ These are baked into the reference and break the experience if violated:
 1. **CORS local errors**: Always verify that the user starts a local HTTP server (`python -m http.server 8000`) instead of loading via `file://`, otherwise browser engines will taint the canvas elements.
 2. **Disk space check**: Proactively verify available disk space before starting video extraction; 241 frames at native resolution can consume up to 60MB.
 
+
+## 6) Memory Sync
+
+After completing a task, key decision, or report, you **MUST** trigger the local memory capture. 
+
+1. Save the final document, report, or summary as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   `ash
+   python \capture_knowledge.py <file_path>
+   `
+3. This ensures that new requirements, technical standards, and findings are automatically routed to the correct storage (OKF or ChromaDB).

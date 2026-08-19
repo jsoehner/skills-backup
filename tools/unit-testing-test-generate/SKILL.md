@@ -322,3 +322,15 @@ Focus on generating maintainable, comprehensive tests that catch bugs early and 
 
 - NEVER skip clean-up routines (teardowns) to prevent test state leakage between runs.
 - NEVER assert on unstable UI selectors or variable network latencies without proper wait mechanisms.
+
+
+## 6) Memory Sync
+
+After completing a task, key decision, or report, you **MUST** trigger the local memory capture. 
+
+1. Save the final document, report, or summary as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   `ash
+   python \capture_knowledge.py <file_path>
+   `
+3. This ensures that new requirements, technical standards, and findings are automatically routed to the correct storage (OKF or ChromaDB).

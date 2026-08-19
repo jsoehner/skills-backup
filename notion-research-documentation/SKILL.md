@@ -128,3 +128,15 @@ What is the target reader's goal?
 3. **Database Destination Missing / Access Denied**:
    - *Scenario*: Unable to save the research page to a specific database parent.
    - *Fallback*: Create the research report as a standalone page in the workspace root, email/notify the user with the page link, and ask them to move it into the correct database.
+
+
+## 6) Memory Sync
+
+After completing a task, key decision, or report, you **MUST** trigger the local memory capture. 
+
+1. Save the final document, report, or summary as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   `ash
+   python \capture_knowledge.py <file_path>
+   `
+3. This ensures that new requirements, technical standards, and findings are automatically routed to the correct storage (OKF or ChromaDB).

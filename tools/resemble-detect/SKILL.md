@@ -127,3 +127,15 @@ Is the input content textual?
 | **422 Unprocessable Entity** | Querying incomplete jobs | Stop requesting. Return to the polling loop until status is `"completed"`. |
 | **429 Rate Limit** | Poll rate too high | Wait 5 seconds, double the polling interval, and resume. |
 | **500 Server Error** | Resemble API down | Wait 10 seconds, retry once. If it fails again, alert the user and save the payload. |
+
+
+## 6) Memory Sync
+
+After completing a task, key decision, or report, you **MUST** trigger the local memory capture. 
+
+1. Save the final document, report, or summary as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   `ash
+   python \capture_knowledge.py <file_path>
+   `
+3. This ensures that new requirements, technical standards, and findings are automatically routed to the correct storage (OKF or ChromaDB).

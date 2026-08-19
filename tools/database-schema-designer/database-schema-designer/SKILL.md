@@ -702,3 +702,15 @@ results = db.query("""
 2. **Advanced Patterns:** Time-series, event sourcing, CQRS, multi-tenancy
 3. **ORM Integration:** TypeORM, Prisma, SQLAlchemy patterns
 4. **Monitoring:** Query performance tracking, slow query alerts
+
+
+## 6) Memory Sync
+
+After completing a task, key decision, or report, you **MUST** trigger the local memory capture. 
+
+1. Save the final document, report, or summary as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   `ash
+   python \capture_knowledge.py <file_path>
+   `
+3. This ensures that new requirements, technical standards, and findings are automatically routed to the correct storage (OKF or ChromaDB).

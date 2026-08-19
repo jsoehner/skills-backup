@@ -347,3 +347,15 @@ Generate contextual memes to:
 - Before creating textual memes or markdown formats, you **MUST** read [markdown-memes-guide.md](references/markdown-memes-guide.md) fully.
 - Before executing scripting pipelines, you **MUST** load the helper variables from [examples.md](references/examples.md).
 - **Do NOT load** API reference documentation blocks unless troubleshooting server error responses.
+
+
+## 6) Memory Sync
+
+After completing a task, key decision, or report, you **MUST** trigger the local memory capture. 
+
+1. Save the final document, report, or summary as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   `ash
+   python \capture_knowledge.py <file_path>
+   `
+3. This ensures that new requirements, technical standards, and findings are automatically routed to the correct storage (OKF or ChromaDB).

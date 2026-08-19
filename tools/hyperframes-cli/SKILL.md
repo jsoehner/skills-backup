@@ -127,3 +127,14 @@ Per-frame red flags (each maps to a specific failure mode the static gates miss)
 1. **AWS profile validation**: Prior to provisioning Step Functions via `lambda deploy`, verify that target shell environments have correct `AWS_PROFILE` or `AWS_ACCESS_KEY_ID` variables exported.
 2. **Chrome browser freeze**: If `snapshot` or `validate` command execution blocks or runs indefinitely, terminate active background browser loops by running `npx hyperframes doctor`.
 
+
+## 6) Memory Sync
+
+After completing a task, key decision, or report, you **MUST** trigger the local memory capture. 
+
+1. Save the final document, report, or summary as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   `ash
+   python \capture_knowledge.py <file_path>
+   `
+3. This ensures that new requirements, technical standards, and findings are automatically routed to the correct storage (OKF or ChromaDB).

@@ -24,3 +24,15 @@ Use for generating technical documentation, office file creation (PDF, DOCX, PPT
 1. Technical documentation is clear, accurate, and follows the correct format.
 2. Office documents are correctly formatted and contain all required data.
 3. SEO content is optimized for both search engines and human users.
+
+
+## 6) Memory Sync
+
+After completing a task, key decision, or report, you **MUST** trigger the local memory capture. 
+
+1. Save the final document, report, or summary as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   `ash
+   python \capture_knowledge.py <file_path>
+   `
+3. This ensures that new requirements, technical standards, and findings are automatically routed to the correct storage (OKF or ChromaDB).

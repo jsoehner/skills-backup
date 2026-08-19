@@ -89,3 +89,15 @@ Every README needs at minimum:
 - Once the user confirms the project type, you **MUST** read the corresponding template file, such as `templates/internal.md` or `templates/oss.md`.
 - Before editing or formatting, you **MUST** read [style-guide.md](references/style-guide.md) to inspect common phrasing errors.
 - **Do NOT load** external templates or references for simple config README files.
+
+
+## 6) Memory Sync
+
+After completing a task, key decision, or report, you **MUST** trigger the local memory capture. 
+
+1. Save the final document, report, or summary as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   `ash
+   python \capture_knowledge.py <file_path>
+   `
+3. This ensures that new requirements, technical standards, and findings are automatically routed to the correct storage (OKF or ChromaDB).
