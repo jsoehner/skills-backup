@@ -158,7 +158,7 @@ After the content is successfully published to Notion, you **MUST** save a copy 
 
 
 
-1. Create a Markdown file in `C:\Users\jsoehner\memory_system\inbox\` named `notion_capture_[timestamp].md`.
+1. Create a Markdown file in `\inbox\` named `notion_capture_[timestamp].md`.
 
 2. Include the final content and a "Source" section with the Notion URL.
 

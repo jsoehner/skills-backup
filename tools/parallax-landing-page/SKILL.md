@@ -148,11 +148,11 @@ Example:
 
 ```bash
 
-python C:/Users/User/.claude/skills/parallax-landing-page/scripts/extract_frames.py \
+python <skills_dir>/parallax-landing-page/scripts/extract_frames.py \
 
-    C:/Users/User/Documents/parasites/hope/hope.mp4 \
+    <user_documents>/parasites/hope/hope.mp4 \
 
-    C:/Users/User/Documents/parasites/hope
+    <user_documents>/parasites/hope
 
 ```
 

@@ -12,13 +12,13 @@ Use this skill whenever you synthesize key findings, architecture decisions, cod
 Before using memory storage for the first time on a new system or harness, initialize the required directories and ChromaDB persistent collection:
 
 ```bash
-python C:\Users\jsoehner\memory_system\init_storage.py
+python /init_storage.py
 ```
 
 This will automatically create:
-- **ChromaDB Storage**: `C:\Users\jsoehner\memory_system\db`
-- **OKF Storage**: `C:\Users\jsoehner\memory_system\knowledge\okf`
-- **Inbox Directories**: `C:\Users\jsoehner\memory_system\inbox\` (`processed/`, `error/`)
+- **ChromaDB Storage**: `\db`
+- **OKF Storage**: `\knowledge\okf`
+- **Inbox Directories**: `\inbox\` (`processed/`, `error/`)
 
 ---
 
@@ -29,7 +29,7 @@ This will automatically create:
 When completing a task or documenting a decision:
 
 1. **Format the Output**:
-   Write the knowledge summary into a temporary file or directly into `C:\Users\jsoehner\memory_system\inbox\<filename>.md`.
+   Write the knowledge summary into a temporary file or directly into `\inbox\<filename>.md`.
 
 2. **Specify Classification Hint (Optional Header)**:
    Add a header at the top of the file to guide routing if necessary:
@@ -49,16 +49,16 @@ When completing a task or documenting a decision:
 3. **Trigger Processing**:
    Run the capture command directly from the shell:
    ```bash
-   python C:\Users\jsoehner\memory_system\capture_knowledge.py <path_to_file>
+   python /capture_knowledge.py <path_to_file>
    ```
-   Or place the file into `C:\Users\jsoehner\memory_system\inbox/` for automatic background processing.
+   Or place the file into `\inbox/` for automatic background processing.
 
 ### 2. Memory Retrieval Architecture (RAG Integration)
 
 When querying historical agent memory:
 
-- **OKF Direct Search (Rules & Policies)**: Perform keyword or regex search across `C:\Users\jsoehner\memory_system\knowledge\okf\*.md` for deterministic architectural policies and rules.
-- **Chroma Vector Retrieval (Troubleshooting & Context)**: Query the persistent ChromaDB collection at `C:\Users\jsoehner\memory_system\db` using semantic similarity search (chunk size: 500–1000 tokens, 150 token overlap).
+- **OKF Direct Search (Rules & Policies)**: Perform keyword or regex search across `\knowledge\okf\*.md` for deterministic architectural policies and rules.
+- **Chroma Vector Retrieval (Troubleshooting & Context)**: Query the persistent ChromaDB collection at `\db` using semantic similarity search (chunk size: 500–1000 tokens, 150 token overlap).
 - **Metadata Filtering**: Filter vector queries using `filter={"type": "Troubleshooting"}` or `filter={"type": "Policy"}` to isolate specific domain contexts.
 
 ## Classification Standard

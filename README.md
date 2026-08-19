@@ -55,7 +55,7 @@ To add a new skill:
 
 ## 📚 Skill Catalog
 
-This repository manages a total of **628** skills.
+This repository manages a total of **636** skills.
 
 ### 👤 Custom User Skills
 Click on a category to view the list of user-installed skills and their detailed descriptions:
@@ -64,9 +64,9 @@ Click on a category to view the list of user-installed skills and their detailed
 - [📄 Document & Media Processing](categories/document_media_processing.md) (6 skills)
 - [📓 Notion Integration](categories/notion_integration.md) (8 skills)
 - [🛠️ Development & Testing Tools](categories/development_testing.md) (12 skills)
-- [🔍 Research & Analysis](categories/research_analysis.md) (27 skills)
+- [🔍 Research & Analysis](categories/research_analysis.md) (30 skills)
 - [💬 Productivity & Communication](categories/productivity_comms.md) (6 skills)
-- [📦 Other User Skills](categories/other_user.md) (542 skills)
+- [📦 Other User Skills](categories/other_user.md) (547 skills)
 
 ### ⚙️ System Config Skills
 Click on a category to view the list of system-installed configuration skills and their detailed descriptions:

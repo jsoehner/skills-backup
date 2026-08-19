@@ -430,10 +430,10 @@ def evaluate_rag_system(qa_chain, test_cases):
 When implementing RAG for local AI agent workflows, ground retrieval using the standardized local memory infrastructure:
 
 - **Storage Locations**:
-  - **ChromaDB Vector Store**: `C:\Users\jsoehner\memory_system\db` (for vector embeddings, code snippets, logs)
-  - **OKF Document Store**: `C:\Users\jsoehner\memory_system\knowledge\okf` (for high-level source-of-truth rules and policies)
-  - **Inbox Ingestion**: `C:\Users\jsoehner\memory_system\inbox\`
-- **Ingestion Pipeline**: Run `python C:\Users\jsoehner\memory_system\capture_knowledge.py <file_path>` to automatically chunk, embed, and route document knowledge to the appropriate storage tier.
+  - **ChromaDB Vector Store**: `\db` (for vector embeddings, code snippets, logs)
+  - **OKF Document Store**: `\knowledge\okf` (for high-level source-of-truth rules and policies)
+  - **Inbox Ingestion**: `\inbox\`
+- **Ingestion Pipeline**: Run `python /capture_knowledge.py <file_path>` to automatically chunk, embed, and route document knowledge to the appropriate storage tier.
 
 ## 6) Memory Sync
 
