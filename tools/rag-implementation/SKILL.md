@@ -425,13 +425,24 @@ def evaluate_rag_system(qa_chain, test_cases):
 - NEVER deploy prompts or agent workflows without setting strict token budget constraints and safety guardrails.
 - NEVER trust LLM tool calls without validating and sanitizing the arguments before execution.
 
-## 6) Capture Knowledge
+## Local Persistent Memory Architecture Integration
 
-After implementing a RAG system, automatically trigger the `capture_knowledge.py` script.
-The script will analyze the RAG pipeline to identify:
-- Embedding model choices and chunking parameters.
-- Retrieval strategies used (e.g., Hybrid, Multi-Query, Reranking).
-- Vector store configurations and metadata filtering rules.
-The script will then route this information to the appropriate storage:
-- **OKF**: RAG architectural standards, chunking best practices, and retrieval strategies.
-- **ChromaDB**: Specific embedding models, vector store configs, and retrieval performance logs.
+When implementing RAG for local AI agent workflows, ground retrieval using the standardized local memory infrastructure:
+
+- **Storage Locations**:
+  - **ChromaDB Vector Store**: `C:\Users\jsoehner\memory_system\db` (for vector embeddings, code snippets, logs)
+  - **OKF Document Store**: `C:\Users\jsoehner\memory_system\knowledge\okf` (for high-level source-of-truth rules and policies)
+  - **Inbox Ingestion**: `C:\Users\jsoehner\memory_system\inbox\`
+- **Ingestion Pipeline**: Run `python C:\Users\jsoehner\memory_system\capture_knowledge.py <file_path>` to automatically chunk, embed, and route document knowledge to the appropriate storage tier.
+
+## 6) Memory Sync
+
+After completing a RAG architecture design, retrieval pipeline, or vector index tuning task, you **MUST** trigger the local memory capture. 
+
+1. Save the final RAG specification, retrieval configuration, or index evaluation report as a Markdown file in the project directory.
+2. Invoke the capture script: 
+   ```bash
+   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   ```
+3. This ensures that new requirements, technical standards, and findings are automatically routed to the correct storage (OKF or ChromaDB).
+
