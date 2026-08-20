@@ -342,10 +342,12 @@ if os.path.exists(readme_path):
     with open(readme_path, "r", encoding="utf-8") as f:
         original_content = f.read()
 
-# Cut off any existing catalog section
-cutoff_marker = "## 📚 Skill Catalog"
+# Cut off any existing generated sections (Memory RAG or Skill Catalog)
+cutoff_marker = "## 🧠 Local Memory RAG Architecture"
 if cutoff_marker in original_content:
     original_content = original_content.split(cutoff_marker)[0].strip()
+elif "## 📚 Skill Catalog" in original_content:
+    original_content = original_content.split("## 📚 Skill Catalog")[0].strip()
 
 new_content = original_content.strip() + "\n" + readme_addition
 
