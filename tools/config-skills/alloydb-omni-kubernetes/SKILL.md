@@ -644,7 +644,7 @@ After a cluster or instance is provisioned, or high-level configuration is retri
 1. Save the final infrastructure configuration, cluster details, or instance status as a Markdown file in the project directory.
 2. Invoke the capture script: 
    ```bash
-   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   python3 ~/memory_system/capture_knowledge.py <file_path>
    ```
 3. This ensures that infrastructure provisioning details and high-level configuration states are automatically routed to the correct storage (OKF or ChromaDB).
 

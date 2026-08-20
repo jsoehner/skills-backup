@@ -214,6 +214,6 @@ After a database exploration, schema audit, or SQL query execution is completed,
 1. Save the final database schema, audit findings, or query results as a Markdown file in the project directory.
 2. Invoke the capture script: 
    ```bash
-   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   python3 ~/memory_system/capture_knowledge.py <file_path>
    ```
 3. This ensures that database structures, schema objects, and query results are automatically routed to the correct storage (OKF or ChromaDB).

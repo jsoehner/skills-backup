@@ -48,7 +48,7 @@ After an architectural pattern selection, design blueprint, or refactoring plan 
 1. Save the final architecture blueprint, refactoring plan, or pattern selection as a Markdown file in the project directory.
 2. Invoke the capture script: 
    ```bash
-   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   python3 ~/memory_system/capture_knowledge.py <file_path>
    ```
 3. This ensures that architectural patterns, design blueprints, and refactoring plans are automatically routed to the correct storage (OKF or ChromaDB).
 

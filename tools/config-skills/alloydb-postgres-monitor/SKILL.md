@@ -238,7 +238,7 @@ After a database monitoring session, long-running transaction audit, or query pe
 1. Save the final monitoring report, transaction audit, or query performance analysis as a Markdown file in the project directory.
 2. Invoke the capture script: 
    ```bash
-   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   python3 ~/memory_system/capture_knowledge.py <file_path>
    ```
 3. This ensures that database performance metrics, long-running transaction insights, and query performance analyses are automatically routed to the correct storage (OKF or ChromaDB).
 

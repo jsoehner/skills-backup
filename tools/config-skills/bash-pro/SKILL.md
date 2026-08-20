@@ -322,7 +322,7 @@ After a defensive Bash script is designed, a production automation is planned, o
 1. Save the final script design, automation plan, or CI/CD configuration as a Markdown file in the project directory.
 2. Invoke the capture script: 
    ```bash
-   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   python3 ~/memory_system/capture_knowledge.py <file_path>
    ```
 3. This ensures that Bash scripts, automation plans, and CI/CD configurations are automatically routed to the correct storage (OKF or ChromaDB).
 

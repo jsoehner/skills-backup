@@ -48,6 +48,6 @@ After an AI assistant architecture, conversation flow, or tool-calling schema is
 1. Save the final assistant architecture, conversation flow, or tool-calling schema as a Markdown file in the project directory.
 2. Invoke the capture script: 
    ```bash
-   python C:\\Users\\jsoehner\\memory_system\\capture_knowledge.py <file_path>
+   python ~/memory_system/capture_knowledge.py <file_path>
    ```
 3. This ensures that new AI assistant designs, conversation standards, and tool-calling patterns are automatically routed to the correct storage (OKF or ChromaDB).

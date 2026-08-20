@@ -212,7 +212,7 @@ After a technical reference, API documentation, or configuration guide is comple
 1. Save the final documentation as a Markdown file in the project directory.
 2. Invoke the capture script: 
    ```bash
-   python C:\\Users\\jsoehner\\memory_system\\capture_knowledge.py <file_path>
+   python ~/memory_system/capture_knowledge.py <file_path>
    ```
 3. This ensures that new parameters, standards, and architectural rules are automatically routed to the correct storage (OKF or ChromaDB).
 ",path:

@@ -218,7 +218,7 @@ After a smart contract, DeFi protocol, or Web3 application design is completed, 
 1. Save the final smart contract, protocol design, or Web3 application architecture as a Markdown file in the project directory.
 2. Invoke the capture script: 
    ```bash
-   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   python3 ~/memory_system/capture_knowledge.py <file_path>
    ```
 3. This ensures that smart contracts, DeFi protocols, and Web3 designs are automatically routed to the correct storage (OKF or ChromaDB).
 

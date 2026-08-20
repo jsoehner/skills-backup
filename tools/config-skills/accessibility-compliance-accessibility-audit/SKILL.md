@@ -55,6 +55,6 @@ After a compliance audit, accessibility report, or audit plan is completed, you 
 1. Save the final audit report, accessibility plan, or compliance checklist as a Markdown file in the project directory.
 2. Invoke the capture script: 
    ```bash
-   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   python3 ~/memory_system/capture_knowledge.py <file_path>
    ```
 3. This ensures that new compliance requirements, accessibility standards, and audit findings are automatically routed to the correct storage (OKF or ChromaDB).

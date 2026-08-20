@@ -49,7 +49,7 @@ After an attack tree is constructed, a threat path analysis, or a defense gap id
 1. Save the final attack tree, threat path analysis, or defense gap report as a Markdown file in the project directory.
 2. Invoke the capture script: 
    ```bash
-   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   python3 ~/memory_system/capture_knowledge.py <file_path>
    ```
 3. This ensures that attack paths, defense priorities, and security risk visualizations are automatically routed to the correct storage (OKF or ChromaDB).
 

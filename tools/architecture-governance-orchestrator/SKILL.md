@@ -19,7 +19,7 @@ Use for architectural planning, decision recording (ADRs), C4 diagram generation
 
    Save the final ADR, RADR, or architectural decision as a Markdown file in the project directory and invoke the capture script: 
    ```bash
-   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   python3 ~/memory_system/capture_knowledge.py <file_path>
    ```
    This ensures that architectural decisions, compliance documentation, and formal records are automatically routed to the correct storage (OKF or ChromaDB).
 

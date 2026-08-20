@@ -49,7 +49,7 @@ After an API design, specification review, or standard establishment is complete
 1. Save the final API design, specification, or standards document as a Markdown file in the project directory.
 2. Invoke the capture script: 
    ```bash
-   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   python3 ~/memory_system/capture_knowledge.py <file_path>
    ```
 3. This ensures that API designs, specifications, and standards are automatically routed to the correct storage (OKF or ChromaDB).
 

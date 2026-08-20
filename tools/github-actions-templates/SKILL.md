@@ -342,5 +342,10 @@ jobs:
 
 After a GitHub Actions workflow is created or updated, automatically trigger the local memory capture. 
 
-1. Save the final workflow definition or pipeline map as a Markdown file in the project directory.\n2. Invoke the capture script: \n   ```bash\n   python C:\\Users\\jsoehner\\memory_system\\capture_knowledge.py <file_path>\n   ```\n3. This ensures that new CI/CD patterns, security pinning policies, and deployment rules are automatically routed to the correct storage (OKF or ChromaDB).
+1. Save the final workflow definition or pipeline map as a Markdown file in the project directory.
+2. Invoke the capture script:
+   ```bash
+   python ~/memory_system/capture_knowledge.py <file_path>
+   ```
+3. This ensures that new CI/CD patterns, security pinning policies, and deployment rules are automatically routed to the correct storage (OKF or ChromaDB).
 ",path:

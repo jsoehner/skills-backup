@@ -205,7 +205,7 @@ After a BigQuery Data Transfer Service (DTS) configuration is discovered, provis
 1. Save the final DTS configuration, discovery parameters, or transfer run status as a Markdown file in the project directory.
 2. Invoke the capture script: 
    ```bash
-   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   python3 ~/memory_system/capture_knowledge.py <file_path>
    ```
 3. This ensures that DTS configurations, ingestion parameters, and transfer run results are automatically routed to the correct storage (OKF or ChromaDB).
 

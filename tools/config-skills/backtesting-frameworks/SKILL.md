@@ -50,7 +50,7 @@ After a backtesting framework is designed, a strategy is validated, or a backtes
 1. Save the final backtest report, strategy validation, or framework design as a Markdown file in the project directory.
 2. Invoke the capture script: 
    ```bash
-   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   python3 ~/memory_system/capture_knowledge.py <file_path>
    ```
 3. This ensures that backtesting results, strategy validations, and framework designs are automatically routed to the correct storage (OKF or ChromaDB).
 

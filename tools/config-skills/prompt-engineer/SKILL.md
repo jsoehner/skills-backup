@@ -279,4 +279,9 @@ Remember: The best prompt is one that consistently produces the desired output w
 
 After a prompt system, agent workflow, or specialized prompt design is completed, you **MUST** trigger the local memory capture. 
 
-1. Save the final prompt, workflow definition, or design document as a Markdown file in the project directory.\n2. Invoke the capture script: \n   ```bash\n   python C:\\Users\\jsoehner\\memory_system\\capture_knowledge.py <file_path>\n   ```\n3. This ensures that new prompt patterns, agent behaviors, and system designs are automatically routed to the correct storage (OKF or ChromaDB).
+1. Save the final prompt, workflow definition, or design document as a Markdown file in the project directory.
+2. Invoke the capture script:
+   ```bash
+   python ~/memory_system/capture_knowledge.py <file_path>
+   ```
+3. This ensures that new prompt patterns, agent behaviors, and system designs are automatically routed to the correct storage (OKF or ChromaDB).

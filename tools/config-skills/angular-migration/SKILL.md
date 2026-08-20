@@ -440,7 +440,7 @@ After a migration milestone, a component conversion, or a module migration is co
 1. Save the migration progress report, component conversion list, or module status as a Markdown file in the project directory.
 2. Invoke the capture script: 
    ```bash
-   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   python3 ~/memory_system/capture_knowledge.py <file_path>
    ```
 3. This ensures that migration progress, converted components, and framework status are automatically routed to the correct storage (OKF or ChromaDB).
 

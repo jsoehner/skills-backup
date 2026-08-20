@@ -57,7 +57,7 @@ After a mock API design, contract definition, or scenario mapping is completed, 
 1. Save the final mock API specification, test scenarios, or response fixtures as a Markdown file in the project directory.
 2. Invoke the capture script: 
    ```bash
-   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   python3 ~/memory_system/capture_knowledge.py <file_path>
    ```
 3. This ensures that API mock definitions, test scenarios, and mock schemas are automatically routed to the correct storage (OKF or ChromaDB).
 

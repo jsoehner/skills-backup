@@ -50,7 +50,7 @@ After an auth system design, authorization policy mapping, or auth flow analysis
 1. Save the final auth design, policy mapping, or flow analysis as a Markdown file in the project directory.
 2. Invoke the capture script: 
    ```bash
-   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   python3 ~/memory_system/capture_knowledge.py <file_path>
    ```
 3. This ensures that auth architectures, policy models, and identity flow designs are automatically routed to the correct storage (OKF or ChromaDB).
 

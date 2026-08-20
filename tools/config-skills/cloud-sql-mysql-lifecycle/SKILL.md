@@ -224,6 +224,6 @@ After a backup creation, restoration, or instance cloning is completed, you **MU
 1. Save the final backup metadata, restoration logs, or cloning parameters as a Markdown file in the project directory.
 2. Invoke the capture script: 
    ```bash
-   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   python3 ~/memory_system/capture_knowledge.py <file_path>
    ```
 3. This ensures that backup schedules, restoration procedures, and instance cloning history are automatically routed to the correct storage (OKF or ChromaDB).

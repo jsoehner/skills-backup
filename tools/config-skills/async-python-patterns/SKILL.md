@@ -50,7 +50,7 @@ After an async system design, concurrent workload analysis, or non-blocking I/O 
 1. Save the final async architecture, concurrency plan, or I/O optimization report as a Markdown file in the project directory.
 2. Invoke the capture script: 
    ```bash
-   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   python3 ~/memory_system/capture_knowledge.py <file_path>
    ```
 3. This ensures that async patterns, concurrency strategies, and non-blocking I/O plans are automatically routed to the correct storage (OKF or ChromaDB).
 

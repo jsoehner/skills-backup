@@ -86,4 +86,9 @@ Guidelines and best practices for querying property graphs in BigQuery.
 
 After a BigQuery query optimization, ML model definition, or graph analytics plan is completed, you **MUST** trigger the local memory capture. 
 
-1. Save the final query plan, ML model definition, or graph schema as a Markdown file in the project directory.\n2. Invoke the capture script: \n   ```bash\n   python C:\\Users\\jsoehner\\memory_system\\capture_knowledge.py <file_path>\n   ```\n3. This ensures that new SQL patterns, ML model definitions, and graph schemas are automatically routed to the correct storage (OKF or ChromaDB).
+1. Save the final query plan, ML model definition, or graph schema as a Markdown file in the project directory.
+2. Invoke the capture script:
+   ```bash
+   python ~/memory_system/capture_knowledge.py <file_path>
+   ```
+3. This ensures that new SQL patterns, ML model definitions, and graph schemas are automatically routed to the correct storage (OKF or ChromaDB).

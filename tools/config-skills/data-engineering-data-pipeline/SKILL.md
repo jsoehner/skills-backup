@@ -209,4 +209,9 @@ ingester.save_dead_letter_queue('s3://lake/dlq/orders')
 
 After a data pipeline architecture, ELT/ETL flow, or data quality framework is completed, you **MUST** trigger the local memory capture. 
 
-1. Save the final architecture design, pipeline map, or data model as a Markdown file in the project directory.\n2. Invoke the capture script: \n   ```bash\n   python C:\\Users\\jsoehner\\memory_system\\capture_knowledge.py <file_path>\n   ```\n3. This ensures that new data models, pipeline designs, and data engineering standards are automatically routed to the correct storage (OKF or ChromaDB).
+1. Save the final architecture design, pipeline map, or data model as a Markdown file in the project directory.
+2. Invoke the capture script:
+   ```bash
+   python ~/memory_system/capture_knowledge.py <file_path>
+   ```
+3. This ensures that new data models, pipeline designs, and data engineering standards are automatically routed to the correct storage (OKF or ChromaDB).

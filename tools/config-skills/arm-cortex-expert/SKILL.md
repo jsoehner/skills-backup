@@ -317,7 +317,7 @@ After a firmware module, driver implementation, or hardware integration analysis
 1. Save the final driver code, hardware configuration, or integration report as a Markdown file in the project directory.
 2. Invoke the capture script: 
    ```bash
-   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   python3 ~/memory_system/capture_knowledge.py <file_path>
    ```
 3. This ensures that firmware drivers, hardware configurations, and integration insights are automatically routed to the correct storage (OKF or ChromaDB).
 

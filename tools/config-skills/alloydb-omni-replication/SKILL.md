@@ -94,7 +94,7 @@ After a replication health check, sync state audit, or publication table review 
 1. Save the final replication status, sync state summary, or publication audit as a Markdown file in the project directory.
 2. Invoke the capture script: 
    ```bash
-   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   python3 ~/memory_system/capture_knowledge.py <file_path>
    ```
 3. This ensures that replication health, sync states, and publication audit results are automatically routed to the correct storage (OKF or ChromaDB).
 
