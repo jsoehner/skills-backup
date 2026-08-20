@@ -86,44 +86,23 @@ Focus on actionable insights. Always provide direct quotes for important claims.
 
 ## 6) Capture Knowledge
 
-After a research synthesis or fact-checking task is completed, automatically trigger the `capture_knowledge.py` script.
-The script will analyze the research results to identify:
-- Key findings, source citations, and synthesized insights.
-- Identification of research gaps or contradictions.
-- Methodologies used for verification and cross-referencing.
-The script will then route this information to the appropriate storage:
-- **OKF**: High-level research standards, source reliability policies, and research methodologies.
-- **ChromaDB**: Specific research notes, synthesized insights, and source URLs.
 
 ## 6) Capture Knowledge
 
-After a research synthesis or fact-checking task is completed, automatically trigger the `capture_knowledge.py` script.
-The script will analyze the research results to identify:
-- Key findings, source citations, and synthesized insights.
-- Identification of research gaps or contradictions.
-- Methodologies used for verification and cross-referencing.
-The script will then route this information to the appropriate storage:
-- **OKF**: High-level research standards, source reliability policies, and research methodologies.
-- **ChromaDB**: Specific research notes, synthesized insights, and source URLs.
 
 ## 6) Capture Knowledge
 
-After a research synthesis or fact-checking task is completed, automatically trigger the `capture_knowledge.py` script.
-The script will analyze the research results to identify:
-- Key findings, source citations, and synthesized insights.
-- Identification of research gaps or contradictions.
-- Methodologies used for verification and cross-referencing.
-The script will then route this information to the appropriate storage:
-- **OKF**: High-level research standards, source reliability policies, and research methodologies.
-- **ChromaDB**: Specific research notes, synthesized insights, and source URLs.
 
 ## 6) Capture Knowledge
 
-After a research synthesis or fact-checking task is completed, automatically trigger the `capture_knowledge.py` script.
-The script will analyze the research results to identify:
-- Key findings, source citations, and synthesized insights.
-- Identification of research gaps or contradictions.
-- Methodologies used for verification and cross-referencing.
-The script will then route this information to the appropriate storage:
-- **OKF**: High-level research standards, source reliability policies, and research methodologies.
-- **ChromaDB**: Specific research notes, synthesized insights, and source URLs.
+
+## Memory Sync
+
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
+
+1. Save the final summary or artifact as a Markdown file in the project directory.
+2. Invoke the capture script:
+   ```bash
+   python3 ~/memory_system/capture_knowledge.py <file_path>
+   ```
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).

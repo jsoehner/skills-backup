@@ -245,21 +245,17 @@ This command pairs well with:
 
 ## 6) Capture Knowledge
 
-After the analysis or business case is finalized, automatically trigger the `capture_knowledge.py` script.
-The script will analyze the findings and identify:
-- Key market opportunities and "10x" opportunities.
-- High-level strategic decisions and "Hard Rules" for the business model.
-- Key financial targets and unit economics milestones.
-The script will then route this information to the appropriate storage:
-- **OKF**: High-level strategy, market sizing conclusions, and business model rules.
-- **ChromaDB**: Specific financial model scenarios, competitive analysis details, and detailed startup metrics.
+
 ## 6) Capture Knowledge
 
-After the analysis or business case is finalized, automatically trigger the `capture_knowledge.py` script.
-The script will analyze the findings and identify:
-- Key market opportunities and "10x" opportunities.
-- High-level strategic decisions and "Hard Rules" for the business model.
-- Key financial targets and unit economics milestones.
-The script will then route this information to the appropriate storage:
-- **OKF**: High-level strategy, market sizing conclusions, and business model rules.
-- **ChromaDB**: Specific financial model scenarios, competitive analysis details, and detailed startup metrics.
+
+## Memory Sync
+
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
+
+1. Save the final summary or artifact as a Markdown file in the project directory.
+2. Invoke the capture script:
+   ```bash
+   python3 ~/memory_system/capture_knowledge.py <file_path>
+   ```
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).

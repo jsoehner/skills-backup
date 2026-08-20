@@ -89,12 +89,14 @@ python3 -m venv .venv
 
 ## 6) Capture Knowledge
 
-After a new Python dependency is added or the project's dependency manager is configured, automatically trigger the `capture_knowledge.py` script.
-The script will analyze the dependency changes to identify:
-- New package additions and their purpose.
-- Dependency version updates or major version bumps.
-- New project-wide configuration in `pyproject.toml`, `Pipfile`, or `requirements.txt`.
-The script will then route this information to the appropriate storage:
-- **OKF**: High-level Python environment standards and dependency management rules.
-- **ChromaDB**: Specific package lists, version constraints, and dependency-related configurations.
-",path:
+
+## Memory Sync
+
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
+
+1. Save the final summary or artifact as a Markdown file in the project directory.
+2. Invoke the capture script:
+   ```bash
+   python3 ~/memory_system/capture_knowledge.py <file_path>
+   ```
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).

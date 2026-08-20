@@ -235,12 +235,14 @@ Focus on user-centered, accessible design solutions with comprehensive documenta
 
 ## 6) Capture Knowledge
 
-After the design system or interface designs are finalized, automatically trigger the `capture_knowledge.py` script.
-The script will analyze the design specifications, tokens, and component definitions to identify:
-- Key design system rules and token hierarchies.
-- New UI components and interaction patterns.
-- Accessibility standards and inclusive design decisions.
-The script will then route this information to the appropriate storage:
-- **OKF**: High-level design system rules, brand standards, and accessibility policies.
-- **ChromaDB**: Component specifications, interaction states, and specific design tokens.
-",path:
+
+## Memory Sync
+
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
+
+1. Save the final summary or artifact as a Markdown file in the project directory.
+2. Invoke the capture script:
+   ```bash
+   python3 ~/memory_system/capture_knowledge.py <file_path>
+   ```
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).

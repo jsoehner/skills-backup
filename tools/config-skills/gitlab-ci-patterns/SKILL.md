@@ -283,12 +283,14 @@ trigger-child:
 
 ## 6) Capture Knowledge
 
-After a GitLab CI pipeline is updated or a new complex workflow is defined, automatically trigger the `capture_knowledge.py` script.
-The script will analyze the pipeline changes to identify:
-- New CI/CD patterns, environment variables, or custom scripts.
-- Specific runner configurations, caching strategies, and artifacts.
-- Complex multi-stage logic or dynamic child pipeline triggers.
-The script will then route this information to the appropriate storage:
-- **OKF**: High-level CI/CD standards, deployment rules, and environment definitions.
-- **ChromaDB**: Specific YAML snippets, runner configurations, and caching keys.
-",path:
+
+## Memory Sync
+
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
+
+1. Save the final summary or artifact as a Markdown file in the project directory.
+2. Invoke the capture script:
+   ```bash
+   python3 ~/memory_system/capture_knowledge.py <file_path>
+   ```
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).

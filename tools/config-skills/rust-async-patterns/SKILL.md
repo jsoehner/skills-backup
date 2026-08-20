@@ -40,11 +40,14 @@ Production patterns for async Rust programming with Tokio runtime, including tas
 
 ## 6) Capture Knowledge
 
-After a Rust async pattern implementation or concurrent system design is completed, automatically trigger the `capture_knowledge.py` script.
-The script will analyze the async patterns to identify:
-- Key async task structures and channel types.
-- Error handling strategies and result types.
-- Concurrency patterns and shared state management.
-The script will then route this information to the appropriate storage:
-- **OKF**: High-level async patterns, concurrency standards, and system designs.
-- **ChromaDB**: Specific task definitions, error handling logic, and performance notes.
+
+## Memory Sync
+
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
+
+1. Save the final summary or artifact as a Markdown file in the project directory.
+2. Invoke the capture script:
+   ```bash
+   python3 ~/memory_system/capture_knowledge.py <file_path>
+   ```
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).

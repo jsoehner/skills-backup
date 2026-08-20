@@ -122,11 +122,14 @@ Sometimes aggressive optimization or upscaling makes a file larger than the orig
 
 ## 6) Capture Knowledge
 
-After an image is enhanced, optimized, or converted for documentation, automatically trigger the `capture_knowledge.py` script.
-The script will analyze the image processing steps to identify:
-- New image enhancement patterns (e.g., specific `-unsharp` values for UI text).
-- Optimization results (size reduction ratios, format changes).
-- Specific tools and versions used for the enhancement.
-The script will then route this information to the appropriate storage:
-- **OKF**: Image processing standards (e.g., "always use PNG for screenshots," "default upscaling values").
-- **ChromaDB**: Specific enhancement parameters (e.g., "UI screenshot sharpen: -unsharp 0x0.75+0.75+0.008").
+
+## Memory Sync
+
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
+
+1. Save the final summary or artifact as a Markdown file in the project directory.
+2. Invoke the capture script:
+   ```bash
+   python3 ~/memory_system/capture_knowledge.py <file_path>
+   ```
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).

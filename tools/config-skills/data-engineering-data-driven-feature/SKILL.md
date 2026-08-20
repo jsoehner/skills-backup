@@ -185,13 +185,14 @@ Feature to develop with data-driven approach: $ARGUMENTS
 - NEVER deploy code changes without validating them against target test suites.
 - NEVER skip documenting non-obvious code assumptions, constraints, and side effects.
 
-## 6) Memory Sync
 
-After a data-driven feature architecture, experiment design, or analytics instrumentation plan is completed, you **MUST** trigger the local memory capture. 
+## Memory Sync
 
-1. Save the final design, experiment plan, or analytics schema as a Markdown file in the project directory.
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
+
+1. Save the final summary or artifact as a Markdown file in the project directory.
 2. Invoke the capture script:
    ```bash
-   python ~/memory_system/capture_knowledge.py <file_path>
+   python3 ~/memory_system/capture_knowledge.py <file_path>
    ```
-3. This ensures that new feature requirements, experiment designs, and analytics schemas are automatically routed to the correct storage (OKF or ChromaDB).
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).

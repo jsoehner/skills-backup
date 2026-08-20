@@ -55,12 +55,14 @@ Bump to these major versions to resolve Node 20 deprecation warnings:
 
 ## 6) Capture Knowledge
 
-After a GitHub Actions workflow is updated to support Node 24, automatically trigger the `capture_knowledge.py` script.
-The script will analyze the workflow changes to identify:
-- Specific actions bumped to Node 24-compatible major versions.
-- New commit SHAs used for security pinning.
-- Resolution of specific GitHub Action quirks (e.g., Gitleaks input errors).
-The script will then route this information to the appropriate storage:
-- **OKF**: CI/CD standards for Node 24 support and security pinning policies.
-- **ChromaDB**: Specific action versions, commit SHAs, and workflow-specific quirks.
-",path:
+
+## Memory Sync
+
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
+
+1. Save the final summary or artifact as a Markdown file in the project directory.
+2. Invoke the capture script:
+   ```bash
+   python3 ~/memory_system/capture_knowledge.py <file_path>
+   ```
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).

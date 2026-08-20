@@ -36,14 +36,14 @@ Master C#/.NET patterns for building production-grade APIs, MCP servers, and ent
 
 - `resources/implementation-playbook.md` for detailed .NET patterns and examples.
 
-## Knowledge Capture Requirement
-When performing tasks that involve architectural decisions, significant engineering trade-offs, or complex infrastructure changes, you MUST use the `capture_knowledge.py` script to persist the information.
 
-- **Policy/High-Level Decisions**: Use `python3 capture_knowledge.py --type okf` to save to the Open Knowledge Framework (OKF).
-- **Technical Context/Implementation Details**: Use `python3 capture_knowledge.py --type chroma` to save to the contextual memory (ChromaDB).
+## Memory Sync
 
-Ensure that the captured content is deduplicated (the script handles this via hashing) and correctly chunked.
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
 
-
-- NEVER deploy code changes without validating them against target test suites.
-- NEVER skip documenting non-obvious code assumptions, constraints, and side effects.
+1. Save the final summary or artifact as a Markdown file in the project directory.
+2. Invoke the capture script:
+   ```bash
+   python3 ~/memory_system/capture_knowledge.py <file_path>
+   ```
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).

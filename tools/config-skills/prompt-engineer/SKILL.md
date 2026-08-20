@@ -275,13 +275,14 @@ Remember: The best prompt is one that consistently produces the desired output w
 - NEVER deploy prompts or agent workflows without setting strict token budget constraints and safety guardrails.
 - NEVER trust LLM tool calls without validating and sanitizing the arguments before execution.
 
-## 6) Memory Sync
 
-After a prompt system, agent workflow, or specialized prompt design is completed, you **MUST** trigger the local memory capture. 
+## Memory Sync
 
-1. Save the final prompt, workflow definition, or design document as a Markdown file in the project directory.
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
+
+1. Save the final summary or artifact as a Markdown file in the project directory.
 2. Invoke the capture script:
    ```bash
-   python ~/memory_system/capture_knowledge.py <file_path>
+   python3 ~/memory_system/capture_knowledge.py <file_path>
    ```
-3. This ensures that new prompt patterns, agent behaviors, and system designs are automatically routed to the correct storage (OKF or ChromaDB).
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).

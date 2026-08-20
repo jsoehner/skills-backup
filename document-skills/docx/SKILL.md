@@ -117,13 +117,14 @@ In Open XML, Revision Save IDs (RSIDs) are used to track which session created/m
 *   *Scenario*: The `unpack.py` script fails or does not output an RSID suggestion.
 *   *Fallback*: Open `word/settings.xml` and locate the `<w:rsids>` element. Use any existing RSID from that list or use a fallback value (e.g., `00A1B2C3`) that does not clash with other runs.
 
-## 8) Memory Sync
 
-After a technical manual, architecture guide, or deep-dive documentation is completed, you **MUST** trigger the local memory capture. 
+## Memory Sync
 
-1. Save the final documentation as a Markdown file in the project directory.
-2. Invoke the capture script: 
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
+
+1. Save the final summary or artifact as a Markdown file in the project directory.
+2. Invoke the capture script:
    ```bash
    python3 ~/memory_system/capture_knowledge.py <file_path>
    ```
-3. This ensures that new high-level architectural rules, system designs, and technical standards are automatically routed to the correct storage (OKF or ChromaDB).
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).

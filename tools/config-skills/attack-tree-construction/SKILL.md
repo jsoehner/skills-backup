@@ -42,14 +42,14 @@ Systematic attack path visualization and analysis.
 - NEVER publish attack trees to public repositories or unauthorized personnel.
 - NEVER include specific zero-day details or functional exploit scripts in the tree annotations.
 
-## 6) Memory Sync
 
-After an attack tree is constructed, a threat path analysis, or a defense gap identification is completed, you **MUST** trigger the local memory capture. 
+## Memory Sync
 
-1. Save the final attack tree, threat path analysis, or defense gap report as a Markdown file in the project directory.
-2. Invoke the capture script: 
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
+
+1. Save the final summary or artifact as a Markdown file in the project directory.
+2. Invoke the capture script:
    ```bash
    python3 ~/memory_system/capture_knowledge.py <file_path>
    ```
-3. This ensures that attack paths, defense priorities, and security risk visualizations are automatically routed to the correct storage (OKF or ChromaDB).
-
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).

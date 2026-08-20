@@ -148,31 +148,6 @@ Don't just list ideas—stack rank them:
 
 ### 6) Capture Knowledge
 
-After the 10x analysis and priority list are finalized, automatically trigger the `capture_knowledge.py` script.
-The script will analyze the 10x opportunities and identify:
-- New high-level strategic bets and "10x" opportunities.
-- Key "Quick wins" and "Do Now" items.
-- Core product strategy shifts.
-The script will then route this information to the appropriate storage:
-- **OKF**: High-level product strategy, 10x opportunities, and long-term roadmap shifts.
-- **ChromaDB**: Specific feature ideas, "Small Gems," and technical feasibility notes for 10x opportunities.
-
-Force yourself through each category:
-
-| Category | Question | Example |
-|----------|----------|---------|
-| **Speed** | What takes too long? | Instant search, predictive loading |
-| **Automation** | What's repetitive? | Auto-scheduling, smart defaults |
-| **Intelligence** | What could be smarter? | Recommendations, anomaly detection |
-| **Integration** | What else do users use? | Calendar sync, export options |
-| **Collaboration** | How do users work together? | Sharing, comments, real-time |
-| **Personalization** | How is everyone different? | Custom views, preferences |
-| **Visibility** | What's hidden that shouldn't be? | Dashboards, progress tracking |
-| **Confidence** | What creates anxiety? | Confirmations, undo, previews |
-| **Delight** | What could spark joy? | Animations, celebrations, polish |
-| **Access** | Who can't use this yet? | Mobile, offline, accessibility |
-
----
 
 ## Output Format
 
@@ -313,3 +288,13 @@ This is a self-contained skill. Do NOT load external files or reference director
 ```
 
 
+## Memory Sync
+
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
+
+1. Save the final summary or artifact as a Markdown file in the project directory.
+2. Invoke the capture script:
+   ```bash
+   python3 ~/memory_system/capture_knowledge.py <file_path>
+   ```
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).

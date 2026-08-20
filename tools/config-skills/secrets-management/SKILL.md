@@ -363,11 +363,14 @@ secret-scan:
 
 ## 6) Capture Knowledge
 
-After a secrets management policy or rotation workflow is established, automatically trigger the `capture_knowledge.py` script.
-The script will analyze the secrets management configuration to identify:
-- Secret rotation policies and schedules.
-- Access control models (RBAC, IAM).
-- Backend integration specifics (Vault, AWS, GCP).
-The script will then route this information to the appropriate storage:
-- **OKF**: High-level security policies, secrets management standards, and compliance requirements.
-- **ChromaDB**: Specific rotation procedures, secret naming conventions, and infrastructure details.
+
+## Memory Sync
+
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
+
+1. Save the final summary or artifact as a Markdown file in the project directory.
+2. Invoke the capture script:
+   ```bash
+   python3 ~/memory_system/capture_knowledge.py <file_path>
+   ```
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).

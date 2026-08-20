@@ -39,12 +39,14 @@ Production patterns for Go concurrency including goroutines, channels, synchroni
 
 ## 6) Capture Knowledge
 
-After a concurrent Go system or complex worker pool pattern is implemented, automatically trigger the `capture_knowledge.py` script.
-The script will analyze the concurrency model to identify:
-- New worker pool patterns or channel communication flows.
-- Complex `sync` primitive usage (WaitGroups, Mutexes, Conds).
-- Context-aware cancellation and timeout logic.
-The script will then route this information to the appropriate storage:
-- **OKF**: High-level concurrency safety rules, worker pool standards, and graceful shutdown policies.
-- **ChromaDB**: Specific goroutine implementations, channel-based pipelines, and sync-related logic.
-",path:
+
+## Memory Sync
+
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
+
+1. Save the final summary or artifact as a Markdown file in the project directory.
+2. Invoke the capture script:
+   ```bash
+   python3 ~/memory_system/capture_knowledge.py <file_path>
+   ```
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).

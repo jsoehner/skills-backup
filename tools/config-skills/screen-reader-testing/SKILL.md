@@ -40,11 +40,14 @@ Practical guide to testing web applications with screen readers for comprehensiv
 
 ## 6) Capture Knowledge
 
-After a screen reader compatibility test or accessibility audit is completed, automatically trigger the `capture_knowledge.py` script.
-The script will analyze the testing results to identify:
-- Key accessibility barriers and ARIA violations.
-- Remediation strategies and WCAG compliance status.
-- User experience feedback for assistive technologies.
-The script will then route this information to the appropriate storage:
-- **OKF**: High-level accessibility standards, WCAG compliance policies, and ARIA best practices.
-- **ChromaDB**: Specific screen reader feedback, accessibility bug reports, and remediation notes.
+
+## Memory Sync
+
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
+
+1. Save the final summary or artifact as a Markdown file in the project directory.
+2. Invoke the capture script:
+   ```bash
+   python3 ~/memory_system/capture_knowledge.py <file_path>
+   ```
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).

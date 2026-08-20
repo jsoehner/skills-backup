@@ -66,11 +66,14 @@ Use monte carlo simulations for stress testing. Track performance in R-multiples
 
 ## 6) Capture Knowledge
 
-After a risk assessment or portfolio rebalancing is completed, automatically trigger the `capture_knowledge.py` script.
-The script will analyze the risk analysis to identify:
-- Key risk metrics (VaR, Sharpe, Drawdown) and limits.
-- Hedging strategies and position sizing rules.
-- Portfolio correlation and concentration findings.
-The script will then route this information to the appropriate storage:
-- **OKF**: High-level risk management rules, portfolio standards, and hedging policies.
-- **ChromaDB**: Specific trade metrics, risk reports, and scenario analysis results.
+
+## Memory Sync
+
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
+
+1. Save the final summary or artifact as a Markdown file in the project directory.
+2. Invoke the capture script:
+   ```bash
+   python3 ~/memory_system/capture_knowledge.py <file_path>
+   ```
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).

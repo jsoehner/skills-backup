@@ -408,12 +408,14 @@ NEVER:
 
 ## 6) Capture Knowledge
 
-After the React component architecture or UI pattern is implemented, automatically trigger the `capture_knowledge.py` script.
-The script will analyze the component structure, type definitions, and state management patterns to identify:
-- New reusable UI components or hooks.
-- Complex type definitions or discriminated unions.
-- React 19 specific patterns or performance optimizations.
-The script will then route this information to the appropriate storage:
-- **OKF**: High-level UI patterns, component naming conventions, and state management rules.
-- **ChromaDB**: Specific component implementations, prop types, and complex hook logic.
-",path:
+
+## Memory Sync
+
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
+
+1. Save the final summary or artifact as a Markdown file in the project directory.
+2. Invoke the capture script:
+   ```bash
+   python3 ~/memory_system/capture_knowledge.py <file_path>
+   ```
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).

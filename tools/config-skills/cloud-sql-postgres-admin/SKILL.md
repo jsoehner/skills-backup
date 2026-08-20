@@ -258,13 +258,14 @@ Lists all type of Cloud SQL instances for a project.
 - NEVER execute raw DML/DDL operations on production database instances without verification.
 - NEVER ignore connection limits and connection pool starvation indicators.
 
-## 6) Memory Sync
 
-After a database provision, user creation, or instance status check is completed, you **MUST** trigger the local memory capture. 
+## Memory Sync
 
-1. Save the final database schema, instance details, or user permissions as a Markdown file in the project directory.
-2. Invoke the capture script: 
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
+
+1. Save the final summary or artifact as a Markdown file in the project directory.
+2. Invoke the capture script:
    ```bash
    python3 ~/memory_system/capture_knowledge.py <file_path>
    ```
-3. This ensures that database infrastructure changes, user roles, and instance configurations are automatically routed to the correct storage (OKF or ChromaDB).
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).

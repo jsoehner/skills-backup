@@ -69,12 +69,14 @@ Need to respond to something?
 
 ## 6) Capture Knowledge
 
-After a complex `useEffect` refactor or a state synchronization pattern is finalized, automatically trigger the `capture_knowledge.py` script.
-The script will analyze the refactored logic to identify:
-- Complex `useEffect` cleanup patterns or `useSyncExternalStore` implementations.
-- Identification of "hidden" side effects or synchronization logic.
-- Key architectural shifts (e.g., moving from `useEffect` to `useMemo` or `key` prop).
-The script will then route this information to the appropriate storage:
-- **OKF**: High-level rules for when to use (and not use) Effects, and state synchronization standards.
-- **ChromaDB**: Specific complex `useEffect` implementations, cleanup logic, and sync patterns.
-",path:
+
+## Memory Sync
+
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
+
+1. Save the final summary or artifact as a Markdown file in the project directory.
+2. Invoke the capture script:
+   ```bash
+   python3 ~/memory_system/capture_knowledge.py <file_path>
+   ```
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).

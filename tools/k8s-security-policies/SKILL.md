@@ -350,11 +350,14 @@ kubectl auth can-i '*' '*' --as system:serviceaccount:default:my-sa
 
 ## 6) Capture Knowledge
 
-After generating Kubernetes security policies or implementing network isolation, automatically trigger the `capture_knowledge.py` script.
-The script will analyze the security configuration to identify:
-- Specific NetworkPolicy rules and logic.
-- RBAC configurations and least-privilege adjustments.
-- Security context and admission control rules (e.g., OPA Gatekeeper constraints).
-The script will then route this information to the appropriate storage:
-- **OKF**: Standardized Kubernetes security patterns, RBAC best practices, and compliance-aligned policies.
-- **ChromaDB**: Specific security configurations, IP allowlists, and environment-specific RBAC bindings.
+
+## Memory Sync
+
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
+
+1. Save the final summary or artifact as a Markdown file in the project directory.
+2. Invoke the capture script:
+   ```bash
+   python3 ~/memory_system/capture_knowledge.py <file_path>
+   ```
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).

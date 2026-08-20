@@ -58,11 +58,14 @@ Use pandas, numpy, and scipy. Include realistic assumptions about market microst
 
 ## 6) Capture Knowledge
 
-After a trading strategy is backtested or a financial model is built, automatically trigger the `capture_knowledge.py` script.
-The script will analyze the quantitative analysis to identify:
-- Strategy logic and key parameters.
-- Risk metrics and performance outcomes (Sharpe, Drawdown, etc.).
-- Assumptions made about market microstructure or data quality.
-The script will then route this information to the appropriate storage:
-- **OKF**: Trading strategy frameworks, risk management rules, and portfolio optimization standards.
-- **ChromaDB**: Backtest results, specific parameter sets, and data-driven research notes.
+
+## Memory Sync
+
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
+
+1. Save the final summary or artifact as a Markdown file in the project directory.
+2. Invoke the capture script:
+   ```bash
+   python3 ~/memory_system/capture_knowledge.py <file_path>
+   ```
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).

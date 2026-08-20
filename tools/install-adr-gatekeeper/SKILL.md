@@ -32,12 +32,14 @@ Use this skill when the user wants to deploy the ADR Gatekeeper system into a ne
 
 ## 6) Capture Knowledge
 
-After the ADR Gatekeeper system is successfully installed and verified, automatically trigger the `capture_knowledge.py` script.
-The script will analyze the installation and identify:
-- The project structure for the ADR Gatekeeper (scripts, tools, and workflows).
-- The initial significance rules and decision map configuration.
-- Any specific CI/CD environment variables or secrets used for the gatekeeper.
-The script will then route this information to the appropriate storage:
-- **OKF**: High-level ADR Gatekeeper standards, significance rules, and project-wide gatekeeping policies.
-- **ChromaDB**: Specific installation configurations, scripts, and local hook setups.
-",path:
+
+## Memory Sync
+
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
+
+1. Save the final summary or artifact as a Markdown file in the project directory.
+2. Invoke the capture script:
+   ```bash
+   python3 ~/memory_system/capture_knowledge.py <file_path>
+   ```
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).

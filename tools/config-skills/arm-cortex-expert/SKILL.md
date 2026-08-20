@@ -310,14 +310,14 @@ __set_BASEPRI(basepri);
 - NEVER execute memory-mapped I/O operations without explicit memory barriers (`__DMB()`, `__DSB()`) on Cortex-M7 devices.
 - NEVER use unaligned memory buffers for DMA operations; align buffers to 32-byte cache line boundaries.
 
-## 6) Memory Sync
 
-After a firmware module, driver implementation, or hardware integration analysis is completed, you **MUST** trigger the local memory capture. 
+## Memory Sync
 
-1. Save the final driver code, hardware configuration, or integration report as a Markdown file in the project directory.
-2. Invoke the capture script: 
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
+
+1. Save the final summary or artifact as a Markdown file in the project directory.
+2. Invoke the capture script:
    ```bash
    python3 ~/memory_system/capture_knowledge.py <file_path>
    ```
-3. This ensures that firmware drivers, hardware configurations, and integration insights are automatically routed to the correct storage (OKF or ChromaDB).
-
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).

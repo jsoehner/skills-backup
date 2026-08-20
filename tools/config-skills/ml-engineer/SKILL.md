@@ -171,13 +171,14 @@ Expert ML engineer specializing in production-ready machine learning systems. Ma
 - NEVER deploy code changes without validating them against target test suites.
 - NEVER skip documenting non-obvious code assumptions, constraints, and side effects.
 
-## 6) Memory Sync
 
-After a production ML system design, model serving architecture, or production ML pipeline is completed, you **MUST** trigger the local memory capture. 
+## Memory Sync
 
-1. Save the final ML architecture design, serving schema, or pipeline map as a Markdown file in the project directory.
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
+
+1. Save the final summary or artifact as a Markdown file in the project directory.
 2. Invoke the capture script:
    ```bash
-   python ~/memory_system/capture_knowledge.py <file_path>
+   python3 ~/memory_system/capture_knowledge.py <file_path>
    ```
-3. This ensures that new ML infrastructure designs, model serving standards, and production ML pipelines are automatically routed to the correct storage (OKF or ChromaDB).
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).

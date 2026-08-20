@@ -20,26 +20,6 @@ Generate software architecture documentation using C4 model diagrams in Mermaid 
 
 ## 5) Capture Knowledge
 
-After the architecture diagrams are finalized and saved, automatically trigger the `capture_knowledge.py` script.
-The script will analyze the architecture diagrams and the accompanying documentation to identify:
-- Key architectural decisions and trade-offs.
-- New trust boundaries and system components.
-- Infrastructure choices and deployment patterns.
-The script will then route this information to the correct storage:
-- **OKF**: High-level architectural decisions, "Hard Rules" for system structure, and core trust boundaries.
-- **ChromaDB**: Detailed component interaction flows, specific technology stacks, and "Soft Context" for implementation details.
-
-Select the appropriate level based on the documentation need:
-
-| Level | Diagram Type | Audience | Shows | When to Create |
-|-------|-------------|----------|-------|----------------|
-| 1 | **C4Context** | Everyone | System + external actors | Always (required) |
-| 2 | **C4Container** | Technical | Apps, databases, services | Always (required) |
-| 3 | **C4Component** | Developers | Internal components | Only if adds value |
-| 4 | **C4Deployment** | DevOps | Infrastructure nodes | For production systems |
-| - | **C4Dynamic** | Technical | Request flows (numbered) | For complex workflows |
-
-**Key Insight:** "Context + Container diagrams are sufficient for most software development teams." Only create Component/Code diagrams when they genuinely add value.
 
 ## Quick Start Examples
 
@@ -317,25 +297,15 @@ Write architecture documentation to `docs/architecture/` with naming convention:
 \\
 ## 5) Capture Knowledge\\
 \\
-After the architecture diagrams are finalized and saved, automatically trigger the `capture_knowledge.py` script.
-The script will analyze the architecture diagrams and the accompanying documentation to identify:
-- Key architectural decisions and trade-offs.
-- New trust boundaries and system components.
-- Infrastructure choices and deployment patterns.
-The script will then route this information to the correct storage:
-- **OKF**: High-level architectural decisions, "Hard Rules" for system structure, and core trust boundaries.
-- **ChromaDB**: Detailed component interaction flows, specific technology stacks, and "Soft Context" for implementation details.
-
-Select the appropriate level based on the documentation need:
-
-| Level | Diagram Type | Audience | Shows | When to Create |
-|-------|-------------|----------|-------|----------------|
-| 1 | **C4Context** | Everyone | System + external actors | Always (required) |
-| 2 | **C4Container** | Technical | Apps, databases, services | Always (required) |
-| 3 | **C4Component** | Developers | Internal components | Only if adds value |
-| 4 | **C4Deployment** | DevOps | Infrastructure nodes | For production systems |
-| - | **C4Dynamic** | Technical | Request flows (numbered) | For complex workflows |
-
-**Key Insight:** "Context + Container diagrams are sufficient for most software development teams." Only create Component/Code diagrams when they genuinely add value.
 
 
+## Memory Sync
+
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
+
+1. Save the final summary or artifact as a Markdown file in the project directory.
+2. Invoke the capture script:
+   ```bash
+   python3 ~/memory_system/capture_knowledge.py <file_path>
+   ```
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).

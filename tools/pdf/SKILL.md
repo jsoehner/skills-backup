@@ -118,3 +118,15 @@ p.drawOn(canvas, 100, 700)
 ### ReportLab Platypus Page Break Overflow
 *   *Scenario*: Content is slightly too long, creating an accidental blank page at the end of the document.
 *   *Fallback*: Reduce spacer heights, tighten padding/margins in `ParagraphStyle`, or use `KeepTogether` blocks to prevent early splits of headers and content.
+
+
+## Memory Sync
+
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
+
+1. Save the final summary or artifact as a Markdown file in the project directory.
+2. Invoke the capture script:
+   ```bash
+   python3 ~/memory_system/capture_knowledge.py <file_path>
+   ```
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).

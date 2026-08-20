@@ -178,14 +178,14 @@ Elite software architect focused on ensuring architectural integrity, scalabilit
 - NEVER approve architectural changes without a defined fallback or rollback strategy.
 - NEVER recommend over-engineered microservices for simple, low-throughput systems where a clean monolith suffices.
 
-## 6) Memory Sync
 
-After an architectural review, design assessment, or decision documentation is completed, you **MUST** trigger the local memory capture. 
+## Memory Sync
 
-1. Save the final architecture review, design assessment, or architectural decision as a Markdown file in the project directory.
-2. Invoke the capture script: 
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
+
+1. Save the final summary or artifact as a Markdown file in the project directory.
+2. Invoke the capture script:
    ```bash
    python3 ~/memory_system/capture_knowledge.py <file_path>
    ```
-3. This ensures that architectural reviews, design assessments, and decisions are automatically routed to the correct storage (OKF or ChromaDB).
-
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).

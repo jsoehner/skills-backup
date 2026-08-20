@@ -33,3 +33,15 @@ Use for architectural planning, decision recording (ADRs), C4 diagram generation
 2. C4 diagrams correctly represent the system boundaries and components.
 3. Design choices are consistent across Cloud, K8s, and Monorepo implementations.
 4. Architectural decisions and formal records are automatically synced to the memory system.
+
+
+## Memory Sync
+
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
+
+1. Save the final summary or artifact as a Markdown file in the project directory.
+2. Invoke the capture script:
+   ```bash
+   python3 ~/memory_system/capture_knowledge.py <file_path>
+   ```
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).

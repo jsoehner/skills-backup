@@ -46,14 +46,14 @@ Master automated billing systems including recurring billing, invoice generation
 - NEVER run billing tests with live credit cards or actual customer accounts.
 - NEVER deploy pricing changes without a migration plan for existing subscribers.
 
-## 6) Memory Sync
 
-After a billing system design, proration model, or dunning workflow is completed, you **MUST** trigger the local memory capture. 
+## Memory Sync
 
-1. Save the final billing model, subscription lifecycle, or dunning workflow as a Markdown file in the project directory.
-2. Invoke the capture script: 
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
+
+1. Save the final summary or artifact as a Markdown file in the project directory.
+2. Invoke the capture script:
    ```bash
    python3 ~/memory_system/capture_knowledge.py <file_path>
    ```
-3. This ensures that billing models, proration logic, and dunning workflows are automatically routed to the correct storage (OKF or ChromaDB).
-
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).

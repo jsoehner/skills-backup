@@ -433,14 +433,14 @@ Phase 4: Cleanup (1-2 weeks)
 - NEVER ignore change detection digest cycle differences when mixing AngularJS and Angular components.
 - NEVER migrate user-facing UI screens before migrating backend state-management services.
 
-## 6) Memory Sync
 
-After a migration milestone, a component conversion, or a module migration is completed, you **MUST** trigger the local memory capture. 
+## Memory Sync
 
-1. Save the migration progress report, component conversion list, or module status as a Markdown file in the project directory.
-2. Invoke the capture script: 
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
+
+1. Save the final summary or artifact as a Markdown file in the project directory.
+2. Invoke the capture script:
    ```bash
    python3 ~/memory_system/capture_knowledge.py <file_path>
    ```
-3. This ensures that migration progress, converted components, and framework status are automatically routed to the correct storage (OKF or ChromaDB).
-
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).

@@ -313,12 +313,14 @@ argocd app sync my-app --force
 
 ## 6) Capture Knowledge
 
-After a GitOps deployment or complex reconciliation pattern is finalized, automatically trigger the `capture_knowledge.py` script.
-The script will analyze the GitOps configuration to identify:
-- New infrastructure-as-code patterns or sync policies.
-- Complex ArgoCD/Flux application definitions or multi-cluster logic.
-- Specific secret management integrations or promotion flows.
-The script will then route this information to the appropriate storage:
-- **OKF**: High-level GitOps standards, cluster-wide sync policies, and environment rules.
-- **ChromaDB**: Specific Kustomization/Application YAMLs, sync logic, and ArgoCD/Flux configurations.
-",path:
+
+## Memory Sync
+
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
+
+1. Save the final summary or artifact as a Markdown file in the project directory.
+2. Invoke the capture script:
+   ```bash
+   python3 ~/memory_system/capture_knowledge.py <file_path>
+   ```
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).

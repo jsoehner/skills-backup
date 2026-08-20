@@ -48,14 +48,14 @@ Refer to `resources/implementation-playbook.md` for detailed patterns, checklist
 - NEVER use backticks for command substitution; always use `$()`.
 - NEVER parse file lists using `for f in $(ls)`; use `find` with NUL delimiters or loops instead.
 
-## 6) Memory Sync
 
-After a defensive Bash script is designed, a production automation is planned, or a CI/CD pipeline script is completed, you **MUST** trigger the local memory capture. 
+## Memory Sync
 
-1. Save the final script design, automation plan, or CI/CD configuration as a Markdown file in the project directory.
-2. Invoke the capture script: 
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
+
+1. Save the final summary or artifact as a Markdown file in the project directory.
+2. Invoke the capture script:
    ```bash
    python3 ~/memory_system/capture_knowledge.py <file_path>
    ```
-3. This ensures that Bash scripts, automation plans, and CI/CD configurations are automatically routed to the correct storage (OKF or ChromaDB).
-
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).

@@ -681,3 +681,13 @@ This is a self-contained skill. Do NOT load external files or reference director
 2. **Artifact destination check**: Always require the agent to specify the exact path or repository coordinates where the completed Rep 1 artifact must be pushed or shared.
 
 
+## Memory Sync
+
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
+
+1. Save the final summary or artifact as a Markdown file in the project directory.
+2. Invoke the capture script:
+   ```bash
+   python3 ~/memory_system/capture_knowledge.py <file_path>
+   ```
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).

@@ -205,13 +205,14 @@ ingester.save_dead_letter_queue('s3://lake/dlq/orders')
 - NEVER commit raw secrets or API keys to infrastructure code repositories.
 - NEVER deploy resources without setting clear resource limits (CPU/Memory/storage quotas).
 
-## 6) Memory Sync
 
-After a data pipeline architecture, ELT/ETL flow, or data quality framework is completed, you **MUST** trigger the local memory capture. 
+## Memory Sync
 
-1. Save the final architecture design, pipeline map, or data model as a Markdown file in the project directory.
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
+
+1. Save the final summary or artifact as a Markdown file in the project directory.
 2. Invoke the capture script:
    ```bash
-   python ~/memory_system/capture_knowledge.py <file_path>
+   python3 ~/memory_system/capture_knowledge.py <file_path>
    ```
-3. This ensures that new data models, pipeline designs, and data engineering standards are automatically routed to the correct storage (OKF or ChromaDB).
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).
