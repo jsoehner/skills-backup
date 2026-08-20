@@ -1,1 +1,2997 @@
-{}
+{
+  "ai-engineer": {
+    "name": "ai-engineer",
+    "path": "ai-engineer",
+    "categorized": true
+  },
+  "algorithmic-art": {
+    "name": "algorithmic-art",
+    "path": "algorithmic-art",
+    "categorized": true
+  },
+  "architecture-governance-orchestrator": {
+    "name": "architecture-governance-orchestrator",
+    "path": "architecture-governance-orchestrator",
+    "categorized": true
+  },
+  "backend-architect": {
+    "name": "backend-architect",
+    "path": "backend-architect",
+    "categorized": true
+  },
+  "backend-development-feature-development": {
+    "name": "backend-development-feature-development",
+    "path": "backend-development-feature-development",
+    "categorized": true
+  },
+  "daily-meeting-update": {
+    "name": "daily-meeting-update",
+    "path": "daily-meeting-update",
+    "categorized": true
+  },
+  "data-engineer": {
+    "name": "data-engineer",
+    "path": "data-engineer",
+    "categorized": true
+  },
+  "data-engineering-data-driven-feature": {
+    "name": "data-engineering-data-driven-feature",
+    "path": "data-engineering-data-driven-feature",
+    "categorized": true
+  },
+  "data-engineering-data-pipeline": {
+    "name": "data-engineering-data-pipeline",
+    "path": "data-engineering-data-pipeline",
+    "categorized": true
+  },
+  "data-quality-frameworks": {
+    "name": "data-quality-frameworks",
+    "path": "data-quality-frameworks",
+    "categorized": true
+  },
+  "data-scientist": {
+    "name": "data-scientist",
+    "path": "data-scientist",
+    "categorized": true
+  },
+  "data-storytelling": {
+    "name": "data-storytelling",
+    "path": "data-storytelling",
+    "categorized": true
+  },
+  "database-admin": {
+    "name": "database-admin",
+    "path": "database-admin",
+    "categorized": true
+  },
+  "database-architect": {
+    "name": "database-architect",
+    "path": "database-architect",
+    "categorized": true
+  },
+  "database-cloud-optimization-cost-optimize": {
+    "name": "database-cloud-optimization-cost-optimize",
+    "path": "database-cloud-optimization-cost-optimize",
+    "categorized": true
+  },
+  "database-migration": {
+    "name": "database-migration",
+    "path": "database-migration",
+    "categorized": true
+  },
+  "database-migrations-migration-observability": {
+    "name": "database-migrations-migration-observability",
+    "path": "database-migrations-migration-observability",
+    "categorized": true
+  },
+  "database-migrations-sql-migrations": {
+    "name": "database-migrations-sql-migrations",
+    "path": "database-migrations-sql-migrations",
+    "categorized": true
+  },
+  "database-optimizer": {
+    "name": "database-optimizer",
+    "path": "database-optimizer",
+    "categorized": true
+  },
+  "database-schema-designer": {
+    "name": "database-schema-designer",
+    "path": "database-schema-designer",
+    "categorized": true
+  },
+  "datadog-cli": {
+    "name": "datadog-cli",
+    "path": "datadog-cli",
+    "categorized": true
+  },
+  "dataform-bigquery": {
+    "name": "dataform-bigquery",
+    "path": "dataform-bigquery",
+    "categorized": true
+  },
+  "dbt-bigquery": {
+    "name": "dbt-bigquery",
+    "path": "dbt-bigquery",
+    "categorized": true
+  },
+  "dbt-transformation-patterns": {
+    "name": "dbt-transformation-patterns",
+    "path": "dbt-transformation-patterns",
+    "categorized": true
+  },
+  "dependency-lifecycle-orchestrator": {
+    "name": "dependency-lifecycle-orchestrator",
+    "path": "dependency-lifecycle-orchestrator",
+    "categorized": true
+  },
+  "dependency-management-deps-audit": {
+    "name": "dependency-management-deps-audit",
+    "path": "dependency-management-deps-audit",
+    "categorized": true
+  },
+  "dependency-updater": {
+    "name": "dependency-updater",
+    "path": "dependency-updater",
+    "categorized": true
+  },
+  "dependency-upgrade": {
+    "name": "dependency-upgrade",
+    "path": "dependency-upgrade",
+    "categorized": true
+  },
+  "deployment-engineer": {
+    "name": "deployment-engineer",
+    "path": "deployment-engineer",
+    "categorized": true
+  },
+  "deployment-pipeline-design": {
+    "name": "deployment-pipeline-design",
+    "path": "deployment-pipeline-design",
+    "categorized": true
+  },
+  "deployment-validation-config-validate": {
+    "name": "deployment-validation-config-validate",
+    "path": "deployment-validation-config-validate",
+    "categorized": true
+  },
+  "design-system-starter": {
+    "name": "design-system-starter",
+    "path": "design-system-starter",
+    "categorized": true
+  },
+  "devops-troubleshooter": {
+    "name": "devops-troubleshooter",
+    "path": "devops-troubleshooter",
+    "categorized": true
+  },
+  "difficult-workplace-conversations": {
+    "name": "difficult-workplace-conversations",
+    "path": "difficult-workplace-conversations",
+    "categorized": true
+  },
+  "discovering-gcp-data-assets": {
+    "name": "discovering-gcp-data-assets",
+    "path": "discovering-gcp-data-assets",
+    "categorized": true
+  },
+  "distributed-debugging-debug-trace": {
+    "name": "distributed-debugging-debug-trace",
+    "path": "distributed-debugging-debug-trace",
+    "categorized": true
+  },
+  "distributed-tracing": {
+    "name": "distributed-tracing",
+    "path": "distributed-tracing",
+    "categorized": true
+  },
+  "django-pro": {
+    "name": "django-pro",
+    "path": "django-pro",
+    "categorized": true
+  },
+  "docs-architect": {
+    "name": "docs-architect",
+    "path": "docs-architect",
+    "categorized": true
+  },
+  "document-skills/docx": {
+    "name": "docx",
+    "path": "document-skills/docx",
+    "categorized": true
+  },
+  "document-skills/pdf": {
+    "name": "pdf",
+    "path": "document-skills/pdf",
+    "categorized": true
+  },
+  "document-skills/pptx": {
+    "name": "pptx",
+    "path": "document-skills/pptx",
+    "categorized": true
+  },
+  "document-skills/xlsx": {
+    "name": "xlsx",
+    "path": "document-skills/xlsx",
+    "categorized": true
+  },
+  "documentation-generation-doc-generate": {
+    "name": "documentation-generation-doc-generate",
+    "path": "documentation-generation-doc-generate",
+    "categorized": true
+  },
+  "docx": {
+    "name": "docx",
+    "path": "docx",
+    "categorized": true
+  },
+  "domain-name-brainstormer": {
+    "name": "domain-name-brainstormer",
+    "path": "domain-name-brainstormer",
+    "categorized": true
+  },
+  "dotnet-architect": {
+    "name": "dotnet-architect",
+    "path": "dotnet-architect",
+    "categorized": true
+  },
+  "dotnet-backend-patterns": {
+    "name": "dotnet-backend-patterns",
+    "path": "dotnet-backend-patterns",
+    "categorized": true
+  },
+  "error-debugging-multi-agent-review": {
+    "name": "error-debugging-multi-agent-review",
+    "path": "error-debugging-multi-agent-review",
+    "categorized": true
+  },
+  "error-diagnostics-orchestrator": {
+    "name": "error-diagnostics-orchestrator",
+    "path": "error-diagnostics-orchestrator",
+    "categorized": true
+  },
+  "framework-migration-code-migrate": {
+    "name": "framework-migration-code-migrate",
+    "path": "framework-migration-code-migrate",
+    "categorized": true
+  },
+  "framework-migration-deps-upgrade": {
+    "name": "framework-migration-deps-upgrade",
+    "path": "framework-migration-deps-upgrade",
+    "categorized": true
+  },
+  "framework-migration-legacy-modernize": {
+    "name": "framework-migration-legacy-modernize",
+    "path": "framework-migration-legacy-modernize",
+    "categorized": true
+  },
+  "frontend-developer": {
+    "name": "frontend-developer",
+    "path": "frontend-developer",
+    "categorized": true
+  },
+  "full-stack-orchestration-full-stack-feature": {
+    "name": "full-stack-orchestration-full-stack-feature",
+    "path": "full-stack-orchestration-full-stack-feature",
+    "categorized": true
+  },
+  "game-changing-features": {
+    "name": "game-changing-features",
+    "path": "game-changing-features",
+    "categorized": true
+  },
+  "gcp-data-pipelines": {
+    "name": "gcp-data-pipelines",
+    "path": "gcp-data-pipelines",
+    "categorized": true
+  },
+  "gcp-dataflow": {
+    "name": "gcp-dataflow",
+    "path": "gcp-dataflow",
+    "categorized": true
+  },
+  "gcp-pipeline-orchestration": {
+    "name": "gcp-pipeline-orchestration",
+    "path": "gcp-pipeline-orchestration",
+    "categorized": true
+  },
+  "gcp-spark": {
+    "name": "gcp-spark",
+    "path": "gcp-spark",
+    "categorized": true
+  },
+  "gemini": {
+    "name": "gemini",
+    "path": "gemini",
+    "categorized": true
+  },
+  "gepetto": {
+    "name": "gepetto",
+    "path": "gepetto",
+    "categorized": true
+  },
+  "git-pr-workflows-git-workflow": {
+    "name": "git-pr-workflows-git-workflow",
+    "path": "git-pr-workflows-git-workflow",
+    "categorized": true
+  },
+  "git-pr-workflows-onboard": {
+    "name": "git-pr-workflows-onboard",
+    "path": "git-pr-workflows-onboard",
+    "categorized": true
+  },
+  "git-pr-workflows-pr-enhance": {
+    "name": "git-pr-workflows-pr-enhance",
+    "path": "git-pr-workflows-pr-enhance",
+    "categorized": true
+  },
+  "gitops-workflow": {
+    "name": "gitops-workflow",
+    "path": "gitops-workflow",
+    "categorized": true
+  },
+  "graphql-architect": {
+    "name": "graphql-architect",
+    "path": "graphql-architect",
+    "categorized": true
+  },
+  "hybrid-cloud-architect": {
+    "name": "hybrid-cloud-architect",
+    "path": "hybrid-cloud-architect",
+    "categorized": true
+  },
+  "hyperframes": {
+    "name": "hyperframes",
+    "path": "hyperframes",
+    "categorized": true
+  },
+  "incident-responder": {
+    "name": "incident-responder",
+    "path": "incident-responder",
+    "categorized": true
+  },
+  "incident-response-incident-response": {
+    "name": "incident-response-incident-response",
+    "path": "incident-response-incident-response",
+    "categorized": true
+  },
+  "incident-response-smart-fix": {
+    "name": "incident-response-smart-fix",
+    "path": "incident-response-smart-fix",
+    "categorized": true
+  },
+  "ios-developer": {
+    "name": "ios-developer",
+    "path": "ios-developer",
+    "categorized": true
+  },
+  "kubernetes-architect": {
+    "name": "kubernetes-architect",
+    "path": "kubernetes-architect",
+    "categorized": true
+  },
+  "langchain-architecture": {
+    "name": "langchain-architecture",
+    "path": "langchain-architecture",
+    "categorized": true
+  },
+  "legacy-modernizer": {
+    "name": "legacy-modernizer",
+    "path": "legacy-modernizer",
+    "categorized": true
+  },
+  "llm-application-dev-ai-assistant": {
+    "name": "llm-application-dev-ai-assistant",
+    "path": "llm-application-dev-ai-assistant",
+    "categorized": true
+  },
+  "llm-application-dev-langchain-agent": {
+    "name": "llm-application-dev-langchain-agent",
+    "path": "llm-application-dev-langchain-agent",
+    "categorized": true
+  },
+  "llm-application-dev-prompt-optimize": {
+    "name": "llm-application-dev-prompt-optimize",
+    "path": "llm-application-dev-prompt-optimize",
+    "categorized": true
+  },
+  "llm-evaluation": {
+    "name": "llm-evaluation",
+    "path": "llm-evaluation",
+    "categorized": true
+  },
+  "machine-learning-ops-ml-pipeline": {
+    "name": "machine-learning-ops-ml-pipeline",
+    "path": "machine-learning-ops-ml-pipeline",
+    "categorized": true
+  },
+  "microservices-patterns": {
+    "name": "microservices-patterns",
+    "path": "microservices-patterns",
+    "categorized": true
+  },
+  "ml-best-practices": {
+    "name": "ml-best-practices",
+    "path": "ml-best-practices",
+    "categorized": true
+  },
+  "ml-engineer": {
+    "name": "ml-engineer",
+    "path": "ml-engineer",
+    "categorized": true
+  },
+  "ml-pipeline-workflow": {
+    "name": "ml-pipeline-workflow",
+    "path": "ml-pipeline-workflow",
+    "categorized": true
+  },
+  "mlops-engineer": {
+    "name": "mlops-engineer",
+    "path": "mlops-engineer",
+    "categorized": true
+  },
+  "mobile-developer": {
+    "name": "mobile-developer",
+    "path": "mobile-developer",
+    "categorized": true
+  },
+  "monorepo-architect": {
+    "name": "monorepo-architect",
+    "path": "monorepo-architect",
+    "categorized": true
+  },
+  "monorepo-management": {
+    "name": "monorepo-management",
+    "path": "monorepo-management",
+    "categorized": true
+  },
+  "multi-cloud-architecture": {
+    "name": "multi-cloud-architecture",
+    "path": "multi-cloud-architecture",
+    "categorized": true
+  },
+  "multi-platform-apps-multi-platform": {
+    "name": "multi-platform-apps-multi-platform",
+    "path": "multi-platform-apps-multi-platform",
+    "categorized": true
+  },
+  "network-engineer": {
+    "name": "network-engineer",
+    "path": "network-engineer",
+    "categorized": true
+  },
+  "notion-intelligence-orchestrator": {
+    "name": "notion-intelligence-orchestrator",
+    "path": "notion-intelligence-orchestrator",
+    "categorized": true
+  },
+  "notion-knowledge-capture": {
+    "name": "notion-knowledge-capture",
+    "path": "notion-knowledge-capture",
+    "categorized": true
+  },
+  "notion-meeting-intelligence": {
+    "name": "notion-meeting-intelligence",
+    "path": "notion-meeting-intelligence",
+    "categorized": true
+  },
+  "notion-research-documentation": {
+    "name": "notion-research-documentation",
+    "path": "notion-research-documentation",
+    "categorized": true
+  },
+  "notion-spec-to-implementation": {
+    "name": "notion-spec-to-implementation",
+    "path": "notion-spec-to-implementation",
+    "categorized": true
+  },
+  "observability-engineer": {
+    "name": "observability-engineer",
+    "path": "observability-engineer",
+    "categorized": true
+  },
+  "payment-integration": {
+    "name": "payment-integration",
+    "path": "payment-integration",
+    "categorized": true
+  },
+  "performance-engineer": {
+    "name": "performance-engineer",
+    "path": "performance-engineer",
+    "categorized": true
+  },
+  "performance-optimization-orchestrator": {
+    "name": "performance-optimization-orchestrator",
+    "path": "performance-optimization-orchestrator",
+    "categorized": true
+  },
+  "performance-testing-review-ai-review": {
+    "name": "performance-testing-review-ai-review",
+    "path": "performance-testing-review-ai-review",
+    "categorized": true
+  },
+  "performance-testing-review-multi-agent-review": {
+    "name": "performance-testing-review-multi-agent-review",
+    "path": "performance-testing-review-multi-agent-review",
+    "categorized": true
+  },
+  "prompt-engineer": {
+    "name": "prompt-engineer",
+    "path": "prompt-engineer",
+    "categorized": true
+  },
+  "rag-implementation": {
+    "name": "rag-implementation",
+    "path": "rag-implementation",
+    "categorized": true
+  },
+  "react-dev": {
+    "name": "react-dev",
+    "path": "react-dev",
+    "categorized": true
+  },
+  "react-modernization": {
+    "name": "react-modernization",
+    "path": "react-modernization",
+    "categorized": true
+  },
+  "react-native-architecture": {
+    "name": "react-native-architecture",
+    "path": "react-native-architecture",
+    "categorized": true
+  },
+  "react-state-management": {
+    "name": "react-state-management",
+    "path": "react-state-management",
+    "categorized": true
+  },
+  "reverse-engineer": {
+    "name": "reverse-engineer",
+    "path": "reverse-engineer",
+    "categorized": true
+  },
+  "risk-manager": {
+    "name": "risk-manager",
+    "path": "risk-manager",
+    "categorized": true
+  },
+  "saga-orchestration": {
+    "name": "saga-orchestration",
+    "path": "saga-orchestration",
+    "categorized": true
+  },
+  "security-auditor": {
+    "name": "security-auditor",
+    "path": "security-auditor",
+    "categorized": true
+  },
+  "security-governance-orchestrator": {
+    "name": "security-governance-orchestrator",
+    "path": "security-governance-orchestrator",
+    "categorized": true
+  },
+  "service-mesh-expert": {
+    "name": "service-mesh-expert",
+    "path": "service-mesh-expert",
+    "categorized": true
+  },
+  "startup-analyst": {
+    "name": "startup-analyst",
+    "path": "startup-analyst",
+    "categorized": true
+  },
+  "startup-business-analyst-business-case": {
+    "name": "startup-business-analyst-business-case",
+    "path": "startup-business-analyst-business-case",
+    "categorized": true
+  },
+  "startup-business-analyst-financial-projections": {
+    "name": "startup-business-analyst-financial-projections",
+    "path": "startup-business-analyst-financial-projections",
+    "categorized": true
+  },
+  "startup-business-analyst-market-opportunity": {
+    "name": "startup-business-analyst-market-opportunity",
+    "path": "startup-business-analyst-market-opportunity",
+    "categorized": true
+  },
+  "startup-financial-modeling": {
+    "name": "startup-financial-modeling",
+    "path": "startup-financial-modeling",
+    "categorized": true
+  },
+  "startup-metrics-framework": {
+    "name": "startup-metrics-framework",
+    "path": "startup-metrics-framework",
+    "categorized": true
+  },
+  "stripe-integration": {
+    "name": "stripe-integration",
+    "path": "stripe-integration",
+    "categorized": true
+  },
+  "tdd-orchestrator": {
+    "name": "tdd-orchestrator",
+    "path": "tdd-orchestrator",
+    "categorized": true
+  },
+  "tools/accessibility-compliance-accessibility-audit": {
+    "name": "accessibility-compliance-accessibility-audit",
+    "path": "tools/accessibility-compliance-accessibility-audit",
+    "categorized": true
+  },
+  "tools/accidental-data-loss-prevention": {
+    "name": "accidental-data-loss-prevention",
+    "path": "tools/accidental-data-loss-prevention",
+    "categorized": true
+  },
+  "tools/adr-authoring": {
+    "name": "adr-authoring",
+    "path": "tools/adr-authoring",
+    "categorized": true
+  },
+  "tools/adr-discovery": {
+    "name": "adr-discovery",
+    "path": "tools/adr-discovery",
+    "categorized": true
+  },
+  "tools/adr-lifecycle-management": {
+    "name": "adr-lifecycle-management",
+    "path": "tools/adr-lifecycle-management",
+    "categorized": true
+  },
+  "tools/agent-md-refactor": {
+    "name": "agent-md-refactor",
+    "path": "tools/agent-md-refactor",
+    "categorized": true
+  },
+  "tools/agent-orchestration-improve-agent": {
+    "name": "agent-orchestration-improve-agent",
+    "path": "tools/agent-orchestration-improve-agent",
+    "categorized": true
+  },
+  "tools/agent-orchestration-multi-agent-optimize": {
+    "name": "agent-orchestration-multi-agent-optimize",
+    "path": "tools/agent-orchestration-multi-agent-optimize",
+    "categorized": true
+  },
+  "tools/ai-engineer": {
+    "name": "ai-engineer",
+    "path": "tools/ai-engineer",
+    "categorized": true
+  },
+  "tools/airflow-dag-patterns": {
+    "name": "airflow-dag-patterns",
+    "path": "tools/airflow-dag-patterns",
+    "categorized": true
+  },
+  "tools/algorithmic-art": {
+    "name": "algorithmic-art",
+    "path": "tools/algorithmic-art",
+    "categorized": true
+  },
+  "tools/alloydb-omni-access-control": {
+    "name": "alloydb-omni-access-control",
+    "path": "tools/alloydb-omni-access-control",
+    "categorized": true
+  },
+  "tools/alloydb-omni-container": {
+    "name": "alloydb-omni-container",
+    "path": "tools/alloydb-omni-container",
+    "categorized": true
+  },
+  "tools/alloydb-omni-data": {
+    "name": "alloydb-omni-data",
+    "path": "tools/alloydb-omni-data",
+    "categorized": true
+  },
+  "tools/alloydb-omni-health": {
+    "name": "alloydb-omni-health",
+    "path": "tools/alloydb-omni-health",
+    "categorized": true
+  },
+  "tools/alloydb-omni-kubernetes": {
+    "name": "alloydb-omni-kubernetes",
+    "path": "tools/alloydb-omni-kubernetes",
+    "categorized": true
+  },
+  "tools/alloydb-omni-monitor": {
+    "name": "alloydb-omni-monitor",
+    "path": "tools/alloydb-omni-monitor",
+    "categorized": true
+  },
+  "tools/alloydb-omni-optimize": {
+    "name": "alloydb-omni-optimize",
+    "path": "tools/alloydb-omni-optimize",
+    "categorized": true
+  },
+  "tools/alloydb-omni-performance": {
+    "name": "alloydb-omni-performance",
+    "path": "tools/alloydb-omni-performance",
+    "categorized": true
+  },
+  "tools/alloydb-omni-replication": {
+    "name": "alloydb-omni-replication",
+    "path": "tools/alloydb-omni-replication",
+    "categorized": true
+  },
+  "tools/alloydb-postgres-access-management": {
+    "name": "alloydb-postgres-access-management",
+    "path": "tools/alloydb-postgres-access-management",
+    "categorized": true
+  },
+  "tools/alloydb-postgres-admin": {
+    "name": "alloydb-postgres-admin",
+    "path": "tools/alloydb-postgres-admin",
+    "categorized": true
+  },
+  "tools/alloydb-postgres-data": {
+    "name": "alloydb-postgres-data",
+    "path": "tools/alloydb-postgres-data",
+    "categorized": true
+  },
+  "tools/alloydb-postgres-health": {
+    "name": "alloydb-postgres-health",
+    "path": "tools/alloydb-postgres-health",
+    "categorized": true
+  },
+  "tools/alloydb-postgres-monitor": {
+    "name": "alloydb-postgres-monitor",
+    "path": "tools/alloydb-postgres-monitor",
+    "categorized": true
+  },
+  "tools/alloydb-postgres-optimize": {
+    "name": "alloydb-postgres-optimize",
+    "path": "tools/alloydb-postgres-optimize",
+    "categorized": true
+  },
+  "tools/alloydb-postgres-replication": {
+    "name": "alloydb-postgres-replication",
+    "path": "tools/alloydb-postgres-replication",
+    "categorized": true
+  },
+  "tools/angular-migration": {
+    "name": "angular-migration",
+    "path": "tools/angular-migration",
+    "categorized": true
+  },
+  "tools/anti-reversing-techniques": {
+    "name": "anti-reversing-techniques",
+    "path": "tools/anti-reversing-techniques",
+    "categorized": true
+  },
+  "tools/api-design-principles": {
+    "name": "api-design-principles",
+    "path": "tools/api-design-principles",
+    "categorized": true
+  },
+  "tools/api-documenter": {
+    "name": "api-documenter",
+    "path": "tools/api-documenter",
+    "categorized": true
+  },
+  "tools/api-testing-observability-api-mock": {
+    "name": "api-testing-observability-api-mock",
+    "path": "tools/api-testing-observability-api-mock",
+    "categorized": true
+  },
+  "tools/application-performance-performance-optimization": {
+    "name": "application-performance-performance-optimization",
+    "path": "tools/application-performance-performance-optimization",
+    "categorized": true
+  },
+  "tools/architect-review": {
+    "name": "architect-review",
+    "path": "tools/architect-review",
+    "categorized": true
+  },
+  "tools/architecture-decision-records": {
+    "name": "architecture-decision-records",
+    "path": "tools/architecture-decision-records",
+    "categorized": true
+  },
+  "tools/architecture-governance-orchestrator": {
+    "name": "architecture-governance-orchestrator",
+    "path": "tools/architecture-governance-orchestrator",
+    "categorized": true
+  },
+  "tools/architecture-patterns": {
+    "name": "architecture-patterns",
+    "path": "tools/architecture-patterns",
+    "categorized": true
+  },
+  "tools/arm-cortex-expert": {
+    "name": "arm-cortex-expert",
+    "path": "tools/arm-cortex-expert",
+    "categorized": true
+  },
+  "tools/article-illustrations": {
+    "name": "article-illustrations",
+    "path": "tools/article-illustrations",
+    "categorized": true
+  },
+  "tools/artifacts-builder": {
+    "name": "artifacts-builder",
+    "path": "tools/artifacts-builder",
+    "categorized": true
+  },
+  "tools/async-python-patterns": {
+    "name": "async-python-patterns",
+    "path": "tools/async-python-patterns",
+    "categorized": true
+  },
+  "tools/attack-tree-construction": {
+    "name": "attack-tree-construction",
+    "path": "tools/attack-tree-construction",
+    "categorized": true
+  },
+  "tools/auth-implementation-patterns": {
+    "name": "auth-implementation-patterns",
+    "path": "tools/auth-implementation-patterns",
+    "categorized": true
+  },
+  "tools/backend-architect": {
+    "name": "backend-architect",
+    "path": "tools/backend-architect",
+    "categorized": true
+  },
+  "tools/backend-development-feature-development": {
+    "name": "backend-development-feature-development",
+    "path": "tools/backend-development-feature-development",
+    "categorized": true
+  },
+  "tools/backend-security-coder": {
+    "name": "backend-security-coder",
+    "path": "tools/backend-security-coder",
+    "categorized": true
+  },
+  "tools/backend-to-frontend-handoff-docs": {
+    "name": "backend-to-frontend-handoff-docs",
+    "path": "tools/backend-to-frontend-handoff-docs",
+    "categorized": true
+  },
+  "tools/backtesting-frameworks": {
+    "name": "backtesting-frameworks",
+    "path": "tools/backtesting-frameworks",
+    "categorized": true
+  },
+  "tools/bash-defensive-patterns": {
+    "name": "bash-defensive-patterns",
+    "path": "tools/bash-defensive-patterns",
+    "categorized": true
+  },
+  "tools/bash-pro": {
+    "name": "bash-pro",
+    "path": "tools/bash-pro",
+    "categorized": true
+  },
+  "tools/bats-testing-patterns": {
+    "name": "bats-testing-patterns",
+    "path": "tools/bats-testing-patterns",
+    "categorized": true
+  },
+  "tools/bazel-build-optimization": {
+    "name": "bazel-build-optimization",
+    "path": "tools/bazel-build-optimization",
+    "categorized": true
+  },
+  "tools/bigquery-data-transfer-service": {
+    "name": "bigquery-data-transfer-service",
+    "path": "tools/bigquery-data-transfer-service",
+    "categorized": true
+  },
+  "tools/bigquery": {
+    "name": "bigquery",
+    "path": "tools/bigquery",
+    "categorized": true
+  },
+  "tools/billing-automation": {
+    "name": "billing-automation",
+    "path": "tools/billing-automation",
+    "categorized": true
+  },
+  "tools/binary-analysis-patterns": {
+    "name": "binary-analysis-patterns",
+    "path": "tools/binary-analysis-patterns",
+    "categorized": true
+  },
+  "tools/blockchain-developer": {
+    "name": "blockchain-developer",
+    "path": "tools/blockchain-developer",
+    "categorized": true
+  },
+  "tools/brand-guidelines": {
+    "name": "brand-guidelines",
+    "path": "tools/brand-guidelines",
+    "categorized": true
+  },
+  "tools/building-data-apps": {
+    "name": "building-data-apps",
+    "path": "tools/building-data-apps",
+    "categorized": true
+  },
+  "tools/business-analyst": {
+    "name": "business-analyst",
+    "path": "tools/business-analyst",
+    "categorized": true
+  },
+  "tools/c-pro": {
+    "name": "c-pro",
+    "path": "tools/c-pro",
+    "categorized": true
+  },
+  "tools/c4-architecture-c4-architecture": {
+    "name": "c4-architecture-c4-architecture",
+    "path": "tools/c4-architecture-c4-architecture",
+    "categorized": true
+  },
+  "tools/c4-architecture": {
+    "name": "c4-architecture",
+    "path": "tools/c4-architecture",
+    "categorized": true
+  },
+  "tools/c4-code": {
+    "name": "c4-code",
+    "path": "tools/c4-code",
+    "categorized": true
+  },
+  "tools/c4-component": {
+    "name": "c4-component",
+    "path": "tools/c4-component",
+    "categorized": true
+  },
+  "tools/c4-container": {
+    "name": "c4-container",
+    "path": "tools/c4-container",
+    "categorized": true
+  },
+  "tools/c4-context": {
+    "name": "c4-context",
+    "path": "tools/c4-context",
+    "categorized": true
+  },
+  "tools/canvas-design": {
+    "name": "canvas-design",
+    "path": "tools/canvas-design",
+    "categorized": true
+  },
+  "tools/changelog-automation": {
+    "name": "changelog-automation",
+    "path": "tools/changelog-automation",
+    "categorized": true
+  },
+  "tools/changelog-generator": {
+    "name": "changelog-generator",
+    "path": "tools/changelog-generator",
+    "categorized": true
+  },
+  "tools/cicd-automation-workflow-automate": {
+    "name": "cicd-automation-workflow-automate",
+    "path": "tools/cicd-automation-workflow-automate",
+    "categorized": true
+  },
+  "tools/cloud-architect": {
+    "name": "cloud-architect",
+    "path": "tools/cloud-architect",
+    "categorized": true
+  },
+  "tools/cloud-sql-mysql-admin": {
+    "name": "cloud-sql-mysql-admin",
+    "path": "tools/cloud-sql-mysql-admin",
+    "categorized": true
+  },
+  "tools/cloud-sql-mysql-data": {
+    "name": "cloud-sql-mysql-data",
+    "path": "tools/cloud-sql-mysql-data",
+    "categorized": true
+  },
+  "tools/cloud-sql-mysql-lifecycle": {
+    "name": "cloud-sql-mysql-lifecycle",
+    "path": "tools/cloud-sql-mysql-lifecycle",
+    "categorized": true
+  },
+  "tools/cloud-sql-mysql-monitor": {
+    "name": "cloud-sql-mysql-monitor",
+    "path": "tools/cloud-sql-mysql-monitor",
+    "categorized": true
+  },
+  "tools/cloud-sql-postgres-admin": {
+    "name": "cloud-sql-postgres-admin",
+    "path": "tools/cloud-sql-postgres-admin",
+    "categorized": true
+  },
+  "tools/cloud-sql-postgres-data": {
+    "name": "cloud-sql-postgres-data",
+    "path": "tools/cloud-sql-postgres-data",
+    "categorized": true
+  },
+  "tools/cloud-sql-postgres-health": {
+    "name": "cloud-sql-postgres-health",
+    "path": "tools/cloud-sql-postgres-health",
+    "categorized": true
+  },
+  "tools/cloud-sql-postgres-lifecycle": {
+    "name": "cloud-sql-postgres-lifecycle",
+    "path": "tools/cloud-sql-postgres-lifecycle",
+    "categorized": true
+  },
+  "tools/cloud-sql-postgres-monitor": {
+    "name": "cloud-sql-postgres-monitor",
+    "path": "tools/cloud-sql-postgres-monitor",
+    "categorized": true
+  },
+  "tools/cloud-sql-postgres-replication": {
+    "name": "cloud-sql-postgres-replication",
+    "path": "tools/cloud-sql-postgres-replication",
+    "categorized": true
+  },
+  "tools/cloud-sql-postgres-vectorassist": {
+    "name": "cloud-sql-postgres-vectorassist",
+    "path": "tools/cloud-sql-postgres-vectorassist",
+    "categorized": true
+  },
+  "tools/cloud-sql-postgres-view-config": {
+    "name": "cloud-sql-postgres-view-config",
+    "path": "tools/cloud-sql-postgres-view-config",
+    "categorized": true
+  },
+  "tools/cloud-sql-sqlserver-admin": {
+    "name": "cloud-sql-sqlserver-admin",
+    "path": "tools/cloud-sql-sqlserver-admin",
+    "categorized": true
+  },
+  "tools/cloud-sql-sqlserver-data": {
+    "name": "cloud-sql-sqlserver-data",
+    "path": "tools/cloud-sql-sqlserver-data",
+    "categorized": true
+  },
+  "tools/cloud-sql-sqlserver-lifecycle": {
+    "name": "cloud-sql-sqlserver-lifecycle",
+    "path": "tools/cloud-sql-sqlserver-lifecycle",
+    "categorized": true
+  },
+  "tools/cloud-sql-sqlserver-monitor": {
+    "name": "cloud-sql-sqlserver-monitor",
+    "path": "tools/cloud-sql-sqlserver-monitor",
+    "categorized": true
+  },
+  "tools/code-documentation-code-explain": {
+    "name": "code-documentation-code-explain",
+    "path": "tools/code-documentation-code-explain",
+    "categorized": true
+  },
+  "tools/code-documentation-doc-generate": {
+    "name": "code-documentation-doc-generate",
+    "path": "tools/code-documentation-doc-generate",
+    "categorized": true
+  },
+  "tools/code-refactoring-context-restore": {
+    "name": "code-refactoring-context-restore",
+    "path": "tools/code-refactoring-context-restore",
+    "categorized": true
+  },
+  "tools/code-refactoring-refactor-clean": {
+    "name": "code-refactoring-refactor-clean",
+    "path": "tools/code-refactoring-refactor-clean",
+    "categorized": true
+  },
+  "tools/code-refactoring-tech-debt": {
+    "name": "code-refactoring-tech-debt",
+    "path": "tools/code-refactoring-tech-debt",
+    "categorized": true
+  },
+  "tools/code-review-ai-ai-review": {
+    "name": "code-review-ai-ai-review",
+    "path": "tools/code-review-ai-ai-review",
+    "categorized": true
+  },
+  "tools/code-review-excellence": {
+    "name": "code-review-excellence",
+    "path": "tools/code-review-excellence",
+    "categorized": true
+  },
+  "tools/code-reviewer": {
+    "name": "code-reviewer",
+    "path": "tools/code-reviewer",
+    "categorized": true
+  },
+  "tools/codebase-cleanup-deps-audit": {
+    "name": "codebase-cleanup-deps-audit",
+    "path": "tools/codebase-cleanup-deps-audit",
+    "categorized": true
+  },
+  "tools/codebase-cleanup-refactor-clean": {
+    "name": "codebase-cleanup-refactor-clean",
+    "path": "tools/codebase-cleanup-refactor-clean",
+    "categorized": true
+  },
+  "tools/codebase-cleanup-tech-debt": {
+    "name": "codebase-cleanup-tech-debt",
+    "path": "tools/codebase-cleanup-tech-debt",
+    "categorized": true
+  },
+  "tools/codex": {
+    "name": "codex",
+    "path": "tools/codex",
+    "categorized": true
+  },
+  "tools/command-creator": {
+    "name": "command-creator",
+    "path": "tools/command-creator",
+    "categorized": true
+  },
+  "tools/commit-work": {
+    "name": "commit-work",
+    "path": "tools/commit-work",
+    "categorized": true
+  },
+  "tools/competitive-ads-extractor": {
+    "name": "competitive-ads-extractor",
+    "path": "tools/competitive-ads-extractor",
+    "categorized": true
+  },
+  "tools/competitive-landscape": {
+    "name": "competitive-landscape",
+    "path": "tools/competitive-landscape",
+    "categorized": true
+  },
+  "tools/comprehensive-review-full-review": {
+    "name": "comprehensive-review-full-review",
+    "path": "tools/comprehensive-review-full-review",
+    "categorized": true
+  },
+  "tools/comprehensive-review-pr-enhance": {
+    "name": "comprehensive-review-pr-enhance",
+    "path": "tools/comprehensive-review-pr-enhance",
+    "categorized": true
+  },
+  "tools/conductor-implement": {
+    "name": "conductor-implement",
+    "path": "tools/conductor-implement",
+    "categorized": true
+  },
+  "tools/conductor-manage": {
+    "name": "conductor-manage",
+    "path": "tools/conductor-manage",
+    "categorized": true
+  },
+  "tools/conductor-new-track": {
+    "name": "conductor-new-track",
+    "path": "tools/conductor-new-track",
+    "categorized": true
+  },
+  "tools/conductor-revert": {
+    "name": "conductor-revert",
+    "path": "tools/conductor-revert",
+    "categorized": true
+  },
+  "tools/conductor-setup": {
+    "name": "conductor-setup",
+    "path": "tools/conductor-setup",
+    "categorized": true
+  },
+  "tools/conductor-status": {
+    "name": "conductor-status",
+    "path": "tools/conductor-status",
+    "categorized": true
+  },
+  "tools/conductor-validator": {
+    "name": "conductor-validator",
+    "path": "tools/conductor-validator",
+    "categorized": true
+  },
+  "tools/content-governance-orchestrator": {
+    "name": "content-governance-orchestrator",
+    "path": "tools/content-governance-orchestrator",
+    "categorized": true
+  },
+  "tools/content-marketer": {
+    "name": "content-marketer",
+    "path": "tools/content-marketer",
+    "categorized": true
+  },
+  "tools/content-research-writer": {
+    "name": "content-research-writer",
+    "path": "tools/content-research-writer",
+    "categorized": true
+  },
+  "tools/context-driven-development": {
+    "name": "context-driven-development",
+    "path": "tools/context-driven-development",
+    "categorized": true
+  },
+  "tools/context-management-context-restore": {
+    "name": "context-management-context-restore",
+    "path": "tools/context-management-context-restore",
+    "categorized": true
+  },
+  "tools/context-management-context-save": {
+    "name": "context-management-context-save",
+    "path": "tools/context-management-context-save",
+    "categorized": true
+  },
+  "tools/context-manager": {
+    "name": "context-manager",
+    "path": "tools/context-manager",
+    "categorized": true
+  },
+  "tools/cost-optimization": {
+    "name": "cost-optimization",
+    "path": "tools/cost-optimization",
+    "categorized": true
+  },
+  "tools/cpp-pro": {
+    "name": "cpp-pro",
+    "path": "tools/cpp-pro",
+    "categorized": true
+  },
+  "tools/cqrs-implementation": {
+    "name": "cqrs-implementation",
+    "path": "tools/cqrs-implementation",
+    "categorized": true
+  },
+  "tools/crafting-effective-readmes": {
+    "name": "crafting-effective-readmes",
+    "path": "tools/crafting-effective-readmes",
+    "categorized": true
+  },
+  "tools/csharp-pro": {
+    "name": "csharp-pro",
+    "path": "tools/csharp-pro",
+    "categorized": true
+  },
+  "tools/custom-code-reviewer": {
+    "name": "custom-code-reviewer",
+    "path": "tools/custom-code-reviewer",
+    "categorized": true
+  },
+  "tools/customer-support": {
+    "name": "customer-support",
+    "path": "tools/customer-support",
+    "categorized": true
+  },
+  "tools/daily-meeting-update": {
+    "name": "daily-meeting-update",
+    "path": "tools/daily-meeting-update",
+    "categorized": true
+  },
+  "tools/data-autocleaning": {
+    "name": "data-autocleaning",
+    "path": "tools/data-autocleaning",
+    "categorized": true
+  },
+  "tools/data-engineer": {
+    "name": "data-engineer",
+    "path": "tools/data-engineer",
+    "categorized": true
+  },
+  "tools/data-engineering-data-driven-feature": {
+    "name": "data-engineering-data-driven-feature",
+    "path": "tools/data-engineering-data-driven-feature",
+    "categorized": true
+  },
+  "tools/data-engineering-data-pipeline": {
+    "name": "data-engineering-data-pipeline",
+    "path": "tools/data-engineering-data-pipeline",
+    "categorized": true
+  },
+  "tools/data-quality-frameworks": {
+    "name": "data-quality-frameworks",
+    "path": "tools/data-quality-frameworks",
+    "categorized": true
+  },
+  "tools/data-scientist": {
+    "name": "data-scientist",
+    "path": "tools/data-scientist",
+    "categorized": true
+  },
+  "tools/data-storytelling": {
+    "name": "data-storytelling",
+    "path": "tools/data-storytelling",
+    "categorized": true
+  },
+  "tools/database-admin": {
+    "name": "database-admin",
+    "path": "tools/database-admin",
+    "categorized": true
+  },
+  "tools/database-architect": {
+    "name": "database-architect",
+    "path": "tools/database-architect",
+    "categorized": true
+  },
+  "tools/database-cloud-optimization-cost-optimize": {
+    "name": "database-cloud-optimization-cost-optimize",
+    "path": "tools/database-cloud-optimization-cost-optimize",
+    "categorized": true
+  },
+  "tools/database-migration": {
+    "name": "database-migration",
+    "path": "tools/database-migration",
+    "categorized": true
+  },
+  "tools/database-migrations-migration-observability": {
+    "name": "database-migrations-migration-observability",
+    "path": "tools/database-migrations-migration-observability",
+    "categorized": true
+  },
+  "tools/database-migrations-sql-migrations": {
+    "name": "database-migrations-sql-migrations",
+    "path": "tools/database-migrations-sql-migrations",
+    "categorized": true
+  },
+  "tools/database-optimizer": {
+    "name": "database-optimizer",
+    "path": "tools/database-optimizer",
+    "categorized": true
+  },
+  "tools/database-schema-designer": {
+    "name": "database-schema-designer",
+    "path": "tools/database-schema-designer",
+    "categorized": true
+  },
+  "tools/datadog-cli": {
+    "name": "datadog-cli",
+    "path": "tools/datadog-cli",
+    "categorized": true
+  },
+  "tools/dataform-bigquery": {
+    "name": "dataform-bigquery",
+    "path": "tools/dataform-bigquery",
+    "categorized": true
+  },
+  "tools/dbt-bigquery": {
+    "name": "dbt-bigquery",
+    "path": "tools/dbt-bigquery",
+    "categorized": true
+  },
+  "tools/dbt-transformation-patterns": {
+    "name": "dbt-transformation-patterns",
+    "path": "tools/dbt-transformation-patterns",
+    "categorized": true
+  },
+  "tools/debugger": {
+    "name": "debugger",
+    "path": "tools/debugger",
+    "categorized": true
+  },
+  "tools/debugging-strategies": {
+    "name": "debugging-strategies",
+    "path": "tools/debugging-strategies",
+    "categorized": true
+  },
+  "tools/debugging-toolkit-smart-debug": {
+    "name": "debugging-toolkit-smart-debug",
+    "path": "tools/debugging-toolkit-smart-debug",
+    "categorized": true
+  },
+  "tools/defi-protocol-templates": {
+    "name": "defi-protocol-templates",
+    "path": "tools/defi-protocol-templates",
+    "categorized": true
+  },
+  "tools/dependency-lifecycle-orchestrator": {
+    "name": "dependency-lifecycle-orchestrator",
+    "path": "tools/dependency-lifecycle-orchestrator",
+    "categorized": true
+  },
+  "tools/dependency-management-deps-audit": {
+    "name": "dependency-management-deps-audit",
+    "path": "tools/dependency-management-deps-audit",
+    "categorized": true
+  },
+  "tools/dependency-updater": {
+    "name": "dependency-updater",
+    "path": "tools/dependency-updater",
+    "categorized": true
+  },
+  "tools/dependency-upgrade": {
+    "name": "dependency-upgrade",
+    "path": "tools/dependency-upgrade",
+    "categorized": true
+  },
+  "tools/deployment-engineer": {
+    "name": "deployment-engineer",
+    "path": "tools/deployment-engineer",
+    "categorized": true
+  },
+  "tools/deployment-pipeline-design": {
+    "name": "deployment-pipeline-design",
+    "path": "tools/deployment-pipeline-design",
+    "categorized": true
+  },
+  "tools/deployment-validation-config-validate": {
+    "name": "deployment-validation-config-validate",
+    "path": "tools/deployment-validation-config-validate",
+    "categorized": true
+  },
+  "tools/design-system-starter": {
+    "name": "design-system-starter",
+    "path": "tools/design-system-starter",
+    "categorized": true
+  },
+  "tools/devops-troubleshooter": {
+    "name": "devops-troubleshooter",
+    "path": "tools/devops-troubleshooter",
+    "categorized": true
+  },
+  "tools/difficult-workplace-conversations": {
+    "name": "difficult-workplace-conversations",
+    "path": "tools/difficult-workplace-conversations",
+    "categorized": true
+  },
+  "tools/director": {
+    "name": "director",
+    "path": "tools/director",
+    "categorized": true
+  },
+  "tools/discovering-gcp-data-assets": {
+    "name": "discovering-gcp-data-assets",
+    "path": "tools/discovering-gcp-data-assets",
+    "categorized": true
+  },
+  "tools/distributed-debugging-debug-trace": {
+    "name": "distributed-debugging-debug-trace",
+    "path": "tools/distributed-debugging-debug-trace",
+    "categorized": true
+  },
+  "tools/distributed-tracing": {
+    "name": "distributed-tracing",
+    "path": "tools/distributed-tracing",
+    "categorized": true
+  },
+  "tools/django-pro": {
+    "name": "django-pro",
+    "path": "tools/django-pro",
+    "categorized": true
+  },
+  "tools/docs-architect": {
+    "name": "docs-architect",
+    "path": "tools/docs-architect",
+    "categorized": true
+  },
+  "tools/documentation-generation-doc-generate": {
+    "name": "documentation-generation-doc-generate",
+    "path": "tools/documentation-generation-doc-generate",
+    "categorized": true
+  },
+  "tools/docx": {
+    "name": "docx",
+    "path": "tools/docx",
+    "categorized": true
+  },
+  "tools/domain-name-brainstormer": {
+    "name": "domain-name-brainstormer",
+    "path": "tools/domain-name-brainstormer",
+    "categorized": true
+  },
+  "tools/dotnet-architect": {
+    "name": "dotnet-architect",
+    "path": "tools/dotnet-architect",
+    "categorized": true
+  },
+  "tools/dotnet-backend-patterns": {
+    "name": "dotnet-backend-patterns",
+    "path": "tools/dotnet-backend-patterns",
+    "categorized": true
+  },
+  "tools/draw-io": {
+    "name": "draw-io",
+    "path": "tools/draw-io",
+    "categorized": true
+  },
+  "tools/dx-optimizer": {
+    "name": "dx-optimizer",
+    "path": "tools/dx-optimizer",
+    "categorized": true
+  },
+  "tools/e2e-testing-patterns": {
+    "name": "e2e-testing-patterns",
+    "path": "tools/e2e-testing-patterns",
+    "categorized": true
+  },
+  "tools/elixir-pro": {
+    "name": "elixir-pro",
+    "path": "tools/elixir-pro",
+    "categorized": true
+  },
+  "tools/embedding-strategies": {
+    "name": "embedding-strategies",
+    "path": "tools/embedding-strategies",
+    "categorized": true
+  },
+  "tools/employment-contract-templates": {
+    "name": "employment-contract-templates",
+    "path": "tools/employment-contract-templates",
+    "categorized": true
+  },
+  "tools/error-debugging-error-analysis": {
+    "name": "error-debugging-error-analysis",
+    "path": "tools/error-debugging-error-analysis",
+    "categorized": true
+  },
+  "tools/error-debugging-error-trace": {
+    "name": "error-debugging-error-trace",
+    "path": "tools/error-debugging-error-trace",
+    "categorized": true
+  },
+  "tools/error-debugging-multi-agent-review": {
+    "name": "error-debugging-multi-agent-review",
+    "path": "tools/error-debugging-multi-agent-review",
+    "categorized": true
+  },
+  "tools/error-detective": {
+    "name": "error-detective",
+    "path": "tools/error-detective",
+    "categorized": true
+  },
+  "tools/error-diagnostics-error-analysis": {
+    "name": "error-diagnostics-error-analysis",
+    "path": "tools/error-diagnostics-error-analysis",
+    "categorized": true
+  },
+  "tools/error-diagnostics-error-trace": {
+    "name": "error-diagnostics-error-trace",
+    "path": "tools/error-diagnostics-error-trace",
+    "categorized": true
+  },
+  "tools/error-diagnostics-orchestrator": {
+    "name": "error-diagnostics-orchestrator",
+    "path": "tools/error-diagnostics-orchestrator",
+    "categorized": true
+  },
+  "tools/error-diagnostics-smart-debug": {
+    "name": "error-diagnostics-smart-debug",
+    "path": "tools/error-diagnostics-smart-debug",
+    "categorized": true
+  },
+  "tools/error-handling-patterns": {
+    "name": "error-handling-patterns",
+    "path": "tools/error-handling-patterns",
+    "categorized": true
+  },
+  "tools/event-sourcing-architect": {
+    "name": "event-sourcing-architect",
+    "path": "tools/event-sourcing-architect",
+    "categorized": true
+  },
+  "tools/event-store-design": {
+    "name": "event-store-design",
+    "path": "tools/event-store-design",
+    "categorized": true
+  },
+  "tools/excalidraw": {
+    "name": "excalidraw",
+    "path": "tools/excalidraw",
+    "categorized": true
+  },
+  "tools/fastapi-pro": {
+    "name": "fastapi-pro",
+    "path": "tools/fastapi-pro",
+    "categorized": true
+  },
+  "tools/fastapi-templates": {
+    "name": "fastapi-templates",
+    "path": "tools/fastapi-templates",
+    "categorized": true
+  },
+  "tools/federate-lakehouse-catalog": {
+    "name": "federate-lakehouse-catalog",
+    "path": "tools/federate-lakehouse-catalog",
+    "categorized": true
+  },
+  "tools/feedback-mastery": {
+    "name": "feedback-mastery",
+    "path": "tools/feedback-mastery",
+    "categorized": true
+  },
+  "tools/file-organizer": {
+    "name": "file-organizer",
+    "path": "tools/file-organizer",
+    "categorized": true
+  },
+  "tools/firestore-data": {
+    "name": "firestore-data",
+    "path": "tools/firestore-data",
+    "categorized": true
+  },
+  "tools/firmware-analyst": {
+    "name": "firmware-analyst",
+    "path": "tools/firmware-analyst",
+    "categorized": true
+  },
+  "tools/flutter-expert": {
+    "name": "flutter-expert",
+    "path": "tools/flutter-expert",
+    "categorized": true
+  },
+  "tools/framework-migration-code-migrate": {
+    "name": "framework-migration-code-migrate",
+    "path": "tools/framework-migration-code-migrate",
+    "categorized": true
+  },
+  "tools/framework-migration-deps-upgrade": {
+    "name": "framework-migration-deps-upgrade",
+    "path": "tools/framework-migration-deps-upgrade",
+    "categorized": true
+  },
+  "tools/framework-migration-legacy-modernize": {
+    "name": "framework-migration-legacy-modernize",
+    "path": "tools/framework-migration-legacy-modernize",
+    "categorized": true
+  },
+  "tools/frontend-developer": {
+    "name": "frontend-developer",
+    "path": "tools/frontend-developer",
+    "categorized": true
+  },
+  "tools/frontend-mobile-development-component-scaffold": {
+    "name": "frontend-mobile-development-component-scaffold",
+    "path": "tools/frontend-mobile-development-component-scaffold",
+    "categorized": true
+  },
+  "tools/frontend-mobile-security-xss-scan": {
+    "name": "frontend-mobile-security-xss-scan",
+    "path": "tools/frontend-mobile-security-xss-scan",
+    "categorized": true
+  },
+  "tools/frontend-security-coder": {
+    "name": "frontend-security-coder",
+    "path": "tools/frontend-security-coder",
+    "categorized": true
+  },
+  "tools/frontend-to-backend-requirements": {
+    "name": "frontend-to-backend-requirements",
+    "path": "tools/frontend-to-backend-requirements",
+    "categorized": true
+  },
+  "tools/full-stack-orchestration-full-stack-feature": {
+    "name": "full-stack-orchestration-full-stack-feature",
+    "path": "tools/full-stack-orchestration-full-stack-feature",
+    "categorized": true
+  },
+  "tools/game-changing-features": {
+    "name": "game-changing-features",
+    "path": "tools/game-changing-features",
+    "categorized": true
+  },
+  "tools/gcloud-auth-verification": {
+    "name": "gcloud-auth-verification",
+    "path": "tools/gcloud-auth-verification",
+    "categorized": true
+  },
+  "tools/gcp-composer-troubleshooting": {
+    "name": "gcp-composer-troubleshooting",
+    "path": "tools/gcp-composer-troubleshooting",
+    "categorized": true
+  },
+  "tools/gcp-data-pipelines": {
+    "name": "gcp-data-pipelines",
+    "path": "tools/gcp-data-pipelines",
+    "categorized": true
+  },
+  "tools/gcp-dataflow": {
+    "name": "gcp-dataflow",
+    "path": "tools/gcp-dataflow",
+    "categorized": true
+  },
+  "tools/gcp-managed-airflow-migrations": {
+    "name": "gcp-managed-airflow-migrations",
+    "path": "tools/gcp-managed-airflow-migrations",
+    "categorized": true
+  },
+  "tools/gcp-pipeline-orchestration": {
+    "name": "gcp-pipeline-orchestration",
+    "path": "tools/gcp-pipeline-orchestration",
+    "categorized": true
+  },
+  "tools/gcp-pipeline-resource-provisioning": {
+    "name": "gcp-pipeline-resource-provisioning",
+    "path": "tools/gcp-pipeline-resource-provisioning",
+    "categorized": true
+  },
+  "tools/gcp-spark": {
+    "name": "gcp-spark",
+    "path": "tools/gcp-spark",
+    "categorized": true
+  },
+  "tools/gcs-security-assessment": {
+    "name": "gcs-security-assessment",
+    "path": "tools/gcs-security-assessment",
+    "categorized": true
+  },
+  "tools/gdpr-data-handling": {
+    "name": "gdpr-data-handling",
+    "path": "tools/gdpr-data-handling",
+    "categorized": true
+  },
+  "tools/gemini": {
+    "name": "gemini",
+    "path": "tools/gemini",
+    "categorized": true
+  },
+  "tools/gepetto": {
+    "name": "gepetto",
+    "path": "tools/gepetto",
+    "categorized": true
+  },
+  "tools/git-advanced-workflows": {
+    "name": "git-advanced-workflows",
+    "path": "tools/git-advanced-workflows",
+    "categorized": true
+  },
+  "tools/git-pr-workflows-git-workflow": {
+    "name": "git-pr-workflows-git-workflow",
+    "path": "tools/git-pr-workflows-git-workflow",
+    "categorized": true
+  },
+  "tools/git-pr-workflows-onboard": {
+    "name": "git-pr-workflows-onboard",
+    "path": "tools/git-pr-workflows-onboard",
+    "categorized": true
+  },
+  "tools/git-pr-workflows-pr-enhance": {
+    "name": "git-pr-workflows-pr-enhance",
+    "path": "tools/git-pr-workflows-pr-enhance",
+    "categorized": true
+  },
+  "tools/github-actions-node24": {
+    "name": "github-actions-node24",
+    "path": "tools/github-actions-node24",
+    "categorized": true
+  },
+  "tools/github-actions-templates": {
+    "name": "github-actions-templates",
+    "path": "tools/github-actions-templates",
+    "categorized": true
+  },
+  "tools/gitlab-ci-patterns": {
+    "name": "gitlab-ci-patterns",
+    "path": "tools/gitlab-ci-patterns",
+    "categorized": true
+  },
+  "tools/gitops-workflow": {
+    "name": "gitops-workflow",
+    "path": "tools/gitops-workflow",
+    "categorized": true
+  },
+  "tools/go-concurrency-patterns": {
+    "name": "go-concurrency-patterns",
+    "path": "tools/go-concurrency-patterns",
+    "categorized": true
+  },
+  "tools/godot-gdscript-patterns": {
+    "name": "godot-gdscript-patterns",
+    "path": "tools/godot-gdscript-patterns",
+    "categorized": true
+  },
+  "tools/golang-pro": {
+    "name": "golang-pro",
+    "path": "tools/golang-pro",
+    "categorized": true
+  },
+  "tools/grafana-dashboards": {
+    "name": "grafana-dashboards",
+    "path": "tools/grafana-dashboards",
+    "categorized": true
+  },
+  "tools/graphql-architect": {
+    "name": "graphql-architect",
+    "path": "tools/graphql-architect",
+    "categorized": true
+  },
+  "tools/haskell-pro": {
+    "name": "haskell-pro",
+    "path": "tools/haskell-pro",
+    "categorized": true
+  },
+  "tools/helm-chart-scaffolding": {
+    "name": "helm-chart-scaffolding",
+    "path": "tools/helm-chart-scaffolding",
+    "categorized": true
+  },
+  "tools/hr-pro": {
+    "name": "hr-pro",
+    "path": "tools/hr-pro",
+    "categorized": true
+  },
+  "tools/humanizer": {
+    "name": "humanizer",
+    "path": "tools/humanizer",
+    "categorized": true
+  },
+  "tools/hybrid-cloud-architect": {
+    "name": "hybrid-cloud-architect",
+    "path": "tools/hybrid-cloud-architect",
+    "categorized": true
+  },
+  "tools/hybrid-cloud-networking": {
+    "name": "hybrid-cloud-networking",
+    "path": "tools/hybrid-cloud-networking",
+    "categorized": true
+  },
+  "tools/hybrid-search-implementation": {
+    "name": "hybrid-search-implementation",
+    "path": "tools/hybrid-search-implementation",
+    "categorized": true
+  },
+  "tools/hyperframes-cli": {
+    "name": "hyperframes-cli",
+    "path": "tools/hyperframes-cli",
+    "categorized": true
+  },
+  "tools/hyperframes-registry": {
+    "name": "hyperframes-registry",
+    "path": "tools/hyperframes-registry",
+    "categorized": true
+  },
+  "tools/hyperframes": {
+    "name": "hyperframes",
+    "path": "tools/hyperframes",
+    "categorized": true
+  },
+  "tools/image-enhancer": {
+    "name": "image-enhancer",
+    "path": "tools/image-enhancer",
+    "categorized": true
+  },
+  "tools/incident-responder": {
+    "name": "incident-responder",
+    "path": "tools/incident-responder",
+    "categorized": true
+  },
+  "tools/incident-response-incident-response": {
+    "name": "incident-response-incident-response",
+    "path": "tools/incident-response-incident-response",
+    "categorized": true
+  },
+  "tools/incident-response-smart-fix": {
+    "name": "incident-response-smart-fix",
+    "path": "tools/incident-response-smart-fix",
+    "categorized": true
+  },
+  "tools/incident-runbook-templates": {
+    "name": "incident-runbook-templates",
+    "path": "tools/incident-runbook-templates",
+    "categorized": true
+  },
+  "tools/install-adr-gatekeeper": {
+    "name": "install-adr-gatekeeper",
+    "path": "tools/install-adr-gatekeeper",
+    "categorized": true
+  },
+  "tools/internal-comms": {
+    "name": "internal-comms",
+    "path": "tools/internal-comms",
+    "categorized": true
+  },
+  "tools/invoice-organizer": {
+    "name": "invoice-organizer",
+    "path": "tools/invoice-organizer",
+    "categorized": true
+  },
+  "tools/ios-developer": {
+    "name": "ios-developer",
+    "path": "tools/ios-developer",
+    "categorized": true
+  },
+  "tools/istio-traffic-management": {
+    "name": "istio-traffic-management",
+    "path": "tools/istio-traffic-management",
+    "categorized": true
+  },
+  "tools/java-pro": {
+    "name": "java-pro",
+    "path": "tools/java-pro",
+    "categorized": true
+  },
+  "tools/javascript-pro": {
+    "name": "javascript-pro",
+    "path": "tools/javascript-pro",
+    "categorized": true
+  },
+  "tools/javascript-testing-patterns": {
+    "name": "javascript-testing-patterns",
+    "path": "tools/javascript-testing-patterns",
+    "categorized": true
+  },
+  "tools/javascript-typescript-typescript-scaffold": {
+    "name": "javascript-typescript-typescript-scaffold",
+    "path": "tools/javascript-typescript-typescript-scaffold",
+    "categorized": true
+  },
+  "tools/jira": {
+    "name": "jira",
+    "path": "tools/jira",
+    "categorized": true
+  },
+  "tools/julia-pro": {
+    "name": "julia-pro",
+    "path": "tools/julia-pro",
+    "categorized": true
+  },
+  "tools/k8s-manifest-generator": {
+    "name": "k8s-manifest-generator",
+    "path": "tools/k8s-manifest-generator",
+    "categorized": true
+  },
+  "tools/k8s-security-policies": {
+    "name": "k8s-security-policies",
+    "path": "tools/k8s-security-policies",
+    "categorized": true
+  },
+  "tools/kpi-dashboard-design": {
+    "name": "kpi-dashboard-design",
+    "path": "tools/kpi-dashboard-design",
+    "categorized": true
+  },
+  "tools/kubernetes-architect": {
+    "name": "kubernetes-architect",
+    "path": "tools/kubernetes-architect",
+    "categorized": true
+  },
+  "tools/langchain-architecture": {
+    "name": "langchain-architecture",
+    "path": "tools/langchain-architecture",
+    "categorized": true
+  },
+  "tools/lead-research-assistant": {
+    "name": "lead-research-assistant",
+    "path": "tools/lead-research-assistant",
+    "categorized": true
+  },
+  "tools/legacy-modernizer": {
+    "name": "legacy-modernizer",
+    "path": "tools/legacy-modernizer",
+    "categorized": true
+  },
+  "tools/legal-advisor": {
+    "name": "legal-advisor",
+    "path": "tools/legal-advisor",
+    "categorized": true
+  },
+  "tools/lesson-learned": {
+    "name": "lesson-learned",
+    "path": "tools/lesson-learned",
+    "categorized": true
+  },
+  "tools/linkerd-patterns": {
+    "name": "linkerd-patterns",
+    "path": "tools/linkerd-patterns",
+    "categorized": true
+  },
+  "tools/llm-application-dev-ai-assistant": {
+    "name": "llm-application-dev-ai-assistant",
+    "path": "tools/llm-application-dev-ai-assistant",
+    "categorized": true
+  },
+  "tools/llm-application-dev-langchain-agent": {
+    "name": "llm-application-dev-langchain-agent",
+    "path": "tools/llm-application-dev-langchain-agent",
+    "categorized": true
+  },
+  "tools/llm-application-dev-prompt-optimize": {
+    "name": "llm-application-dev-prompt-optimize",
+    "path": "tools/llm-application-dev-prompt-optimize",
+    "categorized": true
+  },
+  "tools/llm-evaluation": {
+    "name": "llm-evaluation",
+    "path": "tools/llm-evaluation",
+    "categorized": true
+  },
+  "tools/machine-learning-ops-ml-pipeline": {
+    "name": "machine-learning-ops-ml-pipeline",
+    "path": "tools/machine-learning-ops-ml-pipeline",
+    "categorized": true
+  },
+  "tools/malware-analyst": {
+    "name": "malware-analyst",
+    "path": "tools/malware-analyst",
+    "categorized": true
+  },
+  "tools/managing-python-dependencies": {
+    "name": "managing-python-dependencies",
+    "path": "tools/managing-python-dependencies",
+    "categorized": true
+  },
+  "tools/market-sizing-analysis": {
+    "name": "market-sizing-analysis",
+    "path": "tools/market-sizing-analysis",
+    "categorized": true
+  },
+  "tools/marp-slide": {
+    "name": "marp-slide",
+    "path": "tools/marp-slide",
+    "categorized": true
+  },
+  "tools/mcp-builder": {
+    "name": "mcp-builder",
+    "path": "tools/mcp-builder",
+    "categorized": true
+  },
+  "tools/meeting-insights-analyzer": {
+    "name": "meeting-insights-analyzer",
+    "path": "tools/meeting-insights-analyzer",
+    "categorized": true
+  },
+  "tools/meme-factory": {
+    "name": "meme-factory",
+    "path": "tools/meme-factory",
+    "categorized": true
+  },
+  "tools/memory-capture": {
+    "name": "memory-capture",
+    "path": "tools/memory-capture",
+    "categorized": true
+  },
+  "tools/memory-forensics": {
+    "name": "memory-forensics",
+    "path": "tools/memory-forensics",
+    "categorized": true
+  },
+  "tools/memory-safety-patterns": {
+    "name": "memory-safety-patterns",
+    "path": "tools/memory-safety-patterns",
+    "categorized": true
+  },
+  "tools/mermaid-diagrams": {
+    "name": "mermaid-diagrams",
+    "path": "tools/mermaid-diagrams",
+    "categorized": true
+  },
+  "tools/mermaid-expert": {
+    "name": "mermaid-expert",
+    "path": "tools/mermaid-expert",
+    "categorized": true
+  },
+  "tools/microservices-patterns": {
+    "name": "microservices-patterns",
+    "path": "tools/microservices-patterns",
+    "categorized": true
+  },
+  "tools/minecraft-bukkit-pro": {
+    "name": "minecraft-bukkit-pro",
+    "path": "tools/minecraft-bukkit-pro",
+    "categorized": true
+  },
+  "tools/ml-best-practices": {
+    "name": "ml-best-practices",
+    "path": "tools/ml-best-practices",
+    "categorized": true
+  },
+  "tools/ml-engineer": {
+    "name": "ml-engineer",
+    "path": "tools/ml-engineer",
+    "categorized": true
+  },
+  "tools/ml-pipeline-workflow": {
+    "name": "ml-pipeline-workflow",
+    "path": "tools/ml-pipeline-workflow",
+    "categorized": true
+  },
+  "tools/mlops-engineer": {
+    "name": "mlops-engineer",
+    "path": "tools/mlops-engineer",
+    "categorized": true
+  },
+  "tools/mobile-developer": {
+    "name": "mobile-developer",
+    "path": "tools/mobile-developer",
+    "categorized": true
+  },
+  "tools/mobile-security-coder": {
+    "name": "mobile-security-coder",
+    "path": "tools/mobile-security-coder",
+    "categorized": true
+  },
+  "tools/modern-javascript-patterns": {
+    "name": "modern-javascript-patterns",
+    "path": "tools/modern-javascript-patterns",
+    "categorized": true
+  },
+  "tools/monorepo-architect": {
+    "name": "monorepo-architect",
+    "path": "tools/monorepo-architect",
+    "categorized": true
+  },
+  "tools/monorepo-management": {
+    "name": "monorepo-management",
+    "path": "tools/monorepo-management",
+    "categorized": true
+  },
+  "tools/mtls-configuration": {
+    "name": "mtls-configuration",
+    "path": "tools/mtls-configuration",
+    "categorized": true
+  },
+  "tools/mui": {
+    "name": "mui",
+    "path": "tools/mui",
+    "categorized": true
+  },
+  "tools/multi-cloud-architecture": {
+    "name": "multi-cloud-architecture",
+    "path": "tools/multi-cloud-architecture",
+    "categorized": true
+  },
+  "tools/multi-platform-apps-multi-platform": {
+    "name": "multi-platform-apps-multi-platform",
+    "path": "tools/multi-platform-apps-multi-platform",
+    "categorized": true
+  },
+  "tools/naming-analyzer": {
+    "name": "naming-analyzer",
+    "path": "tools/naming-analyzer",
+    "categorized": true
+  },
+  "tools/nano-banana-pro": {
+    "name": "nano-banana-pro",
+    "path": "tools/nano-banana-pro",
+    "categorized": true
+  },
+  "tools/network-engineer": {
+    "name": "network-engineer",
+    "path": "tools/network-engineer",
+    "categorized": true
+  },
+  "tools/nextjs-app-router-patterns": {
+    "name": "nextjs-app-router-patterns",
+    "path": "tools/nextjs-app-router-patterns",
+    "categorized": true
+  },
+  "tools/nft-standards": {
+    "name": "nft-standards",
+    "path": "tools/nft-standards",
+    "categorized": true
+  },
+  "tools/nodejs-backend-patterns": {
+    "name": "nodejs-backend-patterns",
+    "path": "tools/nodejs-backend-patterns",
+    "categorized": true
+  },
+  "tools/notebook-guidance": {
+    "name": "notebook-guidance",
+    "path": "tools/notebook-guidance",
+    "categorized": true
+  },
+  "tools/notion-intelligence-orchestrator": {
+    "name": "notion-intelligence-orchestrator",
+    "path": "tools/notion-intelligence-orchestrator",
+    "categorized": true
+  },
+  "tools/notion-knowledge-capture": {
+    "name": "notion-knowledge-capture",
+    "path": "tools/notion-knowledge-capture",
+    "categorized": true
+  },
+  "tools/notion-meeting-intelligence": {
+    "name": "notion-meeting-intelligence",
+    "path": "tools/notion-meeting-intelligence",
+    "categorized": true
+  },
+  "tools/notion-research-documentation": {
+    "name": "notion-research-documentation",
+    "path": "tools/notion-research-documentation",
+    "categorized": true
+  },
+  "tools/notion-spec-to-implementation": {
+    "name": "notion-spec-to-implementation",
+    "path": "tools/notion-spec-to-implementation",
+    "categorized": true
+  },
+  "tools/nx-workspace-patterns": {
+    "name": "nx-workspace-patterns",
+    "path": "tools/nx-workspace-patterns",
+    "categorized": true
+  },
+  "tools/observability-engineer": {
+    "name": "observability-engineer",
+    "path": "tools/observability-engineer",
+    "categorized": true
+  },
+  "tools/observability-monitoring-monitor-setup": {
+    "name": "observability-monitoring-monitor-setup",
+    "path": "tools/observability-monitoring-monitor-setup",
+    "categorized": true
+  },
+  "tools/observability-monitoring-slo-implement": {
+    "name": "observability-monitoring-slo-implement",
+    "path": "tools/observability-monitoring-slo-implement",
+    "categorized": true
+  },
+  "tools/on-call-handoff-patterns": {
+    "name": "on-call-handoff-patterns",
+    "path": "tools/on-call-handoff-patterns",
+    "categorized": true
+  },
+  "tools/openapi-spec-generation": {
+    "name": "openapi-spec-generation",
+    "path": "tools/openapi-spec-generation",
+    "categorized": true
+  },
+  "tools/openapi-to-typescript": {
+    "name": "openapi-to-typescript",
+    "path": "tools/openapi-to-typescript",
+    "categorized": true
+  },
+  "tools/parallax-landing-page": {
+    "name": "parallax-landing-page",
+    "path": "tools/parallax-landing-page",
+    "categorized": true
+  },
+  "tools/payment-integration": {
+    "name": "payment-integration",
+    "path": "tools/payment-integration",
+    "categorized": true
+  },
+  "tools/paypal-integration": {
+    "name": "paypal-integration",
+    "path": "tools/paypal-integration",
+    "categorized": true
+  },
+  "tools/pci-compliance": {
+    "name": "pci-compliance",
+    "path": "tools/pci-compliance",
+    "categorized": true
+  },
+  "tools/pdf": {
+    "name": "pdf",
+    "path": "tools/pdf",
+    "categorized": true
+  },
+  "tools/performance-engineer": {
+    "name": "performance-engineer",
+    "path": "tools/performance-engineer",
+    "categorized": true
+  },
+  "tools/performance-optimization-orchestrator": {
+    "name": "performance-optimization-orchestrator",
+    "path": "tools/performance-optimization-orchestrator",
+    "categorized": true
+  },
+  "tools/performance-testing-review-ai-review": {
+    "name": "performance-testing-review-ai-review",
+    "path": "tools/performance-testing-review-ai-review",
+    "categorized": true
+  },
+  "tools/performance-testing-review-multi-agent-review": {
+    "name": "performance-testing-review-multi-agent-review",
+    "path": "tools/performance-testing-review-multi-agent-review",
+    "categorized": true
+  },
+  "tools/perplexity": {
+    "name": "perplexity",
+    "path": "tools/perplexity",
+    "categorized": true
+  },
+  "tools/php-pro": {
+    "name": "php-pro",
+    "path": "tools/php-pro",
+    "categorized": true
+  },
+  "tools/plugin-forge": {
+    "name": "plugin-forge",
+    "path": "tools/plugin-forge",
+    "categorized": true
+  },
+  "tools/posix-shell-pro": {
+    "name": "posix-shell-pro",
+    "path": "tools/posix-shell-pro",
+    "categorized": true
+  },
+  "tools/postgresql": {
+    "name": "postgresql",
+    "path": "tools/postgresql",
+    "categorized": true
+  },
+  "tools/postmortem-writing": {
+    "name": "postmortem-writing",
+    "path": "tools/postmortem-writing",
+    "categorized": true
+  },
+  "tools/pptx": {
+    "name": "pptx",
+    "path": "tools/pptx",
+    "categorized": true
+  },
+  "tools/professional-communication": {
+    "name": "professional-communication",
+    "path": "tools/professional-communication",
+    "categorized": true
+  },
+  "tools/projection-patterns": {
+    "name": "projection-patterns",
+    "path": "tools/projection-patterns",
+    "categorized": true
+  },
+  "tools/prometheus-configuration": {
+    "name": "prometheus-configuration",
+    "path": "tools/prometheus-configuration",
+    "categorized": true
+  },
+  "tools/prompt-engineer": {
+    "name": "prompt-engineer",
+    "path": "tools/prompt-engineer",
+    "categorized": true
+  },
+  "tools/prompt-engineering-patterns": {
+    "name": "prompt-engineering-patterns",
+    "path": "tools/prompt-engineering-patterns",
+    "categorized": true
+  },
+  "tools/protocol-reverse-engineering": {
+    "name": "protocol-reverse-engineering",
+    "path": "tools/protocol-reverse-engineering",
+    "categorized": true
+  },
+  "tools/python-development-python-scaffold": {
+    "name": "python-development-python-scaffold",
+    "path": "tools/python-development-python-scaffold",
+    "categorized": true
+  },
+  "tools/python-packaging": {
+    "name": "python-packaging",
+    "path": "tools/python-packaging",
+    "categorized": true
+  },
+  "tools/python-performance-optimization": {
+    "name": "python-performance-optimization",
+    "path": "tools/python-performance-optimization",
+    "categorized": true
+  },
+  "tools/python-pro": {
+    "name": "python-pro",
+    "path": "tools/python-pro",
+    "categorized": true
+  },
+  "tools/python-testing-patterns": {
+    "name": "python-testing-patterns",
+    "path": "tools/python-testing-patterns",
+    "categorized": true
+  },
+  "tools/qa-test-planner": {
+    "name": "qa-test-planner",
+    "path": "tools/qa-test-planner",
+    "categorized": true
+  },
+  "tools/quant-analyst": {
+    "name": "quant-analyst",
+    "path": "tools/quant-analyst",
+    "categorized": true
+  },
+  "tools/raffle-winner-picker": {
+    "name": "raffle-winner-picker",
+    "path": "tools/raffle-winner-picker",
+    "categorized": true
+  },
+  "tools/rag-implementation": {
+    "name": "rag-implementation",
+    "path": "tools/rag-implementation",
+    "categorized": true
+  },
+  "tools/react-dev": {
+    "name": "react-dev",
+    "path": "tools/react-dev",
+    "categorized": true
+  },
+  "tools/react-modernization": {
+    "name": "react-modernization",
+    "path": "tools/react-modernization",
+    "categorized": true
+  },
+  "tools/react-native-architecture": {
+    "name": "react-native-architecture",
+    "path": "tools/react-native-architecture",
+    "categorized": true
+  },
+  "tools/react-state-management": {
+    "name": "react-state-management",
+    "path": "tools/react-state-management",
+    "categorized": true
+  },
+  "tools/react-useeffect": {
+    "name": "react-useeffect",
+    "path": "tools/react-useeffect",
+    "categorized": true
+  },
+  "tools/reducing-entropy": {
+    "name": "reducing-entropy",
+    "path": "tools/reducing-entropy",
+    "categorized": true
+  },
+  "tools/reference-builder": {
+    "name": "reference-builder",
+    "path": "tools/reference-builder",
+    "categorized": true
+  },
+  "tools/requirements-clarity": {
+    "name": "requirements-clarity",
+    "path": "tools/requirements-clarity",
+    "categorized": true
+  },
+  "tools/resemble-detect": {
+    "name": "resemble-detect",
+    "path": "tools/resemble-detect",
+    "categorized": true
+  },
+  "tools/reverse-engineer": {
+    "name": "reverse-engineer",
+    "path": "tools/reverse-engineer",
+    "categorized": true
+  },
+  "tools/risk-manager": {
+    "name": "risk-manager",
+    "path": "tools/risk-manager",
+    "categorized": true
+  },
+  "tools/risk-metrics-calculation": {
+    "name": "risk-metrics-calculation",
+    "path": "tools/risk-metrics-calculation",
+    "categorized": true
+  },
+  "tools/ruby-pro": {
+    "name": "ruby-pro",
+    "path": "tools/ruby-pro",
+    "categorized": true
+  },
+  "tools/rust-async-patterns": {
+    "name": "rust-async-patterns",
+    "path": "tools/rust-async-patterns",
+    "categorized": true
+  },
+  "tools/rust-pro": {
+    "name": "rust-pro",
+    "path": "tools/rust-pro",
+    "categorized": true
+  },
+  "tools/saga-orchestration": {
+    "name": "saga-orchestration",
+    "path": "tools/saga-orchestration",
+    "categorized": true
+  },
+  "tools/sales-automator": {
+    "name": "sales-automator",
+    "path": "tools/sales-automator",
+    "categorized": true
+  },
+  "tools/sast-configuration": {
+    "name": "sast-configuration",
+    "path": "tools/sast-configuration",
+    "categorized": true
+  },
+  "tools/scala-pro": {
+    "name": "scala-pro",
+    "path": "tools/scala-pro",
+    "categorized": true
+  },
+  "tools/screen-reader-testing": {
+    "name": "screen-reader-testing",
+    "path": "tools/screen-reader-testing",
+    "categorized": true
+  },
+  "tools/search-specialist": {
+    "name": "search-specialist",
+    "path": "tools/search-specialist",
+    "categorized": true
+  },
+  "tools/secrets-management": {
+    "name": "secrets-management",
+    "path": "tools/secrets-management",
+    "categorized": true
+  },
+  "tools/security-auditor": {
+    "name": "security-auditor",
+    "path": "tools/security-auditor",
+    "categorized": true
+  },
+  "tools/security-compliance-compliance-check": {
+    "name": "security-compliance-compliance-check",
+    "path": "tools/security-compliance-compliance-check",
+    "categorized": true
+  },
+  "tools/security-governance-orchestrator": {
+    "name": "security-governance-orchestrator",
+    "path": "tools/security-governance-orchestrator",
+    "categorized": true
+  },
+  "tools/security-requirement-extraction": {
+    "name": "security-requirement-extraction",
+    "path": "tools/security-requirement-extraction",
+    "categorized": true
+  },
+  "tools/security-scanning-security-dependencies": {
+    "name": "security-scanning-security-dependencies",
+    "path": "tools/security-scanning-security-dependencies",
+    "categorized": true
+  },
+  "tools/security-scanning-security-hardening": {
+    "name": "security-scanning-security-hardening",
+    "path": "tools/security-scanning-security-hardening",
+    "categorized": true
+  },
+  "tools/security-scanning-security-sast": {
+    "name": "security-scanning-security-sast",
+    "path": "tools/security-scanning-security-sast",
+    "categorized": true
+  },
+  "tools/seo-authority-builder": {
+    "name": "seo-authority-builder",
+    "path": "tools/seo-authority-builder",
+    "categorized": true
+  },
+  "tools/seo-cannibalization-detector": {
+    "name": "seo-cannibalization-detector",
+    "path": "tools/seo-cannibalization-detector",
+    "categorized": true
+  },
+  "tools/seo-content-auditor": {
+    "name": "seo-content-auditor",
+    "path": "tools/seo-content-auditor",
+    "categorized": true
+  },
+  "tools/seo-content-planner": {
+    "name": "seo-content-planner",
+    "path": "tools/seo-content-planner",
+    "categorized": true
+  },
+  "tools/seo-content-refresher": {
+    "name": "seo-content-refresher",
+    "path": "tools/seo-content-refresher",
+    "categorized": true
+  },
+  "tools/seo-content-writer": {
+    "name": "seo-content-writer",
+    "path": "tools/seo-content-writer",
+    "categorized": true
+  },
+  "tools/seo-keyword-strategist": {
+    "name": "seo-keyword-strategist",
+    "path": "tools/seo-keyword-strategist",
+    "categorized": true
+  },
+  "tools/seo-meta-optimizer": {
+    "name": "seo-meta-optimizer",
+    "path": "tools/seo-meta-optimizer",
+    "categorized": true
+  },
+  "tools/seo-snippet-hunter": {
+    "name": "seo-snippet-hunter",
+    "path": "tools/seo-snippet-hunter",
+    "categorized": true
+  },
+  "tools/seo-structure-architect": {
+    "name": "seo-structure-architect",
+    "path": "tools/seo-structure-architect",
+    "categorized": true
+  },
+  "tools/service-mesh-expert": {
+    "name": "service-mesh-expert",
+    "path": "tools/service-mesh-expert",
+    "categorized": true
+  },
+  "tools/service-mesh-observability": {
+    "name": "service-mesh-observability",
+    "path": "tools/service-mesh-observability",
+    "categorized": true
+  },
+  "tools/session-handoff": {
+    "name": "session-handoff",
+    "path": "tools/session-handoff",
+    "categorized": true
+  },
+  "tools/shellcheck-configuration": {
+    "name": "shellcheck-configuration",
+    "path": "tools/shellcheck-configuration",
+    "categorized": true
+  },
+  "tools/ship-learn-next": {
+    "name": "ship-learn-next",
+    "path": "tools/ship-learn-next",
+    "categorized": true
+  },
+  "tools/similarity-search-patterns": {
+    "name": "similarity-search-patterns",
+    "path": "tools/similarity-search-patterns",
+    "categorized": true
+  },
+  "tools/skill-creator": {
+    "name": "skill-creator",
+    "path": "tools/skill-creator",
+    "categorized": true
+  },
+  "tools/skill-judge": {
+    "name": "skill-judge",
+    "path": "tools/skill-judge",
+    "categorized": true
+  },
+  "tools/skill-repair": {
+    "name": "skill-repair",
+    "path": "tools/skill-repair",
+    "categorized": true
+  },
+  "tools/slack-gif-creator": {
+    "name": "slack-gif-creator",
+    "path": "tools/slack-gif-creator",
+    "categorized": true
+  },
+  "tools/slo-implementation": {
+    "name": "slo-implementation",
+    "path": "tools/slo-implementation",
+    "categorized": true
+  },
+  "tools/solidity-security": {
+    "name": "solidity-security",
+    "path": "tools/solidity-security",
+    "categorized": true
+  },
+  "tools/spanner-data": {
+    "name": "spanner-data",
+    "path": "tools/spanner-data",
+    "categorized": true
+  },
+  "tools/spark-optimization": {
+    "name": "spark-optimization",
+    "path": "tools/spark-optimization",
+    "categorized": true
+  },
+  "tools/sql-optimization-patterns": {
+    "name": "sql-optimization-patterns",
+    "path": "tools/sql-optimization-patterns",
+    "categorized": true
+  },
+  "tools/sql-pro": {
+    "name": "sql-pro",
+    "path": "tools/sql-pro",
+    "categorized": true
+  },
+  "tools/startup-analyst": {
+    "name": "startup-analyst",
+    "path": "tools/startup-analyst",
+    "categorized": true
+  },
+  "tools/startup-business-analyst-business-case": {
+    "name": "startup-business-analyst-business-case",
+    "path": "tools/startup-business-analyst-business-case",
+    "categorized": true
+  },
+  "tools/startup-business-analyst-financial-projections": {
+    "name": "startup-business-analyst-financial-projections",
+    "path": "tools/startup-business-analyst-financial-projections",
+    "categorized": true
+  },
+  "tools/startup-business-analyst-market-opportunity": {
+    "name": "startup-business-analyst-market-opportunity",
+    "path": "tools/startup-business-analyst-market-opportunity",
+    "categorized": true
+  },
+  "tools/startup-financial-modeling": {
+    "name": "startup-financial-modeling",
+    "path": "tools/startup-financial-modeling",
+    "categorized": true
+  },
+  "tools/startup-metrics-framework": {
+    "name": "startup-metrics-framework",
+    "path": "tools/startup-metrics-framework",
+    "categorized": true
+  },
+  "tools/stride-analysis-patterns": {
+    "name": "stride-analysis-patterns",
+    "path": "tools/stride-analysis-patterns",
+    "categorized": true
+  },
+  "tools/stripe-integration": {
+    "name": "stripe-integration",
+    "path": "tools/stripe-integration",
+    "categorized": true
+  },
+  "tools/systems-programming-rust-project": {
+    "name": "systems-programming-rust-project",
+    "path": "tools/systems-programming-rust-project",
+    "categorized": true
+  },
+  "tools/tailwind-design-system": {
+    "name": "tailwind-design-system",
+    "path": "tools/tailwind-design-system",
+    "categorized": true
+  },
+  "tools/tdd-orchestrator": {
+    "name": "tdd-orchestrator",
+    "path": "tools/tdd-orchestrator",
+    "categorized": true
+  },
+  "tools/tdd-workflows-tdd-cycle": {
+    "name": "tdd-workflows-tdd-cycle",
+    "path": "tools/tdd-workflows-tdd-cycle",
+    "categorized": true
+  },
+  "tools/tdd-workflows-tdd-green": {
+    "name": "tdd-workflows-tdd-green",
+    "path": "tools/tdd-workflows-tdd-green",
+    "categorized": true
+  },
+  "tools/tdd-workflows-tdd-red": {
+    "name": "tdd-workflows-tdd-red",
+    "path": "tools/tdd-workflows-tdd-red",
+    "categorized": true
+  },
+  "tools/tdd-workflows-tdd-refactor": {
+    "name": "tdd-workflows-tdd-refactor",
+    "path": "tools/tdd-workflows-tdd-refactor",
+    "categorized": true
+  },
+  "tools/team-collaboration-issue": {
+    "name": "team-collaboration-issue",
+    "path": "tools/team-collaboration-issue",
+    "categorized": true
+  },
+  "tools/team-collaboration-standup-notes": {
+    "name": "team-collaboration-standup-notes",
+    "path": "tools/team-collaboration-standup-notes",
+    "categorized": true
+  },
+  "tools/team-composition-analysis": {
+    "name": "team-composition-analysis",
+    "path": "tools/team-composition-analysis",
+    "categorized": true
+  },
+  "tools/template-skill": {
+    "name": "template-skill",
+    "path": "tools/template-skill",
+    "categorized": true
+  },
+  "tools/temporal-python-pro": {
+    "name": "temporal-python-pro",
+    "path": "tools/temporal-python-pro",
+    "categorized": true
+  },
+  "tools/temporal-python-testing": {
+    "name": "temporal-python-testing",
+    "path": "tools/temporal-python-testing",
+    "categorized": true
+  },
+  "tools/terraform-module-library": {
+    "name": "terraform-module-library",
+    "path": "tools/terraform-module-library",
+    "categorized": true
+  },
+  "tools/terraform-specialist": {
+    "name": "terraform-specialist",
+    "path": "tools/terraform-specialist",
+    "categorized": true
+  },
+  "tools/test-automator": {
+    "name": "test-automator",
+    "path": "tools/test-automator",
+    "categorized": true
+  },
+  "tools/theme-factory": {
+    "name": "theme-factory",
+    "path": "tools/theme-factory",
+    "categorized": true
+  },
+  "tools/threat-mitigation-mapping": {
+    "name": "threat-mitigation-mapping",
+    "path": "tools/threat-mitigation-mapping",
+    "categorized": true
+  },
+  "tools/threat-modeling-expert": {
+    "name": "threat-modeling-expert",
+    "path": "tools/threat-modeling-expert",
+    "categorized": true
+  },
+  "tools/track-management": {
+    "name": "track-management",
+    "path": "tools/track-management",
+    "categorized": true
+  },
+  "tools/turborepo-caching": {
+    "name": "turborepo-caching",
+    "path": "tools/turborepo-caching",
+    "categorized": true
+  },
+  "tools/tutorial-engineer": {
+    "name": "tutorial-engineer",
+    "path": "tools/tutorial-engineer",
+    "categorized": true
+  },
+  "tools/typescript-advanced-types": {
+    "name": "typescript-advanced-types",
+    "path": "tools/typescript-advanced-types",
+    "categorized": true
+  },
+  "tools/typescript-pro": {
+    "name": "typescript-pro",
+    "path": "tools/typescript-pro",
+    "categorized": true
+  },
+  "tools/ui-ux-designer": {
+    "name": "ui-ux-designer",
+    "path": "tools/ui-ux-designer",
+    "categorized": true
+  },
+  "tools/ui-visual-validator": {
+    "name": "ui-visual-validator",
+    "path": "tools/ui-visual-validator",
+    "categorized": true
+  },
+  "tools/unit-testing-test-generate": {
+    "name": "unit-testing-test-generate",
+    "path": "tools/unit-testing-test-generate",
+    "categorized": true
+  },
+  "tools/unity-developer": {
+    "name": "unity-developer",
+    "path": "tools/unity-developer",
+    "categorized": true
+  },
+  "tools/unity-ecs-patterns": {
+    "name": "unity-ecs-patterns",
+    "path": "tools/unity-ecs-patterns",
+    "categorized": true
+  },
+  "tools/uv-package-manager": {
+    "name": "uv-package-manager",
+    "path": "tools/uv-package-manager",
+    "categorized": true
+  },
+  "tools/vector-database-engineer": {
+    "name": "vector-database-engineer",
+    "path": "tools/vector-database-engineer",
+    "categorized": true
+  },
+  "tools/vector-index-tuning": {
+    "name": "vector-index-tuning",
+    "path": "tools/vector-index-tuning",
+    "categorized": true
+  },
+  "tools/video-content-orchestrator": {
+    "name": "video-content-orchestrator",
+    "path": "tools/video-content-orchestrator",
+    "categorized": true
+  },
+  "tools/video-downloader": {
+    "name": "video-downloader",
+    "path": "tools/video-downloader",
+    "categorized": true
+  },
+  "tools/video-edit": {
+    "name": "video-edit",
+    "path": "tools/video-edit",
+    "categorized": true
+  },
+  "tools/video-to-landing-page": {
+    "name": "video-to-landing-page",
+    "path": "tools/video-to-landing-page",
+    "categorized": true
+  },
+  "tools/wcag-audit-patterns": {
+    "name": "wcag-audit-patterns",
+    "path": "tools/wcag-audit-patterns",
+    "categorized": true
+  },
+  "tools/web-to-markdown": {
+    "name": "web-to-markdown",
+    "path": "tools/web-to-markdown",
+    "categorized": true
+  },
+  "tools/web3-testing": {
+    "name": "web3-testing",
+    "path": "tools/web3-testing",
+    "categorized": true
+  },
+  "tools/webapp-testing": {
+    "name": "webapp-testing",
+    "path": "tools/webapp-testing",
+    "categorized": true
+  },
+  "tools/workflow-orchestration-patterns": {
+    "name": "workflow-orchestration-patterns",
+    "path": "tools/workflow-orchestration-patterns",
+    "categorized": true
+  },
+  "tools/workflow-patterns": {
+    "name": "workflow-patterns",
+    "path": "tools/workflow-patterns",
+    "categorized": true
+  },
+  "tools/writing-clearly-and-concisely": {
+    "name": "writing-clearly-and-concisely",
+    "path": "tools/writing-clearly-and-concisely",
+    "categorized": true
+  },
+  "tools/xlsx": {
+    "name": "xlsx",
+    "path": "tools/xlsx",
+    "categorized": true
+  },
+  "tools/yuv-brand-orchestrator": {
+    "name": "yuv-brand-orchestrator",
+    "path": "tools/yuv-brand-orchestrator",
+    "categorized": true
+  },
+  "tools/yuv-decks": {
+    "name": "yuv-decks",
+    "path": "tools/yuv-decks",
+    "categorized": true
+  },
+  "tools/yuv-design-system": {
+    "name": "yuv-design-system",
+    "path": "tools/yuv-design-system",
+    "categorized": true
+  },
+  "tools/yuv-pilot": {
+    "name": "yuv-pilot",
+    "path": "tools/yuv-pilot",
+    "categorized": true
+  },
+  "tools/yuv-viral-video": {
+    "name": "yuv-viral-video",
+    "path": "tools/yuv-viral-video",
+    "categorized": true
+  },
+  "ui-ux-designer": {
+    "name": "ui-ux-designer",
+    "path": "ui-ux-designer",
+    "categorized": true
+  },
+  "unity-developer": {
+    "name": "unity-developer",
+    "path": "unity-developer",
+    "categorized": true
+  },
+  "vector-database-engineer": {
+    "name": "vector-database-engineer",
+    "path": "vector-database-engineer",
+    "categorized": true
+  },
+  "video-content-orchestrator": {
+    "name": "video-content-orchestrator",
+    "path": "video-content-orchestrator",
+    "categorized": true
+  },
+  "video-edit": {
+    "name": "video-edit",
+    "path": "video-edit",
+    "categorized": true
+  },
+  "video-to-landing-page": {
+    "name": "video-to-landing-page",
+    "path": "video-to-landing-page",
+    "categorized": true
+  },
+  "workflow-orchestration-patterns": {
+    "name": "workflow-orchestration-patterns",
+    "path": "workflow-orchestration-patterns",
+    "categorized": true
+  },
+  "workflow-patterns": {
+    "name": "workflow-patterns",
+    "path": "workflow-patterns",
+    "categorized": true
+  },
+  "yuv-brand-orchestrator": {
+    "name": "yuv-brand-orchestrator",
+    "path": "yuv-brand-orchestrator",
+    "categorized": true
+  },
+  "yuv-decks": {
+    "name": "yuv-decks",
+    "path": "yuv-decks",
+    "categorized": true
+  },
+  "yuv-design-system": {
+    "name": "yuv-design-system",
+    "path": "yuv-design-system",
+    "categorized": true
+  },
+  "yuv-pilot": {
+    "name": "yuv-pilot",
+    "path": "yuv-pilot",
+    "categorized": true
+  },
+  "yuv-viral-video": {
+    "name": "yuv-viral-video",
+    "path": "yuv-viral-video",
+    "categorized": true
+  }
+}

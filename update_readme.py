@@ -9,38 +9,51 @@ readme_path = os.path.join(repo_dir, "README.md")
 USER_CATEGORIES = {
     "design_film_video": {
         "title": "🎨 Design, Film & Video",
-        "patterns": ["yuv-pilot", "yuv-decks", "yuv-design-system", "yuv-viral-video", "video-edit", 
-                     "video-to-landing-page", "parallax-landing-page", "director", "hyperframes", 
-                     "hyperframes-cli", "hyperframes-registry", "canvas-design", "algorithmic-art", 
-                     "image-enhancer", "theme-factory", "slack-gif-creator", "excalidraw", "draw-io", 
-                     "marp-slide"]
+        "patterns": [r"yuv-", r"video", r"film", r"director", r"hyperframes", r"canvas-design", r"algorithmic-art", r"image-enhancer", r"theme-factory", r"slack-gif-creator", r"excalidraw", r"draw-io", r"marp-slide", r"art", r"brand", r"decks", r"meme-factory"]
     },
     "document_media_processing": {
         "title": "📄 Document & Media Processing",
-        "patterns": ["document-skills/docx", "document-skills/pdf", "document-skills/pptx", 
-                     "document-skills/xlsx", "web-to-markdown", "video-downloader", "resemble-detect", "document-skills"]
+        "patterns": [r"document", r"docx", r"pdf", r"pptx", r"xlsx", r"web-to-markdown", r"video-downloader", r"resemble-detect", r"html", r"invoice"]
     },
     "notion_integration": {
         "title": "📓 Notion Integration",
-        "patterns": ["notion-knowledge-capture", "notion-meeting-intelligence", 
-                     "notion-research-documentation", "notion-spec-to-implementation"]
+        "patterns": [r"notion-"]
+    },
+    "ai_llm_engineering": {
+        "title": "🤖 AI, RAG & LLM Engineering",
+        "patterns": [r"ai-", r"llm", r"agent", r"langchain", r"rag", r"embedding", r"vector", r"prompt", r"openai", r"claude", r"gemini", r"copilot", r"semantic", r"similarity-search", r"hybrid-search", r"ml-", r"mlops", r"gepetto"]
+    },
+    "databases_data": {
+        "title": "🗄️ Databases & Data Engineering",
+        "patterns": [r"alloydb", r"cloud-sql", r"postgres", r"mysql", r"sqlserver", r"spanner", r"firestore", r"bigquery", r"dbt", r"spark", r"airflow", r"database", r"migration", r"sql", r"data-", r"lakehouse", r"gcs-"]
+    },
+    "security_compliance": {
+        "title": "🔒 Security, Compliance & Hardening",
+        "patterns": [r"security", r"secrets", r"sast", r"pci", r"threat", r"attack", r"stride", r"reversing", r"binary", r"malware", r"solidity", r"xss", r"wcag", r"audit", r"hardening", r"auth", r"mtls", r"gdpr"]
+    },
+    "devops_cloud": {
+        "title": "☁️ DevOps, Cloud & Infrastructure",
+        "patterns": [r"gcloud", r"gcp", r"k8s", r"kubernetes", r"helm", r"istio", r"linkerd", r"service-mesh", r"turborepo", r"nx-workspace", r"bazel", r"github", r"gitlab", r"deployment", r"observability", r"prometheus", r"grafana", r"datadog", r"incident", r"postmortem", r"slo", r"cost-optimization", r"ci-cd", r"monorepo", r"docker", r"container", r"devops", r"tracing", r"on-call", r"gitops", r"terraform", r"network"]
+    },
+    "software_architecture": {
+        "title": "🏗️ Architecture & Engineering Practices",
+        "patterns": [r"architect", r"c4-", r"feature", r"design-pattern", r"clean-code", r"governance", r"requirements", r"onboard", r"microservices", r"saga", r"cqrs", r"event-", r"systems-programming"]
+    },
+    "software_languages": {
+        "title": "💻 Software Engineering & Frameworks",
+        "patterns": [r"python", r"cpp", r"c-pro", r"java", r"javascript", r"typescript", r"golang", r"go-", r"rust", r"elixir", r"php", r"ruby", r"scala", r"haskell", r"angular", r"react", r"nextjs", r"django", r"fastapi", r"api-", r"openapi", r"graphql", r"mui", r"tailwind", r"godot", r"unity", r"flutter", r"ios-", r"dotnet", r"csharp", r"bash", r"shell", r"bats", r"posix", r"frontend", r"backend", r"full-stack", r"mobile", r"web", r"arm-cortex", r"firmware", r"blockchain", r"web3", r"defi", r"nft", r"uv-package"]
+    },
+    "business_finance": {
+        "title": "📈 Business, Finance & Strategy",
+        "patterns": [r"startup", r"quant", r"risk", r"billing", r"sales", r"stripe", r"paypal", r"payment", r"seo-", r"hr-", r"employment", r"legal", r"business", r"market", r"customer-support"]
     },
     "development_testing": {
-        "title": "🛠️ Development & Testing Tools",
-        "patterns": ["artifacts-builder", "mcp-builder", "skill-creator", "webapp-testing", 
-                     "template-skill", "skill-judge", "dependency-updater", "openapi-to-typescript", 
-                     "changelog-generator", "commit-work", "reducing-entropy"]
-    },
-    "research_analysis": {
-        "title": "🔍 Research & Analysis",
-        "patterns": ["competitive-ads-extractor", "content-research-writer", "lead-research-assistant", 
-                     "meeting-insights-analyzer", "daily-meeting-update", "session-handoff", "lesson-learned", 
-                     "naming-analyzer", "domain-name-brainstormer", "gemini", "codex", "perplexity"]
+        "title": "🛠️ Development, Debugging & QA Workflows",
+        "patterns": [r"artifacts", r"mcp", r"skill", r"webapp", r"template", r"dependency", r"changelog", r"commit", r"entropy", r"tdd", r"conductor", r"adr", r"context", r"codebase", r"refactor", r"debug", r"test", r"error", r"diagnostics", r"review", r"qa", r"issue", r"pr-", r"patch", r"performance", r"dx-optimizer", r"memory-"]
     },
     "productivity_comms": {
-        "title": "💬 Productivity & Communication",
-        "patterns": ["internal-comms", "professional-communication", "difficult-workplace-conversations", 
-                     "feedback-mastery", "raffle-winner-picker"]
+        "title": "💬 Productivity, Research & Communication",
+        "patterns": [r"internal-comms", r"communication", r"conversation", r"feedback", r"raffle", r"research", r"meeting", r"handoff", r"lesson", r"naming", r"domain", r"standup", r"humanizer", r"writing", r"tutorial", r"docs-", r"file-organizer"]
     }
 }
 
@@ -92,7 +105,7 @@ def determine_category(relative_path, is_config=False):
     
     for cat_key, cat_info in categories.items():
         for pattern in cat_info["patterns"]:
-            if pattern in path_str:
+            if re.search(pattern, path_str, re.IGNORECASE):
                 return cat_key
                 
     return "other"
@@ -236,26 +249,92 @@ if other_config:
     write_category_file("other_config", "⚙️ Other Config Skills", other_config, is_config=True)
 
 # Build master README links
-readme_addition = "\n\n## 📚 Skill Catalog\n"
-readme_addition += f"\nThis repository manages a total of **{len(user_skills) + len(config_skills)}** skills.\n"
+readme_addition = "\n\n## 🧠 Local Memory RAG Architecture & Token Flow\n\n"
+readme_addition += "The repository integrates a local Memory RAG framework (`~/memory_system`) using [`memory-capture`](tools/memory-capture). This system intercepts requests locally, retrieves policy/vector context, and injects it **before** tokens are transmitted to frontier LLMs.\n\n"
 
-readme_addition += "\n### 👤 Custom User Skills\n"
-readme_addition += "Click on a category to view the list of user-installed skills and their detailed descriptions:\n\n"
+readme_addition += "### System Architecture & Data Flow\n\n"
+readme_addition += "```mermaid\n"
+readme_addition += "flowchart TD\n"
+readme_addition += "    subgraph LocalMachine[\"💻 Local Machine (Zero Cloud Tokens Spent)\"]\n"
+readme_addition += "        UserReq[\"👤 User Request\"] --> PrePrompt[\"⚡ Pre-Prompt Interceptor\"]\n"
+readme_addition += "        PrePrompt --> OKFSearch[\"📄 OKF File Search<br/>~/memory_system/knowledge/okf\"]\n"
+readme_addition += "        PrePrompt --> ChromaSearch[\"🔍 ChromaDB Vector Search<br/>~/memory_system/db\"]\n"
+readme_addition += "        OKFSearch --> ContextFormat[\"📦 Context Formatter\"]\n"
+readme_addition += "        ChromaSearch --> ContextFormat\n"
+readme_addition += "        ContextFormat --> AugmentedPayload[\"📝 Augmented Prompt Payload<br/>(System Prompt + RAG + User Query)\"]\n"
+readme_addition += "    end\n\n"
+readme_addition += "    subgraph CloudModel[\"☁️ Frontier LLM Cloud\"]\n"
+readme_addition += "        AugmentedPayload -->|\"Encrypted HTTP / Token Stream\"| FrontierLLM[\"🤖 Gemini / Claude / OpenAI\"]\n"
+readme_addition += "        FrontierLLM -->|\"Response Stream\"| AgentResponse[\"✨ Synthesized Response\"]\n"
+readme_addition += "    end\n"
+readme_addition += "```\n\n"
+
+readme_addition += "### Why & How This Functionality Is Organized\n\n"
+readme_addition += "- **Deterministic Policy Routing (OKF)**: High-level architectural rules and security standards are stored as plain Markdown under `~/memory_system/knowledge/okf/` for exact, zero-hallucination regex matching.\n"
+readme_addition += "- **Semantic Memory Indexing (ChromaDB)**: Troubleshooting notes, error logs, and code snippets are embedded locally into ChromaDB at `~/memory_system/db/` using local ONNX embeddings.\n"
+readme_addition += "- **Automated Inbox Daemon**: Background service `memory-inbox.service` monitors `~/memory_system/inbox/` for new `.md` files and automatically indexes them.\n"
+readme_addition += "- **Architectural Decision Record**: See [ADR 0005: Local Memory RAG Architecture](tools/adr/0005-local-memory-rag-architecture.md) for rationale.\n"
+readme_addition += "- **Detailed Documentation**: See the complete [Memory RAG FAQ](memory_rag_faq.md) for step-by-step technical details.\n\n"
+
+readme_addition += "### ⚠️ Gotchas & Operational Caveats\n\n"
+readme_addition += "> [!WARNING]\n"
+readme_addition += "> **Pre-Prompt Token Payload Overflow**: Ingesting raw logs or unchunked files directly into ChromaDB can inflate the injected context payload. Ensure log files are pre-filtered or split into 500–1000 token chunks before dropping into `~/memory_system/inbox/`.\n\n"
+readme_addition += "> [!IMPORTANT]\n"
+readme_addition += "> **Systemd User Daemon Required**: The inbox background watcher relies on `memory-inbox.service` running under `systemctl --user`. If the service is stopped or disabled, files dropped into `inbox/` will sit unprocessed until `python3 ~/memory_system/capture_knowledge.py <file>` is run manually.\n\n"
+readme_addition += "> [!CAUTION]\n"
+readme_addition += "> **OKF vs Chroma Routing Triggers**: Files intended for OKF (deterministic policies) **must** contain `# OKF Decision`, `Type: Policy`, or `Type: Architecture Standard` in their header. Without these exact header strings, `capture_knowledge.py` defaults to embedding the content into ChromaDB vector storage.\n\n"
+readme_addition += "> [!NOTE]\n"
+readme_addition += "> **Directory Tree Initializer**: If `~/memory_system` is missing or cleared, running `python3 ~/memory_system/init_storage.py` must be executed before ingestion to recreate required SQLite tables and collection schemas.\n\n"
+
+readme_addition += "## 📚 Skill Catalog & Navigation\n"
+readme_addition += f"\nThis repository manages **{len(user_skills) + len(config_skills)}** modular AI skills across 12 primary domains.\n\n"
+
+# Overview Table
+readme_addition += "### Overview\n\n"
+readme_addition += "| Category | Skills | Quick Link |\n"
+readme_addition += "|---|---|---|\n"
+
 for cat_key, cat_info in USER_CATEGORIES.items():
     skills_in_cat = user_by_cat.get(cat_key, [])
     if skills_in_cat:
-        readme_addition += f"- [{cat_info['title']}](categories/{cat_key}.md) ({len(skills_in_cat)} skills)\n"
-if other_user:
-    readme_addition += f"- [📦 Other User Skills](categories/other_user.md) ({len(other_user)} skills)\n"
+        link = f"[{cat_info['title']}](#-{cat_key.replace('_', '-')})"
+        count = f"**{len(skills_in_cat)}**"
+        doc_link = f"[Full Doc ↗](categories/{cat_key}.md)"
+        readme_addition += f"| {link} | {count} | {doc_link} |\n"
 
-readme_addition += "\n### ⚙️ System Config Skills\n"
-readme_addition += "Click on a category to view the list of system-installed configuration skills and their detailed descriptions:\n\n"
-for cat_key, cat_info in CONFIG_CATEGORIES.items():
-    skills_in_cat = config_by_cat.get(cat_key, [])
+if other_user:
+    readme_addition += f"| [📦 Other User Skills](#-other-user-skills) | **{len(other_user)}** | [Full Doc ↗](categories/other_user.md) |\n"
+
+readme_addition += "\n---\n\n"
+
+# Detailed Category Sections with direct skill links
+for cat_key, cat_info in USER_CATEGORIES.items():
+    skills_in_cat = user_by_cat.get(cat_key, [])
     if skills_in_cat:
-        readme_addition += f"- [{cat_info['title']}](categories/{cat_key}.md) ({len(skills_in_cat)} skills)\n"
-if other_config:
-    readme_addition += f"- [⚙️ Other Config Skills](categories/other_config.md) ({len(other_config)} skills)\n"
+        readme_addition += f"### {cat_info['title']}\n"
+        readme_addition += f"📁 *Full Documentation: [{cat_info['title']} Document](categories/{cat_key}.md) ({len(skills_in_cat)} skills)*\n\n"
+        
+        # Deduplicate skills by name for display list
+        unique_skills = {}
+        for s in skills_in_cat:
+            if s["name"] not in unique_skills:
+                unique_skills[s["name"]] = s
+        
+        skill_links = []
+        for s_name, s_info in sorted(unique_skills.items()):
+            skill_links.append(f"[`{s_name}`]({s_info['path']})")
+        
+        readme_addition += " • ".join(skill_links) + "\n\n"
+
+if other_user:
+    readme_addition += "### 📦 Other User Skills\n"
+    readme_addition += f"📁 *Full Documentation: [Other User Skills Document](categories/other_user.md) ({len(other_user)} skills)*\n\n"
+    unique_skills = {}
+    for s in other_user:
+        if s["name"] not in unique_skills:
+            unique_skills[s["name"]] = s
+    skill_links = [f"[`{s_name}`]({s_info['path']})" for s_name, s_info in sorted(unique_skills.items())]
+    readme_addition += " • ".join(skill_links) + "\n\n"
 
 # Read original README up to the separator
 original_content = ""
