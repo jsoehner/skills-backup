@@ -1,6 +1,9 @@
 import os
 import re
-import yaml
+try:
+    import yaml
+except ImportError:
+    yaml = None
 
 repo_dir = os.path.dirname(os.path.abspath(__file__))
 readme_path = os.path.join(repo_dir, "README.md")
@@ -110,6 +113,79 @@ def determine_category(relative_path, is_config=False):
                 
     return "other"
 
+def parse_yaml_frontmatter_fallback(yaml_text):
+    data = {}
+    lines = yaml_text.splitlines()
+    i = 0
+    while i < len(lines):
+        line = lines[i]
+        # Match key: ...
+        key_match = re.match(r"^([a-zA-Z0-9_-]+):\s*(.*)$", line)
+        if key_match:
+            key = key_match.group(1).strip()
+            rest = key_match.group(2).strip()
+            if rest in ("|", "|-", "|+", ">", ">-", ">+"):
+                # Multiline block scalar
+                block_lines = []
+                i += 1
+                while i < len(lines):
+                    subline = lines[i]
+                    if subline.strip() == "":
+                        block_lines.append("")
+                        i += 1
+                        continue
+                    # Check if indented
+                    indent_match = re.match(r"^(\s+)(.*)$", subline)
+                    if indent_match:
+                        block_lines.append(indent_match.group(2))
+                        i += 1
+                    else:
+                        break
+                data[key] = "\n".join(block_lines).strip()
+                continue
+            elif rest == "":
+                # Could be multiline without pipe or empty
+                block_lines = []
+                i += 1
+                while i < len(lines):
+                    subline = lines[i]
+                    if subline.strip() == "":
+                        block_lines.append("")
+                        i += 1
+                        continue
+                    indent_match = re.match(r"^(\s+)(.*)$", subline)
+                    if indent_match:
+                        block_lines.append(indent_match.group(2))
+                        i += 1
+                    else:
+                        break
+                if block_lines:
+                    data[key] = "\n".join(block_lines).strip()
+                else:
+                    data[key] = ""
+                continue
+            else:
+                # Value on same line, handle possible continuation lines
+                val = rest
+                i += 1
+                while i < len(lines):
+                    subline = lines[i]
+                    if subline.strip() == "":
+                        break
+                    # If line starts with non-space key: break
+                    if re.match(r"^[a-zA-Z0-9_-]+:\s*", subline):
+                        break
+                    indent_match = re.match(r"^\s+(.*)$", subline)
+                    if indent_match:
+                        val += " " + indent_match.group(1)
+                        i += 1
+                    else:
+                        break
+                data[key] = val.strip()
+                continue
+        i += 1
+    return data
+
 def extract_frontmatter(skill_md_path):
     if not os.path.exists(skill_md_path):
         return None
@@ -121,29 +197,42 @@ def extract_frontmatter(skill_md_path):
         match = re.match(r"^---\s*\n(.*?)\n---\s*\n", content, re.DOTALL)
         if match:
             yaml_content = match.group(1)
+            name = None
+            desc = None
             group_val = None
-            try:
-                parsed = yaml.safe_load(yaml_content)
-                name = parsed.get("name")
-                desc = parsed.get("description")
-                group_val = parsed.get("group")
-            except Exception:
-                # Regex fallback if safe_load fails
-                name_match = re.search(r"^name:\s*(.+)$", yaml_content, re.MULTILINE)
-                desc_match = re.search(r"^description:\s*(.+)$", yaml_content, re.MULTILINE)
-                group_match = re.search(r"^group:\s*(.+)$", yaml_content, re.MULTILINE)
-                name = name_match.group(1).strip() if name_match else None
-                desc = desc_match.group(1).strip() if desc_match else None
-                group_val = group_match.group(1).strip() if group_match else None
+            if yaml is not None:
+                try:
+                    parsed = yaml.safe_load(yaml_content)
+                    if isinstance(parsed, dict):
+                        name = parsed.get("name")
+                        desc = parsed.get("description")
+                        group_val = parsed.get("group")
+                except Exception:
+                    pass
             
-            if not name:
+            if not name or not desc:
+                fallback_data = parse_yaml_frontmatter_fallback(yaml_content)
+                if not name:
+                    name = fallback_data.get("name")
+                if not desc:
+                    desc = fallback_data.get("description")
+                if not group_val:
+                    group_val = fallback_data.get("group")
+            
+            if name:
+                name = str(name).strip().strip('"').strip("'")
+            else:
                 name = os.path.basename(os.path.dirname(skill_md_path))
-            if not desc:
+
+            if desc:
+                desc = str(desc).strip().strip('"').strip("'")
+                desc = re.sub(r"\s+", " ", desc)
+            else:
                 desc = ""
             
-            # Strip quotes from descriptions if present
-            desc = desc.strip().strip('"').strip("'")
-            desc = re.sub(r"\s+", " ", desc)
+            if group_val:
+                group_val = str(group_val).strip().strip('"').strip("'")
+            
             return {"name": name, "description": desc, "group": group_val}
     except Exception as e:
         print(f"Error parsing {skill_md_path}: {e}")
@@ -224,8 +313,8 @@ def write_category_file(cat_key, title, skills, is_config):
         f.write("| Skill Name | Description | Path |\n")
         f.write("|---|---|---|\n")
         for skill in skills:
-            # relative link goes up one level to categories' parent
-            skill_link = f"[`{skill['name']}`](../{skill['path']})"
+            # relative link goes up one level to categories' parent and points to SKILL.md
+            skill_link = f"[`{skill['name']}`](../{skill['path']}/SKILL.md)"
             f.write(f"| {skill_link} | {skill['description']} | `{skill['path']}` |\n")
 
 # Write user category documents
@@ -322,7 +411,7 @@ for cat_key, cat_info in USER_CATEGORIES.items():
         
         skill_links = []
         for s_name, s_info in sorted(unique_skills.items()):
-            skill_links.append(f"[`{s_name}`]({s_info['path']})")
+            skill_links.append(f"[`{s_name}`]({s_info['path']}/SKILL.md)")
         
         readme_addition += " • ".join(skill_links) + "\n\n"
 
@@ -333,7 +422,7 @@ if other_user:
     for s in other_user:
         if s["name"] not in unique_skills:
             unique_skills[s["name"]] = s
-    skill_links = [f"[`{s_name}`]({s_info['path']})" for s_name, s_info in sorted(unique_skills.items())]
+    skill_links = [f"[`{s_name}`]({s_info['path']}/SKILL.md)" for s_name, s_info in sorted(unique_skills.items())]
     readme_addition += " • ".join(skill_links) + "\n\n"
 
 # Read original README up to the separator

@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.1.0] - 2026-08-28
+### Fixed
+- **Category Document Links**: Updated category index files to link directly to `SKILL.md` rather than the parent skill folder.
+- **Frontmatter Parsing**: Enhanced `update_readme.py` frontmatter extraction with pure-Python fallback supporting multiline descriptions and block scalar types.
+
 ## [1.0.0] - 2025-05-20
 ### Added
 - **Atomic vs. Composite Architecture**: Restructured the skills repository into "Atomic Skills" (building blocks) and "Composite Skills" (orchestrators).
