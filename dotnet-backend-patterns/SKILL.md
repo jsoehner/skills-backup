@@ -36,11 +36,6 @@ Master C#/.NET patterns for building production-grade APIs, MCP servers, and ent
 
 - `resources/implementation-playbook.md` for detailed .NET patterns and examples.
 
-## Anti-Patterns
-
-- NEVER deploy code changes without validating them against target test suites.
-- NEVER skip documenting non-obvious code assumptions, constraints, and side effects.
-
 
 ## Memory Sync
 

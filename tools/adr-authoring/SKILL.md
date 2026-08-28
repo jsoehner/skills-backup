@@ -40,71 +40,24 @@ Determine Target Audience & Depth
 
 ### Step 1: Choose the ADR Template
 
-Review the decision requirements and choose the template style:
+Review the decision requirements (assessed in `adr-discovery`) and select one of the following official templates:
 
-#### Option A: Nygard Template (Classic)
-```markdown
-# [Number]. [Title]
+#### Option A: Minimum ADR Template
+- **Usage**: Low-risk, local, reversible, or component-level architecturally significant decisions.
+- **Template File**: `/Users/jsoehner/.gemini/config/skills/adr-templates/Minimum_ADR_Template.md`
+- **Key Sections**: Metadata, Context (Problem Statement, Current Situation), Alternatives Considered, Decision, Rationale, Consequences (Positive, Negative, Follow-on), Related Records.
 
-## Status
-[Draft | Proposed | Accepted | Rejected | Deprecated | Superseded by ADR-XX]
+#### Option B: Standard ADR Template (Default)
+- **Usage**: Enterprise default for production application, platform, cloud, security, data, infrastructure, and integration decisions.
+- **Template File**: `/Users/jsoehner/.gemini/config/skills/adr-templates/Standard_ADR_Template.md`
+- **Key Sections**: Metadata, Business and Architecture Context, Assumptions, Constraints, Alternatives Considered (table format), Decision (Selected Option, Rationale), Consequences (Benefits, Trade-offs/Negatives, New Constraints, Follow-on), Security/Risk/Control Impact, Technical Debt Assessment, Traceability, Review and Lifecycle.
 
-## Context
-[What is the context and problem we are trying to solve? What are the constraints?]
+#### Option C: Comprehensive ADR Template
+- **Usage**: Enterprise-critical, regulated, security-sensitive, cross-domain, strategic-platform, significant third-party, standards-exception, material-risk, or material-technical-debt decisions.
+- **Template File**: `/Users/jsoehner/.gemini/config/skills/adr-templates/Comprehensive_ADR_Template.md`
+- **Key Sections**: Metadata, Governance Classification, Stakeholders/Accountability, Business and Architecture Context, Assumptions/Constraints, Alternatives Considered (Detailed scoring matrix), Decision, Consequences, Security/Privacy/Risk/Compliance Assessment, Technical Debt Assessment, Third-Party/Supply-Chain Assessment, Implementation/Transition, Operational Readiness, Validation/Conformance, Traceability, Outcome Review, Review/Supersession/Lifecycle, Audit/Records Management, Change Log.
 
-## Decision
-[What is the change/decision we are committing to?]
-
-## Consequences
-[What becomes easier or harder? What new problems are introduced? What is the impact?]
-```
-
-#### Option B: MADR Template (Markdown ADR)
-```markdown
-# [Title of Decision Record]
-
-* Status: [draft | proposed | accepted | rejected | deprecated | superseded by [ADR-XX](file:///path/to/adr-XX.md)]
-* Deciders: [list of names]
-* Date: [YYYY-MM-DD]
-
-## Technical Story
-* [Link to Story/Epic/Issue]
-
-## Context and Problem Statement
-[Describe the context and problem, e.g., in free text or a set of questions.]
-
-## Decision Drivers
-* [driver 1, e.g., performance]
-* [driver 2, e.g., cost]
-
-## Considered Options
-* [Option 1]
-* [Option 2]
-
-## Decision Outcome
-Chosen option: [Option X], because [justification].
-
-### Positive Consequences
-* [e.g., improves speed]
-
-### Negative Consequences
-* [e.g., increases operational cost]
-
-## Pros and Cons of Options
-
-### [Option 1]
-* Good, because [argument]
-* Bad, because [argument]
-```
-
-#### Option C: Y-Statement Template
-```0
-In the context of [use case/context],
-we decided for [chosen option]
-and against [alternative options],
-to achieve [quality attributes/drivers],
-accepting [consequences/downsides].
-```
+Read the chosen template file directly to get its exact markdown structure and placeholders.
 
 ### Step 2: Gather Context and Trade-offs
 

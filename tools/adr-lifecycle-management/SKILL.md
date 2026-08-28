@@ -23,10 +23,11 @@ This skill helps the agent and team maintain a healthy, searchable, and up-to-da
 
 ```
 Action Required
- ├─ Creating a new decision → [Status: Proposed / Draft]
- ├─ Decision is accepted and implemented → [Update Status: Accepted]
- ├─ Decision is replaced by a newer decision → [Link both: Update old to Superseded, new to Supersedes]
- └─ Decision is retired/no longer applicable → [Update Status: Deprecated / Retired]
+ ├─ Initial drafting or under review → [Status: Draft / Proposed / Under Review]
+ ├─ Approved or approved with caveats → [Status: Accepted / Accepted with Conditions]
+ ├─ Fully deployed and validated → [Status: Implemented / Validated]
+ ├─ Replaced by a newer decision → [Link both: Update old to Superseded by ADR-XX, new to Supersedes ADR-YY]
+ └─ Decommissioned or retired → [Status: Deprecated / Retired / Archived]
 ```
 
 ## Professional Mindset & Design Principles
