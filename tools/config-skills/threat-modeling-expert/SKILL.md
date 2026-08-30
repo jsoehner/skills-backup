@@ -35,14 +35,20 @@ Expert in threat modeling methodologies, security architecture review, and risk 
 
 ## Instructions
 
-1. Define system scope and trust boundaries
-2. Create data flow diagrams
-3. Identify assets and entry points
-4. Apply STRIDE to each component
-5. Build attack trees for critical paths
-6. Score and prioritize threats
-7. Design mitigations
-8. Document residual risks
+1. **Scope & Trust Boundaries**: Define system boundaries, untrusted external interfaces, and data flow crossings.
+2. **Decomposition & DFDs**: Map all data flows, processes, data stores, and actors.
+3. **Threat Enumeration**:
+   - Apply STRIDE-per-element and STRIDE-per-interaction across all components and boundaries.
+   - For risk-centric or business-critical reviews, apply the 7-stage PASTA framework.
+4. **Attack Modeling**: Construct AND/OR attack trees for critical asset paths, scoring difficulty, cost, and detection.
+5. **Risk Scoring & Prioritization**: Score threats using Likelihood × Impact (4x4 matrix) or DREAD.
+6. **Mitigation Strategy & Requirements**: Map threats to concrete preventive, detective, and corrective controls.
+7. **Reporting & Follow-up**: Produce structured threat model documentation with 30/60/90-day roadmaps.
+8. If detailed templates, checklists, or matrix structures are needed, consult `resources/implementation-playbook.md`.
+
+## Resources
+
+- `resources/implementation-playbook.md`: Detailed methodology playbooks, STRIDE per element/interaction matrix, PASTA 7-stage workflow, attack tree templates, risk scoring matrices, and standardized markdown report templates.
 
 ## Safety
 
