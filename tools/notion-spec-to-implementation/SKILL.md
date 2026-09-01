@@ -142,13 +142,13 @@ To prevent token bloat, load only the formatting schemas relevant to your active
 
 | :--- | :--- | :--- |
 
-| **Parsing PRDs / Specs** | Read [reference/spec-parsing.md](file:///home/jsoehner/yuv-skills-backup/notion-spec-to-implementation/reference/spec-parsing.md) | `reference/progress-tracking.md` |
+| **Parsing PRDs / Specs** | Read [reference/spec-parsing.md](reference/spec-parsing.md) | `reference/progress-tracking.md` |
 
-| **Drafting Implementation Plan** | Read [reference/standard-implementation-plan.md](file:///home/jsoehner/yuv-skills-backup/notion-spec-to-implementation/reference/standard-implementation-plan.md) OR [reference/quick-implementation-plan.md](file:///home/jsoehner/yuv-skills-backup/notion-spec-to-implementation/reference/quick-implementation-plan.md) | `reference/task-creation.md` |
+| **Drafting Implementation Plan** | Read [reference/standard-implementation-plan.md](reference/standard-implementation-plan.md) OR [reference/quick-implementation-plan.md](reference/quick-implementation-plan.md) | `reference/task-creation.md` |
 
-| **Creating Database Tasks** | Read [reference/task-creation.md](file:///home/jsoehner/yuv-skills-backup/notion-spec-to-implementation/reference/task-creation.md) AND [reference/task-creation-template.md](file:///home/jsoehner/yuv-skills-backup/notion-spec-to-implementation/reference/task-creation-template.md) | `reference/spec-parsing.md` |
+| **Creating Database Tasks** | Read [reference/task-creation.md](reference/task-creation.md) AND [reference/task-creation-template.md](reference/task-creation-template.md) | `reference/spec-parsing.md` |
 
-| **Tracking Progress & Status** | Read [reference/progress-tracking.md](file:///home/jsoehner/yuv-skills-backup/notion-spec-to-implementation/reference/progress-tracking.md), [reference/progress-update-template.md](file:///home/jsoehner/yuv-skills-backup/notion-spec-to-implementation/reference/progress-update-template.md), AND [reference/milestone-summary-template.md](file:///home/jsoehner/yuv-skills-backup/notion-spec-to-implementation/reference/milestone-summary-template.md) | `reference/quick-implementation-plan.md` |
+| **Tracking Progress & Status** | Read [reference/progress-tracking.md](reference/progress-tracking.md), [reference/progress-update-template.md](reference/progress-update-template.md), AND [reference/milestone-summary-template.md](reference/milestone-summary-template.md) | `reference/quick-implementation-plan.md` |
 
 
 

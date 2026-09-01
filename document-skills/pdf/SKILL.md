@@ -16,8 +16,8 @@ This skill guides you through parsing, creating, editing, and converting PDF doc
 ## 1. Reference Loading & Progressive Disclosure
 
 This folder contains additional reference documentation:
-- **For AcroForm and Form Filling**: You **MUST** read [forms.md](file:///home/jsoehner/yuv-skills-backup/document-skills/pdf/forms.md) completely before proceeding.
-- **For Advanced PDFium2 / JS (pdf-lib) Tasks**: You **MUST** read [reference.md](file:///home/jsoehner/yuv-skills-backup/document-skills/pdf/reference.md) completely.
+- **For AcroForm and Form Filling**: You **MUST** read [forms.md](forms.md) completely before proceeding.
+- **For Advanced PDFium2 / JS (pdf-lib) Tasks**: You **MUST** read [reference.md](reference.md) completely.
 - **NEVER** set range limits when reading these reference files.
 
 ---

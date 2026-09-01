@@ -26,11 +26,11 @@ To install these skills onto a new workspace/system:
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/jsoehner/yuv-skills-backup.git ~/yuv-skills-backup
+   git clone https://github.com/jsoehner/skills-backup.git ~/skills-backup
    ```
 2. Navigate to the repository:
    ```bash
-   cd ~/yuv-skills-backup
+   cd ~/skills-backup
    ```
 3. Deploy the skills to the local agentic runtime configuration directories (`~/.gemini/skills` and `~/.gemini/config/skills`):
    ```bash
@@ -48,7 +48,7 @@ When you or an agent modifies a skill locally or creates a new one:
 
 1. Navigate to the backup repository:
    ```bash
-   cd ~/yuv-skills-backup
+   cd ~/skills-backup
    ```
 2. Synchronize the local changes back to the backup repository:
    ```bash
@@ -78,7 +78,7 @@ To keep multiple development systems aligned:
 
 1. On a secondary system, fetch the latest backup repository state:
    ```bash
-   cd ~/yuv-skills-backup
+   cd ~/skills-backup
    git pull origin main
    ```
 2. Redeploy the updated skills locally:
@@ -109,11 +109,11 @@ The utility to push/pull files between local runtime directories and this repo:
 - **List Categories**: `python3 sync.py -l`
 
 ### `update_readme.py`
-Scans all skills in the repository, parses their frontmatter (`SKILL.md`), and updates the main [README.md](file:///home/jsoehner/yuv-skills-backup/README.md) catalog.
+Scans all skills in the repository, parses their frontmatter (`SKILL.md`), and updates the main [README.md](README.md) catalog.
 - **Run**: `python3 update_readme.py`
 
 ---
 
 > [!TIP]
 > **Pro Tip for Active Iteration**:
-> Always verify status and run tests locally before saving changes back to the repo. Pin action versions to explicit 40-character commit SHAs in workflows (as described in [github_actions_node24](file:///home/jsoehner/yuv-skills-backup/config-skills/github_actions_node24/SKILL.md)) to avoid security warnings.
+> Always verify status and run tests locally before saving changes back to the repo. Pin action versions to explicit 40-character commit SHAs in workflows (as described in [github_actions_node24](tools/config-skills/github_actions_node24/SKILL.md)) to avoid security warnings.

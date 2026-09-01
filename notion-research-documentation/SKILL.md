@@ -148,19 +148,19 @@ To prevent token bloat, load only the formatting schemas relevant to your resear
 
 | :--- | :--- | :--- |
 
-| **Comparison Grid / Matrix** | Read [reference/comparison-format.md](file:///home/jsoehner/yuv-skills-backup/notion-research-documentation/reference/comparison-format.md) AND [reference/comparison-template.md](file:///home/jsoehner/yuv-skills-backup/notion-research-documentation/reference/comparison-template.md) | `reference/comprehensive-report-template.md` |
+| **Comparison Grid / Matrix** | Read [reference/comparison-format.md](reference/comparison-format.md) AND [reference/comparison-template.md](reference/comparison-template.md) | `reference/comprehensive-report-template.md` |
 
-| **Long-Form Report / Analysis** | Read [reference/comprehensive-report-format.md](file:///home/jsoehner/yuv-skills-backup/notion-research-documentation/reference/comprehensive-report-format.md) AND [reference/comprehensive-report-template.md](file:///home/jsoehner/yuv-skills-backup/notion-research-documentation/reference/comprehensive-report-template.md) | `reference/quick-brief-template.md` |
+| **Long-Form Report / Analysis** | Read [reference/comprehensive-report-format.md](reference/comprehensive-report-format.md) AND [reference/comprehensive-report-template.md](reference/comprehensive-report-template.md) | `reference/quick-brief-template.md` |
 
-| **Executive Brief / Status Deck** | Read [reference/quick-brief-format.md](file:///home/jsoehner/yuv-skills-backup/notion-research-documentation/reference/quick-brief-format.md) AND [reference/quick-brief-template.md](file:///home/jsoehner/yuv-skills-backup/notion-research-documentation/reference/quick-brief-template.md) | `reference/comprehensive-report-template.md` |
+| **Executive Brief / Status Deck** | Read [reference/quick-brief-format.md](reference/quick-brief-format.md) AND [reference/quick-brief-template.md](reference/quick-brief-template.md) | `reference/comprehensive-report-template.md` |
 
-| **Standard Summary** | Read [reference/research-summary-format.md](file:///home/jsoehner/yuv-skills-backup/notion-research-documentation/reference/research-summary-format.md) AND [reference/research-summary-template.md](file:///home/jsoehner/yuv-skills-backup/notion-research-documentation/reference/research-summary-template.md) | `reference/comparison-template.md` |
+| **Standard Summary** | Read [reference/research-summary-format.md](reference/research-summary-format.md) AND [reference/research-summary-template.md](reference/research-summary-template.md) | `reference/comparison-template.md` |
 
-| **Linking & Citations** | Read [reference/citations.md](file:///home/jsoehner/yuv-skills-backup/notion-research-documentation/reference/citations.md) | N/A |
+| **Linking & Citations** | Read [reference/citations.md](reference/citations.md) | N/A |
 
-| **Overall Selection Guide** | Read [reference/format-selection-guide.md](file:///home/jsoehner/yuv-skills-backup/notion-research-documentation/reference/format-selection-guide.md) | N/A |
+| **Overall Selection Guide** | Read [reference/format-selection-guide.md](reference/format-selection-guide.md) | N/A |
 
-| **Advanced Search Tips** | Read [reference/advanced-search.md](file:///home/jsoehner/yuv-skills-backup/notion-research-documentation/reference/advanced-search.md) | N/A |
+| **Advanced Search Tips** | Read [reference/advanced-search.md](reference/advanced-search.md) | N/A |
 
 
 

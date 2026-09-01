@@ -902,9 +902,9 @@ The exact pattern this skill describes was implemented at:
 
 **MANDATORY - LOADING TRIGGERS**:
 
-- Before locking visual palettes in Step 5, you **MUST** read [yuv-design-system](file:///Users/jsoehner/.gemini/skills/yuv-design-system/SKILL.md) fully.
+- Before locking visual palettes in Step 5, you **MUST** read [yuv-design-system](../yuv-design-system/SKILL.md) fully.
 
-- Before constructing react JSX layouts in Step 7, you **MUST** read [slide-authoring](file:///Users/jsoehner/.gemini/skills/slide-authoring/SKILL.md).
+- Before constructing react JSX layouts in Step 7, you **MUST** read `slide-authoring`.
 
 - **Do NOT load** design system references during Step 1 project bootstrapping steps.
 

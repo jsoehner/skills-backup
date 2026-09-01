@@ -29,10 +29,10 @@ You **MUST** identify the communication type and immediately load the correspond
 
 | Requested Comms Type | Target Guideline File (MANDATORY - Load via `view_file`) | What it covers |
 | :--- | :--- | :--- |
-| **Progress, Plans, Problems** | [`examples/3p-updates.md`](file:///home/jsoehner/yuv-skills-backup/internal-comms/examples/3p-updates.md) | Weekly/bi-weekly updates for teams or cross-functional stakeholders. |
-| **Newsletters / Staff Announcements** | [`examples/company-newsletter.md`](file:///home/jsoehner/yuv-skills-backup/internal-comms/examples/company-newsletter.md) | All-hands digests, department milestones, monthly summaries. |
-| **Q&A / FAQs** | [`examples/faq-answers.md`](file:///home/jsoehner/yuv-skills-backup/internal-comms/examples/faq-answers.md) | Answering employee or customer questions directly and constructively. |
-| **Other / General Comms** | [`examples/general-comms.md`](file:///home/jsoehner/yuv-skills-backup/internal-comms/examples/general-comms.md) | Incident updates, ad-hoc leadership messages, project milestones. |
+| **Progress, Plans, Problems** | [`examples/3p-updates.md`](examples/3p-updates.md) | Weekly/bi-weekly updates for teams or cross-functional stakeholders. |
+| **Newsletters / Staff Announcements** | [`examples/company-newsletter.md`](examples/company-newsletter.md) | All-hands digests, department milestones, monthly summaries. |
+| **Q&A / FAQs** | [`examples/faq-answers.md`](examples/faq-answers.md) | Answering employee or customer questions directly and constructively. |
+| **Other / General Comms** | [`examples/general-comms.md`](examples/general-comms.md) | Incident updates, ad-hoc leadership messages, project milestones. |
 
 ---
 
@@ -59,7 +59,7 @@ You **MUST** identify the communication type and immediately load the correspond
 
 ## Usability & Fallback Logic
 
-* **No direct match:** If the request doesn't match one of the template files (e.g., a post-mortem incident report), load [`examples/general-comms.md`](file:///home/jsoehner/yuv-skills-backup/internal-comms/examples/general-comms.md) as the default baseline.
+* **No direct match:** If the request doesn't match one of the template files (e.g., a post-mortem incident report), load [`examples/general-comms.md`](examples/general-comms.md) as the default baseline.
 * **Missing Details:** If the user asks for an update but provides no data, do not invent achievements. Prompt the user:
   > "To draft this update, please provide: (1) Key achievements/launches this period, (2) Critical milestones for next period, and (3) Any blockers/problems you are facing."
 

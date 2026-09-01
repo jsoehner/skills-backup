@@ -34,9 +34,9 @@ This skill guides you through constructing and refining PowerPoint presentations
 
 This folder contains additional reference documentation. Follow these strict loading rules:
 
-- **For Creating Presentations without a Template**: You **MUST** read [html2pptx.md](file:///home/jsoehner/yuv-skills-backup/document-skills/pptx/html2pptx.md) completely.
+- **For Creating Presentations without a Template**: You **MUST** read [html2pptx.md](html2pptx.md) completely.
 
-- **For Editing Existing Presentations via XML**: You **MUST** read [ooxml.md](file:///home/jsoehner/yuv-skills-backup/document-skills/pptx/ooxml.md) completely.
+- **For Editing Existing Presentations via XML**: You **MUST** read [ooxml.md](ooxml.md) completely.
 
 - **NEVER** set range limits when loading these reference markdown files.
 

@@ -14,7 +14,7 @@ This skill guides you through constructing, parsing, updating, and recalculating
 ## 1. Reference Loading & Progressive Disclosure
 
 This is a self-contained skill folder.
-- Execute calculations and validations using the local [recalc.py](file:///home/jsoehner/yuv-skills-backup/document-skills/xlsx/recalc.py) script.
+- Execute calculations and validations using the local [recalc.py](recalc.py) script.
 - Do NOT look for other external reference files unless specified.
 
 ---

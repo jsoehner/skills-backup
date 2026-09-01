@@ -148,19 +148,19 @@ To prevent context bloat, load only the templates relevant to your specific meet
 
 | :--- | :--- | :--- |
 
-| **Decision / Design Review** | Read [reference/decision-meeting-template.md](file:///home/jsoehner/yuv-skills-backup/notion-meeting-intelligence/reference/decision-meeting-template.md) | `reference/sprint-planning-template.md` |
+| **Decision / Design Review** | Read [reference/decision-meeting-template.md](reference/decision-meeting-template.md) | `reference/sprint-planning-template.md` |
 
-| **Sprint Planning** | Read [reference/sprint-planning-template.md](file:///home/jsoehner/yuv-skills-backup/notion-meeting-intelligence/reference/sprint-planning-template.md) | `reference/retrospective-template.md` |
+| **Sprint Planning** | Read [reference/sprint-planning-template.md](reference/sprint-planning-template.md) | `reference/retrospective-template.md` |
 
-| **Retrospective** | Read [reference/retrospective-template.md](file:///home/jsoehner/yuv-skills-backup/notion-meeting-intelligence/reference/retrospective-template.md) | `reference/one-on-one-template.md` |
+| **Retrospective** | Read [reference/retrospective-template.md](reference/retrospective-template.md) | `reference/one-on-one-template.md` |
 
-| **1-on-1 / Sync** | Read [reference/one-on-one-template.md](file:///home/jsoehner/yuv-skills-backup/notion-meeting-intelligence/reference/one-on-one-template.md) | `reference/decision-meeting-template.md` |
+| **1-on-1 / Sync** | Read [reference/one-on-one-template.md](reference/one-on-one-template.md) | `reference/decision-meeting-template.md` |
 
-| **Status Update / Sync** | Read [reference/status-update-template.md](file:///home/jsoehner/yuv-skills-backup/notion-meeting-intelligence/reference/status-update-template.md) | `reference/brainstorming-template.md` |
+| **Status Update / Sync** | Read [reference/status-update-template.md](reference/status-update-template.md) | `reference/brainstorming-template.md` |
 
-| **Brainstorming / Workshop** | Read [reference/brainstorming-template.md](file:///home/jsoehner/yuv-skills-backup/notion-meeting-intelligence/reference/brainstorming-template.md) | `reference/retrospective-template.md` |
+| **Brainstorming / Workshop** | Read [reference/brainstorming-template.md](reference/brainstorming-template.md) | `reference/retrospective-template.md` |
 
-| **Template Selector** | For overall design context, load [reference/template-selection-guide.md](file:///home/jsoehner/yuv-skills-backup/notion-meeting-intelligence/reference/template-selection-guide.md) | N/A |
+| **Template Selector** | For overall design context, load [reference/template-selection-guide.md](reference/template-selection-guide.md) | N/A |
 
 
 

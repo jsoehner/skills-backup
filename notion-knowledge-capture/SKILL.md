@@ -222,13 +222,13 @@ To prevent token bloating, do not load all databases or examples at once. Follow
 
 | :--- | :--- | :--- |
 
-| Writing a custom DB record | Read [reference/database-best-practices.md](file:///home/jsoehner/yuv-skills-backup/notion-knowledge-capture/reference/database-best-practices.md) | `examples/how-to-guide.md` |
+| Writing a custom DB record | Read [reference/database-best-practices.md](reference/database-best-practices.md) | `examples/how-to-guide.md` |
 
-| Capturing a decision / ADR | Read [reference/decision-log-database.md](file:///home/jsoehner/yuv-skills-backup/notion-knowledge-capture/reference/decision-log-database.md) AND [examples/decision-capture.md](file:///home/jsoehner/yuv-skills-backup/notion-knowledge-capture/examples/decision-capture.md) | `reference/faq-database.md` |
+| Capturing a decision / ADR | Read [reference/decision-log-database.md](reference/decision-log-database.md) AND [examples/decision-capture.md](examples/decision-capture.md) | `reference/faq-database.md` |
 
-| Creating a How-To runbook | Read [reference/how-to-guide-database.md](file:///home/jsoehner/yuv-skills-backup/notion-knowledge-capture/reference/how-to-guide-database.md) AND [examples/how-to-guide.md](file:///home/jsoehner/yuv-skills-backup/notion-knowledge-capture/examples/how-to-guide.md) | `reference/decision-log-database.md` |
+| Creating a How-To runbook | Read [reference/how-to-guide-database.md](reference/how-to-guide-database.md) AND [examples/how-to-guide.md](examples/how-to-guide.md) | `reference/decision-log-database.md` |
 
-| Extracting Q&A from chat | Read [reference/faq-database.md](file:///home/jsoehner/yuv-skills-backup/notion-knowledge-capture/reference/faq-database.md) AND [examples/conversation-to-faq.md](file:///home/jsoehner/yuv-skills-backup/notion-knowledge-capture/examples/conversation-to-faq.md) | `reference/how-to-guide-database.md` |
+| Extracting Q&A from chat | Read [reference/faq-database.md](reference/faq-database.md) AND [examples/conversation-to-faq.md](examples/conversation-to-faq.md) | `reference/how-to-guide-database.md` |
 
 | Static Wiki page creation | Use self-contained layouts. Do NOT load any database schemas. | All database schema reference files |
 
