@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "version": "1.0.0",
+  "adrs": [
+    {
+      "id": "0001",
+      "title": "Use PostgreSQL as Primary Database",
+      "status": "Accepted",
+      "date": "2025-07-31",
+      "file": "docs/adr/0001-postgresql-primary-database.md",
+      "tags": ["database", "storage", "acid"]
+    },
+    {
+      "id": "0002",
+      "title": "Caching Strategy (Redis)",
+      "status": "Accepted",
+      "date": "2025-07-31",
+      "file": "docs/adr/0002-redis-caching-strategy.md",
+      "tags": ["caching", "performance", "redis"]
+    },
+    {
+      "id": "0003",
+      "title": "Local Memory Management (LanceDB)",
+      "status": "Accepted",
+      "date": "2025-07-31",
+      "file": "docs/adr/0003-local-memory-management.md",
+      "tags": ["memory", "vector", "lancedb"]
+    },
+    {
+      "id": "0004",
+      "title": "Adopt Regulated Architecture Decision Record (RADR) Framework",
+      "status": "Accepted",
+      "date": "2026-08-08",
+      "file": "docs/adr/0004-adopt-regulated-adr-framework.md",
+      "tags": ["governance", "compliance", "radr"]
+    },
+    {
+      "id": "0005",
+      "title": "Local Memory RAG Architecture and Zero-Cloud Token Injection",
+      "status": "Accepted",
+      "date": "2026-08-20",
+      "file": "docs/adr/0005-local-memory-rag-architecture.md",
+      "tags": ["memory", "rag", "chromadb", "okf"]
+    },
+    {
+      "id": "0006",
+      "title": "Standardize Skills Directory Structure and Eliminate Ambiguous tools/ Taxonomy (Tier 1)",
+      "status": "Accepted",
+      "date": "2026-09-02",
+      "file": "docs/adr/0006-standardize-skills-directory-structure.md",
+      "tags": ["taxonomy", "skills", "refactoring", "sync"]
+    }
+  ]
+}
