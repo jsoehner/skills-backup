@@ -10,6 +10,8 @@ This directory contains the Architecture Decision Records (ADRs) for the project
 | [0002](0002-redis-caching-strategy.md) | Caching Strategy (Redis) | Accepted | 2025-07-31 |
 | [0003](0003-local-memory-management.md) | Local Memory Management (LanceDB) | Accepted | 2025-07-31 |
 | [0004](0004-adopt-regulated-adr-framework.md) | Adopt Regulated Architecture Decision Record (RADR) Framework | Accepted | 2026-08-08 |
+| [0005](0005-local-memory-rag-architecture.md) | Local Memory RAG Architecture and Zero-Cloud Token Injection | Accepted | 2026-08-20 |
+| [0006](0006-standardize-skills-directory-structure.md) | Standardize Skills Directory Structure and Eliminate Ambiguous tools/ Taxonomy (Tier 1) | Accepted | 2026-09-02 |
 
 ## Lifecycle
 - **Proposed**: The decision is being discussed.

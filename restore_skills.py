@@ -38,7 +38,7 @@ def main():
         if '.git' in parts or '__pycache__' in parts:
             continue
         # Skip nested skills subdirectories inside skills
-        if 'skills' in parts and len(parts) > 1 and parts[0] != 'config-skills':
+        if 'skills' in parts[1:] and parts[0] != 'config-skills':
             continue
 
         if 'SKILL.md' in files:

@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.2.0] - 2026-09-02
+### Changed
+- **Directory Structure**: Renamed `tools/` directory to `skills/` to standardize the skill repository naming.
+- **Documentation & Scripts**: Updated all documentation (`README.md`, `CONTRIBUTING.md`, `LIFECYCLE.md`), `audit_status.json`, and utilities (`deploy_skills.py`, `debug_scan.py`, `sync.py`, `restore_skills.py`, `update_readme.py`) to reference `skills/`.
+
 ## [1.1.0] - 2026-08-28
 ### Fixed
 - **Category Document Links**: Updated category index files to link directly to `SKILL.md` rather than the parent skill folder.
