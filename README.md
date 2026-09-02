@@ -233,6 +233,7 @@ skills-backup/
 1. **Atomic Skills**: Add new modular skills directly to `skills/<skill-name>/SKILL.md`.
 2. **Composite Skills**: Add orchestrators with a `manifest.json` declaring dependencies.
 3. **Architectural Changes**: All structural or breaking changes require an Architectural Decision Record in `docs/adr/` following the [ADR Governance Strategy](docs/architecture.md#architectural-decision-record-adr-governance-strategy).
+4. **Automated Enforcement**: Deploy the [`install-adr-gatekeeper`](skills/install-adr-gatekeeper/SKILL.md) skill to set up pre-commit validation and CI/CD pull request gatekeeping (`.github/workflows/adr-gatekeeper.yml`).
 
 
 ## 🧠 Local Memory RAG Architecture & Token Flow

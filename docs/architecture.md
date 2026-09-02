@@ -102,3 +102,26 @@ Once the decision is live and the project evolves:
 *   **Consistency**: Do all ADRs follow a recognizable structure in `docs/adr/`?
 *   **Integrity**: Are there any "orphaned" decisions (decisions with no links to what superseded them)?
 *   **Immutability**: Approved decisions are append-only. Never modify historical records in place.
+
+---
+
+## 6. Automated Enforcement: Deploying `install-adr-gatekeeper`
+
+To prevent architectural drift automatically, repositories deploy the [`install-adr-gatekeeper`](../skills/install-adr-gatekeeper/SKILL.md) skill:
+
+1. **Deploying the Gatekeeper**:
+   ```bash
+   # Run the install-adr-gatekeeper skill to provision gatekeeping assets:
+   # - docs/adr/adr_index.json
+   # - docs/adr/adr_analyst_config.json
+   # - docs/adr/adr_analyst_prompt.txt
+   # - scripts/adr_gatekeeper.py
+   # - .github/workflows/adr-gatekeeper.yml
+   # - .git/hooks/pre-commit
+   ```
+
+2. **Local Pre-Commit Guard**:
+   When developers stage modifications to core infrastructure, schema definitions, or framework configurations, the local hook validates that an ADR in `docs/adr/` is included in the commit.
+
+3. **CI/CD Pull Request Gate**:
+   GitHub Actions executes `scripts/adr_gatekeeper.py <base_branch>` on every PR. If an architecturally sensitive path is modified without an ADR in `docs/adr/`, the build fails and provides actionable instructions on drafting the record.
