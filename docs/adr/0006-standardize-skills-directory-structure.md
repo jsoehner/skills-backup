@@ -15,7 +15,7 @@
 | Named Decision Maker | jsoehner, AI Systems Team |
 | Approval Authority | Architecture Review Board (ARB) |
 | Approval Evidence ID | ARB-20260902-DIR-MIGRATE |
-| Repository Location | `skills/adr/0006-standardize-skills-directory-structure.md` |
+| Repository Location | `docs/adr/0006-standardize-skills-directory-structure.md` |
 | Tags | skills, directory-structure, refactoring, taxonomy, sync, multi-harness |
 
 ---

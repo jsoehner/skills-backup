@@ -369,7 +369,7 @@ readme_addition += "### Why & How This Functionality Is Organized\n\n"
 readme_addition += "- **Deterministic Policy Routing (OKF)**: High-level architectural rules and security standards are stored as plain Markdown under `~/memory_system/knowledge/okf/` for exact, zero-hallucination regex matching.\n"
 readme_addition += "- **Semantic Memory Indexing (ChromaDB)**: Troubleshooting notes, error logs, and code snippets are embedded locally into ChromaDB at `~/memory_system/db/` using local ONNX embeddings.\n"
 readme_addition += "- **Automated Inbox Daemon**: Background service `memory-inbox.service` monitors `~/memory_system/inbox/` for new `.md` files and automatically indexes them.\n"
-readme_addition += "- **Architectural Decision Record**: See [ADR 0005: Local Memory RAG Architecture](skills/adr/0005-local-memory-rag-architecture.md) for rationale.\n"
+readme_addition += "- **Architectural Decision Record**: See [ADR 0005: Local Memory RAG Architecture](docs/adr/0005-local-memory-rag-architecture.md) for rationale.\n"
 readme_addition += "- **Detailed Documentation**: See the complete [Memory RAG FAQ](memory_rag_faq.md) for step-by-step technical details.\n\n"
 
 readme_addition += "### ⚠️ Gotchas & Operational Caveats\n\n"

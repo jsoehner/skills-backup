@@ -3,7 +3,7 @@
 A centralized, enterprise-grade repository of modular AI agent skills supporting **OpenCode**, **Gemini CLI**, **Claude Code**, and **Pi-Agent** harnesses. Each skill provides self-contained domain expertise, deterministic policies, step-by-step procedures, and execution playbooks.
 
 > [!NOTE]
-> **Tier 1 Architecture Standardization**: As of `v1.2.0`, the repository structure has been migrated to standardize all skills under the `skills/` namespace (see [ADR 0006](skills/adr/0006-standardize-skills-directory-structure.md)).
+> **Tier 1 Architecture Standardization**: As of `v1.2.0`, the repository structure has been migrated to standardize all skills under the `skills/` namespace (see [ADR 0006](docs/adr/0006-standardize-skills-directory-structure.md)).
 
 ---
 
@@ -206,12 +206,13 @@ Valid JSON with 599 entries
 ```text
 skills-backup/
 ├── skills/                     # All Atomic and Modular Skills
-│   ├── adr/                    # Architecture Decision Records (ADRs)
-│   ├── adr-templates/          # Official ADR markdown templates
 │   ├── config-skills/          # System configuration & connector skills
 │   └── [skill-name]/           # Individual skill directory (contains SKILL.md)
+├── docs/                       # Architectural governance & documentation
+│   ├── adr/                    # Architecture Decision Records (ADRs)
+│   ├── adr-templates/          # Official ADR markdown templates
+│   └── decisions/              # Decision strategies & policies
 ├── categories/                 # Auto-generated category index documentation
-├── docs/                       # Architectural governance & strategy guides
 ├── audit_status.json           # Categorization and migration source of truth
 ├── sync.py                     # Bi-directional local sync engine
 ├── restore_skills.py           # Client environment restoration utility
@@ -231,7 +232,7 @@ skills-backup/
 
 1. **Atomic Skills**: Add new modular skills directly to `skills/<skill-name>/SKILL.md`.
 2. **Composite Skills**: Add orchestrators with a `manifest.json` declaring dependencies.
-3. **Architectural Changes**: All structural or breaking changes require an Architectural Decision Record in `skills/adr/` following the [ADR Governance Strategy](docs/decisions/ADR_Governance_Strategy.md).
+3. **Architectural Changes**: All structural or breaking changes require an Architectural Decision Record in `docs/adr/` following the [ADR Governance Strategy](docs/decisions/ADR_Governance_Strategy.md).
 
 
 ## 🧠 Local Memory RAG Architecture & Token Flow
@@ -262,7 +263,7 @@ flowchart TD
 - **Deterministic Policy Routing (OKF)**: High-level architectural rules and security standards are stored as plain Markdown under `~/memory_system/knowledge/okf/` for exact, zero-hallucination regex matching.
 - **Semantic Memory Indexing (ChromaDB)**: Troubleshooting notes, error logs, and code snippets are embedded locally into ChromaDB at `~/memory_system/db/` using local ONNX embeddings.
 - **Automated Inbox Daemon**: Background service `memory-inbox.service` monitors `~/memory_system/inbox/` for new `.md` files and automatically indexes them.
-- **Architectural Decision Record**: See [ADR 0005: Local Memory RAG Architecture](skills/adr/0005-local-memory-rag-architecture.md) for rationale.
+- **Architectural Decision Record**: See [ADR 0005: Local Memory RAG Architecture](docs/adr/0005-local-memory-rag-architecture.md) for rationale.
 - **Detailed Documentation**: See the complete [Memory RAG FAQ](memory_rag_faq.md) for step-by-step technical details.
 
 ### ⚠️ Gotchas & Operational Caveats
