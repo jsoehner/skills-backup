@@ -208,11 +208,10 @@ skills-backup/
 ├── skills/                     # All Atomic and Modular Skills
 │   ├── config-skills/          # System configuration & connector skills
 │   └── [skill-name]/           # Individual skill directory (contains SKILL.md)
-├── docs/                       # Architectural governance & documentation
+├── docs/                       # Architecture & ADR governance documentation
 │   ├── adr/                    # Architecture Decision Records (ADRs)
 │   │   └── templates/          # Official ADR markdown templates
-│   ├── decisions/              # Decision strategies & policies
-│   └── architecture.md         # Current state of system architecture
+│   └── architecture.md         # Architecture overview & ADR governance strategy
 ├── categories/                 # Auto-generated category index documentation
 ├── audit_status.json           # Categorization and migration source of truth
 ├── sync.py                     # Bi-directional local sync engine
@@ -233,7 +232,7 @@ skills-backup/
 
 1. **Atomic Skills**: Add new modular skills directly to `skills/<skill-name>/SKILL.md`.
 2. **Composite Skills**: Add orchestrators with a `manifest.json` declaring dependencies.
-3. **Architectural Changes**: All structural or breaking changes require an Architectural Decision Record in `docs/adr/` following the [ADR Governance Strategy](docs/decisions/ADR_Governance_Strategy.md).
+3. **Architectural Changes**: All structural or breaking changes require an Architectural Decision Record in `docs/adr/` following the [ADR Governance Strategy](docs/architecture.md#architectural-decision-record-adr-governance-strategy).
 
 
 ## 🧠 Local Memory RAG Architecture & Token Flow
