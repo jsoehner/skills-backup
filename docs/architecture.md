@@ -28,6 +28,6 @@ The system is designed as a high-performance, scalable, and maintainable platfor
 - **Session Handoff**: Structured system for transferring state between AI agent sessions.
 
 ## Roadmap & Governance
-- **ADRs**: All significant technical decisions are logged in the `adr/` directory.
+- **ADRs**: All significant technical decisions are logged in the `docs/adr/` directory.
 - **Documentation**: Automated and manual documentation generation for APIs, runbooks, and system diagrams.
 - **Security**: Integrated SAST, threat modeling, and compliance checks (GDPR, etc.).

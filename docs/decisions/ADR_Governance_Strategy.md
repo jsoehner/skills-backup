@@ -49,14 +49,14 @@ Before starting a major feature or infrastructure change, run the `adr-discovery
 
 ### Step 2: The Drafting Phase (`adr-authoring`)
 Once a decision is flagged as significant:
-1.  Use `adr-authoring` to select the appropriate template.
-2.  Draft the ADR, ensuring the **Consequences** section is honest and detailed (including the downsides).
+1.  Use `adr-authoring` to select the appropriate template from `docs/adr/templates/`.
+2.  Draft the ADR in `docs/adr/NNNN-title.md`, ensuring the **Consequences** section is honest and detailed (including the downsides).
 3.  Submit the ADR for review as part of the technical design approval.
 
 ### Step 3: The Maintenance Loop (`adr-lifecycle-management`)
 Once the decision is live and the project evolves:
-1.  **New Decision?** Create a new ADR and use the lifecycle skill to update the index.
-2.  **Superseding a Decision?** Use the lifecycle skill to create the bidirectional link between the old and new records.
+1.  **New Decision?** Create a new ADR in `docs/adr/` and use the lifecycle skill to update the index (`docs/adr/README.md`).
+2.  **Superseding a Decision?** Use the lifecycle skill to create the bidirectional link between the old and new records in `docs/adr/`.
 3.  **Retiring a Decision?** Mark as `Deprecated` or `Superseded`; never delete the file.
 
 ## 5. Success Metrics

@@ -13,6 +13,13 @@ This directory contains the Architecture Decision Records (ADRs) for the project
 | [0005](0005-local-memory-rag-architecture.md) | Local Memory RAG Architecture and Zero-Cloud Token Injection | Accepted | 2026-08-20 |
 | [0006](0006-standardize-skills-directory-structure.md) | Standardize Skills Directory Structure and Eliminate Ambiguous tools/ Taxonomy (Tier 1) | Accepted | 2026-09-02 |
 
+## Templates
+
+Official markdown templates are maintained in [`templates/`](templates/):
+- [`Minimum_ADR_Template.md`](templates/Minimum_ADR_Template.md) - For low-risk, component-level, or reversible decisions.
+- [`Standard_ADR_Template.md`](templates/Standard_ADR_Template.md) - Enterprise default for production applications, cloud, and security decisions.
+- [`Comprehensive_ADR_Template.md`](templates/Comprehensive_ADR_Template.md) - For regulated, high-risk, or strategic Tier 1 decisions.
+
 ## Lifecycle
 - **Proposed**: The decision is being discussed.
 - **Accepted**: The decision is finalized and implemented.

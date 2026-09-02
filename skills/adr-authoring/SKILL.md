@@ -44,17 +44,17 @@ Review the decision requirements (assessed in `adr-discovery`) and select one of
 
 #### Option A: Minimum ADR Template
 - **Usage**: Low-risk, local, reversible, or component-level architecturally significant decisions.
-- **Template File**: `../../docs/adr-templates/Minimum_ADR_Template.md`
+- **Template File**: `../../docs/adr/templates/Minimum_ADR_Template.md`
 - **Key Sections**: Metadata, Context (Problem Statement, Current Situation), Alternatives Considered, Decision, Rationale, Consequences (Positive, Negative, Follow-on), Related Records.
 
 #### Option B: Standard ADR Template (Default)
 - **Usage**: Enterprise default for production application, platform, cloud, security, data, infrastructure, and integration decisions.
-- **Template File**: `../../docs/adr-templates/Standard_ADR_Template.md`
+- **Template File**: `../../docs/adr/templates/Standard_ADR_Template.md`
 - **Key Sections**: Metadata, Business and Architecture Context, Assumptions, Constraints, Alternatives Considered (table format), Decision (Selected Option, Rationale), Consequences (Benefits, Trade-offs/Negatives, New Constraints, Follow-on), Security/Risk/Control Impact, Technical Debt Assessment, Traceability, Review and Lifecycle.
 
 #### Option C: Comprehensive ADR Template
 - **Usage**: Enterprise-critical, regulated, security-sensitive, cross-domain, strategic-platform, significant third-party, standards-exception, material-risk, or material-technical-debt decisions.
-- **Template File**: `../../docs/adr-templates/Comprehensive_ADR_Template.md`
+- **Template File**: `../../docs/adr/templates/Comprehensive_ADR_Template.md`
 - **Key Sections**: Metadata, Governance Classification, Stakeholders/Accountability, Business and Architecture Context, Assumptions/Constraints, Alternatives Considered (Detailed scoring matrix), Decision, Consequences, Security/Privacy/Risk/Compliance Assessment, Technical Debt Assessment, Third-Party/Supply-Chain Assessment, Implementation/Transition, Operational Readiness, Validation/Conformance, Traceability, Outcome Review, Review/Supersession/Lifecycle, Audit/Records Management, Change Log.
 
 Read the chosen template file directly to get its exact markdown structure and placeholders.

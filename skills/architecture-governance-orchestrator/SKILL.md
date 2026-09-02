@@ -10,10 +10,10 @@ Use for architectural planning, decision recording (ADRs), C4 diagram generation
 
 ## Procedure
 1. Identify the architectural task: Decision Recording (ADR), Visual Modeling (C4), or High-Level Design (Cloud/K8s/Monorepo).
-2. For ADRs: Use the MADR format to capture context, decision, and consequences. Maintain the ADR Index.
+2. For ADRs: Use standard ADR templates to capture context, decision, and consequences in `docs/adr/`. Maintain the ADR Index in `docs/adr/README.md`.
 3. For C4 Modeling: Generate diagrams for Context, Container, Component, or Code levels as needed, ensuring consistent notation.
 4. For High-Level Design: Provide architectural blueprints for Cloud (AWS/Azure/GCP), Kubernetes, or Monorepo (Nx/Turborepo) structures.
-5. Link all diagrams to relevant ADRs to ensure the 'why' is always discoverable.
+5. Link all diagrams to relevant ADRs (in `docs/adr/`) to ensure the 'why' is always discoverable.
 6. Validate the architecture against the project's core principles (scalability, maintainability, security).
 7. **Memory Sync**: After an architectural decision, formal ADR documentation, or design assessment is completed, you **MUST** trigger the local memory capture. 
 

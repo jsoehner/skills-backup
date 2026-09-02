@@ -12,10 +12,10 @@ Use this skill when the user wants to deploy the ADR Gatekeeper system into a ne
 
 ## Procedure
 
-1. Create 'scripts/' and 'tools/' directories at the project root.
-2. Write 'tools/adr_index.json' with the initial decision map.
-3. Write 'tools/adr_analyst_config.json' with the significance rules.
-4. Write 'tools/adr_analyst_prompt.txt' with the gatekeeper persona.
+1. Create 'scripts/' and 'docs/adr/' directories at the project root.
+2. Write 'docs/adr/adr_index.json' with the initial decision map.
+3. Write 'docs/adr/adr_analyst_config.json' with the significance rules.
+4. Write 'docs/adr/adr_analyst_prompt.txt' with the gatekeeper persona.
 5. Write 'scripts/adr_gatekeeper.py' with the analysis engine.
 6. Write '.github/workflows/adr-gatekeeper.yml' for CI/CD integration.
 7. Create and configure the local '.git/hooks/pre-commit' hook.

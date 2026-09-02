@@ -210,8 +210,9 @@ skills-backup/
 │   └── [skill-name]/           # Individual skill directory (contains SKILL.md)
 ├── docs/                       # Architectural governance & documentation
 │   ├── adr/                    # Architecture Decision Records (ADRs)
-│   ├── adr-templates/          # Official ADR markdown templates
-│   └── decisions/              # Decision strategies & policies
+│   │   └── templates/          # Official ADR markdown templates
+│   ├── decisions/              # Decision strategies & policies
+│   └── architecture.md         # Current state of system architecture
 ├── categories/                 # Auto-generated category index documentation
 ├── audit_status.json           # Categorization and migration source of truth
 ├── sync.py                     # Bi-directional local sync engine

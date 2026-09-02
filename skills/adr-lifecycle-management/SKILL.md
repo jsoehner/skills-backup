@@ -5,7 +5,7 @@ description: "Manage the lifecycle states (Proposed, Accepted, Superseded, Depre
 
 # ADR Lifecycle Management - Decision Log Maintenance
 
-This skill helps the agent and team maintain a healthy, searchable, and up-to-date decision log (usually stored in `docs/adr/` or `doc/decisions/`). It details how to update statuses, link superseded decisions, generate indices, and integrate automation tools.
+This skill helps the agent and team maintain a healthy, searchable, and up-to-date decision log (standardized in `docs/adr/`). It details how to update statuses, link superseded decisions, generate indices, and integrate automation tools.
 
 ## Progressive Disclosure & External Resources
 
@@ -34,7 +34,7 @@ Action Required
 
 1. **Decision Logs are Immutable Logs**: Never delete an ADR when it is no longer valid. Instead, mark it as Deprecated or Superseded so the historical path of the architecture is preserved.
 2. **Strict Bidirectional Linking**: Every transition must link both ways. Never update only one side of a superseded/supersedes pair.
-3. **Single Source of Truth**: Keep the decision log close to the code (in git) so that code changes and the decisions that authorized them travel together.
+3. **Single Source of Truth**: Keep the decision log close to the code (standardized under `docs/adr/`) so that code changes and the decisions that authorized them travel together.
 
 ---
 
@@ -44,7 +44,7 @@ Action Required
 
 If starting a new project or folder:
 
-- Create the target directory: `mkdir -p docs/adr` (or `doc/decisions`).
+- Create the target directory: `mkdir -p docs/adr`.
 - Create `docs/adr/0000-record-architecture-decisions.md` (ADR-0) to establish the practice of documenting architectural decisions.
 - Add an index/readme file `docs/adr/README.md` containing a table of all ADRs, their status, and dates.
 
