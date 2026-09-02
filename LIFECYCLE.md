@@ -94,8 +94,8 @@ The synchronization script (`sync.py`) maps files between the backup repository 
 
 | Repo Path | Local Destination Path | Type |
 |---|---|---|
-| `./skills/` (or root subdirectories) | `~/.gemini/skills/[skill_name]` | User Custom Skills |
-| `./skills/config-skills/` | `~/.gemini/config/skills/[skill_name]` | System Configuration Skills |
+| `./` (Root subdirectories) | `~/.gemini/skills/[skill_name]` | User Custom Skills |
+| `./config-skills/` | `~/.gemini/config/skills/[skill_name]` | System Configuration Skills |
 
 ---
 
@@ -116,4 +116,4 @@ Scans all skills in the repository, parses their frontmatter (`SKILL.md`), and u
 
 > [!TIP]
 > **Pro Tip for Active Iteration**:
-> Always verify status and run tests locally before saving changes back to the repo. Pin action versions to explicit 40-character commit SHAs in workflows (as described in [github_actions_node24](skills/config-skills/github_actions_node24/SKILL.md)) to avoid security warnings.
+> Always verify status and run tests locally before saving changes back to the repo. Pin action versions to explicit 40-character commit SHAs in workflows (as described in [github_actions_node24](config-skills/github_actions_node24/SKILL.md)) to avoid security warnings.

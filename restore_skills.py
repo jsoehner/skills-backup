@@ -6,7 +6,7 @@ import argparse
 def main():
     parser = argparse.ArgumentParser(description="Restore skills to the correct directory based on the AI client.")
     parser.add_argument("source_root", help="The directory containing the skill backups.")
-    parser.add_argument("--client", choices=["opencode", "pi", "gemini", "claude"], default="opencode", help="The AI client to restore skills for (default: opencode).")
+    parser.add_argument("--client", choices=["opencode", "pi", "gemini", "claude"], default="pi", help="The AI client to restore skills for (default: pi).")
     args = parser.parse_args()
 
     source_root = os.path.abspath(args.source_root)
@@ -24,10 +24,6 @@ def main():
         target_root = os.path.expanduser('~/.pi/agent')
         skills_dir = os.path.join(target_root, 'skills')
 
-    # Ensure target directory exists and is clean
-    if os.path.exists(skills_dir):
-        shutil.rmtree(skills_dir, ignore_errors=True)
-    os.makedirs(skills_dir, exist_ok=True)
 
     seen_skills = set()
     count = 0
@@ -38,7 +34,7 @@ def main():
         if '.git' in parts or '__pycache__' in parts:
             continue
         # Skip nested skills subdirectories inside skills
-        if 'skills' in parts[1:] and parts[0] != 'config-skills':
+        if 'skills' in parts and len(parts) > 1 and parts[0] != 'config-skills':
             continue
 
         if 'SKILL.md' in files:
@@ -57,7 +53,7 @@ def main():
                 d = os.path.join(dest_path, item)
                 if os.path.isdir(s):
                     if item != 'skills' and item != '__pycache__':
-                        shutil.copytree(s, d)
+                        shutil.copytree(s, d, dirs_exist_ok=True)
                 else:
                     shutil.copy2(s, d)
             

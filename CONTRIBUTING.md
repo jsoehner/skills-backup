@@ -5,7 +5,7 @@ Thank you for contributing to the YUV AI Skills repository! This project aims to
 ## Architecture Overview
 
 ### Atomic Skills
-Located in the `skills/` directory, these are self-contained building blocks. They should not have dependencies on other skills in this repository.
+Located in the `` directory, these are self-contained building blocks. They should not have dependencies on other skills in this repository.
 
 ### Composite Skills
 Located in the root directory, these are orchestrators that depend on Atomic or other Composite skills.
@@ -18,7 +18,7 @@ Located in the root directory, these are orchestrators that depend on Atomic or 
 1. **Identify Type**: Determine if the skill is Atomic or Composite.
 2. **Create Directory**: Create a new folder for the skill.
 3. **Write SKILL.md**: Follow the provided templates to document the skill's goal, inputs, workflow, and references.
-4. **Atomic Skills**: Place in the appropriate sub-folder within `skills/`.
+4. **Atomic Skills**: Place in the appropriate sub-folder within ``.
 5. **Composite Skills**:
     - Place in the root directory.
     - Create a `manifest.json` file with the required metadata.

@@ -21,11 +21,11 @@ class SkillDeployer:
         """Scan the backup directory to map all skills and identify atomic ones."""
         print(f"Scanning directory: {self.root_dir}")
         
-        # 1. Scan the skills directory for atomic skills
-        skills_path = os.path.join(self.root_dir, "skills")
-        if os.path.exists(skills_path):
-            print(f"Scanning skills path: {skills_path}")
-            for root, dirs, files in os.walk(skills_path):
+        # 1. Scan the tools directory for atomic skills
+        tools_path = os.path.join(self.root_dir, "tools")
+        if os.path.exists(tools_path):
+            print(f"Scanning tools path: {tools_path}")
+            for root, dirs, files in os.walk(tools_path):
                 if "SKILL.md" in files:
                     # The skill name is the folder name containing SKILL.md
                     skill_name = os.path.basename(root)
@@ -37,8 +37,8 @@ class SkillDeployer:
             if any(part.startswith('.') for part in root.split(os.sep)):
                 continue
             
-            # Skip the skills directory here as we handled it above
-            if "skills" in root.split(os.sep):
+            # Skip the tools directory here as we handled it above
+            if "tools" in root.split(os.sep):
                 continue
 
             # Check if this directory is a skill (has a SKILL.md)
@@ -102,7 +102,7 @@ class SkillDeployer:
             deps = self.get_all_dependencies(comp)
             to_include.update(deps)
         
-        # Also include all atomic skills from the skills folder
+        # Also include all atomic skills from the tools folder
         for atomic in self.atomic_skills:
             to_include.add(atomic)
             

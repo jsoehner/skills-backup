@@ -1,0 +1,93 @@
+---
+name: risk-metrics-calculation
+description: Calculate portfolio risk metrics including VaR, CVaR, Sharpe, Sortino, and drawdown analysis. Use when measuring portfolio risk, implementing risk limits, or building risk monitoring systems.
+---
+
+# Risk Metrics Calculation
+
+Comprehensive risk measurement toolkit for portfolio management, including Value at Risk, Expected Shortfall, and drawdown analysis.
+
+## Use this skill when
+
+- Measuring portfolio risk
+- Implementing risk limits
+- Building risk dashboards
+- Calculating risk-adjusted returns
+- Setting position sizes
+- Regulatory reporting
+
+## Do not use this skill when
+
+- The task is unrelated to risk metrics calculation
+- You need a different domain or tool outside this scope
+
+## Instructions
+
+- Clarify goals, constraints, and required inputs.
+- Apply relevant best practices and validate outcomes.
+- Provide actionable steps and verification.
+- If detailed examples are required, open `resources/implementation-playbook.md`.
+
+## Resources
+
+- `resources/implementation-playbook.md` for detailed patterns and examples.
+
+## Anti-Patterns
+
+- NEVER deploy code changes without validating them against target test suites.
+- NEVER skip documenting non-obvious code assumptions, constraints, and side effects.
+
+## 6) Capture Knowledge
+
+After a risk metrics calculation or portfolio rebalancing is completed, automatically trigger the `capture_knowledge.py` script.
+The script will analyze the risk analysis to identify:
+- Key risk metrics (VaR, Sharpe, Drawdown) and limits.
+- Hedging strategies and position sizing rules.
+- Portfolio correlation and concentration findings.
+The script will then route this information to the appropriate storage:
+- **OKF**: High-level risk management rules, portfolio standards, and hedging policies.
+- **ChromaDB**: Specific trade metrics, risk reports, and scenario analysis results.
+
+## 6) Capture Knowledge
+
+After a risk metrics calculation or portfolio rebalancing is completed, automatically trigger the `capture_knowledge.py` script.
+The script will analyze the risk analysis to identify:
+- Key risk metrics (VaR, Sharpe, Drawdown) and limits.
+- Hedging strategies and position sizing rules.
+- Portfolio correlation and concentration findings.
+The script will then route this information to the appropriate storage:
+- **OKF**: High-level risk management rules, portfolio standards, and hedging policies.
+- **ChromaDB**: Specific trade metrics, risk reports, and scenario analysis results.
+
+## 6) Capture Knowledge
+
+After a risk metrics calculation or portfolio rebalancing is completed, automatically trigger the `capture_knowledge.py` script.
+The script will analyze the risk analysis to identify:
+- Key risk metrics (VaR, Sharpe, Drawdown) and limits.
+- Hedging strategies and position sizing rules.
+- Portfolio correlation and concentration findings.
+The script will then route this information to the appropriate storage:
+- **OKF**: High-level risk management rules, portfolio standards, and hedging policies.
+- **ChromaDB**: Specific trade metrics, risk reports, and scenario analysis results.
+
+## 6) Capture Knowledge
+
+After a risk metrics calculation or portfolio rebalancing is completed, automatically trigger the `capture_knowledge.py` script.
+The script will analyze the risk analysis to identify:
+- Key risk metrics (VaR, Sharpe, Drawdown) and limits.
+- Hedging strategies and position sizing rules.
+- Portfolio correlation and concentration findings.
+The script will then route this information to the appropriate storage:
+- **OKF**: High-level risk management rules, portfolio standards, and hedging policies.
+- **ChromaDB**: Specific trade metrics, risk reports, and scenario analysis results.
+
+## 6) Capture Knowledge
+
+After a risk metrics calculation or portfolio rebalancing is completed, automatically trigger the `capture_knowledge.py` script.
+The script will analyze the risk analysis to identify:
+- Key risk metrics (VaR, Sharpe, Drawdown) and limits.
+- Hedging strategies and position sizing rules.
+- Portfolio correlation and concentration findings.
+The script will then route this information to the appropriate storage:
+- **OKF**: High-level risk management rules, portfolio standards, and hedging policies.
+- **ChromaDB**: Specific trade metrics, risk reports, and scenario analysis results.
