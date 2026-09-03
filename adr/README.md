@@ -10,6 +10,8 @@ This directory contains the Architecture Decision Records (ADRs) for the project
 | [0002](0002-redis-caching-strategy.md) | Caching Strategy (Redis) | Accepted | 2025-07-31 |
 | [0003](0003-local-memory-management.md) | Local Memory Management (LanceDB) | Accepted | 2025-07-31 |
 | [0004](0004-adopt-regulated-adr-framework.md) | Adopt Regulated Architecture Decision Record (RADR) Framework | Accepted | 2026-08-08 |
+| [0005](0005-local-memory-rag-architecture.md) | Local Memory RAG Architecture | Accepted | 2026-08-15 |
+| [0006](0006-repository-security-posture-hardening.md) | Repository Security Posture Assessment and Script Hardening | Accepted | 2026-09-03 |
 
 ## Lifecycle
 - **Proposed**: The decision is being discussed.

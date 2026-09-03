@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.2.0] - 2026-09-03
+### Security
+- **Path Traversal & Boundary Containment**: Enforced strict canonical path resolution (`is_safe_subpath`) and directory name regex validation across `restore_skills.py` and `sync.py`.
+- **Symlink Protection**: Configured directory walkers and copying utilities (`shutil.copytree`, `shutil.copy2`) to prevent following unsafe external symbolic links (`symlinks=False`).
+- **Safe Recursive Deletion Guards**: Protected destination deletion paths in `sync.py` to prevent accidental deletion outside the target root.
+- **Secrets & Artifact Isolation**: Hardened `.gitignore` with comprehensive ignore patterns for credentials, private keys, certificates, environment files, SQLite databases, OS `.DS_Store` artifacts, backup files (`*.bak`), and scratch tools (`debug_*.py`).
+- **Repository Hygiene & Pruning**: Removed stale backup files (`AGENTS.md.bak`, `director/SKILL.md.bak`), scratch scripts (`debug_scan.py`), and tracked OS metadata (`.DS_Store`).
+- **Cross-Platform Path Portability**: Fixed hardcoded platform paths in `import_builtins.py` using dynamic home directory expansion (`os.path.expanduser`).
+- **Resilient Manifest Parsing**: Added robust JSON parsing error handling in `deploy_skills.py`.
+- **Architecture Decision Record**: Documented security decisions and STRIDE threat analysis in [ADR-0006](adr/0006-repository-security-posture-hardening.md).
+
 ## [1.1.0] - 2026-08-28
 ### Fixed
 - **Category Document Links**: Updated category index files to link directly to `SKILL.md` rather than the parent skill folder.

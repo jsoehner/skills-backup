@@ -13,11 +13,10 @@ agents = [
     "worker"
 ]
 
-base_path = r'C:/Users/jsoehner/.pi/agent/skills'
+base_path = os.path.expanduser('~/.pi/agent/skills')
 
 # Ensure the base path exists
-if not os.path.exists(base_path):
-    os.makedirs(base_path)
+os.makedirs(base_path, exist_ok=True)
 
 for agent in agents:
     agent_path = os.path.join(base_path, agent)

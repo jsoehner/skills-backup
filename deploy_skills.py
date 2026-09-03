@@ -52,12 +52,19 @@ class SkillDeployer:
                 manifest_path = os.path.join(root, MANIFEST_FILENAME)
                 
                 if os.path.exists(manifest_path):
-                    with open(manifest_path, 'r') as f:
-                        manifest = json.load(f)
-                        self.skills_map[skill_name] = {
-                            "path": root,
-                            "manifest": manifest
-                        }
+                    try:
+                        with open(manifest_path, 'r', encoding='utf-8') as f:
+                            manifest = json.load(f)
+                            if isinstance(manifest, dict):
+                                self.skills_map[skill_name] = {
+                                    "path": root,
+                                    "manifest": manifest
+                                }
+                            else:
+                                self.atomic_skills.add(skill_name)
+                    except Exception as e:
+                        print(f"Warning: Failed to parse manifest at {manifest_path}: {e}", file=sys.stderr)
+                        self.atomic_skills.add(skill_name)
                 else:
                     # If it has SKILL.md but no manifest, it's an atomic skill
                     self.atomic_skills.add(skill_name)

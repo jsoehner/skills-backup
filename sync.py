@@ -81,8 +81,18 @@ def list_groups():
         print(f"  - {key:<30} ({info['title']})")
     print("  - other                          (Uncategorized)")
 
+def is_safe_subpath(base_dir: str, target_path: str) -> bool:
+    """Verify that target_path resides strictly within base_dir."""
+    real_base = os.path.realpath(base_dir)
+    real_target = os.path.realpath(target_path)
+    try:
+        return os.path.commonpath([real_base, real_target]) == real_base
+    except ValueError:
+        return False
+
 def sync_skills(direction, client="pi", filter_group=None):
-    local_dir = get_client_skills_dir(client)
+    local_dir = os.path.realpath(get_client_skills_dir(client))
+    real_repo_dir = os.path.realpath(repo_dir)
     skills = get_all_skills_in_repo(local_dir)
     
     if filter_group:
@@ -99,13 +109,25 @@ def sync_skills(direction, client="pi", filter_group=None):
         src = s["repo_path"] if direction == "deploy" else s["local_path"]
         dst = s["local_path"] if direction == "deploy" else s["repo_path"]
         
+        allowed_dst_base = local_dir if direction == "deploy" else real_repo_dir
+        allowed_src_base = real_repo_dir if direction == "deploy" else local_dir
+        
         # Ensure parent directory of destination exists
         os.makedirs(os.path.dirname(dst), exist_ok=True)
         
+        # Security validation: Ensure dst is within allowed base directory before touching filesystem
+        if not is_safe_subpath(allowed_dst_base, dst):
+            print(f"Security Alert: Destination '{dst}' is outside allowed base '{allowed_dst_base}'. Skipping.", file=sys.stderr)
+            continue
+            
         if not os.path.exists(src):
             if direction == "save":
                 continue
             print(f"Warning: Source path {src} does not exist. Skipping.")
+            continue
+
+        if not is_safe_subpath(allowed_src_base, src):
+            print(f"Security Alert: Source '{src}' is outside allowed base '{allowed_src_base}'. Skipping.", file=sys.stderr)
             continue
             
         try:
@@ -115,7 +137,7 @@ def sync_skills(direction, client="pi", filter_group=None):
                 else:
                     os.remove(dst)
                     
-            shutil.copytree(src, dst, ignore=shutil.ignore_patterns('skills', '__pycache__', '.git'))
+            shutil.copytree(src, dst, symlinks=False, ignore=shutil.ignore_patterns('skills', '__pycache__', '.git'))
             synced_names.add(s['name'])
             success_count += 1
         except Exception as e:
