@@ -4,14 +4,17 @@ import json, os, sys
 from pathlib import Path
 import requests
 
-EDIT = Path(r"C:\Users\User\Desktop\edit")
+EDIT = Path(os.getenv("VIDEO_EDIT_DIR", str(Path.home() / "Desktop" / "edit")))
 SFX = EDIT / "sfx"
 SFX.mkdir(parents=True, exist_ok=True)
 
-KEY = None
-for line in (Path.home() / "Developer/video-use/.env").read_text().splitlines():
-    if line.startswith("ELEVENLABS_API_KEY="):
-        KEY = line.split("=", 1)[1].strip()
+KEY = os.getenv("ELEVENLABS_API_KEY")
+if not KEY:
+    env_file = Path.home() / "Developer/video-use/.env"
+    if env_file.exists():
+        for line in env_file.read_text().splitlines():
+            if line.startswith("ELEVENLABS_API_KEY="):
+                KEY = line.split("=", 1)[1].strip()
 
 URL = "https://api.elevenlabs.io/v1/sound-generation"
 
