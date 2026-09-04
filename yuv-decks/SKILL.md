@@ -902,9 +902,9 @@ The exact pattern this skill describes was implemented at:
 
 **MANDATORY - LOADING TRIGGERS**:
 
-- Before locking visual palettes in Step 5, you **MUST** read [yuv-design-system](file:///Users/jsoehner/.gemini/skills/yuv-design-system/SKILL.md) fully.
+- Before locking visual palettes in Step 5, you **MUST** read [yuv-design-system](../yuv-design-system/SKILL.md) fully.
 
-- Before constructing react JSX layouts in Step 7, you **MUST** read [slide-authoring](file:///Users/jsoehner/.gemini/skills/slide-authoring/SKILL.md).
+- Before constructing react JSX layouts in Step 7, you **MUST** read `slide-authoring`.
 
 - **Do NOT load** design system references during Step 1 project bootstrapping steps.
 
@@ -957,3 +957,13 @@ Every layer of polish — voice, story, visual, motion — exists to make the au
 If a slide doesn't pass the "would this drop an aha-token in the audience's mind" test, cut or rewrite it. Hollywood, not corporate. Story, not summary. Flight, not boxes.
 
 
+## Memory Sync
+
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
+
+1. Save the final summary or artifact as a Markdown file in the project directory.
+2. Invoke the capture script:
+   ```bash
+   python3 ~/memory_system/capture_knowledge.py <file_path>
+   ```
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).

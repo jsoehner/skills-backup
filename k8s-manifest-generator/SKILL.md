@@ -41,11 +41,14 @@ Use this skill when you need to:
 
 ## 6) Capture Knowledge
 
-After generating Kubernetes manifests, automatically trigger the `capture_knowledge.py` script.
-The script will analyze the manifest generation to identify:
-- Common resource patterns (e.g., standard Deployment templates).
-- Specific configuration choices (e.g., resource limits, health check intervals).
-- Security-related configurations (e.g., PodSecurityContext, NetworkPolicies).
-The script will then route this information to the appropriate storage:
-- **OKF**: Standardized Kubernetes manifest patterns, resource limits, and security standards.
-- **ChromaDB**: Specific manifest configurations, environment-specific values, and custom resource definitions.
+
+## Memory Sync
+
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
+
+1. Save the final summary or artifact as a Markdown file in the project directory.
+2. Invoke the capture script:
+   ```bash
+   python3 ~/memory_system/capture_knowledge.py <file_path>
+   ```
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).

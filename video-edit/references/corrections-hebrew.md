@@ -38,9 +38,9 @@ CORRECTIONS_HE = {
 - `קלוט` and variants — Whisper consistently mishears Claude. Force-replace.
 - Names of channels, animals, places (Hope, Marcus, Midbarium) — usually correct, but
   spot-check in review.
-- For English-mixed Hebrew (the speaker says "AI coding agent" in English mid-sentence),
+- For English-mixed Hebrew (the speaker says "Claude Code" in English mid-sentence),
   Whisper may transliterate awkwardly. Replace the transliteration with the English term
-  in Latin letters: `קלוד קוד` → `AI coding agent` for cleaner captions.
+  in Latin letters: `קלוד קוד` → `Claude Code` for cleaner captions.
 
 ## How to add new corrections
 

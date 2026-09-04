@@ -14,7 +14,7 @@ This skill guides you through constructing, parsing, updating, and recalculating
 ## 1. Reference Loading & Progressive Disclosure
 
 This is a self-contained skill folder.
-- Execute calculations and validations using the local [recalc.py](file:///home/jsoehner/yuv-skills-backup/document-skills/xlsx/recalc.py) script.
+- Execute calculations and validations using the local [recalc.py](recalc.py) script.
 - Do NOT look for other external reference files unless specified.
 
 ---
@@ -111,3 +111,15 @@ graph TD
 ### `#REF!` Error After Insert/Delete Row
 *   *Scenario*: Inserting or deleting rows programmatically breaks references in formulas elsewhere in the sheet.
 *   *Fallback*: When inserting rows via openpyxl, formulas do not auto-update. You must manually adjust the ranges of affected formulas in your script to account for the row shift.
+
+
+## Memory Sync
+
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
+
+1. Save the final summary or artifact as a Markdown file in the project directory.
+2. Invoke the capture script:
+   ```bash
+   python3 ~/memory_system/capture_knowledge.py <file_path>
+   ```
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).

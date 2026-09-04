@@ -108,7 +108,7 @@ Every landing page or marketing site opens with a cinematic product-demo video b
 
 1. **Logo slam** (~1s) — giant Anton wordmark + triangle mark slams in on off-white. Establishes brand.
 2. **Headline hold** (~2s) — massive black scene with yellow/pink Anton headline stating the core promise. Subtitle in white Anton below.
-3. **Device interaction** (~4s) — iPhone or MacBook mockup with a **LIVE product dashboard inside it**. A pink cursor enters, hovers over multiple interactive elements with row highlights, then clicks. The product transitions to a detail view. IDE continues interacting. This is the signature moment.
+3. **Device interaction** (~4s) — iPhone or MacBook mockup with a **LIVE product dashboard inside it**. A pink cursor enters, hovers over multiple interactive elements with row highlights, then clicks. The product transitions to a detail view. Cursor continues interacting. This is the signature moment.
 4. **Evidence cascade** (~3s) — full-screen cascade of 3–4 evidence/feature cards entering with staggered `gsap.from({ opacity: 0, y: 40, scale: 0.96 })` at 150ms intervals.
 5. **Climactic payoff** (~2.5s) — massive headline reveal with the core stat, accompanied by 2–3 counters animating up from 0 (`onUpdate` callbacks, `power2.out` ease).
 6. **Pink/purple flood CTA** (~2s) — full brand-color background, enormous Anton headline ("Stop missing what matters" / "Start flying"), solid black pill CTA. Closes the narrative.
@@ -119,7 +119,7 @@ Every landing page or marketing site opens with a cinematic product-demo video b
 - **MacBook** for enterprise / dashboard products: CSS frame with laptop base and screen bezel.
 - Inside the device: **real product UI rendered in HTML, not screenshots**. The cursor actually interacts with elements.
 
-### IDE choreography
+### Cursor choreography
 
 The cursor is the emotional vehicle. Treat it like a character.
 
@@ -127,7 +127,7 @@ The cursor is the emotional vehicle. Treat it like a character.
 - Entry from bottom-right at 0.5 scale, scaling to 1.0 as it settles.
 - **Multiple interactions before the main click** — hover over 2–3 other elements first to establish the scan. Each hover triggers a subtle row highlight.
 - **Click cue:** `scale: 0.85` press on cursor, synced `click-ring` element (`80px` circle, brand border) expanding `scale 0.5 → 2.2, opacity 1 → 0` over 0.6s.
-- **IDE continues after the click.** Don't cut to black — show the cursor navigating the result.
+- **Cursor continues after the click.** Don't cut to black — show the cursor navigating the result.
 
 ### Deterministic loop pattern
 

@@ -4,7 +4,7 @@ Convert web pages to clean Markdown using local browser automation with Puppetee
 
 ## Purpose
 
-This skill enables AI coding agent to convert web pages (including JavaScript-rendered content) into clean, readable Markdown format by leveraging the `web2md` CLI tool. It's particularly useful for extracting article content, documentation, or any web content that needs to be processed, archived, or analyzed in Markdown format.
+This skill enables Claude Code to convert web pages (including JavaScript-rendered content) into clean, readable Markdown format by leveraging the `web2md` CLI tool. It's particularly useful for extracting article content, documentation, or any web content that needs to be processed, archived, or analyzed in Markdown format.
 
 ## When to Use
 
@@ -201,4 +201,4 @@ Current version: 0.1.0
 
 ## Related Tools
 
-For simpler use cases without JavaScript, consider using AI coding agent's built-in `WebFetch` tool instead.
+For simpler use cases without JavaScript, consider using Claude Code's built-in `WebFetch` tool instead.

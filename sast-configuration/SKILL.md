@@ -218,11 +218,14 @@ semgrep --config p/pci-dss --json -o pci-scan-results.json
 
 ## 6) Capture Knowledge
 
-After a SAST tool setup or custom security rule definition is completed, automatically trigger the `capture_knowledge.py` script.
-The script will analyze the security configuration to identify:
-- Custom security rules and logic.
-- CI/CD integration points and gating policies.
-- Identified vulnerability patterns and remediation strategies.
-The script will then route this information to the appropriate storage:
-- **OKF**: High-level security policies, custom rule standards, and compliance requirements.
-- **ChromaDB**: Specific rule definitions, scan results, and suppression logs.
+
+## Memory Sync
+
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
+
+1. Save the final summary or artifact as a Markdown file in the project directory.
+2. Invoke the capture script:
+   ```bash
+   python3 ~/memory_system/capture_knowledge.py <file_path>
+   ```
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).

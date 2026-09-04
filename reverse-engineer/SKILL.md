@@ -178,11 +178,14 @@ Response: For authorized analysis of the DLL:
 
 ## 6) Capture Knowledge
 
-After a reverse engineering analysis or protocol extraction is completed, automatically trigger the `capture_knowledge.py` script.
-The script will analyze the analysis results to identify:
-- Key binary patterns, algorithm findings, or vulnerability locations.
-- Discovered protocol structures and header definitions.
-- Specific disassembly logic or de-obfuscation techniques.
-The script will then route this information to the appropriate storage:
-- **OKF**: High-level RE methodologies, protocol specifications, and security findings.
-- **ChromaDB**: Specific disassembly snippets, function mappings, and research notes.
+
+## Memory Sync
+
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
+
+1. Save the final summary or artifact as a Markdown file in the project directory.
+2. Invoke the capture script:
+   ```bash
+   python3 ~/memory_system/capture_knowledge.py <file_path>
+   ```
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).

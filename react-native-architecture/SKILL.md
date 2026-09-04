@@ -39,12 +39,14 @@ Production-ready patterns for React Native development with Expo, including navi
 
 ## 6) Capture Knowledge
 
-After the React Native architecture or mobile-specific pattern is finalized, automatically trigger the `capture_knowledge.py` script.
-The script will analyze the mobile architecture, navigation flow, and native integration points to identify:
-- New cross-platform architectural patterns or native module interfaces.
-- Offline-first sync strategies and local storage schemas.
-- Mobile-specific performance optimizations or navigation optimizations.
-The script will then route this information to the appropriate storage:
-- **OKF**: High-level mobile architecture rules, navigation standards, and cross-platform policies.
-- **ChromaDB**: Specific native module definitions, offline sync logic, and mobile-specific configuration details.
-",path:
+
+## Memory Sync
+
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
+
+1. Save the final summary or artifact as a Markdown file in the project directory.
+2. Invoke the capture script:
+   ```bash
+   python3 ~/memory_system/capture_knowledge.py <file_path>
+   ```
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).

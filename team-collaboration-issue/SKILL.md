@@ -40,14 +40,6 @@ GitHub Issue ID or URL: $ARGUMENTS
 
 ## 6) Capture Knowledge
 
-After an issue is resolved and the pull request is merged, automatically trigger the `capture_knowledge.py` script.
-The script will analyze the issue report, the bug/feature description, and the final implementation to identify:
-- Root cause analysis and key technical lessons.
-- New architectural patterns or design decisions made during the fix.
-- Edge cases identified and handled during implementation.
-The script will then route this information to the appropriate storage:
-- **OKF**: High-level engineering takeaways and "Hard Rules" learned from the issue.
-- **ChromaDB**: Specific bug details, implementation steps, and technical context for similar future issues.
 
 ## Example Interactions
 
@@ -158,3 +150,15 @@ Provide:
 - NEVER deploy code changes without validating them against target test suites.
 - NEVER skip documenting non-obvious code assumptions, constraints, and side effects.
 ",path:
+
+
+## Memory Sync
+
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
+
+1. Save the final summary or artifact as a Markdown file in the project directory.
+2. Invoke the capture script:
+   ```bash
+   python3 ~/memory_system/capture_knowledge.py <file_path>
+   ```
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).

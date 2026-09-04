@@ -141,7 +141,7 @@ writing-clearly-and-concisely/
 
 ## Installation
 
-**AI coding agent:**
+**Claude Code:**
 ```bash
 cp -r skills/writing-clearly-and-concisely ~/.claude/skills/
 ```

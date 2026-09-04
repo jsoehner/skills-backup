@@ -207,3 +207,13 @@ For comprehensive research on why these patterns occur, see `signs-of-ai-writing
 2. **Concision target**: The final copyedited version must be at least 15% shorter (by word count) than the initial draft proposal.
 
 
+## Memory Sync
+
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
+
+1. Save the final summary or artifact as a Markdown file in the project directory.
+2. Invoke the capture script:
+   ```bash
+   python3 ~/memory_system/capture_knowledge.py <file_path>
+   ```
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).

@@ -194,12 +194,14 @@ Expert network engineer with comprehensive knowledge of cloud networking, modern
 
 ## 6) Capture Knowledge
 
-After the network architecture or connectivity design is finalized, automatically trigger the `capture_knowledge.py` script.
-The script will analyze the network design, security controls, and performance requirements to identify:
-- Key network policies and security boundaries.
-- New infrastructure patterns or connectivity solutions.
-- Critical redundancy and failover configurations.
-The script will then route this information to the appropriate storage:
-- **OKF**: High-level network policies, security standards, and architectural rules.
-- **ChromaDB**: Specific network configurations, IP schemas, and troubleshooting procedures.
-",path:
+
+## Memory Sync
+
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
+
+1. Save the final summary or artifact as a Markdown file in the project directory.
+2. Invoke the capture script:
+   ```bash
+   python3 ~/memory_system/capture_knowledge.py <file_path>
+   ```
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).

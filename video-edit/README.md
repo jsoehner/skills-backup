@@ -108,7 +108,7 @@ robocopy "$HOME/.claude/skills-src/skills/video-edit" "$HOME/.claude/skills/vide
 
 ### Use it from your AI agent
 
-Open AI coding agent (or IDE / Codex / Copilot — anything that supports the agent-skills
+Open Claude Code (or Cursor / Codex / Copilot — anything that supports the agent-skills
 standard). Drop a path and say it like a human:
 
 ```
@@ -149,7 +149,7 @@ robocopy "$HOME/.claude/skills-src/skills/video-edit" "$HOME/.claude/skills/vide
 
 ### 2. Drop your video on the agent
 
-In AI coding agent (or any agent that supports the agent-skill standard):
+In Claude Code (or any agent that supports the agent-skill standard):
 
 ```
 edit this video: C:\path\to\my-talk.mp4
@@ -313,7 +313,7 @@ It's a single HTML file. Inspect it.
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
-│ YOUR AGENT (AI coding agent / IDE / Codex / Copilot)                     │
+│ YOUR AGENT (Claude Code / Cursor / Codex / Copilot)                     │
 │                                                                         │
 │   "edit this video: <path>"                                             │
 │        │                                                                │

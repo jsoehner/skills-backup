@@ -433,16 +433,16 @@ When implementing RAG for local AI agent workflows, ground retrieval using the s
   - **ChromaDB Vector Store**: `~/memory_system/db` (for vector embeddings, code snippets, logs)
   - **OKF Document Store**: `~/memory_system/knowledge/okf` (for high-level source-of-truth rules and policies)
   - **Inbox Ingestion**: `~/memory_system/inbox/`
-- **Ingestion Pipeline**: Run `python /capture_knowledge.py <file_path>` to automatically chunk, embed, and route document knowledge to the appropriate storage tier.
+- **Ingestion Pipeline**: Run `python3 ~/memory_system/capture_knowledge.py <file_path>` to automatically chunk, embed, and route document knowledge to the appropriate storage tier.
 
-## 6) Memory Sync
 
-After completing a RAG architecture design, retrieval pipeline, or vector index tuning task, you **MUST** trigger the local memory capture. 
+## Memory Sync
 
-1. Save the final RAG specification, retrieval configuration, or index evaluation report as a Markdown file in the project directory.
-2. Invoke the capture script: 
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
+
+1. Save the final summary or artifact as a Markdown file in the project directory.
+2. Invoke the capture script:
    ```bash
-   python $MEMORY_SYSTEM_ROOT\capture_knowledge.py <file_path>
+   python3 ~/memory_system/capture_knowledge.py <file_path>
    ```
-3. This ensures that new requirements, technical standards, and findings are automatically routed to the correct storage (OKF or ChromaDB).
-
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).

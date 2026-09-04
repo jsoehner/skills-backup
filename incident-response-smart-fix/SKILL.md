@@ -35,11 +35,14 @@ description: "[Extended thinking: This workflow implements a sophisticated debug
 
 ## 6) Capture Knowledge
 
-After a complex issue is resolved using the multi-agent smart-fix pipeline, automatically trigger the `capture_knowledge.py` script.
-The script will analyze the resolution path to identify:
-- Root cause analysis (RCA) findings and contributing factors.
-- Specific technical fixes, architectural changes, or performance optimizations.
-- New monitoring alerts, runbook updates, or regression tests created.
-The script will then route this information to the appropriate storage:
-- **OKF**: High-level RCA summaries, system-wide prevention rules, and incident-related architectural standards.
-- **ChromaDB**: Detailed technical logs, specific code fixes, and "before and after" debugging evidence.
+
+## Memory Sync
+
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
+
+1. Save the final summary or artifact as a Markdown file in the project directory.
+2. Invoke the capture script:
+   ```bash
+   python3 ~/memory_system/capture_knowledge.py <file_path>
+   ```
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).

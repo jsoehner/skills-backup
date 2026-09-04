@@ -445,23 +445,17 @@ const todosSlice = createSlice({
 
 ## 6) Capture Knowledge
 
-After the state management architecture or complex store logic is implemented, automatically trigger the `capture_knowledge.py` script.
-The script will analyze the store definitions, state transitions, and synchronization patterns to identify:
-- New global state schemas or atomic atoms.
-- Complex Redux Toolkit slices or Zustand store configurations.
-- Custom React Query hooks and optimistic update logic.
-The script will then route this information to the appropriate storage:
-- **OKF**: High-level state management rules, store naming conventions, and architecture patterns.
-- **ChromaDB**: Specific store implementations, complex action types, and custom hook logic.
 
 ## 6) Capture Knowledge
 
-After the state management architecture or complex store logic is implemented, automatically trigger the `capture_knowledge.py` script.
-The script will analyze the store definitions, state transitions, and synchronization patterns to identify:
-- New global state schemas or atomic atoms.
-- Complex Redux Toolkit slices or Zustand store configurations.
-- Custom React Query hooks and optimistic update logic.
-The script will then route this information to the appropriate storage:
-- **OKF**: High-level state management rules, store naming conventions, and architecture patterns.
-- **ChromaDB**: Specific store implementations, complex action types, and custom hook logic.
-",path:
+
+## Memory Sync
+
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
+
+1. Save the final summary or artifact as a Markdown file in the project directory.
+2. Invoke the capture script:
+   ```bash
+   python3 ~/memory_system/capture_knowledge.py <file_path>
+   ```
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).

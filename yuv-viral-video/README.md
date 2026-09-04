@@ -1,6 +1,6 @@
 # yuv-viral-video
 
-The **YUV.AI viral-short editor** — a AI coding agent / Codex / agent-discoverable skill that turns a raw selfie or screen-recording into a finished short-form video in Yuval Avidani's signature style.
+The **YUV.AI viral-short editor** — a Claude Code / Codex / agent-discoverable skill that turns a raw selfie or screen-recording into a finished short-form video in Yuval Avidani's signature style.
 
 > Drop the path to an `.mp4` / `.mov`, type *"edit this"* (or in Hebrew *"ערוך סרטון"*), and the agent runs the full pipeline: transcribe → cut → grade → glass-cards → karaoke captions → SFX → render to both **9:16 and 16:9**, saved with a `_V<N>` suffix so previous renders are preserved.
 
@@ -32,7 +32,7 @@ This skill **does not stand alone** — it composes two open-source companion sk
 | `video-use` | [browser-use/video-use](https://github.com/browser-use/video-use) | Transcription (ElevenLabs Scribe), word-snapped cuts, color grade, ffmpeg correctness |
 | `hyperframes` (+ `gsap`, `hyperframes-cli`, `hyperframes-registry`, `website-to-hyperframes`) | [heygen-com/hyperframes](https://github.com/heygen-com/hyperframes) | HTML/CSS/GSAP composition, frame-accurate render to MP4 |
 
-These are all **agent-discoverable skills** — once placed in `~/.claude/skills/` (or your agent's equivalent), AI coding agent / Codex / IDE / Gemini-CLI auto-load them at session start.
+These are all **agent-discoverable skills** — once placed in `~/.claude/skills/` (or your agent's equivalent), Claude Code / Codex / Cursor / Gemini-CLI auto-load them at session start.
 
 ---
 
@@ -129,7 +129,7 @@ Get a key from https://elevenlabs.io/app/settings/api-keys — Scribe (transcrip
 
 ### 4. Restart your agent session
 
-AI coding agent / Codex / IDE scan `~/.claude/skills/` (or equivalent) at session start. Restart and you'll see all 7 skills auto-load:
+Claude Code / Codex / Cursor scan `~/.claude/skills/` (or equivalent) at session start. Restart and you'll see all 7 skills auto-load:
 
 ```
 yuv-viral-video, video-use, hyperframes, hyperframes-cli,

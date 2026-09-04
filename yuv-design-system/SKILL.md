@@ -72,7 +72,7 @@ Ask once: *"Is this for the YUV.AI brand, or open palette?"* — then commit. Do
 
 
 
-**Default behavior across Claude / Copilot / IDE: if a YUV.AI signal is missing, stay out and let the chosen tool's own design instincts apply. Over-triggering this skill is worse than under-triggering it.**
+**Default behavior across Claude / Copilot / Cursor: if a YUV.AI signal is missing, stay out and let the chosen tool's own design instincts apply. Over-triggering this skill is worse than under-triggering it.**
 
 
 
@@ -232,7 +232,7 @@ The everyday YUV.AI brand. Tavus-inspired: hot pink as the lead, neon cyan as el
 
 - **Card pattern:** rich black `#0A0A0A` background with `1px solid rgba(255,20,100,0.25)` border, optional `0 0 0 1px #00E5FF` inner glow on hover. On light canvas: white card with `1px solid rgba(0,0,0,0.08)` and `4px solid #FF1464` left stripe.
 
-- **IDEs and UI affordances** can be cyan-tinted; the heroes are pink.
+- **Cursors and UI affordances** can be cyan-tinted; the heroes are pink.
 
 
 
@@ -1105,3 +1105,13 @@ Maintained by [@hoodini](https://github.com/hoodini) · [yuv.ai](https://yuv.ai)
 2. **Mobile viewport check**: Before finalizing any web frontend page, resize the browser viewport to `375×812` (standard mobile sizing) to verify responsive flex and grid elements.
 
 
+## Memory Sync
+
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
+
+1. Save the final summary or artifact as a Markdown file in the project directory.
+2. Invoke the capture script:
+   ```bash
+   python3 ~/memory_system/capture_knowledge.py <file_path>
+   ```
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).
