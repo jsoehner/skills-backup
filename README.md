@@ -1,4 +1,4 @@
-# YUV AI Skills Repository
+# My Skills Repository
 
 This repository is a comprehensive collection of AI "skills" designed for various AI harnesses, including Pi-agent, Gemini, and AI coding agent.
 
