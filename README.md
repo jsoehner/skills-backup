@@ -81,7 +81,19 @@ flowchart TD
 - **Deterministic Policy Routing (OKF)**: High-level architectural rules and security standards are stored as plain Markdown under `~/memory_system/knowledge/okf/` for exact, zero-hallucination regex matching.
 - **Semantic Memory Indexing (ChromaDB)**: Troubleshooting notes, error logs, and code snippets are embedded locally into ChromaDB at `~/memory_system/db/` using local ONNX embeddings.
 - **Automated Inbox Daemon**: Background service `memory-inbox.service` monitors `~/memory_system/inbox/` for new `.md` files and automatically indexes them.
-- **Architectural Decision Records (ADRs)**: See the `adr/` directory for the complete decision log. Key decisions include:\n    - [ADR 0001: PostgreSQL Primary Database](adr/0001-postgresql-primary-database.md)\n    - [ADR 0002: Redis Caching Strategy](adr/0002-redis-caching-strategy.md)\n    - [ADR 0003: Local Memory Management](adr/0003-local-memory-management.md)\n    - [ADR 0004: Adopt Regulated ADR Framework](adr/0004-adopt-regulated-adr-framework.md)\n    - [ADR 0005: Local Memory RAG Architecture](adr/0005-local-memory-rag-architecture.md)\n    - [ADR 0006: Repository Security Posture Hardening](adr/0006-repository-security-posture-hardening.md)\n    - [ADR 0007: Reorganize Repository Structure](adr/0007-reorganize-repository-structure.md)\n    - [ADR 0008: Hyphenated Naming Convention](adr/0008-hyphenated-naming-convention.md)\n    - [ADR 0009: Production vs. Development Separation](adr/0009-production-vs-development-separation.md)\n    - [ADR 0010: Management Script Centralization](adr/0010-management-script-centralization.md)\n    - [ADR 0011: Categorical Skill Organization](adr/0011-categorical-skill-organization.md)\n    - [ADR 0012: Project Completion and Handover](adr/0012-project-completion-and-handover.md)
+Architectural Decision Records (ADRs): See the `adr/` directory for the complete decision log. Key decisions include:
+- [ADR 0001: PostgreSQL Primary Database](adr/0001-postgresql-primary-database.md)
+- [ADR 0002: Redis Caching Strategy](adr/0002-redis-caching-strategy.md)
+- [ADR 0003: Local Memory Management](adr/0003-local-memory-management.md)
+- [ADR 0004: Adopt Regulated ADR Framework](adr/0004-adopt-regulated-adr-framework.md)
+- [ADR 0005: Local Memory RAG Architecture](adr/0005-local-memory-rag-architecture.md)
+- [ADR 0006: Repository Security Posture Hardening](adr/0006-repository-security-posture-hardening.md)
+- [ADR 0007: Reorganize Repository Structure](adr/0007-reorganize-repository-structure.md)
+- [ADR 0008: Hyphenated Naming Convention](adr/0008-hyphenated-naming-convention.md)
+- [ADR 0009: Production vs. Development Separation](adr/0009-production-vs-development-separation.md)
+- [ADR 0010: Management Script Centralization](adr/0010-management-script-centralization.md)
+- [ADR 0011: Categorical Skill Organization](adr/0011-categorical-skill-organization.md)
+- [ADR 0012: Project Completion and Handover](adr/0012-project-completion-and-handover.md)
 - **Detailed Documentation**: See the complete [Memory RAG FAQ](memory_rag_faq.md) for step-by-step technical details.
 
 ### ⚠️ Gotchas & Operational Caveats
