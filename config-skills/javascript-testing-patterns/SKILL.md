@@ -1,0 +1,52 @@
+---
+name: javascript-testing-patterns
+description: Implement comprehensive testing strategies using Jest, Vitest, and Testing Library for unit tests, integration tests, and end-to-end testing with mocking, fixtures, and test-driven development. Use when writing JavaScript/TypeScript tests, setting up test infrastructure, or implementing TDD/BDD workflows.
+---
+
+# JavaScript Testing Patterns
+
+Comprehensive guide for implementing robust testing strategies in JavaScript/TypeScript applications using modern testing frameworks and best practices.
+
+## Use this skill when
+
+- Setting up test infrastructure for new projects
+- Writing unit tests for functions and classes
+- Creating integration tests for APIs and services
+- Implementing end-to-end tests for user flows
+- Mocking external dependencies and APIs
+- Testing React, Vue, or other frontend components
+- Implementing test-driven development (TDD)
+- Setting up continuous testing in CI/CD pipelines
+
+## Do not use this skill when
+
+- The task is unrelated to javascript testing patterns
+- You need a different domain or tool outside this scope
+
+## Instructions
+
+- Clarify goals, constraints, and required inputs.
+- Apply relevant best practices and validate outcomes.
+- Provide actionable steps and verification.
+- If detailed examples are required, open `resources/implementation-playbook.md`.
+
+## Resources
+
+- `resources/implementation-playbook.md` for detailed patterns and examples.
+
+## Anti-Patterns
+
+- NEVER skip clean-up routines (teardowns) to prevent test state leakage between runs.
+- NEVER assert on unstable UI selectors or variable network latencies without proper wait mechanisms.
+
+
+## Memory Sync
+
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
+
+1. Save the final summary or artifact as a Markdown file in the project directory.
+2. Invoke the capture script:
+   ```bash
+   python3 ~/memory_system/capture_knowledge.py <file_path>
+   ```
+3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).
