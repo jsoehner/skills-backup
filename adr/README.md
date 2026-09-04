@@ -12,6 +12,12 @@ This directory contains the Architecture Decision Records (ADRs) for the project
 | [0004](0004-adopt-regulated-adr-framework.md) | Adopt Regulated Architecture Decision Record (RADR) Framework | Accepted | 2026-08-08 |
 | [0005](0005-local-memory-rag-architecture.md) | Local Memory RAG Architecture | Accepted | 2026-08-15 |
 | [0006](0006-repository-security-posture-hardening.md) | Repository Security Posture Assessment and Script Hardening | Accepted | 2026-09-03 |
+| [0007](0007-reorganize-repository-structure.md) | Reorganize Repository Structure | Accepted | 2026-09-15 |
+| [0008](0008-hyphenated-naming-convention.md) | Hyphenated Naming Convention | Accepted | 2026-09-15 |
+| [0009](0009-production-vs-development-separation.md) | Production vs. Development Separation | Accepted | 2026-09-15 |
+| [0010](0010-management-script-centralization.md) | Management Script Centralization | Accepted | 2026-09-15 |
+| [0011](0011-categorical-skill-organization.md) | Categorical Skill Organization | Accepted | 2026-09-15 |
+| [0012](0012-project-completion-and-handover.md) | Project Completion and Handover | Accepted | 2026-09-15 |
 
 ## Lifecycle
 - **Proposed**: The decision is being discussed.
