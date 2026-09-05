@@ -18,13 +18,38 @@ To add a new skill to the repository:
 4. **Update Catalog**: Add the new skill to the table in `README.md`.
 5. **Validate**: Run `python3 scripts/check_skills.py` to ensure the skill meets our standards.
 
-### 2. Synchronizing to Production
-To push skills to your local `.pi/agent/skills` environment:
+### 2. Inspecting and Restoring Skills
+To inspect what skills are installed vs new in your local environment, or to restore all skills:
 ```bash
-python3 scripts/sync.py --harness pi
+# Check new vs installed skills
+./setup.sh --status --client [pi|gemini|claude|opencode]
+
+# Browse skills catalog
+./setup.sh --catalog
+
+# Inspect local memory system (OKF + ChromaDB)
+./setup.sh --memory
+
+# Restore all skills
+./setup.sh --client [pi|gemini|claude|opencode]
 ```
 
-### 3. Managing Architectural Decisions
+On Windows PowerShell:
+```powershell
+.\setup.ps1 -Status -Client gemini
+.\setup.ps1 -Catalog
+.\setup.ps1 -Memory
+.\setup.ps1 -Client gemini
+```
+
+### 3. Synchronizing to Production
+To push or pull skills selectively using `scripts/sync.py`:
+```bash
+python3 scripts/sync.py deploy --client pi
+python3 scripts/sync.py save --client pi
+```
+
+### 4. Managing Architectural Decisions
 All significant technical changes must be documented as an Architectural Decision Record (ADR).
 - Locate the next available number in `adr/`.
 - Choose a template (Nygard, MADR, or Y-Statement).
@@ -32,10 +57,12 @@ All significant technical changes must be documented as an Architectural Decisio
 - Commit the new ADR to the repository.
 
 ## Management Tools
-All automation is located in the `scripts/` directory:
-- `restore_skills.py`: Rebuilds the production environment from the source of truth.
-- `sync.py`: Synchronizes specific skill subsets to various harnesses.
-- `check_skills.py`: Validates skill structure and naming compliance.
+All automation is located at repository root or in the `scripts/` directory:
+- `setup.sh` / `setup.ps1`: Primary entry point for skill restoration, catalog exploration, and client status inspection.
+- `scripts/catalog.py`: CLI and helper engine for catalog browsing and installation status checks.
+- `scripts/restore_skills.py`: Rebuilds the production client environment from the source of truth.
+- `scripts/sync.py`: Bidirectionally synchronizes specific skill subsets between repo and client.
+- `scripts/update_readme.py`: Automatically generates and updates `README.md` and `categories/*.md` catalogs.
 
 ## Standards & Compliance
 - **ADR 0008**: Strictly enforces hyphenated naming.

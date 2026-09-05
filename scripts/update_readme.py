@@ -5,7 +5,8 @@ try:
 except ImportError:
     yaml = None
 
-repo_dir = os.path.dirname(os.path.abspath(__file__))
+_script_dir = os.path.dirname(os.path.abspath(__file__))
+repo_dir = os.path.dirname(_script_dir) if os.path.basename(_script_dir) == "scripts" else _script_dir
 readme_path = os.path.join(repo_dir, "README.md")
 
 # Categories mapping mapping folder name patterns to category keys
@@ -269,178 +270,180 @@ def scan_skills_dir(directory, is_config=False):
     catalog.sort(key=lambda x: x["name"])
     return catalog
 
-# Scan
-user_skills = scan_skills_dir(repo_dir, is_config=False)
-config_skills = scan_skills_dir(os.path.join(repo_dir, "config-skills"), is_config=True)
+def update_all_docs():
+    user_skills = scan_skills_dir(repo_dir, is_config=False)
+    config_skills = scan_skills_dir(os.path.join(repo_dir, "config-skills"), is_config=True)
 
-# Ensure categories directory exists
-categories_dir = os.path.join(repo_dir, "categories")
-os.makedirs(categories_dir, exist_ok=True)
+    # Ensure categories directory exists
+    categories_dir = os.path.join(repo_dir, "categories")
+    os.makedirs(categories_dir, exist_ok=True)
 
-# Clear existing category files to avoid orphaned configurations
-if os.path.exists(categories_dir):
-    for f_name in os.listdir(categories_dir):
-        if f_name.endswith(".md"):
-            try:
-                os.remove(os.path.join(categories_dir, f_name))
-            except Exception as e:
-                print(f"Error removing old category file {f_name}: {e}")
+    # Clear existing category files to avoid orphaned configurations
+    if os.path.exists(categories_dir):
+        for f_name in os.listdir(categories_dir):
+            if f_name.endswith(".md"):
+                try:
+                    os.remove(os.path.join(categories_dir, f_name))
+                except Exception as e:
+                    print(f"Error removing old category file {f_name}: {e}")
 
-# Group user skills
-user_by_cat = {}
-for skill in user_skills:
-    group = skill["group_key"]
-    if group not in user_by_cat:
-        user_by_cat[group] = []
-    user_by_cat[group].append(skill)
+    # Group user skills
+    user_by_cat = {}
+    for skill in user_skills:
+        group = skill["group_key"]
+        if group not in user_by_cat:
+            user_by_cat[group] = []
+        user_by_cat[group].append(skill)
 
-# Group config skills
-config_by_cat = {}
-for skill in config_skills:
-    group = skill["group_key"]
-    if group not in config_by_cat:
-        config_by_cat[group] = []
-    config_by_cat[group].append(skill)
+    # Group config skills
+    config_by_cat = {}
+    for skill in config_skills:
+        group = skill["group_key"]
+        if group not in config_by_cat:
+            config_by_cat[group] = []
+        config_by_cat[group].append(skill)
 
-# Helper function to write a category markdown document
-def write_category_file(cat_key, title, skills, is_config):
-    filename = f"{cat_key}.md"
-    file_path = os.path.join(categories_dir, filename)
-    
-    with open(file_path, "w", encoding="utf-8") as f:
-        f.write(f"# {title}\n\n")
-        f.write(f"This document catalogs the {'system configuration' if is_config else 'custom user'} skills belonging to the **{title}** category.\n\n")
-        f.write("| Skill Name | Description | Path |\n")
-        f.write("|---|---|---|\n")
-        for skill in skills:
-            # relative link goes up one level to categories' parent and points to SKILL.md
-            skill_link = f"[`{skill['name']}`](../{skill['path']}/SKILL.md)"
-            f.write(f"| {skill_link} | {skill['description']} | `{skill['path']}` |\n")
-
-# Write user category documents
-for cat_key, cat_info in USER_CATEGORIES.items():
-    skills_in_cat = user_by_cat.get(cat_key, [])
-    if skills_in_cat:
-        write_category_file(cat_key, cat_info["title"], skills_in_cat, is_config=False)
-
-other_user = user_by_cat.get("other", [])
-if other_user:
-    write_category_file("other_user", "📦 Other User Skills", other_user, is_config=False)
-
-# Write config category documents
-for cat_key, cat_info in CONFIG_CATEGORIES.items():
-    skills_in_cat = config_by_cat.get(cat_key, [])
-    if skills_in_cat:
-        write_category_file(cat_key, cat_info["title"], skills_in_cat, is_config=True)
-
-other_config = config_by_cat.get("other", [])
-if other_config:
-    write_category_file("other_config", "⚙️ Other Config Skills", other_config, is_config=True)
-
-# Build master README links
-readme_addition = "\n\n## 🧠 Local Memory RAG Architecture & Token Flow\n\n"
-readme_addition += "The repository integrates a local Memory RAG framework (`~/memory_system`) using [`memory-capture`](memory-capture). This system intercepts requests locally, retrieves policy/vector context, and injects it **before** tokens are transmitted to frontier LLMs.\n\n"
-
-readme_addition += "### System Architecture & Data Flow\n\n"
-readme_addition += "```mermaid\n"
-readme_addition += "flowchart TD\n"
-readme_addition += "    subgraph LocalMachine[\"💻 Local Machine (Zero Cloud Tokens Spent)\"]\n"
-readme_addition += "        UserReq[\"👤 User Request\"] --> PrePrompt[\"⚡ Pre-Prompt Interceptor\"]\n"
-readme_addition += "        PrePrompt --> OKFSearch[\"📄 OKF File Search<br/>~/memory_system/knowledge/okf\"]\n"
-readme_addition += "        PrePrompt --> ChromaSearch[\"🔍 ChromaDB Vector Search<br/>~/memory_system/db\"]\n"
-readme_addition += "        OKFSearch --> ContextFormat[\"📦 Context Formatter\"]\n"
-readme_addition += "        ChromaSearch --> ContextFormat\n"
-readme_addition += "        ContextFormat --> AugmentedPayload[\"📝 Augmented Prompt Payload<br/>(System Prompt + RAG + User Query)\"]\n"
-readme_addition += "    end\n\n"
-readme_addition += "    subgraph CloudModel[\"☁️ Frontier LLM Cloud\"]\n"
-readme_addition += "        AugmentedPayload -->|\"Encrypted HTTP / Token Stream\"| FrontierLLM[\"🤖 Gemini / Claude / OpenAI\"]\n"
-readme_addition += "        FrontierLLM -->|\"Response Stream\"| AgentResponse[\"✨ Synthesized Response\"]\n"
-readme_addition += "    end\n"
-readme_addition += "```\n\n"
-
-readme_addition += "### Why & How This Functionality Is Organized\n\n"
-readme_addition += "- **Deterministic Policy Routing (OKF)**: High-level architectural rules and security standards are stored as plain Markdown under `~/memory_system/knowledge/okf/` for exact, zero-hallucination regex matching.\n"
-readme_addition += "- **Semantic Memory Indexing (ChromaDB)**: Troubleshooting notes, error logs, and code snippets are embedded locally into ChromaDB at `~/memory_system/db/` using local ONNX embeddings.\n"
-readme_addition += "- **Automated Inbox Daemon**: Background service `memory-inbox.service` monitors `~/memory_system/inbox/` for new `.md` files and automatically indexes them.\n"
-readme_addition += "- **Architectural Decision Record**: See [ADR 0005: Local Memory RAG Architecture](adr/0005-local-memory-rag-architecture.md) for rationale.\n"
-readme_addition += "- **Detailed Documentation**: See the complete [Memory RAG FAQ](memory_rag_faq.md) for step-by-step technical details.\n\n"
-
-readme_addition += "### ⚠️ Gotchas & Operational Caveats\n\n"
-readme_addition += "> [!WARNING]\n"
-readme_addition += "> **Pre-Prompt Token Payload Overflow**: Ingesting raw logs or unchunked files directly into ChromaDB can inflate the injected context payload. Ensure log files are pre-filtered or split into 500–1000 token chunks before dropping into `~/memory_system/inbox/`.\n\n"
-readme_addition += "> [!IMPORTANT]\n"
-readme_addition += "> **Systemd User Daemon Required**: The inbox background watcher relies on `memory-inbox.service` running under `systemctl --user`. If the service is stopped or disabled, files dropped into `inbox/` will sit unprocessed until `python3 ~/memory_system/capture_knowledge.py <file>` is run manually.\n\n"
-readme_addition += "> [!CAUTION]\n"
-readme_addition += "> **OKF vs Chroma Routing Triggers**: Files intended for OKF (deterministic policies) **must** contain `# OKF Decision`, `Type: Policy`, or `Type: Architecture Standard` in their header. Without these exact header strings, `capture_knowledge.py` defaults to embedding the content into ChromaDB vector storage.\n\n"
-readme_addition += "> [!NOTE]\n"
-readme_addition += "> **Directory Tree Initializer**: If `~/memory_system` is missing or cleared, running `python3 ~/memory_system/init_storage.py` must be executed before ingestion to recreate required SQLite tables and collection schemas.\n\n"
-
-readme_addition += "## 📚 Skill Catalog & Navigation\n"
-readme_addition += f"\nThis repository manages **{len(user_skills) + len(config_skills)}** modular AI skills across 12 primary domains.\n\n"
-
-# Overview Table
-readme_addition += "### Overview\n\n"
-readme_addition += "| Category | Skills | Quick Link |\n"
-readme_addition += "|---|---|---|\n"
-
-for cat_key, cat_info in USER_CATEGORIES.items():
-    skills_in_cat = user_by_cat.get(cat_key, [])
-    if skills_in_cat:
-        link = f"[{cat_info['title']}](#-{cat_key.replace('_', '-')})"
-        count = f"**{len(skills_in_cat)}**"
-        doc_link = f"[Full Doc ↗](categories/{cat_key}.md)"
-        readme_addition += f"| {link} | {count} | {doc_link} |\n"
-
-if other_user:
-    readme_addition += f"| [📦 Other User Skills](#-other-user-skills) | **{len(other_user)}** | [Full Doc ↗](categories/other_user.md) |\n"
-
-readme_addition += "\n---\n\n"
-
-# Detailed Category Sections with direct skill links
-for cat_key, cat_info in USER_CATEGORIES.items():
-    skills_in_cat = user_by_cat.get(cat_key, [])
-    if skills_in_cat:
-        readme_addition += f"### {cat_info['title']}\n"
-        readme_addition += f"📁 *Full Documentation: [{cat_info['title']} Document](categories/{cat_key}.md) ({len(skills_in_cat)} skills)*\n\n"
+    # Helper function to write a category markdown document
+    def write_category_file(cat_key, title, skills, is_config):
+        filename = f"{cat_key}.md"
+        file_path = os.path.join(categories_dir, filename)
         
-        # Deduplicate skills by name for display list
+        with open(file_path, "w", encoding="utf-8") as f:
+            f.write(f"# {title}\n\n")
+            f.write(f"This document catalogs the {'system configuration' if is_config else 'custom user'} skills belonging to the **{title}** category.\n\n")
+            f.write("| Skill Name | Description | Path |\n")
+            f.write("|---|---|---|\n")
+            for skill in skills:
+                skill_link = f"[`{skill['name']}`](../{skill['path']}/SKILL.md)"
+                f.write(f"| {skill_link} | {skill['description']} | `{skill['path']}` |\n")
+
+    # Write user category documents
+    for cat_key, cat_info in USER_CATEGORIES.items():
+        skills_in_cat = user_by_cat.get(cat_key, [])
+        if skills_in_cat:
+            write_category_file(cat_key, cat_info["title"], skills_in_cat, is_config=False)
+
+    other_user = user_by_cat.get("other", [])
+    if other_user:
+        write_category_file("other_user", "📦 Other User Skills", other_user, is_config=False)
+
+    # Write config category documents
+    for cat_key, cat_info in CONFIG_CATEGORIES.items():
+        skills_in_cat = config_by_cat.get(cat_key, [])
+        if skills_in_cat:
+            write_category_file(cat_key, cat_info["title"], skills_in_cat, is_config=True)
+
+    other_config = config_by_cat.get("other", [])
+    if other_config:
+        write_category_file("other_config", "⚙️ Other Config Skills", other_config, is_config=True)
+
+    # Build master README links
+    readme_addition = "\n\n## 🧠 Local Memory RAG Architecture & Token Flow\n\n"
+    readme_addition += "The repository integrates a local Memory RAG framework (`~/memory_system`) using [`memory-capture`](memory-capture). This system intercepts requests locally, retrieves policy/vector context, and injects it **before** tokens are transmitted to frontier LLMs.\n\n"
+
+    readme_addition += "### System Architecture & Data Flow\n\n"
+    readme_addition += "```mermaid\n"
+    readme_addition += "flowchart TD\n"
+    readme_addition += "    subgraph LocalMachine[\"💻 Local Machine (Zero Cloud Tokens Spent)\"]\n"
+    readme_addition += "        UserReq[\"👤 User Request\"] --> PrePrompt[\"⚡ Pre-Prompt Interceptor\"]\n"
+    readme_addition += "        PrePrompt --> OKFSearch[\"📄 OKF File Search<br/>~/memory_system/knowledge/okf\"]\n"
+    readme_addition += "        PrePrompt --> ChromaSearch[\"🔍 ChromaDB Vector Search<br/>~/memory_system/db\"]\n"
+    readme_addition += "        OKFSearch --> ContextFormat[\"📦 Context Formatter\"]\n"
+    readme_addition += "        ChromaSearch --> ContextFormat\n"
+    readme_addition += "        ContextFormat --> AugmentedPayload[\"📝 Augmented Prompt Payload<br/>(System Prompt + RAG + User Query)\"]\n"
+    readme_addition += "    end\n\n"
+    readme_addition += "    subgraph CloudModel[\"☁️ Frontier LLM Cloud\"]\n"
+    readme_addition += "        AugmentedPayload -->|\"Encrypted HTTP / Token Stream\"| FrontierLLM[\"🤖 Gemini / Claude / OpenAI\"]\n"
+    readme_addition += "        FrontierLLM -->|\"Response Stream\"| AgentResponse[\"✨ Synthesized Response\"]\n"
+    readme_addition += "    end\n"
+    readme_addition += "```\n\n"
+
+    readme_addition += "### Why & How This Functionality Is Organized\n\n"
+    readme_addition += "- **Deterministic Policy Routing (OKF)**: High-level architectural rules and security standards are stored as plain Markdown under `~/memory_system/knowledge/okf/` for exact, zero-hallucination regex matching.\n"
+    readme_addition += "- **Semantic Memory Indexing (ChromaDB)**: Troubleshooting notes, error logs, and code snippets are embedded locally into ChromaDB at `~/memory_system/db/` using local ONNX embeddings.\n"
+    readme_addition += "- **Automated Inbox Daemon**: Background service `memory-inbox.service` monitors `~/memory_system/inbox/` for new `.md` files and automatically indexes them.\n"
+    readme_addition += "- **Architectural Decision Record**: See [ADR 0005: Local Memory RAG Architecture](adr/0005-local-memory-rag-architecture.md) for rationale.\n"
+    readme_addition += "- **Detailed Documentation**: See the complete [Memory RAG FAQ](memory_rag_faq.md) for step-by-step technical details.\n\n"
+
+    readme_addition += "### ⚠️ Gotchas & Operational Caveats\n\n"
+    readme_addition += "> [!WARNING]\n"
+    readme_addition += "> **Pre-Prompt Token Payload Overflow**: Ingesting raw logs or unchunked files directly into ChromaDB can inflate the injected context payload. Ensure log files are pre-filtered or split into 500–1000 token chunks before dropping into `~/memory_system/inbox/`.\n\n"
+    readme_addition += "> [!IMPORTANT]\n"
+    readme_addition += "> **Systemd User Daemon Required**: The inbox background watcher relies on `memory-inbox.service` running under `systemctl --user`. If the service is stopped or disabled, files dropped into `inbox/` will sit unprocessed until `python3 ~/memory_system/capture_knowledge.py <file>` is run manually.\n\n"
+    readme_addition += "> [!CAUTION]\n"
+    readme_addition += "> **OKF vs Chroma Routing Triggers**: Files intended for OKF (deterministic policies) **must** contain `# OKF Decision`, `Type: Policy`, or `Type: Architecture Standard` in their header. Without these exact header strings, `capture_knowledge.py` defaults to embedding the content into ChromaDB vector storage.\n\n"
+    readme_addition += "> [!NOTE]\n"
+    readme_addition += "> **Directory Tree Initializer**: If `~/memory_system` is missing or cleared, running `python3 ~/memory_system/init_storage.py` must be executed before ingestion to recreate required SQLite tables and collection schemas.\n\n"
+
+    readme_addition += "## 📚 Skill Catalog & Navigation\n"
+    readme_addition += f"\nThis repository manages **{len(user_skills) + len(config_skills)}** modular AI skills across 12 primary domains.\n\n"
+
+    # Overview Table
+    readme_addition += "### Overview\n\n"
+    readme_addition += "| Category | Skills | Quick Link |\n"
+    readme_addition += "|---|---|---|\n"
+
+    for cat_key, cat_info in USER_CATEGORIES.items():
+        skills_in_cat = user_by_cat.get(cat_key, [])
+        if skills_in_cat:
+            link = f"[{cat_info['title']}](#-{cat_key.replace('_', '-')})"
+            count = f"**{len(skills_in_cat)}**"
+            doc_link = f"[Full Doc ↗](categories/{cat_key}.md)"
+            readme_addition += f"| {link} | {count} | {doc_link} |\n"
+
+    if other_user:
+        readme_addition += f"| [📦 Other User Skills](#-other-user-skills) | **{len(other_user)}** | [Full Doc ↗](categories/other_user.md) |\n"
+
+    readme_addition += "\n---\n\n"
+
+    # Detailed Category Sections with direct skill links
+    for cat_key, cat_info in USER_CATEGORIES.items():
+        skills_in_cat = user_by_cat.get(cat_key, [])
+        if skills_in_cat:
+            readme_addition += f"### {cat_info['title']}\n"
+            readme_addition += f"📁 *Full Documentation: [{cat_info['title']} Document](categories/{cat_key}.md) ({len(skills_in_cat)} skills)*\n\n"
+            
+            # Deduplicate skills by name for display list
+            unique_skills = {}
+            for s in skills_in_cat:
+                if s["name"] not in unique_skills:
+                    unique_skills[s["name"]] = s
+            
+            skill_links = []
+            for s_name, s_info in sorted(unique_skills.items()):
+                skill_links.append(f"[`{s_name}`]({s_info['path']}/SKILL.md)")
+            
+            readme_addition += " • ".join(skill_links) + "\n\n"
+
+    if other_user:
+        readme_addition += "### 📦 Other User Skills\n"
+        readme_addition += f"📁 *Full Documentation: [Other User Skills Document](categories/other_user.md) ({len(other_user)} skills)*\n\n"
         unique_skills = {}
-        for s in skills_in_cat:
+        for s in other_user:
             if s["name"] not in unique_skills:
                 unique_skills[s["name"]] = s
-        
-        skill_links = []
-        for s_name, s_info in sorted(unique_skills.items()):
-            skill_links.append(f"[`{s_name}`]({s_info['path']}/SKILL.md)")
-        
+        skill_links = [f"[`{s_name}`]({s_info['path']}/SKILL.md)" for s_name, s_info in sorted(unique_skills.items())]
         readme_addition += " • ".join(skill_links) + "\n\n"
 
-if other_user:
-    readme_addition += "### 📦 Other User Skills\n"
-    readme_addition += f"📁 *Full Documentation: [Other User Skills Document](categories/other_user.md) ({len(other_user)} skills)*\n\n"
-    unique_skills = {}
-    for s in other_user:
-        if s["name"] not in unique_skills:
-            unique_skills[s["name"]] = s
-    skill_links = [f"[`{s_name}`]({s_info['path']}/SKILL.md)" for s_name, s_info in sorted(unique_skills.items())]
-    readme_addition += " • ".join(skill_links) + "\n\n"
+    # Read original README up to the separator
+    original_content = ""
+    if os.path.exists(readme_path):
+        with open(readme_path, "r", encoding="utf-8") as f:
+            original_content = f.read()
 
-# Read original README up to the separator
-original_content = ""
-if os.path.exists(readme_path):
-    with open(readme_path, "r", encoding="utf-8") as f:
-        original_content = f.read()
+    # Cut off any existing generated sections (Memory RAG or Skill Catalog)
+    cutoff_marker = "## 🧠 Local Memory RAG Architecture"
+    if cutoff_marker in original_content:
+        original_content = original_content.split(cutoff_marker)[0].strip()
+    elif "## 📚 Skill Catalog" in original_content:
+        original_content = original_content.split("## 📚 Skill Catalog")[0].strip()
 
-# Cut off any existing generated sections (Memory RAG or Skill Catalog)
-cutoff_marker = "## 🧠 Local Memory RAG Architecture"
-if cutoff_marker in original_content:
-    original_content = original_content.split(cutoff_marker)[0].strip()
-elif "## 📚 Skill Catalog" in original_content:
-    original_content = original_content.split("## 📚 Skill Catalog")[0].strip()
+    new_content = original_content.strip() + "\n" + readme_addition
 
-new_content = original_content.strip() + "\n" + readme_addition
+    with open(readme_path, "w", encoding="utf-8") as f:
+        f.write(new_content)
 
-with open(readme_path, "w", encoding="utf-8") as f:
-    f.write(new_content)
+    print(f"README.md and category documents updated successfully with {len(user_skills)} user skills and {len(config_skills)} config skills.")
 
-print(f"README.md and category documents updated successfully with {len(user_skills)} user skills and {len(config_skills)} config skills.")
+if __name__ == "__main__":
+    update_all_docs()
