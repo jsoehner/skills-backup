@@ -32,13 +32,13 @@ To install these skills onto a new workspace/system:
    ```bash
    cd ~/skills-backup
    ```
-3. Deploy the skills to the local agentic runtime configuration directories (`~/.gemini/skills` and `~/.gemini/config/skills`):
+3. Deploy the skills to the local agentic runtime configuration directories (or use `./setup.sh --client gemini`):
    ```bash
-   python3 sync.py deploy
+   python3 scripts/sync.py deploy
    ```
 
 > [!IMPORTANT]
-> The `sync.py deploy` command will create the target local directories if they do not exist and copy the files from the repository to the active directories of the agent runtime.
+> The `scripts/sync.py deploy` command will create the target local directories if they do not exist and copy the files from the repository to the active directories of the agent runtime. Alternatively, use `./setup.sh --client [gemini|pi|claude|opencode]` for full multi-client restoration.
 
 ---
 
@@ -52,11 +52,11 @@ When you or an agent modifies a skill locally or creates a new one:
    ```
 2. Synchronize the local changes back to the backup repository:
    ```bash
-   python3 sync.py save
+   python3 scripts/sync.py save
    ```
 3. Regenerate the catalog documentation in `README.md` to index the new/modified skills:
    ```bash
-   python3 update_readme.py
+   python3 scripts/update_readme.py
    ```
 4. Verify the changes using Git:
    ```bash
@@ -83,34 +83,41 @@ To keep multiple development systems aligned:
    ```
 2. Redeploy the updated skills locally:
    ```bash
-   python3 sync.py deploy
+   python3 scripts/sync.py deploy
    ```
 
 ---
 
 ## Directory Mapping
 
-The synchronization script (`sync.py`) maps files between the backup repository and your home directory:
+The synchronization script (`scripts/sync.py`) maps files between the backup repository and your home directory:
 
 | Repo Path | Local Destination Path | Type |
 |---|---|---|
-| `./` (Root subdirectories) | `~/.gemini/skills/[skill_name]` | User Custom Skills |
+| `./skills/` or `./` | `~/.gemini/skills/[skill_name]` | User Custom Skills |
 | `./config-skills/` | `~/.gemini/config/skills/[skill_name]` | System Configuration Skills |
 
 ---
 
 ## Script Reference
 
-### `sync.py`
-The utility to push/pull files between local runtime directories and this repo:
-- **Save Changes (Local -> Repo)**: `python3 sync.py save`
-- **Deploy Changes (Repo -> Local)**: `python3 sync.py deploy`
-- **Category Filtering**: `python3 sync.py save -g databases_data`
-- **List Categories**: `python3 sync.py -l`
+### `setup.sh` / `setup.ps1`
+Multi-client restoration and inspection script supporting Gemini, Pi, Claude, and OpenCode runtimes.
+- **Restore Skills**: `./setup.sh --client [gemini|pi|claude|opencode]`
+- **Status Check**: `./setup.sh --status --client [client]`
+- **Catalog Search**: `./setup.sh --catalog`
+- **Memory Diagnostic**: `./setup.sh --memory`
 
-### `update_readme.py`
+### `scripts/sync.py`
+The utility to push/pull files between local runtime directories and this repo:
+- **Save Changes (Local -> Repo)**: `python3 scripts/sync.py save`
+- **Deploy Changes (Repo -> Local)**: `python3 scripts/sync.py deploy`
+- **Category Filtering**: `python3 scripts/sync.py save -g databases_data`
+- **List Categories**: `python3 scripts/sync.py -l`
+
+### `scripts/update_readme.py`
 Scans all skills in the repository, parses their frontmatter (`SKILL.md`), and updates the main [README.md](README.md) catalog.
-- **Run**: `python3 update_readme.py`
+- **Run**: `python3 scripts/update_readme.py`
 
 ---
 

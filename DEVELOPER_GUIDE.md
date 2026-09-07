@@ -60,6 +60,7 @@ All significant technical changes must be documented as an Architectural Decisio
 All automation is located at repository root or in the `scripts/` directory:
 - `setup.sh` / `setup.ps1`: Primary entry point for skill restoration, catalog exploration, and client status inspection.
 - `scripts/catalog.py`: CLI and helper engine for catalog browsing and installation status checks.
+- `scripts/deploy_skills.py`: Manifest-driven deployment packager and harness deployer with dependency resolution.
 - `scripts/restore_skills.py`: Rebuilds the production client environment from the source of truth.
 - `scripts/sync.py`: Bidirectionally synchronizes specific skill subsets between repo and client.
 - `scripts/update_readme.py`: Automatically generates and updates `README.md` and `categories/*.md` catalogs.

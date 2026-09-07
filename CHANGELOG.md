@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.3.0] - 2026-09-07
+### Changed
+- **Deploy Script Root Resolution**: Fixed `scripts/deploy_skills.py` repository root resolution (`REPO_DIR`) so it dynamically references the repository root when executed from within the centralized `scripts/` directory.
+- **Directory Traversal Pruning**: Hardened filesystem traversal in `scripts/deploy_skills.py` by pruning hidden folders and `__pycache__` directories in-place during `os.walk`.
+
+### Added
+- **Root Directory CLI Flag**: Added `--root-dir` parameter to `scripts/deploy_skills.py` allowing custom root directory paths for tests, CI/CD, and sub-tree deployments.
+- **Architecture Decision Record**: Documented deployment script root path resolution and traversal hardening in [ADR-0013](docs/adr/0013-deploy-skills-root-resolution-and-traversal-hardening.md).
+- **Multi-Client Setup Tooling**: Added `setup.sh` (Bash) and `setup.ps1` (PowerShell) for fast cross-client environment setup, status inspection (`--status`), catalog browsing (`--catalog`), and memory diagnostics (`--memory`).
+- **Catalog Inspection Engine**: Added `scripts/catalog.py` for diffing installed vs. repository skills and inspecting memory system health.
+
+### Documentation
+- **ADR Directory Reconciliation**: Consolidated legacy decision directories into `docs/adr/` with updated governance strategy references.
+- **Operational Guides**: Updated `DEVELOPER_GUIDE.md` and `LIFECYCLE.md` with centralized `scripts/` paths and deployment tool references.
+
 ## [1.2.0] - 2026-09-03
 ### Security
 - **Path Traversal & Boundary Containment**: Enforced strict canonical path resolution (`is_safe_subpath`) and directory name regex validation across `restore_skills.py` and `sync.py`.

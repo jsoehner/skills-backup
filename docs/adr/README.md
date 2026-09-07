@@ -18,6 +18,7 @@ This directory contains the Architecture Decision Records (ADRs) for the project
 | [0010](0010-management-script-centralization.md) | Management Script Centralization | Accepted | 2026-09-15 |
 | [0011](0011-categorical-skill-organization.md) | Categorical Skill Organization | Accepted | 2026-09-15 |
 | [0012](0012-project-completion-and-handover.md) | Project Completion and Handover | Accepted | 2026-09-15 |
+| [0013](0013-deploy-skills-root-resolution-and-traversal-hardening.md) | Deploy Skills Root Path Resolution and Directory Traversal Hardening | Accepted | 2026-09-07 |
 
 ## Lifecycle
 - **Proposed**: The decision is being discussed.

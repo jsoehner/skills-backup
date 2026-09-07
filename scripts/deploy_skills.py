@@ -6,9 +6,9 @@ import sys
 from typing import Set, List, Dict
 
 # Configuration
-# The script is located in yuv-skills-backup/
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-BACKUP_DIR = SCRIPT_DIR
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+REPO_DIR = os.path.dirname(_SCRIPT_DIR) if os.path.basename(_SCRIPT_DIR) == "scripts" else _SCRIPT_DIR
+BACKUP_DIR = REPO_DIR
 MANIFEST_FILENAME = "manifest.json"
 
 class SkillDeployer:
@@ -33,8 +33,9 @@ class SkillDeployer:
 
         # 2. Scan the root directory for composite skills (those with manifest.json)
         for root, dirs, files in os.walk(self.root_dir):
-            # Skip hidden directories
-            if any(part.startswith('.') for part in root.split(os.sep)):
+            # Skip hidden directories and caches
+            dirs[:] = [d for d in dirs if not d.startswith('.') and d != '__pycache__']
+            if any(part.startswith('.') and part not in ('.', '..') for part in root.split(os.sep)):
                 continue
             
             # Skip the tools directory here as we handled it above
@@ -124,9 +125,10 @@ def main():
     parser.add_argument("--harness", choices=["pi", "gemini", "claude"], required=True, 
                         help="The target AI harness for deployment.")
     parser.add_argument("--dry-run", action="store_true", help="Only plan the deployment without creating files.")
+    parser.add_argument("--root-dir", default=BACKUP_DIR, help="The root directory of the skills backup repository.")
     args = parser.parse_args()
 
-    deployer = SkillDeployer(SCRIPT_DIR)
+    deployer = SkillDeployer(args.root_dir)
     deployer.scan_skills()
     
     plan = deployer.plan_deployment(args.harness)
