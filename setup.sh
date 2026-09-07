@@ -21,7 +21,7 @@ print_usage() {
     cat << EOF
 Usage: $(basename "$0") [OPTIONS] [-- EXTRA_ARGS]
 
-Setup and manage agent skills for your local AI runtime clients.
+Setup, manage, and inspect agent skills and local memory systems for AI clients.
 
 Options:
   -c, --client CLIENT      Target AI client: pi, gemini, claude, opencode (default: pi)
@@ -31,10 +31,19 @@ Options:
       --installed          Show only existing/installed skills for target client
       --categories         List all available skill categories with counts
   -m, --memory             Show local memory & RAG system architecture and host status
+  -i, --info               Display repository overview, skills summary, and memory info
   -g, --category NAME      Filter catalog or status by category name
   -q, --search QUERY       Search skills by name or description keyword
   -r, --restore            Restore skills to the target client (default action)
   -h, --help               Show this help message and exit
+
+Memory & RAG System:
+  The repository integrates a local, persistent Memory RAG system (~/memory_system):
+  • Deterministic Rules (OKF):  ~/memory_system/knowledge/okf (plain Markdown)
+  • Semantic Memory (ChromaDB): ~/memory_system/db (vector embeddings)
+  • Automated Ingestion Inbox:  ~/memory_system/inbox/
+  Key memory skills: memory-capture, context-manager, session-handoff.
+  Run './setup.sh --memory' to audit storage paths and view ingestion commands.
 
 Examples:
   ./setup.sh --client gemini              # Restore skills to Gemini
@@ -45,6 +54,7 @@ Examples:
   ./setup.sh --catalog -q postgres        # Search catalog for 'postgres'
   ./setup.sh --categories                 # List categories and counts
   ./setup.sh --memory                     # Inspect local memory system (OKF + ChromaDB)
+  ./setup.sh --info                       # Show repository & memory architecture info
 EOF
 }
 
@@ -80,6 +90,10 @@ while [[ $# -gt 0 ]]; do
             shift
             ;;
         -m|--memory|--memory-info)
+            ACTION="memory"
+            shift
+            ;;
+        -i|--info)
             ACTION="memory"
             shift
             ;;
@@ -168,7 +182,22 @@ if [[ "$ACTION" == "restore" ]]; then
     fi
 
     echo ""
-    echo "Setup complete!"
+    echo "=================================================="
+    echo "Setup Complete!"
+    echo "=================================================="
+    echo "All skills successfully restored to target client [$CLIENT]."
+    echo ""
+    echo "🧠 Local Memory & Context Systems:"
+    echo "  • Key Skills Restored : memory-capture, context-manager, session-handoff"
+    echo "  • Inspect Memory Host : ./setup.sh --memory"
+    echo "  • Storage Location    : ~/memory_system (OKF policies & ChromaDB vectors)"
+    echo "  • Ingestion Script    : python3 ~/memory_system/capture_knowledge.py <file.md>"
+    echo ""
+    echo "💡 Helpful Next Commands:"
+    echo "  • Check Installed vs New : ./setup.sh --status --client $CLIENT"
+    echo "  • Browse Skills Catalog  : ./setup.sh --catalog"
+    echo "  • Search Skills          : ./setup.sh --catalog -q <keyword>"
+    echo "=================================================="
 else
     if [[ ! -f "$CATALOG_SCRIPT" ]]; then
         echo "Error: Catalog script not found at '$CATALOG_SCRIPT'." >&2

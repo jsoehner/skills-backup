@@ -27,6 +27,9 @@
 .PARAMETER Memory
     Switch to show information and host status for the local memory system (OKF + ChromaDB).
 
+.PARAMETER Info
+    Switch to display repository overview, skills summary, and local memory architecture info.
+
 .PARAMETER Category
     Filter catalog or status by category name.
 
@@ -49,6 +52,9 @@
     .\setup.ps1 -Memory
 
 .EXAMPLE
+    .\setup.ps1 -Info
+
+.EXAMPLE
     .\setup.ps1 -Catalog -Category databases_data
 
 .EXAMPLE
@@ -66,6 +72,7 @@ param (
     [switch]$Installed,
     [switch]$Categories,
     [switch]$Memory,
+    [switch]$Info,
 
     [string]$Category = "",
     [string]$Search = "",
@@ -111,7 +118,7 @@ if (-not $PythonExecutable) {
 }
 
 # Determine action
-$IsDisplayAction = $Catalog -or $Status -or $New -or $Installed -or $Categories -or $Memory -or ($Category -and -not $Restore) -or ($Search -and -not $Restore)
+$IsDisplayAction = $Catalog -or $Status -or $New -or $Installed -or $Categories -or $Memory -or $Info -or ($Category -and -not $Restore) -or ($Search -and -not $Restore)
 
 if ($IsDisplayAction) {
     if (-not (Test-Path -Path $CatalogScript)) {
@@ -126,7 +133,7 @@ if ($IsDisplayAction) {
     if ($New)        { $CatArgs += "--new" }
     if ($Installed)  { $CatArgs += "--installed" }
     if ($Categories) { $CatArgs += "--categories" }
-    if ($Memory)     { $CatArgs += "--memory" }
+    if ($Memory -or $Info) { $CatArgs += "--memory" }
 
     if ($Category) {
         $CatArgs += "--category"
@@ -163,7 +170,22 @@ if ($IsDisplayAction) {
             exit $LASTEXITCODE
         }
         Write-Host ""
-        Write-Host "Setup complete!" -ForegroundColor Green
+        Write-Host "==================================================" -ForegroundColor Green
+        Write-Host "Setup Complete!" -ForegroundColor Green
+        Write-Host "==================================================" -ForegroundColor Green
+        Write-Host "All skills successfully restored to target client [$Client]."
+        Write-Host ""
+        Write-Host "🧠 Local Memory & Context Systems:" -ForegroundColor Cyan
+        Write-Host "  • Key Skills Restored : memory-capture, context-manager, session-handoff"
+        Write-Host "  • Inspect Memory Host : .\setup.ps1 -Memory"
+        Write-Host "  • Storage Location    : ~/memory_system (OKF policies & ChromaDB vectors)"
+        Write-Host "  • Ingestion Script    : python ~/memory_system/capture_knowledge.py <file.md>"
+        Write-Host ""
+        Write-Host "💡 Helpful Next Commands:" -ForegroundColor Yellow
+        Write-Host "  • Check Installed vs New : .\setup.ps1 -Status -Client $Client"
+        Write-Host "  • Browse Skills Catalog  : .\setup.ps1 -Catalog"
+        Write-Host "  • Search Skills          : .\setup.ps1 -Catalog -Search <keyword>"
+        Write-Host "==================================================" -ForegroundColor Green
     } catch {
         Write-Error "An error occurred during setup: $_"
         exit 1
