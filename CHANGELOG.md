@@ -6,6 +6,17 @@
 - **Directory Traversal Pruning**: Hardened filesystem traversal in `scripts/deploy_skills.py` by pruning hidden folders and `__pycache__` directories in-place during `os.walk`.
 
 ### Added
+- **Sequential Pipeline Orchestrators**: Added 10 single-call master orchestrator skills executing multi-skill dependency chains sequentially:
+  - `tdd-pipeline-orchestrator`: Red $\rightarrow$ Green $\rightarrow$ Refactor TDD lifecycle.
+  - `conductor-pipeline-orchestrator`: Setup $\rightarrow$ Spec & Plan $\rightarrow$ Validation $\rightarrow$ Implementation $\rightarrow$ Status.
+  - `c4-modeling-pipeline`: Bottom-up C4 architecture reverse-engineering (Code $\rightarrow$ Component $\rightarrow$ Container $\rightarrow$ Context $\rightarrow$ ADRs).
+  - `video-brand-pipeline-orchestrator`: Video downloading, brand design tokens, motion editing, viral shorts, and hero landing pages.
+  - `security-pipeline-orchestrator`: STRIDE threat modeling, requirements extraction, control mitigation, SAST/deps scanning, hardening, and compliance.
+  - `incident-diagnostics-pipeline`: Telemetry correlation, root-cause analysis, reproduction debugging, fix implementation, and blameless postmortems.
+  - `feature-delivery-pipeline`: Contract-driven full-stack delivery (Database $\rightarrow$ API contracts $\rightarrow$ Frontend hierarchy $\rightarrow$ Implementation $\rightarrow$ E2E tests).
+  - `seo-content-pipeline`: Keyword strategy, article writing, structural/schema optimization, snippet formatting, and E-E-A-T auditing.
+  - `startup-business-pipeline`: Market sizing (TAM/SAM/SOM), opportunity analysis, headcount planning, 3-5y financials, competitive analysis, and investor business case.
+  - `dependency-release-pipeline`: Dependency audit, safe upgrade, code review, test verification, enhanced PR creation, and changelog publishing.
 - **Root Directory CLI Flag**: Added `--root-dir` parameter to `scripts/deploy_skills.py` allowing custom root directory paths for tests, CI/CD, and sub-tree deployments.
 - **Architecture Decision Record**: Documented deployment script root path resolution and traversal hardening in [ADR-0013](docs/adr/0013-deploy-skills-root-resolution-and-traversal-hardening.md).
 - **Multi-Client Setup Tooling**: Added `setup.sh` (Bash) and `setup.ps1` (PowerShell) for fast cross-client environment setup, status inspection (`--status`), catalog browsing (`--catalog`), and memory diagnostics (`--memory`).
