@@ -9,7 +9,7 @@
 - **Repository Hygiene & Pruning**: Removed stale backup files (`AGENTS.md.bak`, `director/SKILL.md.bak`), scratch scripts (`debug_scan.py`), and tracked OS metadata (`.DS_Store`).
 - **Cross-Platform Path Portability**: Fixed hardcoded platform paths in `import_builtins.py` using dynamic home directory expansion (`os.path.expanduser`).
 - **Resilient Manifest Parsing**: Added robust JSON parsing error handling in `deploy_skills.py`.
-- **Architecture Decision Record**: Documented security decisions and STRIDE threat analysis in [ADR-0006](adr/0006-repository-security-posture-hardening.md).
+- **Architecture Decision Record**: Documented security decisions and STRIDE threat analysis in [ADR-0006](docs/adr/0006-repository-security-posture-hardening.md).
 
 ## [1.1.0] - 2026-08-28
 ### Fixed

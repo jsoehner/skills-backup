@@ -51,7 +51,7 @@ python3 scripts/sync.py save --client pi
 
 ### 4. Managing Architectural Decisions
 All significant technical changes must be documented as an Architectural Decision Record (ADR).
-- Locate the next available number in `adr/`.
+- Locate the next available number in `docs/adr/`.
 - Choose a template (Nygard, MADR, or Y-Statement).
 - Document the **Context**, **Decision**, and **Consequences**.
 - Commit the new ADR to the repository.
@@ -70,4 +70,4 @@ All automation is located at repository root or in the `scripts/` directory:
 - **ADR 0011**: Ensures the `categories/` folder remains the source of truth for the `README.md` catalog.
 
 ---
-*For more details, refer to the full list of Architectural Decision Records in the `adr/` directory.*
+*For more details, refer to the full list of Architectural Decision Records in the `docs/adr/` directory.*

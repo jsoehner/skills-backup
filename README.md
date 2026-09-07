@@ -89,6 +89,8 @@ python3 scripts/deploy_skills.py --harness pi
 - `skills/`: User skills categorized by domain.
 - `config-skills/`: System configuration skills.
 - `categories/`: Dynamic markdown catalog per category.
+- `docs/`: Technical documentation and architecture records.
+  - `docs/adr/`: Architecture Decision Records (ADRs) and Governance Strategy.
 - `scripts/`:
   - `restore_skills.py`: Core restoration logic for agent clients.
   - `catalog.py`: Skills catalog engine and status inspector.
@@ -138,7 +140,7 @@ flowchart TD
 - **Deterministic Policy Routing (OKF)**: High-level architectural rules and security standards are stored as plain Markdown under `~/memory_system/knowledge/okf/` for exact, zero-hallucination regex matching.
 - **Semantic Memory Indexing (ChromaDB)**: Troubleshooting notes, error logs, and code snippets are embedded locally into ChromaDB at `~/memory_system/db/` using local ONNX embeddings.
 - **Automated Inbox Daemon**: Background service `memory-inbox.service` monitors `~/memory_system/inbox/` for new `.md` files and automatically indexes them.
-- **Architectural Decision Record**: See [ADR 0005: Local Memory RAG Architecture](adr/0005-local-memory-rag-architecture.md) for rationale.
+- **Architectural Decision Record**: See [ADR 0005: Local Memory RAG Architecture](docs/adr/0005-local-memory-rag-architecture.md) for rationale.
 - **Detailed Documentation**: See the complete [Memory RAG FAQ](memory_rag_faq.md) for step-by-step technical details.
 
 ### ⚠️ Gotchas & Operational Caveats

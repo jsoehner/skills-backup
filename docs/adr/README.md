@@ -24,8 +24,12 @@ This directory contains the Architecture Decision Records (ADRs) for the project
 - **Accepted**: The decision is finalized and implemented.
 - **Superseded**: The decision has been replaced by a newer ADR.
 
+## Governance Strategy
+For principles and operating procedures governing the identification, documentation, and lifecycle management of architectural decisions, see the [ADR Governance Strategy](ADR_Governance_Strategy.md).
+
 ## Review Checklist
 - [x] Related ADRs linked
 - [x] ADR index updated
 - [x] Rationale is clearly explained
 - [x] Consequences (pros/cons) are documented
+

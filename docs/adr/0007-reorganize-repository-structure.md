@@ -10,7 +10,7 @@ The repository previously had a fragmented structure with a redundant `skills-ba
 We have reorganized the repository to the following structure:
 - `skills/`: Contains all 465+ individual skill definitions.
 - `scripts/`: Contains all management and automation scripts.
-- `adr/`: Contains all Architectural Decision Records.
+- `docs/adr/`: Contains all Architectural Decision Records.
 - `skill-groups/`: Contains categorical organization of skills.
 - `config-skills/`: Contains configuration-specific templates.
 - `docs/`: Contains general documentation.
