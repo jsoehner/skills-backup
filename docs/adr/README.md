@@ -19,6 +19,7 @@ This directory contains the Architecture Decision Records (ADRs) for the project
 | [0011](0011-categorical-skill-organization.md) | Categorical Skill Organization | Accepted | 2026-09-15 |
 | [0012](0012-project-completion-and-handover.md) | Project Completion and Handover | Accepted | 2026-09-15 |
 | [0013](0013-deploy-skills-root-resolution-and-traversal-hardening.md) | Deploy Skills Root Path Resolution and Directory Traversal Hardening | Accepted | 2026-09-07 |
+| [0014](0014-independent-repository-for-skills-backup.md) | Independent Repository for Skills Backup | Accepted | 2026-09-07 |
 
 ## Lifecycle
 - **Proposed**: The decision is being discussed.

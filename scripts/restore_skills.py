@@ -16,7 +16,7 @@ def is_safe_subpath(base_dir: str, target_path: str) -> bool:
 def main():
     parser = argparse.ArgumentParser(description="Restore skills to the correct directory based on the AI client.")
     parser.add_argument("source_root", help="The directory containing the skill backups.")
-    parser.add_argument("--client", choices=["opencode", "pi", "gemini", "claude"], default="pi", help="The AI client to restore skills for (default: pi).")
+    parser.add_argument("--client", choices=["opencode", "pi", "gemini", "claude", "hermes"], default="pi", help="The AI client to restore skills for (default: pi).")
     args = parser.parse_args()
 
     source_root = os.path.realpath(os.path.abspath(args.source_root))
@@ -33,6 +33,8 @@ def main():
     elif args.client == "claude":
         target_root = os.path.expanduser('~/.claude')
         skills_dir = os.path.join(target_root, 'skills')
+    elif args.client == "hermes":
+        skills_dir = "C:/Users/jsoehner/AppData/Local/hermes/skills"
     else:
         target_root = os.path.expanduser('~/.pi/agent')
         skills_dir = os.path.join(target_root, 'skills')
@@ -48,8 +50,8 @@ def main():
         parts = rel.split(os.sep)
         if '.git' in parts or '__pycache__' in parts:
             continue
-        # Skip nested skills subdirectories inside skills
-        if 'skills' in parts and len(parts) > 1 and parts[0] != 'config-skills':
+        # Skip nested subdirectories inside skills
+        if ('skills' in parts or 'config-skills' in parts) and len(parts) > 2:
             continue
 
         if 'SKILL.md' in files:
