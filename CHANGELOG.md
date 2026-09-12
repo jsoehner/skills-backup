@@ -11,7 +11,7 @@
   - `conductor-pipeline-orchestrator`: Setup $\rightarrow$ Spec & Plan $\rightarrow$ Validation $\rightarrow$ Implementation $\rightarrow$ Status.
   - `c4-modeling-pipeline`: Bottom-up C4 architecture reverse-engineering (Code $\rightarrow$ Component $\rightarrow$ Container $\rightarrow$ Context $\rightarrow$ ADRs).
   - `video-brand-pipeline-orchestrator`: Video downloading, brand design tokens, motion editing, viral shorts, and hero landing pages.
-  - `security-pipeline-orchestrator`: STRIDE threat modeling, requirements extraction, control mitigation, SAST/deps scanning, hardening, and compliance.
+  - `security-agent-orchestrator`: STRIDE threat modeling, requirements extraction, control mitigation, SAST/deps scanning, hardening, and compliance.
   - `incident-diagnostics-pipeline`: Telemetry correlation, root-cause analysis, reproduction debugging, fix implementation, and blameless postmortems.
   - `feature-delivery-pipeline`: Contract-driven full-stack delivery (Database $\rightarrow$ API contracts $\rightarrow$ Frontend hierarchy $\rightarrow$ Implementation $\rightarrow$ E2E tests).
   - `seo-content-pipeline`: Keyword strategy, article writing, structural/schema optimization, snippet formatting, and E-E-A-T auditing.

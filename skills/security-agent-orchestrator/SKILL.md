@@ -1,9 +1,10 @@
 ---
-name: security-pipeline-orchestrator
+name: security-agent-orchestrator
+group: security_compliance
 description: "Execute end-to-end security lifecycle analysis sequentially: Threat Modeling (STRIDE), Security Requirement Extraction, Threat Mitigation Mapping, SAST & Dependency Scanning, Code/Infra Hardening, and Compliance Auditing."
 ---
 
-# Security Pipeline Orchestrator
+# Security Agent Orchestrator
 
 A unified master skill that executes a complete defense-in-depth security audit and remediation lifecycle in strict sequential order.
 
