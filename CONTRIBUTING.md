@@ -1,38 +1,71 @@
-# Contributing to YUV AI Skills
+# Contributing to [Project Name]
 
-Thank you for contributing to the YUV AI Skills repository! This project aims to provide a modular, scalable, and deployable collection of AI skills for various harnesses.
-
-## Architecture Overview
-
-### Atomic Skills
-Located in the `` directory, these are self-contained building blocks. They should not have dependencies on other skills in this repository.
-
-### Composite Skills
-Located in the root directory, these are orchestrators that depend on Atomic or other Composite skills.
-- Each Composite skill **must** have a `manifest.json` file.
-- Each Composite skill **must** list its dependencies in the `dependencies` section of its `SKILL.md` file.
-
-## Contribution Workflow
-
-### 1. Adding a New Skill
-1. **Identify Type**: Determine if the skill is Atomic or Composite.
-2. **Create Directory**: Create a new folder for the skill.
-3. **Write SKILL.md**: Follow the provided templates to document the skill's goal, inputs, workflow, and references.
-4. **Atomic Skills**: Place in the appropriate sub-folder within ``.
-5. **Composite Skills**:
-    - Place in the root directory.
-    - Create a `manifest.json` file with the required metadata.
-    - Explicitly list dependencies in `SKILL.md`.
-6. **Update Audit**: Record the new skill in `audit_status.json`.
-
-### 2. Updating Existing Skills
-1. **Review Requirements**: Ensure the skill still meets its stated goal.
-2. **Update SKILL.md**: Reflect any changes in logic, inputs, or dependencies.
-3. **Update manifest.json**: If dependencies or metadata have changed.
-4. **Verification**: Run the skill (if possible) or verify the logic with the `skill-judge` skill.
-
-### 3. Deployment
-Use `deploy_skills.py` to verify that your changes don't break the dependency graph for the target harnesses.
+Thank you for your interest in contributing to this project! This document provides guidelines and information for contributors.
 
 ## Code of Conduct
-We expect all contributors to be respectful and professional. Please keep discussions constructive and focused on the technical goals of the project.
+Please read and follow our [Code of Conduct](CODE_OF_CONDUCT.md).
+
+## How to Contribute
+
+### Reporting Bugs
+1. **Check existing issues** - Search the issue tracker to see if the bug has already been reported.
+2. **Create a new issue** - If not found, create a new issue using the bug report template.
+3. **Provide details** - Include:
+   - Version of the software
+   - Operating system
+   - Steps to reproduce
+   - Expected vs actual behavior
+   - Relevant logs or screenshots
+
+### Suggesting Features
+1. **Check existing requests** - Search issues for similar feature requests.
+2. **Create a feature request** - Use the feature request template.
+3. **Describe the use case** - Explain why this feature would be valuable to the users.
+
+### Contributing Code
+1. **Fork the repository**
+2. **Create a feature branch**: `git checkout -b feature/your-feature-name`
+3. **Make your changes**
+4. **Run tests**: Ensure all tests pass before submitting.
+5. **Commit your changes** with a descriptive message following Conventional Commits.
+6. **Push to your fork**: `git push origin feature/your-feature-name`
+7. **Create a Pull Request**
+
+## Development Setup
+
+### Prerequisites
+- Standard development environment for the project's primary language.
+- Git.
+
+### Setup
+1. **Clone the Repository**:
+   ```bash
+   git clone [REPO_URL]
+   cd [REPO_NAME]
+   ```
+2. **Install Dependencies**:
+   - Follow the project's specific installation instructions (e.g., `npm install`, `pip install -r requirements.txt`, or `./gradlew build`).
+3. **Run Tests**:
+   - Execute the project's test suite to ensure your changes don't introduce regressions.
+
+## Commit Message Guidelines
+We use **Conventional Commits**. Please use the following prefixes:
+- `feat:` A new feature
+- `fix:` A bug fix
+- `docs:` Documentation only changes
+- `refactor:` A code change that neither fixes a bug nor adds a feature
+- `perf:` A code change that improves performance
+- `test:` Adding missing tests or correcting existing tests
+- `chore:` Changes to the build process or auxiliary tools and libraries
+
+Example: `feat(api): add new endpoint for user profiles`
+
+## Pull Request Process
+1. Ensure all tests pass.
+2. Update documentation (if applicable).
+3. Add tests for new functionality.
+4. Fill out the PR template completely.
+5. Request review from maintainers.
+
+## Questions?
+Feel free to open an issue for questions or join discussions in existing issues.
