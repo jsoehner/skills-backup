@@ -28,7 +28,7 @@ def get_all_skills_in_repo(local_dir):
         parts = os.path.relpath(root, repo_dir).split(os.sep)
         if '.git' in parts or '__pycache__' in parts:
             continue
-        if 'skills' in parts and len(parts) > 1 and parts[0] != 'config-skills':
+        if 'skills' in parts[1:] and parts[0] != 'config-skills':
             continue
             
         if "SKILL.md" in files:
