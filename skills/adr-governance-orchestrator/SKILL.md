@@ -21,6 +21,11 @@ Use this skill whenever you need to:
 ## The Orchestrated Workflow
 When invoked, this skill follows a strict sequential pipeline:
 
+### Phase 0: Infrastructure Verification
+1. **Directory Check**: Verify if `docs/adr` exists.
+2. **Auto-Provisioning**: If the directory is missing, automatically invoke `install-adr-gatekeeper` to initialize the infrastructure, set up rules, and create the initial index.
+3. **Continuity**: Once provisioned, proceed to the standard discovery and analysis phases.
+
 ### Phase 1: Discovery & Analysis
 1. **Audit Existing State**: Call `adr-discovery` to identify existing ADRs and detect potential overlaps or conflicts.
 2. **Requirement Gathering**: Analyze the user's request to determine:
