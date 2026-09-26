@@ -1,5 +1,9 @@
 # Changelog
 
+## [Unreleased]
+### Added
+- **Repository Governance Automation Skill**: Added `repo-governance-automation` under Architecture & Engineering Practices (`software_architecture`) along with GitHub templates for contributing guidelines, pull request template, commit-lint configuration, changelog generation workflow, and security testing pipeline (Gitleaks, Trivy, Semgrep).
+
 ## [1.3.0] - 2026-09-07
 ### Changed
 - **Deploy Script Root Resolution**: Fixed `scripts/deploy_skills.py` repository root resolution (`REPO_DIR`) so it dynamically references the repository root when executed from within the centralized `scripts/` directory.
