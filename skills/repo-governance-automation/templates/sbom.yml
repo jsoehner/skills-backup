@@ -1,0 +1,60 @@
+name: Software Bill of Materials (SBOM)
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions: read-all
+
+jobs:
+  generate-sbom:
+    name: Generate and Upload SBOM
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1 (Node 24)
+        with:
+          fetch-depth: 0
+
+      - name: Generate CycloneDX SBOM (Anchore / Syft)
+        uses: anchore/sbom-action@006b7ce8314066bdf1765b4500370d40fa6917a3 # v0.24.2
+        with:
+          path: .
+          format: cyclonedx-json
+          output-file: sbom.cyclonedx.json
+          upload-artifact: false
+
+      - name: Generate SPDX SBOM (Anchore / Syft)
+        uses: anchore/sbom-action@006b7ce8314066bdf1765b4500370d40fa6917a3 # v0.24.2
+        with:
+          path: .
+          format: spdx-json
+          output-file: sbom.spdx.json
+          upload-artifact: false
+
+      - name: Upload SBOM Artifacts
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: sbom-reports
+          path: |
+            sbom.cyclonedx.json
+            sbom.spdx.json
+          retention-days: 90
+
+      - name: Attach SBOM to GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@c95fe1489396fe8a9ec87454c605f3b76f25241a # v3.0.0
+        with:
+          files: |
+            sbom.cyclonedx.json
+            sbom.spdx.json
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

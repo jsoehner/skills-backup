@@ -2,7 +2,8 @@
 
 ## [Unreleased]
 ### Added
-- **Repository Governance Automation Skill**: Added `repo-governance-automation` under Architecture & Engineering Practices (`software_architecture`) along with GitHub templates for contributing guidelines, pull request template, commit-lint configuration, changelog generation workflow, and security testing pipeline (Gitleaks, Trivy, Semgrep).
+- **Repository Governance Automation Skill**: Added `repo-governance-automation` under Architecture & Engineering Practices (`software_architecture`) along with GitHub templates for contributing guidelines, pull request template, commit-lint configuration, changelog generation workflow, security testing pipeline (Gitleaks, Trivy, Semgrep), and automated Software Bill of Materials (SBOM) generation (`sbom.yml` supporting CycloneDX and SPDX via Anchore/Syft).
+- **Node 24 Workflow Modernization**: Integrated `github-actions-node24` standards into `repo-governance-automation` workflow templates (`commit-lint.yml`, `changelog.yml`, `sbom.yml`, `security-testing.yml`) with strict 40-character immutable commit SHA pinning.
 
 ## [1.3.0] - 2026-09-07
 ### Changed
