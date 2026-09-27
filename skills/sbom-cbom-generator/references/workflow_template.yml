@@ -56,13 +56,37 @@ jobs:
       #   run: cdxgen --include-crypto -o oss/cbom.json .
 
       # -------------------------------------------------------------
-      # Step D: Automated Verification & Test Harness in CI
+      # Step D: Dual-Engine Semantic AST Crypto Call-Site Discovery & Reconciliation
+      # -------------------------------------------------------------
+      - name: Set up Python for Cryptographic Auditing
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+
+      - name: Semantic AST Cryptographic Scan & CBOM Reconciliation
+        run: |
+          python3 scripts/scan_crypto_ast.py . \
+            --cbom oss/cbom.json \
+            --output-json oss/crypto-callsites.json
+
+      # -------------------------------------------------------------
+      # Step E: Automated Verification & Test Harness in CI
       # -------------------------------------------------------------
       - name: Run BOM Verification and Cryptographic Audit Harness
         run: bash scripts/test_boms.sh oss
 
       # -------------------------------------------------------------
-      # Step E: Upload Generated Artifacts
+      # Step F: Post-Quantum Cryptography (PQC) Readiness Assessment
+      # -------------------------------------------------------------
+      - name: Generate PQC Migration Dashboard & Step Summary
+        run: |
+          python3 scripts/analyze_cbom.py oss/cbom.json \
+            --json oss/crypto-analysis.json \
+            --markdown oss/crypto-summary.md \
+            --step-summary
+
+      # -------------------------------------------------------------
+      # Step G: Upload Generated Artifacts
       # -------------------------------------------------------------
       - name: Upload BOM Artifacts
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.3.3
@@ -70,3 +94,4 @@ jobs:
           name: oss-boms
           path: oss/
           retention-days: 30
+

@@ -105,12 +105,14 @@ mkdir -p "${REPO_DIR}/scripts"
 mkdir -p "${REPO_DIR}/.github/workflows"
 
 # 2. Copy scripts
-echo -n "Installing local generator, analyzer, and test harness ... "
+echo -n "Installing local generator, analyzer, AST scanner, and test harness ... "
 cp "${SKILL_ROOT}/scripts/generate_boms.sh" "${REPO_DIR}/scripts/generate_boms.sh"
 cp "${SKILL_ROOT}/scripts/analyze_cbom.py" "${REPO_DIR}/scripts/analyze_cbom.py"
+cp "${SKILL_ROOT}/scripts/scan_crypto_ast.py" "${REPO_DIR}/scripts/scan_crypto_ast.py"
 cp "${SKILL_ROOT}/scripts/test_boms.sh" "${REPO_DIR}/scripts/test_boms.sh"
 chmod +x "${REPO_DIR}/scripts/generate_boms.sh" \
          "${REPO_DIR}/scripts/analyze_cbom.py" \
+         "${REPO_DIR}/scripts/scan_crypto_ast.py" \
          "${REPO_DIR}/scripts/test_boms.sh"
 echo "✅ Done"
 
@@ -178,15 +180,39 @@ jobs:
 
       - name: Install cdxgen
         run: npm install -g @cyclonedx/cdxgen
-${BUILD_STEP}
+\${BUILD_STEP}
       # -------------------------------------------------------------
-      # Automated Verification & Test Harness in CI
+      # Step D: Dual-Engine Semantic AST Crypto Call-Site Discovery
+      # -------------------------------------------------------------
+      - name: Set up Python for Cryptographic Auditing
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+
+      - name: Semantic AST Cryptographic Scan & CBOM Reconciliation
+        run: |
+          python3 scripts/scan_crypto_ast.py . \\
+            --cbom oss/cbom.json \\
+            --output-json oss/crypto-callsites.json
+
+      # -------------------------------------------------------------
+      # Step E: Automated Verification & Test Harness in CI
       # -------------------------------------------------------------
       - name: Run BOM Verification and Cryptographic Audit Harness
         run: bash scripts/test_boms.sh oss
 
       # -------------------------------------------------------------
-      # Artifact Upload
+      # Step F: Post-Quantum Cryptography (PQC) Readiness Assessment
+      # -------------------------------------------------------------
+      - name: Generate PQC Migration Dashboard & Step Summary
+        run: |
+          python3 scripts/analyze_cbom.py oss/cbom.json \\
+            --json oss/crypto-analysis.json \\
+            --markdown oss/crypto-summary.md \\
+            --step-summary
+
+      # -------------------------------------------------------------
+      # Step G: Artifact Upload
       # -------------------------------------------------------------
       - name: Upload BOM Artifacts
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.3.3

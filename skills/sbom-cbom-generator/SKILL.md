@@ -13,8 +13,9 @@ Provides workflows, automation scripts, and verification procedures to generate 
 This skill bundles automation scripts and technical references to perform generation and audit tasks without cluttering context:
 
 - **Generation Script**: Execute `bash scripts/generate_boms.sh [OPTIONS] <TARGET>` to generate both SBOM and CBOM for Docker images or local source trees.
-- **CBOM Analyzer**: Run `python3 scripts/analyze_cbom.py <path/to/cbom.json>` to inspect cryptographic assets, evaluate algorithm distributions, and identify quantum-vulnerable primitives (PQC assessment).
-- **Repository Installer**: Run `bash scripts/install_to_repo.sh [OPTIONS] <TARGET_REPO>` to automatically install generation scripts, verification test harness, and GitHub Actions CI workflow into any target repository.
+- **AST Crypto Scanner & Reconciler**: Run `python3 scripts/scan_crypto_ast.py <REPO_DIR> --cbom <CBOM_PATH>` to perform dual-engine semantic AST discovery across active languages (Python, JS/TS, Go, Java, Rust, C#, C/C++) and guarantee 100% CBOM reconciliation.
+- **CBOM Analyzer & PQC Dashboard**: Run `python3 scripts/analyze_cbom.py <path/to/cbom.json>` to inspect cryptographic assets, evaluate algorithm distributions, calculate PQC migration progress percentages, and identify quantum-vulnerable primitives.
+- **Repository Installer**: Run `bash scripts/install_to_repo.sh [OPTIONS] <TARGET_REPO>` to automatically install generation scripts, verification test harness, AST scanner, and GitHub Actions CI workflow into any target repository.
 - **BOM Verification Harness**: Run `bash scripts/test_boms.sh [BOM_DIR]` to validate that generated SBOM/CBOM artifacts exist, conform to JSON/CycloneDX schemas, and pass cryptographic audits.
 - **Skill Test Suite**: Run `bash tests/run_tests.sh` to run structural validation, CLI checks, and CBOM analyzer unit tests.
 - **Workflow Template**: Refer to [references/workflow_template.yml](file://references/workflow_template.yml) for a production-grade, hardened GitHub Actions configuration.
