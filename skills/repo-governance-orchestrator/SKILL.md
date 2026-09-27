@@ -58,9 +58,13 @@ flowchart TD
 1. Scaffold standardized [`CONTRIBUTING.md`](templates/CONTRIBUTING.md) adapted to the repository's technology stack.
 2. Scaffold [`.github/PULL_REQUEST_TEMPLATE.md`](templates/PULL_REQUEST_TEMPLATE.md) with mandatory testing evidence, security impact declarations, and sign-off checklists.
 
-### Phase 2: Workflow Automation & Commit Hygiene
-1. Deploy [`.github/workflows/commit-lint.yml`](templates/commit-lint.yml) enforcing Conventional Commits on all pull requests and pushes.
+### Phase 2: Workflow Automation, Commit Hygiene & Unattended Updates
+1. Deploy [`.github/workflows/commit-lint.yml`](templates/commit-lint.yml) enforcing Conventional Commits on all pull requests and pushes using `wagoid/commitlint-github-action@v6`.
 2. Deploy [`.github/workflows/changelog.yml`](templates/changelog.yml) to automate semantic version release notes and `CHANGELOG.md` updates.
+3. Deploy [`.github/workflows/nightly-dependency-update.yml`](templates/nightly-dependency-update.yml) and [`.github/workflows/auto-manage-prs.yml`](templates/auto-manage-prs.yml) for automated 03:00 AM dependency updates with:
+   - Dynamic PAT token resolution (avoiding GitHub `GITHUB_TOKEN` anti-recursion workflow suppression).
+   - Reviewer lock elimination (removing blocking `reviewers` fields on pre-verified updates).
+   - Direct unattended auto-merge execution (`gh pr merge --auto --squash --delete-branch`).
 
 ### Phase 3: Dual-Engine Supply Chain & Cryptographic Governance (BOM Suite)
 Deploy the full dual-engine scanning pipeline into the repository:

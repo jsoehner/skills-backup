@@ -18,7 +18,4 @@ jobs:
         with:
           fetch-depth: 0
       - name: Commitlint
-        uses: amatthew91/commitlint-github-action@v5
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          commit-lint-config: "github-action"
+        uses: wagoid/commitlint-github-action@b948419dd99f3fd78a6548d48f94e3df7f6bf3ed # v6.2.1
