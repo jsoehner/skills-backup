@@ -203,22 +203,130 @@ This repository provides single-call pipeline orchestrators designed to trigger 
 
 | Grouped Skill | Workflow Domain | Sequential Dependent Skills Triggered | Output Artifacts Passed Downstream |
 |---|---|---|---|
+| [`repo-governance-automation`](skills/repo-governance-automation/SKILL.md) | Baseline Repository Governance & DX | Systematic injection of Gold Standard governance suite (`CONTRIBUTING.md`, `PULL_REQUEST_TEMPLATE.md`, `commit-lint.yml`, `changelog.yml`, `sbom.yml`, `security-testing.yml`, Node 24 SHA pinning) | Standardized Repo Governance Suite $\rightarrow$ CycloneDX & SPDX SBOMs $\rightarrow$ Conventional Commits CI $\rightarrow$ Baseline SAST/Secret Scan |
+| [`security-governance-orchestrator`](skills/security-governance-orchestrator/SKILL.md) | Security Governance & Compliance | Complete SDLC security governance (Baseline profiling $\rightarrow$ STRIDE threat modeling $\rightarrow$ Security ADR authoring $\rightarrow$ SAST/CVE/CBOM audit $\rightarrow$ GitHub CI/CD & pre-commit hooks $\rightarrow$ Posture synthesis) | Security Baseline $\rightarrow$ Threat Model & Attack Trees $\rightarrow$ Security ADRs (`Security_ADR_Template.md`) $\rightarrow$ SARIF SAST/CVE Reports $\rightarrow$ Dependabot Cooldowns & Pre-commit Hooks $\rightarrow$ `SECURITY_POSTURE.md` & Memory Sync |
+| [`adr-governance-orchestrator`](skills/adr-governance-orchestrator/SKILL.md) | ADR Decision Lifecycle | End-to-end Architectural Decision Record lifecycle (Infra check $\rightarrow$ Overlap discovery $\rightarrow$ MADR/Nygard drafting $\rightarrow$ ADR gatekeeper validation $\rightarrow$ Registry indexing & memory sync) | ADR Infrastructure (`docs/adr/`) $\rightarrow$ Standardized ADR Drafts $\rightarrow$ Gatekeeper Audit Certificate $\rightarrow$ Updated Registry Index (`docs/adr/README.md`) $\rightarrow$ OKF Policy Sync |
+| [`architecture-governance-orchestrator`](skills/architecture-governance-orchestrator/SKILL.md) | Macro Architecture Governance | High-level system architecture (Visual C4 modeling $\rightarrow$ Multi-platform blueprints $\rightarrow$ ADR linkage $\rightarrow$ Core principles validation $\rightarrow$ Memory capture) | C4 Context/Container/Component/Code Diagrams $\rightarrow$ Cloud/K8s/Monorepo Blueprints $\rightarrow$ Decision Cross-Links $\rightarrow$ Architectural Policy Sync |
+| [`dependency-lifecycle-orchestrator`](skills/dependency-lifecycle-orchestrator/SKILL.md) | Dependency Lifecycle Governance | Comprehensive dependency health (Vulnerability & license audit $\rightarrow$ Patch/minor safe updates $\rightarrow$ Major version breaking migration planning $\rightarrow$ Staged rollout synthesis) | Dependency CVE & License Audit $\rightarrow$ Compatibility Matrix $\rightarrow$ Staged Upgrade Roadmap $\rightarrow$ Actionable Health Report |
+| [`content-governance-orchestrator`](skills/content-governance-orchestrator/SKILL.md) | Multi-Format Content Governance | Multi-modal content delivery (Technical documentation $\rightarrow$ Office documents PDF/DOCX/PPTX/XLSX $\rightarrow$ E-E-A-T & SEO quality governance) | Technical Tutorials & Reference Guides $\rightarrow$ Formatted Office Documents $\rightarrow$ E-E-A-T Audit & Structured Schema |
+| [`error-diagnostics-orchestrator`](skills/error-diagnostics-orchestrator/SKILL.md) | Error Diagnostics & Resilience | Systematic error debugging (Failure analysis $\rightarrow$ Telemetry & distributed tracing $\rightarrow$ Multi-agent review $\rightarrow$ Resilient error-handling patterns) | Root Cause Analysis (RCA) $\rightarrow$ Distributed Trace Map $\rightarrow$ Multi-Perspective Review Notes $\rightarrow$ Hardened Error Handling Code |
+| [`performance-optimization-orchestrator`](skills/performance-optimization-orchestrator/SKILL.md) | Full-Stack Performance Tuning | Multi-tier performance optimization (SQL queries $\rightarrow$ Spark job partitioning/shuffles $\rightarrow$ Vector index tuning HNSW $\rightarrow$ Application runtime profiling) | Optimized SQL Queries $\rightarrow$ Tuned Spark DAGs $\rightarrow$ Benchmarked Vector Indices $\rightarrow$ Profiling Bottleneck Reports |
 | [`data-platform-orchestrator`](skills/data-platform-orchestrator/SKILL.md) | Data Platform Orchestrator | End-to-end data engineering (Schema $\rightarrow$ dbt $\rightarrow$ Quality $\rightarrow$ Analysis) | Database Schema $\rightarrow$ dbt Models $\rightarrow$ Validation Reports |
 | [`security-audit-orchestrator`](skills/security-audit-orchestrator/SKILL.md) | Security Audit Orchestrator | Full security audit lifecycle (Threat Modeling $\rightarrow$ Scanning $\rightarrow$ Forensics $\rightarrow$ Reporting) | Threat Model $\rightarrow$ SAST Reports $\rightarrow$ Forensics $\rightarrow$ Vulnerability Report |
+| [`security-agent-orchestrator`](skills/security-agent-orchestrator/SKILL.md) | Security Agent Orchestrator | STRIDE threat modeling, requirements extraction, control mitigation, SAST/deps scanning, hardening, and compliance | STRIDE threat model $\rightarrow$ Security user stories $\rightarrow$ Control mitigation matrix $\rightarrow$ SAST & CVE vulnerability reports $\rightarrow$ Hardened code/configs $\rightarrow$ Compliance certificate & memory sync |
+| [`c4-modeling-pipeline`](skills/c4-modeling-pipeline/SKILL.md) | C4 Modeling Pipeline | Bottom-up C4 architecture reverse-engineering (Code $\rightarrow$ Component $\rightarrow$ Container $\rightarrow$ Context $\rightarrow$ ADRs) | Class & entity map $\rightarrow$ Component boundaries $\rightarrow$ Deployment units & APIs $\rightarrow$ System context diagrams $\rightarrow$ Architectural Decision Records |
+| [`conductor-pipeline-orchestrator`](skills/conductor-pipeline-orchestrator/SKILL.md) | Conductor Pipeline Orchestrator | Setup $\rightarrow$ Spec & Plan $\rightarrow$ Validation $\rightarrow$ Implementation $\rightarrow$ Status | Tech stack/workflow context $\rightarrow$ `spec.md` & `plan.md` $\rightarrow$ Validation audit $\rightarrow$ Verified task commits $\rightarrow$ Track registry status |
+| [`tdd-pipeline-orchestrator`](skills/tdd-pipeline-orchestrator/SKILL.md) | TDD Pipeline Orchestrator | Red $\rightarrow$ Green $\rightarrow$ Refactor TDD lifecycle | Failing test suites $\rightarrow$ Passing minimal implementation $\rightarrow$ Refactored clean code |
 | [`mlops-pipeline-orchestrator`](skills/mlops-pipeline-orchestrator/SKILL.md) | MLOps Pipeline Orchestrator | Production ML lifecycle (Training $\rightarrow$ Deployment $\rightarrow$ Monitoring) | Model Training $\rightarrow$ Deployment Config $\rightarrow$ Monitoring Alerts |
 | [`frontend-design-system-orchestrator`](skills/frontend-design-system-orchestrator/SKILL.md) | Frontend Design System Orchestrator | UI/UX and design system consistency (Design $\rightarrow$ Tokens $\rightarrow$ Components $\rightarrow$ Validation) | Design Tokens $\rightarrow$ React Components $\rightarrow$ Visual Validation |
-| [`startup-strategy-orchestrator`](skills/startup-strategy-orchestrator/SKILL.md) | Startup Strategy Orchestrator | Startup planning and financial modeling (Market $\rightarrow$ Finance $\rightarrow$ Operations $\rightarrow$ Synthesis) | Market Sizing $\rightarrow$ Financial Model $\rightarrow$ Headcount Plan $\rightarrow$ Business Case |
-| [`multimedia-production-orchestrator`](skills/multimedia-production-orchestrator/SKILL.md) | Multimedia Production Orchestrator | Multimedia production (Download $\rightarrow$ Brand $\rightarrow$ Edit $\rightarrow$ Render $\rightarrow$ Landing Page) | Raw Media $\rightarrow$ Brand Tokens $\rightarrow$ Edited Video $\rightarrow$ HyperFrames $\rightarrow$ Landing Page |
-| [`tdd-pipeline-orchestrator`](skills/tdd-pipeline-orchestrator/SKILL.md) | TDD Pipeline Orchestrator | Red $\rightarrow$ Green $\rightarrow$ Refactor TDD lifecycle | Failing test suites $\rightarrow$ Passing minimal implementation $\rightarrow$ Refactored clean code |
-| [`conductor-pipeline-orchestrator`](skills/conductor-pipeline-orchestrator/SKILL.md) | Conductor Pipeline Orchestrator | Setup $\rightarrow$ Spec & Plan $\rightarrow$ Validation $\rightarrow$ Implementation $\rightarrow$ Status | Tech stack/workflow context $\rightarrow$ `spec.md` & `plan.md` $\rightarrow$ Validation audit $\rightarrow$ Verified task commits $\rightarrow$ Track registry status |
-| [`c4-modeling-pipeline`](skills/c4-modeling-pipeline/SKILL.md) | C4 Modeling Pipeline | Bottom-up C4 architecture reverse-engineering (Code $\rightarrow$ Component $\rightarrow$ Container $\rightarrow$ Context $\rightarrow$ ADRs) | Class & entity map $\rightarrow$ Component boundaries $\rightarrow$ Deployment units & APIs $\rightarrow$ System context diagrams $\rightarrow$ Architectural Decision Records |
 | [`video-brand-pipeline-orchestrator`](skills/video-brand-pipeline-orchestrator/SKILL.md) | Video Brand Pipeline Orchestrator | Video downloading, brand design tokens, motion editing, viral shorts, and hero landing pages | Raw media & audio stem $\rightarrow$ Brand visual tokens $\rightarrow$ Edited video with kinetic captions $\rightarrow$ Vertical viral MP4 $\rightarrow$ Scroll-driven video hero landing page |
-| [`security-agent-orchestrator`](skills/security-agent-orchestrator/SKILL.md) | Security Agent Orchestrator | STRIDE threat modeling, requirements extraction, control mitigation, SAST/deps scanning, hardening, and compliance | STRIDE threat model $\rightarrow$ Security user stories $\rightarrow$ Control mitigation matrix $\rightarrow$ SAST & CVE vulnerability reports $\rightarrow$ Hardened code/configs $\rightarrow$ Compliance certificate & memory sync |
+| [`multimedia-production-orchestrator`](skills/multimedia-production-orchestrator/SKILL.md) | Multimedia Production Orchestrator | Multimedia production (Download $\rightarrow$ Brand $\rightarrow$ Edit $\rightarrow$ Render $\rightarrow$ Landing Page) | Raw Media $\rightarrow$ Brand Tokens $\rightarrow$ Edited Video $\rightarrow$ HyperFrames $\rightarrow$ Landing Page |
 | [`incident-diagnostics-pipeline`](skills/incident-diagnostics-pipeline/SKILL.md) | Incident Diagnostics Pipeline | Telemetry correlation, root-cause analysis, reproduction debugging, fix implementation, and blameless postmortems | Correlated stack traces & telemetry $\rightarrow$ Root Cause Analysis (RCA) $\rightarrow$ Minimal reproduction test case $\rightarrow$ Verified code fix $\rightarrow$ Published blameless postmortem |
 | [`feature-delivery-pipeline`](skills/feature-delivery-pipeline/SKILL.md) | Feature Delivery Pipeline | Contract-driven full-stack delivery (Database $\rightarrow$ API contracts $\rightarrow$ Frontend hierarchy $\rightarrow$ Implementation $\rightarrow$ E2E tests) | Database schema & migrations $\rightarrow$ OpenAPI/GraphQL contracts $\rightarrow$ Component tree & API client $\rightarrow$ Integrated full-stack code $\rightarrow$ Passing E2E test report |
-| [`seo-content-pipeline`](skills/seo-content-pipeline/SKILL.md) | SEO Content Pipeline | Keyword strategy, article writing, structural/schema optimization, snippet formatting, and E-E-A-T auditing | Article outline & search intent $\rightarrow$ Keyword density & LSI matrix $\rightarrow$ Draft Markdown copy $\rightarrow$ Heading hierarchy & JSON-LD schema $\rightarrow$ Meta titles & snippet blocks $\rightarrow$ E-E-A-T audit scorecard $\rightarrow$ Publication-ready package |
-| [`startup-business-pipeline`](skills/startup-business-pipeline/SKILL.md) | Startup Business Pipeline | Market sizing (TAM/SAM/SOM), opportunity analysis, headcount planning, 3-5y financials, competitive analysis, and investor business case | TAM / SAM / SOM calculations $\rightarrow$ Customer ICP & opportunity analysis $\rightarrow$ Phased headcount & compensation model $\rightarrow$ 3-5 year financial forecast & burn rate $\rightarrow$ Competitive differentiation matrix $\rightarrow$ Investor-ready business case |
 | [`dependency-release-pipeline`](skills/dependency-release-pipeline/SKILL.md) | Dependency Release Pipeline | Dependency audit, safe upgrade, code review, test verification, enhanced PR creation, and changelog publishing | Dependency vulnerability & outdated report $\rightarrow$ Updated lockfiles & migrated syntax $\rightarrow$ Code review assessment $\rightarrow$ Verified test suite pass $\rightarrow$ Enhanced Pull Request with checklists $\rightarrow$ Published `CHANGELOG.md` entry |
+| [`seo-content-pipeline`](skills/seo-content-pipeline/SKILL.md) | SEO Content Pipeline | Keyword strategy, article writing, structural/schema optimization, snippet formatting, and E-E-A-T auditing | Article outline & search intent $\rightarrow$ Keyword density & LSI matrix $\rightarrow$ Draft Markdown copy $\rightarrow$ Heading hierarchy & JSON-LD schema $\rightarrow$ Meta titles & snippet blocks $\rightarrow$ E-E-A-T audit scorecard $\rightarrow$ Publication-ready package |
+| [`startup-strategy-orchestrator`](skills/startup-strategy-orchestrator/SKILL.md) | Startup Strategy Orchestrator | Startup planning and financial modeling (Market $\rightarrow$ Finance $\rightarrow$ Operations $\rightarrow$ Synthesis) | Market Sizing $\rightarrow$ Financial Model $\rightarrow$ Headcount Plan $\rightarrow$ Business Case |
+| [`startup-business-pipeline`](skills/startup-business-pipeline/SKILL.md) | Startup Business Pipeline | Market sizing (TAM/SAM/SOM), opportunity analysis, headcount planning, 3-5y financials, competitive analysis, and investor business case | TAM / SAM / SOM calculations $\rightarrow$ Customer ICP & opportunity analysis $\rightarrow$ Phased headcount & compensation model $\rightarrow$ 3-5 year financial forecast & burn rate $\rightarrow$ Competitive differentiation matrix $\rightarrow$ Investor-ready business case |
+
+
+## 🛡️ Repository Governance & Composite Orchestrator Taxonomy
+
+As a codebase evolves, different governance needs arise at different points in the software development lifecycle (SDLC). To prevent overlap and clarify tool selection, the repository organizes composite skills into dedicated functional tiers.
+
+### How Composite Skills Differ: Deep Dive & Comparison
+
+#### 1. Baseline Scaffolding vs. Continuous Security Governance
+
+| Dimension | [`repo-governance-automation`](skills/repo-governance-automation/SKILL.md) | [`security-governance-orchestrator`](skills/security-governance-orchestrator/SKILL.md) |
+|---|---|---|
+| **Primary Scope** | **Developer Experience (DX) & CI/CD Scaffolding** | **Institutional Security Posture & Compliance Gatekeeping** |
+| **Operational Mode** | Batch initializer / setup script across target repos. | Continuous SDLC policy enforcement, threat modeling, and PR gatekeeping. |
+| **Injected Assets** | `CONTRIBUTING.md`, `PULL_REQUEST_TEMPLATE.md`, `commit-lint.yml`, `changelog.yml`, `sbom.yml`, baseline `security-testing.yml`, Node 24 SHA pinning. | STRIDE threat models, Security ADRs (`Security_ADR_Template.md`), `security-governance.yml` with SARIF upload, Dependabot 7-day cooldowns, pre-commit git hooks (`pre_commit.py`), and `adr_security_gatekeeper.py`. |
+| **When to Use** | Bootstrapping a new repository or retrofitting a fleet of repos with standard contribution guides, commit linting, and basic SBOM/SAST workflows. | Onboarding repos to organizational security compliance (SOC2/OWASP/CIS), authoring security ADRs, or blocking PRs that bypass security architecture reviews. |
+
+#### 2. Security Governance vs. Security Auditing vs. Security Remediation
+
+| Dimension | [`security-governance-orchestrator`](skills/security-governance-orchestrator/SKILL.md) | [`security-audit-orchestrator`](skills/security-audit-orchestrator/SKILL.md) | [`security-agent-orchestrator`](skills/security-agent-orchestrator/SKILL.md) |
+|---|---|---|---|
+| **Primary Role** | **Policy & Gatekeeping Orchestrator** | **Forensic & Vulnerability Diagnostic** | **Hands-On Code Remediation Engine** |
+| **Execution Trigger** | Establishing institutional guardrails, PR gatekeeper checks, or compliance onboarding. | Periodic security review, pre-audit assessment, or incident investigation. | Active vulnerability remediation sprint, fixing flagged SAST/CVE issues in code. |
+| **Modifies Code?** | Configures workflows, hooks, ADR templates, and policies. | **No** (read-only audit, scans, and forensic inspection). | **Yes** (modifies source code, sanitizes inputs, hardens endpoints, patches deps). |
+| **Key Deliverable** | CI/CD gatekeeper scripts, Dependabot cooldown, pre-commit hooks, `SECURITY_POSTURE.md`. | Comprehensive vulnerability & forensic audit report with CVSS severity ratings. | Hardened source files, passing SAST regression suite, and verified compliance certificate. |
+
+#### 3. Macro Architecture vs. ADR Lifecycle Management
+
+| Dimension | [`architecture-governance-orchestrator`](skills/architecture-governance-orchestrator/SKILL.md) | [`adr-governance-orchestrator`](skills/adr-governance-orchestrator/SKILL.md) | [`c4-modeling-pipeline`](skills/c4-modeling-pipeline/SKILL.md) |
+|---|---|---|---|
+| **Primary Scope** | **Macro-Level System Topology & Strategy** | **Micro-Level Decision Record Integrity** | **Bottom-Up Architecture Reverse-Engineering** |
+| **Core Function** | Visualizes system boundaries, cloud/K8s blueprints, monorepo structures, and links to ADRs. | Manages the full lifecycle of ADRs: template choice (MADR/Nygard), gatekeeping compliance, indexing, and superseding. | Scans existing codebases bottom-up (Code $\rightarrow$ Component $\rightarrow$ Container $\rightarrow$ Context) to synthesize architecture models. |
+| **When to Use** | Designing a new distributed system, refactoring across cloud providers, or aligning monorepo boundaries. | Recording a significant technical decision (e.g. database choice, auth provider, protocol change). | Documenting or onboarding onto an undocumented legacy codebase to produce C4 diagrams. |
+| **Gatekeeper** | Validates consistency between cloud architecture, K8s manifests, and codebase structure. | Enforces strict ADR standards via `adr-gatekeeper` (unique IDs, consequences, non-deletion, memory sync). | Verifies component and container diagrams against physical package imports. |
+
+#### 4. Dependency Governance vs. Dependency Release Execution
+
+| Dimension | [`dependency-lifecycle-orchestrator`](skills/dependency-lifecycle-orchestrator/SKILL.md) | [`dependency-release-pipeline`](skills/dependency-release-pipeline/SKILL.md) |
+|---|---|---|
+| **Primary Scope** | **Strategic Dependency Health & Upgrade Planning** | **Tactical Upgrade Execution & Release Publishing** |
+| **Core Function** | Scans dependencies for CVEs, license conflicts, breaking change impacts, and creates staged rollout plans. | Bumps versions, updates lockfiles, runs unit/integration tests, authors enhanced PRs, and updates `CHANGELOG.md`. |
+| **When to Use** | Assessing dependency risks across a repository, evaluating library health, or planning major framework upgrades. | Executing the actual version bump PR, verifying tests pass, and generating the release changelog entry. |
+
+#### 5. Diagnostics, Performance, and Content Governance
+
+- **[`error-diagnostics-orchestrator`](skills/error-diagnostics-orchestrator/SKILL.md)**: Coordinates error analysis, distributed tracing, and multi-agent reviews to isolate root causes and formulate resilient error-handling patterns.
+- **[`incident-diagnostics-pipeline`](skills/incident-diagnostics-pipeline/SKILL.md)**: The end-to-end incident response lifecycle—correlates telemetry, reproduces bugs via test cases, deploys verified code fixes, and writes blameless postmortems.
+- **[`performance-optimization-orchestrator`](skills/performance-optimization-orchestrator/SKILL.md)**: Coordinates performance profiling across SQL queries, Spark jobs, vector index tuning (HNSW/IVF), and CPU/memory bottlenecks.
+- **[`content-governance-orchestrator`](skills/content-governance-orchestrator/SKILL.md)**: Governs multi-format technical documentation (tutorials, references, API guides) and office document generation (PDF, DOCX, PPTX, XLSX) while enforcing E-E-A-T and style rules.
+
+---
+
+### 🧭 Composite Governance Decision Matrix
+
+Use this quick-reference table to identify the right composite skill for your exact objective:
+
+| Skill | Category / Domain | When to Invoke (Trigger) | Core Actions Executed | Injected Artifacts & Enforced Guardrails |
+|---|---|---|---|---|
+| [`repo-governance-automation`](skills/repo-governance-automation/SKILL.md) | Repository Scaffolding | New repo setup or batch standardizing repo DX across an org | Scaffolds standard contribution templates, Conventional Commits CI, SBOM generation, and pinned security workflows | `CONTRIBUTING.md`, `PULL_REQUEST_TEMPLATE.md`, `commit-lint.yml`, `changelog.yml`, `sbom.yml`, `security-testing.yml` |
+| [`security-governance-orchestrator`](skills/security-governance-orchestrator/SKILL.md) | Security & Compliance | Onboarding to SOC2/OWASP/CIS, setting up PR security gates, or establishing repository security policies | Executes 6-phase security lifecycle: STRIDE threat modeling, SecADRs, SARIF SAST/CVE scans, Dependabot 7-day cooldowns, and pre-commit hooks | `security-governance.yml`, `dependabot.yml`, `Security_ADR_Template.md`, `adr_security_gatekeeper.py`, `pre_commit.py`, `SECURITY_POSTURE.md` |
+| [`security-audit-orchestrator`](skills/security-audit-orchestrator/SKILL.md) | Security Assessment | Pre-deployment security audits, periodic compliance assessments, or vulnerability discovery | Scans repo for vulnerabilities, builds attack trees, runs memory forensics, and compiles findings | Threat model matrix, SAST scans, forensic analysis report, unified vulnerability report |
+| [`security-agent-orchestrator`](skills/security-agent-orchestrator/SKILL.md) | Security Remediation | Fixing known security vulnerabilities, hardening endpoints, or implementing secure auth flows | Derives mitigations from threat models, writes hardened code, patches dependencies, and verifies with SAST | Hardened application code, patch diffs, sanitized input handlers, compliance verification report |
+| [`architecture-governance-orchestrator`](skills/architecture-governance-orchestrator/SKILL.md) | System Architecture | Architectural redesign, multi-cloud migrations, or establishing macro-level design consistency | Generates visual C4 models, formulates cloud/K8s/monorepo blueprints, and links decisions to ADRs | C4 Context/Container/Component diagrams, infrastructure blueprints, ADR alignment matrix |
+| [`adr-governance-orchestrator`](skills/adr-governance-orchestrator/SKILL.md) | Decision Lifecycle | Making significant architectural choices, superseding decisions, or auditing decision records | Auto-provisions `docs/adr/`, checks for overlapping decisions, drafts MADR/Nygard templates, and enforces gatekeeping | Validated ADRs, updated `docs/adr/README.md` index, gatekeeper compliance logs, OKF policy sync |
+| [`dependency-lifecycle-orchestrator`](skills/dependency-lifecycle-orchestrator/SKILL.md) | Dependency Management | Auditing library vulnerabilities, evaluating licenses, or planning complex framework upgrades | Audits dependencies, assesses breaking changes, and formulates staged upgrade and rollback roadmaps | Dependency health report, CVE vulnerability list, staged migration plan |
+| [`dependency-release-pipeline`](skills/dependency-release-pipeline/SKILL.md) | Release Execution | Executing verified dependency bumps and publishing changelog entries | Upgrades packages, regenerates lockfiles, executes test suites, and opens comprehensive PRs | Updated `package.json`/lockfiles, passing test logs, enhanced PR description, `CHANGELOG.md` entry |
+| [`c4-modeling-pipeline`](skills/c4-modeling-pipeline/SKILL.md) | Architecture Reverse-Engineering | Documenting existing or legacy systems lacking architectural documentation | Analyzes code structure bottom-up to build Context, Container, Component, and Code diagrams with ADR linkage | Complete C4 Mermaid diagrams, system boundary documentation, initial ADR catalog |
+| [`conductor-pipeline-orchestrator`](skills/conductor-pipeline-orchestrator/SKILL.md) | Context-Driven Development | Driving structured multi-phase feature development via Conductor | Scaffolds product context, writes `spec.md` & `plan.md`, executes TDD cycles, and records phase checkpoints | `conductor/` tracks, task-level verified git commits, track status registries |
+| [`tdd-pipeline-orchestrator`](skills/tdd-pipeline-orchestrator/SKILL.md) | Test-Driven Development | Writing reliable features or bug fixes following strict Red-Green-Refactor cycles | Writes failing test suites (Red), implements minimal passing code (Green), and refactors for quality | Unit/integration test suites, minimal clean implementation, refactored production code |
+| [`incident-diagnostics-pipeline`](skills/incident-diagnostics-pipeline/SKILL.md) | Production Incident Triage | Live production incidents, recurring bug reports, or post-incident reviews | Correlates telemetry/logs, constructs minimal reproduction test, implements fix, and writes postmortem | RCA document, reproduction test case, verified code fix, blameless postmortem |
+
+---
+
+### 🌳 Decision Tree: Choosing the Right Governance Skill
+
+```mermaid
+flowchart TD
+    Start["🎯 What is your primary objective?"] --> Objective{Select Need}
+
+    Objective -->|"Scaffold new repo DX & baseline CI"| RepoGov["🚀 repo-governance-automation<br/>(Inject CONTRIBUTING, PR template, commit-lint, SBOM, Node 24 SHA pinning)"]
+
+    Objective -->|"Security & Compliance"| SecBranch{Action Type?}
+    SecBranch -->|"Institutional policy, PR gates & SecADRs"| SecGov["🔒 security-governance-orchestrator<br/>(STRIDE, SecADRs, SARIF CI, pre-commit hooks, Dependabot cooldown)"]
+    SecBranch -->|"Investigative vulnerability assessment"| SecAudit["🔍 security-audit-orchestrator<br/>(Forensic scans, attack trees, vulnerability report)"]
+    SecBranch -->|"Patch vulnerabilities & write secure code"| SecRemed["🛡️ security-agent-orchestrator<br/>(Mitigation mapping, code hardening, regression verification)"]
+
+    Objective -->|"System Architecture & Decisions"| ArchBranch{Focus Area?}
+    ArchBranch -->|"System topology & C4 visual models"| ArchGov["🏗️ architecture-governance-orchestrator<br/>(C4 diagrams, cloud/K8s/monorepo blueprints)"]
+    ArchBranch -->|"Formal decision record lifecycle"| AdrGov["📜 adr-governance-orchestrator<br/>(MADR templates, adr-gatekeeper validation, registry index, OKF sync)"]
+    ArchBranch -->|"Reverse-engineer legacy system C4"| C4Pipe["🗺️ c4-modeling-pipeline<br/>(Bottom-up Code → Component → Container → Context)"]
+
+    Objective -->|"Dependencies & Releases"| DepBranch{Action Type?}
+    DepBranch -->|"Audit CVEs & plan major upgrades"| DepLife["📦 dependency-lifecycle-orchestrator<br/>(CVE/license audit, compatibility matrix, upgrade roadmap)"]
+    DepBranch -->|"Execute package bumps & changelogs"| DepRel["🚀 dependency-release-pipeline<br/>(Lockfile updates, test pass, enhanced PR, CHANGELOG.md)"]
+
+    Objective -->|"Operational Triage & Performance"| OpsBranch{Focus Area?}
+    OpsBranch -->|"Root cause analysis & fix patterns"| ErrDiag["🩺 error-diagnostics-orchestrator<br/>(Trace correlation, multi-agent review, resilient handling)"]
+    OpsBranch -->|"End-to-end incident fix & postmortem"| IncDiag["🚨 incident-diagnostics-pipeline<br/>(Reproduction test, verified fix, blameless postmortem)"]
+    OpsBranch -->|"SQL / Spark / Vector tuning"| PerfOpt["⚡ performance-optimization-orchestrator<br/>(SQL tuning, Spark shuffles, HNSW indexing, profiling)"]
+```
 
 
 ## 🧠 Local Memory RAG Architecture & Token Flow
