@@ -75,20 +75,98 @@ python3 scripts/inspect_memory.py --json # Export structured JSON for agent harn
 .\setup.ps1 -Memory -Details            # Display full document contents
 ```
 
-## Deployment
+## Deployment & Synchronization
 
-We provide a manifest-driven deployment system to package and deploy skills to different harnesses.
+The repository provides multi-tiered deployment workflows ranging from automated one-command client installation to bidirectional synchronization and manifest-driven composite packaging.
 
-### Deployment Script
-The `scripts/deploy_skills.py` script automates the following:
-1. **Dependency Resolution**: Recursively identifies all required skills for a given harness.
-2. **Package Generation**: Creates a deployment-ready directory (`deploy_package`) containing all necessary skills.
-3. **Multi-Harness Support**: Supports `pi`, `gemini`, and `claude` configurations.
+### 1. Supported Target Runtimes
 
-### Usage
-To plan and generate a deployment package for the `pi` harness:
+All skills are automatically flattened and deployed directly into each client's canonical skill directory:
+
+| Client Runtime | Target Directory | CLI Flag | Description |
+|---|---|---|---|
+| **Pi Agent** | `~/.pi/agent/skills` | `pi` | Default local lightweight agent runtime |
+| **Gemini CLI** | `~/.gemini/config/skills` | `gemini` | Google DeepMind Gemini agent harness |
+| **Claude Code** | `~/.claude/skills` | `claude` | Anthropic Claude agent skill directory |
+| **OpenCode** | `~/.opencode/skills` | `opencode` | OpenCode community runtime |
+
+---
+
+### 2. Quick Deployment & Environment Restoration
+
+The primary deployment method restores and flattens all repository skills into your target client with automatic directory creation and path containment checks:
+
+#### Automated CLI Scripts (Recommended)
 ```bash
-python3 scripts/deploy_skills.py --harness pi
+# macOS / Linux (Bash)
+./setup.sh --client gemini      # Deploy/restore all skills to Gemini
+./setup.sh --client pi          # Deploy/restore all skills to Pi
+./setup.sh --client claude      # Deploy/restore all skills to Claude
+./setup.sh --client opencode    # Deploy/restore all skills to OpenCode
+```
+
+```powershell
+# Windows PowerShell
+.\setup.ps1 -Client gemini      # Deploy/restore all skills to Gemini
+.\setup.ps1 -Client pi          # Deploy/restore all skills to Pi
+.\setup.ps1 -Client claude      # Deploy/restore all skills to Claude
+.\setup.ps1 -Client opencode    # Deploy/restore all skills to OpenCode
+```
+
+#### Direct Python Restoration
+```bash
+python3 scripts/restore_skills.py . --client gemini
+```
+
+**Deployment Guarantees:**
+- **Flattening**: Eliminates nested directories. All skills reside strictly at the top level of the target client's skills folder.
+- **Path Containment & Security**: Enforces `is_safe_subpath` checks and blocks symlink traversal to prevent directory escape attacks.
+- **Client Customization Preservation**: Existing client-only skills not tracked in the repository are preserved and never deleted.
+
+---
+
+### 3. Bidirectional Environment Synchronization
+
+When authoring or modifying skills directly within an active agent environment, use `scripts/sync.py` to keep your local client and the repository in sync:
+
+```bash
+# Deploy changes from repository to agent client
+python3 scripts/sync.py deploy --client gemini
+
+# Save new/edited skills from agent client back into the repository
+python3 scripts/sync.py save --client gemini
+```
+
+- **`deploy`**: Copies updated skills from `skills/` and `config-skills/` into the client environment.
+- **`save`**: Discovers new or edited skills in the client directory, automatically determines their category via frontmatter analysis, and copies them back into the proper repository folder.
+
+---
+
+### 4. Manifest-Driven Composite Deployment
+
+For complex, multi-skill workflows, `scripts/deploy_skills.py` provides manifest-based dependency resolution and deployment planning:
+
+```bash
+# Plan and preview dependencies for a specific harness
+python3 scripts/deploy_skills.py --harness pi --dry-run
+
+# Generate the deployment package
+python3 scripts/deploy_skills.py --harness gemini
+```
+
+- **Recursive Dependency Resolution**: Inspects `manifest.json` files in composite skills and automatically includes all dependent atomic tools.
+- **Target Packaging**: Generates a self-contained deployment package ready for air-gapped or containerized distribution.
+
+---
+
+### 5. Pre-Flight Inspection & Verification
+
+Before and after deploying, verify the deployment status across your runtimes:
+
+```bash
+./setup.sh --status --client gemini     # Compare repository vs installed skills
+./setup.sh --new --client gemini        # View only uninstalled / new skills
+./setup.sh --installed --client gemini  # View only currently active skills
 ```
 
 ## Project Structure
