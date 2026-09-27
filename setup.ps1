@@ -73,6 +73,7 @@ param (
     [switch]$Categories,
     [switch]$Memory,
     [switch]$Info,
+    [switch]$Details,
 
     [string]$Category = "",
     [string]$Search = "",
@@ -142,6 +143,9 @@ if ($IsDisplayAction) {
     if ($Search) {
         $CatArgs += "--search"
         $CatArgs += $Search
+    }
+    if ($Details) {
+        $CatArgs += "--details"
     }
 
     & $PythonExecutable $CatArgs

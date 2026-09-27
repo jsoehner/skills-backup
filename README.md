@@ -61,13 +61,18 @@ Explore available skills with descriptions, categories, and keyword search:
 ```
 
 ### Inspect Local Memory System
-Inspect host directories, RAG storage presence, and key memory skills:
+Inspect host directories, RAG storage presence, search stored policies/context, and inspect full memory documents:
 ```bash
-./setup.sh --memory                     # Inspect local memory system (OKF + ChromaDB)
+./setup.sh --memory                     # Inspect memory status and list stored OKF & ChromaDB records
+./setup.sh --memory -q <keyword>        # Search stored memories across policies and vector contexts
+./setup.sh --memory --details           # Display full document contents for memory items
+python3 scripts/inspect_memory.py --json # Export structured JSON for agent harnesses
 ```
 
 ```powershell
 .\setup.ps1 -Memory                     # Windows PowerShell
+.\setup.ps1 -Memory -Search <keyword>   # Search stored memories
+.\setup.ps1 -Memory -Details            # Display full document contents
 ```
 
 ## Deployment

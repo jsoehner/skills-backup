@@ -15,6 +15,7 @@ CLIENT="pi"
 ACTION="restore"
 CATEGORY=""
 SEARCH_QUERY=""
+DETAILS="false"
 EXTRA_ARGS=()
 
 print_usage() {
@@ -30,10 +31,11 @@ Options:
       --new                Show only new/uninstalled skills for target client
       --installed          Show only existing/installed skills for target client
       --categories         List all available skill categories with counts
-  -m, --memory             Show local memory & RAG system architecture and host status
+  -m, --memory             Show local memory status and list stored OKF & ChromaDB knowledge
+  -d, --details            Display full document contents when inspecting memory
   -i, --info               Display repository overview, skills summary, and memory info
   -g, --category NAME      Filter catalog or status by category name
-  -q, --search QUERY       Search skills by name or description keyword
+  -q, --search QUERY       Search skills or memory entries by keyword
   -r, --restore            Restore skills to the target client (default action)
   -h, --help               Show this help message and exit
 
@@ -43,7 +45,7 @@ Memory & RAG System:
   • Semantic Memory (ChromaDB): ~/memory_system/db (vector embeddings)
   • Automated Ingestion Inbox:  ~/memory_system/inbox/
   Key memory skills: memory-capture, context-manager, session-handoff.
-  Run './setup.sh --memory' to audit storage paths and view ingestion commands.
+  Run './setup.sh --memory' to view stored policies and ChromaDB knowledge.
 
 Examples:
   ./setup.sh --client gemini              # Restore skills to Gemini
@@ -91,6 +93,10 @@ while [[ $# -gt 0 ]]; do
             ;;
         -m|--memory|--memory-info)
             ACTION="memory"
+            shift
+            ;;
+        -d|--details)
+            DETAILS=true
             shift
             ;;
         -i|--info)
@@ -233,6 +239,10 @@ else
 
     if [[ -n "$SEARCH_QUERY" ]]; then
         CAT_CMD+=("--search" "$SEARCH_QUERY")
+    fi
+
+    if [[ "$DETAILS" == "true" ]]; then
+        CAT_CMD+=("--details")
     fi
 
     if [[ ${#EXTRA_ARGS[@]} -gt 0 ]]; then

@@ -31,6 +31,11 @@ if _script_dir not in sys.path:
     sys.path.insert(0, _script_dir)
 
 try:
+    from inspect_memory import display_memory
+except ImportError:
+    display_memory = None
+
+try:
     from update_readme import (
         USER_CATEGORIES,
         CONFIG_CATEGORIES,
@@ -226,8 +231,12 @@ def show_status(client: str = "pi", filter_mode: str = "all", search_query: str 
 
     print("\n" + "=" * 80)
 
-def show_memory_info():
-    """Display information about the local memory system and associated skills."""
+def show_memory_info(search_query: str = None, show_details: bool = False):
+    """Display information about the local memory system, host status, and stored entries."""
+    if display_memory is not None:
+        display_memory(search_query=search_query, show_details=show_details)
+        return
+
     mem_root = os.path.realpath(os.path.abspath(os.path.expanduser("~/memory_system")))
     mem_db = os.path.join(mem_root, "db")
     mem_okf = os.path.join(mem_root, "knowledge", "okf")
@@ -271,7 +280,7 @@ def show_memory_info():
     print("=" * 80)
 
 def main():
-    parser = argparse.ArgumentParser(description="View skills catalog and installation status across AI clients.")
+    parser = argparse.ArgumentParser(description="View skills catalog, installation status, and local memory contents.")
     parser.add_argument("--client", choices=["pi", "gemini", "claude", "opencode"], default="pi",
                         help="Target AI client to inspect (default: pi)")
     parser.add_argument("-c", "--catalog", action="store_true",
@@ -285,11 +294,13 @@ def main():
     parser.add_argument("--categories", action="store_true",
                         help="List all categories with skill counts")
     parser.add_argument("-m", "--memory", "--memory-info", dest="memory", action="store_true",
-                        help="Show information and host status for the local memory system (OKF + ChromaDB)")
+                        help="Show host status and stored human-readable knowledge in local memory (OKF + ChromaDB)")
+    parser.add_argument("-d", "--details", dest="details", action="store_true",
+                        help="Display full document content details for stored memory items")
     parser.add_argument("-g", "--group", "--category", dest="category",
                         help="Filter catalog by category name")
     parser.add_argument("-q", "--search",
-                        help="Search skills by name or description keyword")
+                        help="Search skills or memory entries by keyword")
 
     args = parser.parse_args()
 
@@ -303,7 +314,7 @@ def main():
         return
 
     if args.memory:
-        show_memory_info()
+        show_memory_info(search_query=args.search, show_details=args.details)
     elif args.categories:
         show_categories()
     elif args.catalog:
