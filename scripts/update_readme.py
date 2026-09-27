@@ -33,7 +33,7 @@ USER_CATEGORIES = {
     },
     "security_compliance": {
         "title": "🔒 Security, Compliance & Hardening",
-        "patterns": [r"security", r"secrets", r"sast", r"pci", r"threat", r"attack", r"stride", r"reversing", r"binary", r"malware", r"solidity", r"xss", r"wcag", r"audit", r"hardening", r"auth", r"mtls", r"gdpr"]
+        "patterns": [r"security", r"secrets", r"sast", r"pci", r"threat", r"attack", r"stride", r"reversing", r"binary", r"malware", r"solidity", r"xss", r"wcag", r"audit", r"hardening", r"auth", r"mtls", r"gdpr", r"sbom", r"cbom", r"pqc"]
     },
     "devops_cloud": {
         "title": "☁️ DevOps, Cloud & Infrastructure",
@@ -72,7 +72,7 @@ CONFIG_CATEGORIES = {
         "title": "🔒 Security, Compliance & Hardening",
         "patterns": ["security", "secrets-management", "sast-configuration", "pci-compliance", "threat", 
                      "attack-tree", "stride-analysis", "anti-reversing", "binary-analysis", 
-                     "malware-analyst", "solidity-security"]
+                     "malware-analyst", "solidity-security", "sbom", "cbom", "pqc"]
     },
     "devops_infra": {
         "title": "☁️ DevOps & Infrastructure",

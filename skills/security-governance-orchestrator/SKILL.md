@@ -1,9 +1,9 @@
 ---
 name: "security-governance-orchestrator"
-description: "Orchestrates end-to-end security governance for any repository: audits, compliance, threat modeling, vulnerability scanning, Architectural Decision Records (ADRs), and GitHub security CI/CD integration."
+description: "Orchestrates end-to-end security governance for any repository: audits, compliance, threat modeling, vulnerability scanning, Architectural Decision Records (ADRs), supply chain & cryptographic governance (SBOM/CBOM), and GitHub security CI/CD integration."
 version: 2
 created: "2026-07-31"
-updated: "2026-09-12"
+updated: "2026-09-27"
 ---
 
 ## When to Use
@@ -80,6 +80,7 @@ This skill provides cross-platform Python scripts and native PowerShell ports fo
 1. Execute multi-language SAST using `security-scanning-security-sast` (Semgrep, Bandit for Python, ESLint Security for JS/TS, CodeQL).
 2. Scan dependencies and container images for known CVEs using `security-scanning-security-dependencies` and `secrets-management`.
 3. Evaluate infrastructure-as-code and cloud configurations with `security-scanning-security-hardening`.
+4. Inventory and audit Software Bill of Materials (SBOM) and Cryptographic Bill of Materials (CBOM) for Post-Quantum Cryptography (PQC) readiness and automated CI/CD verification using `sbom-cbom-generator`.
 
 ### Phase 5: GitHub Security Governance & CI/CD Setup
 1. **GitHub Actions Security Workflows**: Deploy [security-governance.yml](file:///Users/jsoehner/.gemini/config/skills/security-governance-orchestrator/templates/security-governance.yml) into `.github/workflows/` (using patterns from `github-actions-templates`). Configure SARIF upload (`github/codeql-action/upload-sarif`) into the GitHub Security tab.
@@ -103,6 +104,7 @@ This skill provides cross-platform Python scripts and native PowerShell ports fo
 - **NEVER** permit pull requests to merge if secret scanners or critical SAST checks fail.
 - **NEVER** write ADRs that conceal negative consequences, residual risk, or operational complexity.
 - **NEVER** delete or rewrite historical ADRs when retiring a security control; always mark them `Superseded by ADR-XXXX` or `Deprecated`.
+- **NEVER** release software without valid machine-readable SBOM/CBOM artifacts and automated verification test passes.
 - **NEVER** deploy security CI/CD workflows without setting explicit least-privilege token permissions (`permissions: contents: read, security-events: write`).
 
 ---

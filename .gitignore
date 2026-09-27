@@ -61,3 +61,5 @@ scratch/
 .coverage
 htmlcov/
 
+# Generated BOM artifacts
+oss/

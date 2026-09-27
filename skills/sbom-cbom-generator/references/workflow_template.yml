@@ -1,0 +1,72 @@
+name: Generate SBOM and CBOM
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  generate-boms:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Create output directory
+        run: mkdir -p oss
+
+      # -------------------------------------------------------------
+      # Step A: Container Build (Required if scanning container image)
+      # -------------------------------------------------------------
+      - name: Build Docker Image
+        run: docker build -t my-app:local .
+
+      # -------------------------------------------------------------
+      # Step B: SBOM Generation (Syft via anchore/sbom-action)
+      # -------------------------------------------------------------
+      - name: Generate SBOM from Container Image
+        uses: anchore/sbom-action@3ad7283483fc7af8ff2b4ea19663c2d5ca935e26 # v0.16.1
+        with:
+          image: my-app:local
+          format: spdx-json
+          output-file: oss/sbom.spdx.json
+
+      # -------------------------------------------------------------
+      # Step C: CBOM Generation (CycloneDX cdxgen)
+      # -------------------------------------------------------------
+      - name: Set up Node.js for cdxgen
+        uses: actions/setup-node@v7
+        with:
+          node-version: '20'
+
+      - name: Install cdxgen
+        run: npm install -g @cyclonedx/cdxgen
+
+      - name: Generate CBOM from Container Image
+        run: cdxgen -t docker --include-crypto -o oss/cbom.json my-app:local
+
+      # Optional alternative: Directory / Source Code CBOM
+      # - name: Generate CBOM from Source Directory
+      #   run: cdxgen --include-crypto -o oss/cbom.json .
+
+      # -------------------------------------------------------------
+      # Step D: Automated Verification & Test Harness in CI
+      # -------------------------------------------------------------
+      - name: Run BOM Verification and Cryptographic Audit Harness
+        run: bash scripts/test_boms.sh oss
+
+      # -------------------------------------------------------------
+      # Step E: Upload Generated Artifacts
+      # -------------------------------------------------------------
+      - name: Upload BOM Artifacts
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.3.3
+        with:
+          name: oss-boms
+          path: oss/
+          retention-days: 30
