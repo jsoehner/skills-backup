@@ -1,7 +1,7 @@
 ---
 name: sbom-cbom-generator
 group: security_compliance
-description: Generate, validate, and manage Software Bill of Materials (SBOM) and Cryptographic Bill of Materials (CBOM) for container images, filesystems, and repositories using tools like Anchore Syft, anchore/sbom-action, and CycloneDX cdxgen. Trigger when creating or maintaining SBOM/CBOM pipelines, conducting cryptographic asset discovery (PQC migration, certificate and cipher audits), generating SPDX or CycloneDX reports, or setting up GitHub Actions workflow automation for BOM artifacts.
+description: Generate, validate, and manage Software Bill of Materials (SBOM) and Cryptographic Bill of Materials (CBOM) for container images, filesystems, and repositories using tools like Anchore Syft, anchore/sbom-action, cbomkit-action (cbomkit/cbomkit-action), and CycloneDX cdxgen. Trigger when creating or maintaining SBOM/CBOM pipelines, conducting cryptographic asset discovery (PQC migration, certificate and cipher audits), generating SPDX or CycloneDX reports, or setting up GitHub Actions workflow automation for BOM artifacts.
 ---
 
 # SBOM & CBOM Generator
@@ -18,7 +18,7 @@ This skill bundles automation scripts and technical references to perform genera
 - **Repository Installer**: Run `bash scripts/install_to_repo.sh [OPTIONS] <TARGET_REPO>` to automatically install generation scripts, verification test harness, AST scanner, and GitHub Actions CI workflow into any target repository.
 - **BOM Verification Harness**: Run `bash scripts/test_boms.sh [BOM_DIR]` to validate that generated SBOM/CBOM artifacts exist, conform to JSON/CycloneDX schemas, and pass cryptographic audits.
 - **Skill Test Suite**: Run `bash tests/run_tests.sh` to run structural validation, CLI checks, and CBOM analyzer unit tests.
-- **Workflow Template**: Refer to [references/workflow_template.yml](file://references/workflow_template.yml) for a production-grade, hardened GitHub Actions configuration.
+- **Workflow Template**: Refer to [references/workflow_template.yml](file://references/workflow_template.yml) for a production-grade, hardened GitHub Actions configuration using `cbomkit/cbomkit-action`.
 - **Crypto Taxonomy**: Consult [references/cbom_crypto_taxonomy.md](file://references/cbom_crypto_taxonomy.md) for CycloneDX cryptographic property mappings and Post-Quantum Cryptography (PQC) standards.
 
 ---
@@ -26,7 +26,7 @@ This skill bundles automation scripts and technical references to perform genera
 ## Freedom Calibration & Constraints
 
 - **Constraint Level: High**
-  - **High Rigidity**: CBOM generation must include cryptographic discovery flags (`--include-crypto`). SBOM and CBOM artifacts must be generated in valid JSON standards (SPDX 2.3+ JSON or CycloneDX 1.5+ JSON).
+  - **High Rigidity**: CBOM generation in CI/CD should utilize `cbomkit/cbomkit-action` (or local `--include-crypto`). SBOM and CBOM artifacts must be generated in valid JSON standards (SPDX 2.3+ JSON or CycloneDX 1.5+ JSON).
   - **Medium Freedom**: Output directory paths, image tags, retention policies, and choice of SBOM engine (Syft vs cdxgen) can adapt to project conventions.
 
 ---
@@ -40,9 +40,9 @@ What is the target artifact and objective?
  │   └─ Generate cryptographic assets, certs, and ciphers → cdxgen -t docker --include-crypto (CycloneDX)
  ├─ Local Source Code Directory / Repository
  │   ├─ Package-level software dependencies → syft dir:. or cdxgen .
- │   └─ Source code crypto algorithms & dependencies → cdxgen --include-crypto .
+ │   └─ Source code crypto algorithms & dependencies → cbomkit or cdxgen --include-crypto .
  └─ CI/CD Integration
-     └─ Use GitHub Actions workflow with anchore/sbom-action + cdxgen + actions/upload-artifact
+     └─ Use GitHub Actions workflow with anchore/sbom-action + cbomkit/cbomkit-action + actions/upload-artifact
 ```
 
 ---
@@ -115,9 +115,9 @@ Integrate into `.github/workflows/sbom-cbom.yml` using the template at [referenc
 
 1. Trigger on `push`, `pull_request`, and `workflow_dispatch`.
 2. Restrict workflow permissions: `contents: read`.
-3. Use `actions/checkout@v7` and `actions/setup-node@v7` (Node 20/22).
-4. Run `anchore/sbom-action` with pinned commit SHA.
-5. Install and run `cdxgen` with `--include-crypto`.
+3. Use `actions/checkout@v7` to check out repository code.
+4. Run `anchore/sbom-action` with pinned commit SHA to generate standard SBOM (`oss/sbom.spdx.json`).
+5. Run `cbomkit/cbomkit-action` (pinned commit SHA `34a3d96...` or `@v2`) with `CBOMKIT_OUTPUT_DIR: oss` to generate `oss/cbom.json`.
 6. **Automated Verification**: Run `bash scripts/test_boms.sh oss` to assert JSON syntax, CycloneDX compliance, and non-empty crypto components prior to upload.
 7. Upload the `oss/` directory using `actions/upload-artifact@v4` with specified retention days.
 

@@ -43,7 +43,7 @@ When executed against a target repository, the orchestrator proceeds through six
 flowchart TD
     P0["Phase 0: Profiling & Detection<br/>(Tech Stack, Docker, Manifests)"] --> P1["Phase 1: Developer Experience & DX<br/>(CONTRIBUTING, PR Templates)"]
     P1 --> P2["Phase 2: Workflow Automation<br/>(Commit-Lint, Changelog Generation)"]
-    P2 --> P3["Phase 3: Dual-Engine Supply Chain & CBOM<br/>(Syft, cdxgen, AST Reconciliation, CI Test Harness)"]
+    P2 --> P3["Phase 3: Dual-Engine Supply Chain & CBOM<br/>(Syft, cbomkit-action, AST Reconciliation, CI Test Harness)"]
     P3 --> P4["Phase 4: Security Pipeline & Hardening<br/>(Semgrep, Gitleaks, Trivy, Node 24 SHA Pinning)"]
     P4 --> P5["Phase 5: Automated Verification<br/>(Local Test Harness & CI Verification)"]
     P5 --> P6["Phase 6: Knowledge Capture & Memory Sync<br/>(OKF / ChromaDB Sync)"]
@@ -70,7 +70,7 @@ flowchart TD
 Deploy the full dual-engine scanning pipeline into the repository:
 1. **GitHub Actions Workflow** [`.github/workflows/sbom.yml`](templates/sbom.yml):
    - Generates CycloneDX and SPDX SBOMs via Anchore / Syft.
-   - Generates CycloneDX 1.6/1.7 CBOMs via `@cyclonedx/cdxgen --include-crypto`.
+   - Generates CycloneDX 1.6/1.7 CBOMs via `cbomkit-action` (`cbomkit/cbomkit-action`).
    - Executes multi-language semantic AST call-site discovery (`scan_crypto_ast.py`) to catch instantiated cryptographic calls missed by manifest scanners.
    - Executes the automated CI verification test harness (`test_boms.sh`).
    - Generates the Post-Quantum Cryptography (PQC) migration scorecard and `$GITHUB_STEP_SUMMARY` (`analyze_cbom.py`).

@@ -51,18 +51,13 @@ jobs:
           upload-artifact: false
 
       # -------------------------------------------------------------
-      # 2. Generate CBOM (CycloneDX cdxgen with --include-crypto)
+      # 2. Generate CBOM (cbomkit-action)
       # -------------------------------------------------------------
-      - name: Set up Node.js for cdxgen
-        uses: actions/setup-node@5e21ff4d9bc1a8cf6de233a3057d20ec6b3fb69d # v7.0.0
-        with:
-          node-version: '20'
-
-      - name: Install cdxgen
-        run: npm install -g @cyclonedx/cdxgen
-
-      - name: Generate CBOM from Repository Directory
-        run: cdxgen --include-crypto -o oss/cbom.json .
+      - name: Generate Cryptographic Bill of Materials (CBOM)
+        uses: cbomkit/cbomkit-action@34a3d960625ae7f7f1b59455eff93a96df090eb7 # v2.3.0
+        id: cbom
+        env:
+          CBOMKIT_OUTPUT_DIR: oss
 
       # -------------------------------------------------------------
       # 3. Dual-Engine Semantic AST Crypto Discovery & Reconciliation

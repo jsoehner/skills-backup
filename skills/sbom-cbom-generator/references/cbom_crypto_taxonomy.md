@@ -48,13 +48,24 @@ Under CycloneDX 1.5+, cryptographic assets are represented with the `cryptoPrope
 
 ## Generation Commands Reference
 
+### CI/CD Workflow (cbomkit-action)
+- **GitHub Actions (cbomkit-action)**:
+  ```yaml
+  - name: Generate CBOM with CBOMkit
+    uses: cbomkit/cbomkit-action@34a3d960625ae7f7f1b59455eff93a96df090eb7 # v2.3.0
+    id: cbom
+    env:
+      CBOMKIT_OUTPUT_DIR: oss
+  ```
+
+### Local CLI & Standalone Commands
+- **Local Source Code CBOM (cdxgen / npx)**:
+  ```bash
+  cdxgen --include-crypto -o oss/cbom.json <directory>
+  ```
 - **Container Image CBOM**:
   ```bash
   cdxgen -t docker --include-crypto -o oss/cbom.json <image-name>
-  ```
-- **Local Source Code CBOM**:
-  ```bash
-  cdxgen --include-crypto -o oss/cbom.json <directory>
   ```
 - **Java / Maven / Gradle specific scan**:
   ```bash

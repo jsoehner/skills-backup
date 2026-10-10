@@ -132,8 +132,11 @@ if [[ "$SCAN_TYPE" == "docker" ]]; then
           format: spdx-json
           output-file: oss/sbom.spdx.json
 
-      - name: Generate CBOM from Container Image
-        run: cdxgen -t docker --include-crypto -o oss/cbom.json ${APP_NAME}
+      - name: Generate CBOM with CBOMkit
+        uses: cbomkit/cbomkit-action@34a3d960625ae7f7f1b59455eff93a96df090eb7 # v2.3.0
+        id: cbom
+        env:
+          CBOMKIT_OUTPUT_DIR: oss
 "
 else
     BUILD_STEP="
@@ -144,8 +147,11 @@ else
           format: spdx-json
           output-file: oss/sbom.spdx.json
 
-      - name: Generate CBOM from Repository Directory
-        run: cdxgen --include-crypto -o oss/cbom.json .
+      - name: Generate CBOM with CBOMkit
+        uses: cbomkit/cbomkit-action@34a3d960625ae7f7f1b59455eff93a96df090eb7 # v2.3.0
+        id: cbom
+        env:
+          CBOMKIT_OUTPUT_DIR: oss
 "
 fi
 
@@ -172,14 +178,6 @@ jobs:
 
       - name: Create output directory
         run: mkdir -p oss
-
-      - name: Set up Node.js for cdxgen
-        uses: actions/setup-node@v7
-        with:
-          node-version: '20'
-
-      - name: Install cdxgen
-        run: npm install -g @cyclonedx/cdxgen
 \${BUILD_STEP}
       # -------------------------------------------------------------
       # Step D: Dual-Engine Semantic AST Crypto Call-Site Discovery

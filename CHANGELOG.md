@@ -7,6 +7,8 @@
 - **SBOM & CBOM Generator Skill**: Added `sbom-cbom-generator` under Security, Compliance & Hardening (`security_compliance`) to generate, validate, and manage Software Bill of Materials (SBOM) and Cryptographic Bill of Materials (CBOM) for container images and source code directories using Anchore Syft and CycloneDX `cdxgen`. Features automated Post-Quantum Cryptography (PQC) readiness assessment (`analyze_cbom.py`), multi-layer verification tests (`test_boms.sh`), and one-step target repository scaffolding (`install_to_repo.sh`).
 - **Automated BOM Verification CI/CD Workflow**: Added `.github/workflows/sbom-cbom.yml` and root automation scripts (`scripts/analyze_cbom.py`, `scripts/generate_boms.sh`, `scripts/test_boms.sh`) with immutable commit SHA pinning and automated verification testing before artifact publication.
 - **Security Governance Orchestrator Expansion**: Upgraded `security-governance-orchestrator` to version 2, incorporating supply chain & cryptographic governance procedures (Phase 4), PQC readiness tracking, and strict anti-pattern rules against releasing software without validated machine-readable BOM artifacts.
+### Changed
+- **CBOM Scanning Action Migration**: Migrated CBOM scanning in `sbom-cbom-generator` (`install_to_repo.sh`, `workflow_template.yml`, and `SKILL.md`), `repo-governance-orchestrator` (`templates/sbom.yml`), and `.github/workflows/sbom-cbom.yml` from `cdxgen` npm actions to `cbomkit/cbomkit-action` (pinned to commit SHA `34a3d96...` / v2.3.0), eliminating Node.js setup overhead and standardizing on PQCA Sonar Cryptography container-based CBOM generation.
 
 ## [1.3.0] - 2026-09-07
 ### Changed
