@@ -131,11 +131,35 @@ def reconcile_with_cbom(call_sites: List[Dict[str, Any]], cbom_path: Path):
         base_exist = existing.split("-")[0]
         return base_cand == base_exist and (candidate in existing or existing in candidate)
 
+    # Map existing components by uppercase name
+    comp_map = {}
+    for comp in existing_components:
+        name_u = comp.get("name", "").upper()
+        comp_map[name_u] = comp
+
+    def find_matching_comp(candidate: str):
+        for name_u, comp in comp_map.items():
+            if matches_existing(candidate, name_u):
+                return comp
+        return None
+
     added_count = 0
     for site in call_sites:
         site_name_u = site["name"].upper()
-        # Check if already represented in CBOM
-        if not any(matches_existing(site_name_u, name) for name in existing_names):
+        matched_comp = find_matching_comp(site_name_u)
+        occ_entry = {
+            "location": f"{site['file']}:{site['line']}",
+            "snippet": site.get("snippet", "")
+        }
+
+        if matched_comp:
+            # Append occurrence if not already present
+            evidence = matched_comp.setdefault("evidence", {})
+            occurrences = evidence.setdefault("occurrences", [])
+            if not any(o.get("location") == occ_entry["location"] for o in occurrences):
+                occurrences.append(occ_entry)
+        else:
+            # Create new component
             new_comp = {
                 "type": "cryptographic-asset",
                 "name": site["name"],
@@ -149,13 +173,11 @@ def reconcile_with_cbom(call_sites: List[Dict[str, Any]], cbom_path: Path):
                     }
                 },
                 "evidence": {
-                    "occurrences": [
-                        {"location": f"{site['file']}:{site['line']}"}
-                    ]
+                    "occurrences": [occ_entry]
                 }
             }
             existing_components.append(new_comp)
-            existing_names.add(site_name_u)
+            comp_map[site_name_u] = new_comp
             added_count += 1
 
     cbom_data["components"] = existing_components

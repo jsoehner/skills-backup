@@ -60,6 +60,11 @@ def analyze_cbom(cbom_path: Path):
             "asset_type": asset_type,
         }
 
+        # Evidence / occurrences (file locations and code snippets)
+        evidence = comp.get("evidence", {})
+        occurrences = evidence.get("occurrences", [])
+        asset_info["occurrences"] = occurrences
+
         # Algorithm properties
         algo_details = crypto_props.get("algorithmProperties", {})
         algo_name = str(algo_details.get("name") or comp.get("name") or "")
@@ -140,17 +145,24 @@ def generate_markdown_summary(summary: dict) -> str:
     md.append(f"| **Classical Symmetric / Hashing** | **{summary['symmetric_count']}** | 🟡 Classical Security (Requires AES-256 / SHA-256+) |")
     md.append(f"| **Asymmetric PQC Migration Progress** | **{pqc_pct}%** | ({summary['pqc_ready_count']} of {asym_total} asymmetric primitives migrated) |\n")
 
+    def format_locations(occurrences: list) -> str:
+        if not occurrences:
+            return "Dependencies / External"
+        locs = [f"`{occ.get('location', '')}`" for occ in occurrences if occ.get("location")]
+        return "<br>".join(locs) if locs else "Dependencies / External"
+
     # PQC Assets Table
     md.append("### ✅ Post-Quantum Cryptography Migrated Assets\n")
     if summary["pqc_assets"]:
-        md.append("| Component Name | Primitive | Key/Parameter Set | PQC Standard |")
-        md.append("|---|---|---|---|")
+        md.append("| Component Name | Primitive | Key/Parameter Set | PQC Standard | Location(s) |")
+        md.append("|---|---|---|---|---|")
         for asset in summary["pqc_assets"]:
             std = "NIST FIPS 203 (ML-KEM)" if "KEM" in asset["algorithm"].upper() or "KYBER" in asset["algorithm"].upper() else \
                   "NIST FIPS 204 (ML-DSA)" if "DSA" in asset["algorithm"].upper() or "DILITHIUM" in asset["algorithm"].upper() else \
                   "NIST FIPS 205 (SLH-DSA)" if "SLH" in asset["algorithm"].upper() or "SPHINCS" in asset["algorithm"].upper() else \
                   "Stateful Hash (RFC 8554/8391)" if "LMS" in asset["algorithm"].upper() or "XMSS" in asset["algorithm"].upper() else "PQC Algorithm"
-            md.append(f"| `{asset['name']}` | {asset['primitive']} | {asset['key_length']} | {std} |")
+            locs_str = format_locations(asset.get("occurrences", []))
+            md.append(f"| `{asset['name']}` | {asset['primitive']} | {asset['key_length']} | {std} | {locs_str} |")
         md.append("")
     else:
         md.append("> ⚠️ **No Post-Quantum Ready assets detected.** Immediate migration planning recommended for asymmetric key exchanges and digital signatures.\n")
@@ -158,29 +170,58 @@ def generate_markdown_summary(summary: dict) -> str:
     # Vulnerable Assets Table
     md.append("### ⚠️ Quantum-Vulnerable Assets (Action Required)\n")
     if summary["vulnerable_assets"]:
-        md.append("| Component / Asset Name | Asset Type | Primitive / Algorithm | Key Length / Curve | Recommended PQC Replacement |")
-        md.append("|---|---|---|---|---|")
+        md.append("| Component / Asset Name | Asset Type | Primitive / Algorithm | Key Length / Curve | Recommended PQC Replacement | Location(s) |")
+        md.append("|---|---|---|---|---|---|")
         for asset in summary["vulnerable_assets"]:
             algo_u = asset["algorithm"].upper()
             recom = "ML-KEM-768 / Kyber (FIPS 203)" if any(k in algo_u for k in ["RSA", "DH", "ECDH", "X25519"]) and "SIGN" not in asset["primitive"] else \
                     "ML-DSA-65 / Dilithium (FIPS 204)" if any(k in algo_u for k in ["ECDSA", "ED25519", "DSA"]) or "SIGN" in asset["primitive"] else \
                     "ML-KEM (KEM) or ML-DSA (Signatures)"
-            md.append(f"| `{asset['name']}` | {asset['asset_type']} | {asset['algorithm']} | {asset['key_length']} | **{recom}** |")
+            locs_str = format_locations(asset.get("occurrences", []))
+            md.append(f"| `{asset['name']}` | {asset['asset_type']} | {asset['algorithm']} | {asset['key_length']} | **{recom}** | {locs_str} |")
         md.append("")
     else:
         md.append("> ✅ **Zero quantum-vulnerable asymmetric assets found.** All public-key cryptography conforms to post-quantum standards.\n")
 
+    # Detailed Call-Site Remediation Guide for Developers & Security Teams
+    if summary["vulnerable_assets"]:
+        md.append("### 🛠️ Developer & Security Remediation Guide\n")
+        md.append("The following source code locations require cryptographic migration before quantum computing milestones:\n")
+        for asset in summary["vulnerable_assets"]:
+            algo_u = asset["algorithm"].upper()
+            recom = "ML-KEM-768 / Kyber (NIST FIPS 203)" if any(k in algo_u for k in ["RSA", "DH", "ECDH", "X25519"]) and "SIGN" not in asset["primitive"] else \
+                    "ML-DSA-65 / Dilithium (NIST FIPS 204)" if any(k in algo_u for k in ["ECDSA", "ED25519", "DSA"]) or "SIGN" in asset["primitive"] else \
+                    "ML-KEM (KEM) or ML-DSA (Signatures)"
+            md.append(f"#### `{asset['name']}` ({asset['primitive']})")
+            md.append(f"- **Current Algorithm**: `{asset['algorithm']}` (Key/Curve: `{asset['key_length']}`)")
+            md.append(f"- **Recommended Target**: **{recom}**")
+            
+            occs = asset.get("occurrences", [])
+            if occs:
+                md.append("- **Call Sites / Instantiations**:")
+                for occ in occs:
+                    loc = occ.get("location", "")
+                    snip = occ.get("snippet", "").strip()
+                    if snip:
+                        md.append(f"  - `{loc}`:\n    ```\n    {snip}\n    ```")
+                    else:
+                        md.append(f"  - `{loc}`")
+            else:
+                md.append("- **Call Sites**: Instantiated via external library dependency.")
+            md.append("")
+
     # Symmetric Assets Summary
     md.append("### 🔒 Classical Symmetric & Digest Assets\n")
     if summary["symmetric_assets"]:
-        md.append("| Component Name | Primitive | Key Length | Quantum Resistance Assessment |")
-        md.append("|---|---|---|---|")
+        md.append("| Component Name | Primitive | Key Length | Quantum Resistance Assessment | Location(s) |")
+        md.append("|---|---|---|---|---|")
         for asset in summary["symmetric_assets"]:
             algo_u = asset["algorithm"].upper()
             sec_note = "Quantum-Resistant (Grover's proof)" if "256" in str(asset["key_length"]) or "384" in algo_u or "512" in algo_u else \
                        "Legacy bit-length (Recommend 256-bit upgrade)" if "128" in str(asset["key_length"]) or "128" in algo_u else \
                        "Review key length for Grover resistance"
-            md.append(f"| `{asset['name']}` | {asset['primitive']} | {asset['key_length']} | {sec_note} |")
+            locs_str = format_locations(asset.get("occurrences", []))
+            md.append(f"| `{asset['name']}` | {asset['primitive']} | {asset['key_length']} | {sec_note} | {locs_str} |")
         md.append("")
 
     return "\n".join(md)

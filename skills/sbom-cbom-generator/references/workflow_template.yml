@@ -81,7 +81,27 @@ jobs:
             --step-summary
 
       # -------------------------------------------------------------
-      # Step G: Upload Generated Artifacts
+      # Step G: Publish Cryptographic Audit Report to Repository (docs/security)
+      # -------------------------------------------------------------
+      - name: Publish Cryptographic Audit Report to Repository
+        if: github.event_name == 'push' && !contains(github.event.head_commit.message, '[skip ci]')
+        run: |
+          if [ -f oss/crypto-summary.md ]; then
+            mkdir -p docs/security
+            cp oss/crypto-summary.md docs/security/CRYPTOGRAPHIC_AUDIT.md
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add docs/security/CRYPTOGRAPHIC_AUDIT.md
+            if git diff --staged --quiet; then
+              echo "No changes in cryptographic audit report."
+            else
+              git commit -m "docs(security): update cryptographic audit & PQC migration report [skip ci]"
+              git push
+            fi
+          fi
+
+      # -------------------------------------------------------------
+      # Step H: Upload Generated Artifacts
       # -------------------------------------------------------------
       - name: Upload BOM Artifacts
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.3.3
