@@ -59,6 +59,9 @@ jobs:
         env:
           CBOMKIT_OUTPUT_DIR: oss
 
+      - name: Fix permissions for container-generated artifacts
+        run: sudo chown -R $(id -u):$(id -g) oss/ || true
+
       # -------------------------------------------------------------
       # 3. Dual-Engine Semantic AST Crypto Discovery & Reconciliation
       # -------------------------------------------------------------
