@@ -9,6 +9,8 @@
 - **Security Governance Orchestrator Expansion**: Upgraded `security-governance-orchestrator` to version 2, incorporating supply chain & cryptographic governance procedures (Phase 4), PQC readiness tracking, and strict anti-pattern rules against releasing software without validated machine-readable BOM artifacts.
 ### Changed
 - **CBOM Scanning Action Migration**: Migrated CBOM scanning in `sbom-cbom-generator` (`install_to_repo.sh`, `workflow_template.yml`, and `SKILL.md`), `repo-governance-orchestrator` (`templates/sbom.yml`), and `.github/workflows/sbom-cbom.yml` from `cdxgen` npm actions to `cbomkit/cbomkit-action` (pinned to commit SHA `34a3d96...` / v2.3.0), eliminating Node.js setup overhead and standardizing on PQCA Sonar Cryptography container-based CBOM generation.
+### Fixed
+- **AST Self-Scanning Isolation**: Excluded `scripts/`, `tests/`, and internal tool files from `scan_crypto_ast.py` directory traversal to prevent false-positive self-scanning of the scanner's own algorithm dictionary. Refined deduplication logic to prevent collision between `SHA-3` and `SHA-384`. Configured `CBOMKIT_EXCLUDE` in CI workflows to only analyze production application code.
 
 ## [1.3.0] - 2026-09-07
 ### Changed

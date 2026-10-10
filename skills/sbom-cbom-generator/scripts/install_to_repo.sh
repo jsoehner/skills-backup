@@ -137,6 +137,7 @@ if [[ "$SCAN_TYPE" == "docker" ]]; then
         id: cbom
         env:
           CBOMKIT_OUTPUT_DIR: oss
+          CBOMKIT_EXCLUDE: "(^|/)scripts/.*|(^|/)tests/.*"
 
       - name: Fix permissions for container-generated artifacts
         run: sudo chown -R $(id -u):$(id -g) oss/ || true
@@ -155,6 +156,7 @@ else
         id: cbom
         env:
           CBOMKIT_OUTPUT_DIR: oss
+          CBOMKIT_EXCLUDE: "(^|/)scripts/.*|(^|/)tests/.*"
 
       - name: Fix permissions for container-generated artifacts
         run: sudo chown -R $(id -u):$(id -g) oss/ || true

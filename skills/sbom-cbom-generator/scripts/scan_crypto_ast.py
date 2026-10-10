@@ -48,7 +48,11 @@ SOURCE_EXTENSIONS = {
 
 IGNORED_DIRS = {
     ".git", "node_modules", "vendor", "__pycache__", ".venv", "venv",
-    "target", "dist", "build", "oss", ".idea", ".vscode"
+    "target", "dist", "build", "oss", ".idea", ".vscode", "scripts", "tests", "fixtures"
+}
+
+IGNORED_FILES = {
+    "scan_crypto_ast.py", "analyze_cbom.py", "test_boms.sh", "generate_boms.sh"
 }
 
 
@@ -61,6 +65,9 @@ def scan_source_files(root_dir: Path) -> List[Dict[str, Any]]:
         dirnames[:] = [d for d in dirnames if d not in IGNORED_DIRS and not d.startswith(".")]
         
         for fname in filenames:
+            if fname in IGNORED_FILES:
+                continue
+
             ext = os.path.splitext(fname)[1].lower()
             if ext not in SOURCE_EXTENSIONS:
                 continue
@@ -114,11 +121,21 @@ def reconcile_with_cbom(call_sites: List[Dict[str, Any]], cbom_path: Path):
     existing_components = cbom_data.get("components", [])
     existing_names = {c.get("name", "").upper() for c in existing_components}
 
+    def matches_existing(candidate: str, existing: str) -> bool:
+        if candidate == existing:
+            return True
+        # Prevent false collisions (e.g., SHA-3 vs SHA-384)
+        if candidate.startswith("SHA-3") and existing.startswith("SHA-3") and candidate != existing:
+            return False
+        base_cand = candidate.split("-")[0]
+        base_exist = existing.split("-")[0]
+        return base_cand == base_exist and (candidate in existing or existing in candidate)
+
     added_count = 0
     for site in call_sites:
         site_name_u = site["name"].upper()
         # Check if already represented in CBOM
-        if not any(site_name_u in name or name in site_name_u for name in existing_names):
+        if not any(matches_existing(site_name_u, name) for name in existing_names):
             new_comp = {
                 "type": "cryptographic-asset",
                 "name": site["name"],
