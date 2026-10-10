@@ -216,6 +216,7 @@ ${GRADLE_ENRICH}
       - name: Generate Cryptographic Bill of Materials (CBOM)
         uses: cbomkit/cbomkit-action@34a3d960625ae7f7f1b59455eff93a96df090eb7 # v2.3.0
         id: cbom
+        continue-on-error: true
         env:
           CBOMKIT_OUTPUT_DIR: oss
           CBOMKIT_EXCLUDE: "(^|/)scripts/.*|(^|/)tests/.*"
