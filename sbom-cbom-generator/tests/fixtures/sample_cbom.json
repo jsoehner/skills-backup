@@ -1,0 +1,111 @@
+{
+  "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:3e671687-395b-41f5-a30f-a58921a69b79",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-09-25T18:00:00Z",
+    "tools": {
+      "components": [
+        {
+          "type": "application",
+          "name": "cdxgen",
+          "version": "10.9.0"
+        }
+      ]
+    },
+    "component": {
+      "type": "application",
+      "name": "sample-crypto-app",
+      "version": "1.0.0"
+    }
+  },
+  "components": [
+    {
+      "type": "cryptographic-asset",
+      "name": "RSA-2048",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "name": "RSA",
+          "primitive": "signature",
+          "parameterSetIdentifier": "2048"
+        },
+        "oid": "1.2.840.113549.1.1.1"
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "name": "ECDSA-P256",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "name": "ECDSA",
+          "primitive": "signature",
+          "curve": "secp256r1"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "name": "ML-KEM-768",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "name": "ML-KEM",
+          "primitive": "kem",
+          "parameterSetIdentifier": "768"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "name": "ML-DSA-65",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "name": "ML-DSA",
+          "primitive": "signature",
+          "parameterSetIdentifier": "65"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "name": "AES-256-GCM",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "name": "AES",
+          "primitive": "block-cipher",
+          "parameterSetIdentifier": "256",
+          "mode": "gcm"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "name": "vault-tls-cert",
+      "cryptoProperties": {
+        "assetType": "certificate",
+        "certificateProperties": {
+          "subjectName": "CN=vault.internal.net",
+          "validTo": "2027-01-01T00:00:00Z",
+          "format": "X.509"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "name": "tls-configuration",
+      "cryptoProperties": {
+        "assetType": "protocol",
+        "protocolProperties": {
+          "type": "tls",
+          "version": "1.3"
+        }
+      }
+    }
+  ]
+}

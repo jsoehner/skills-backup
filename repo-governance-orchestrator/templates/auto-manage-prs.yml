@@ -1,0 +1,44 @@
+name: Auto Action Pull Requests
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - labeled
+
+permissions:
+  pull-requests: write
+  contents: write
+
+jobs:
+  auto-approve-and-merge:
+    runs-on: ubuntu-latest
+    # Run only if it's an automated dependency update PR or opened by a trusted bot
+    if: contains(github.event.pull_request.labels.*.name, 'automated-dependency-update') || github.actor == 'dependabot[bot]'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up Node.js 24
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.2.0
+        with:
+          node-version: '24'
+
+      - name: Approve Pull Request
+        run: |
+          gh pr review "$PR_URL" --approve -b "Automated approval by GitHub Actions :robot:" || echo "PR already approved or cannot be approved"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          # Use default GITHUB_TOKEN to approve the PR created by PERSONAL_ACCESS_TOKEN
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Merge Pull Request
+        run: |
+          # Try enabling auto-merge first, fallback to immediate squash merge if branch rules permit
+          gh pr merge --auto --squash --delete-branch "$PR_URL" || gh pr merge --squash --delete-branch "$PR_URL" || echo "Could not automatically merge PR"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          # Use PAT with fallback to GITHUB_TOKEN
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN || secrets.GITHUB_TOKEN }}
