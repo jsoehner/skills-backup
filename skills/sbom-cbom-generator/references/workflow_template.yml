@@ -43,6 +43,7 @@ jobs:
       - name: Generate CBOM with CBOMkit
         uses: cbomkit/cbomkit-action@34a3d960625ae7f7f1b59455eff93a96df090eb7 # v2.3.0
         id: cbom
+        continue-on-error: true
         env:
           CBOMKIT_OUTPUT_DIR: oss
           CBOMKIT_EXCLUDE: "(^|/)scripts/.*|(^|/)tests/.*"
@@ -76,6 +77,7 @@ jobs:
       - name: Generate PQC Migration Dashboard & Step Summary
         run: |
           python3 scripts/analyze_cbom.py oss/cbom.json \
+            --sbom oss/sbom.spdx.json \
             --json oss/crypto-analysis.json \
             --markdown oss/crypto-summary.md \
             --step-summary

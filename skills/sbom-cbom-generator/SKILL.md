@@ -15,6 +15,7 @@ This skill bundles automation scripts and technical references to perform genera
 - **Generation Script**: Execute `bash scripts/generate_boms.sh [OPTIONS] <TARGET>` to generate both SBOM and CBOM for Docker images or local source trees.
 - **AST Crypto Scanner & Reconciler**: Run `python3 scripts/scan_crypto_ast.py <REPO_DIR> --cbom <CBOM_PATH>` to perform dual-engine semantic AST discovery across active languages (Python, JS/TS, Go, Java, Rust, C#, C/C++) and guarantee 100% CBOM reconciliation.
 - **CBOM Analyzer & PQC Dashboard**: Run `python3 scripts/analyze_cbom.py <path/to/cbom.json>` to inspect cryptographic assets, evaluate algorithm distributions, calculate PQC migration progress percentages, and identify quantum-vulnerable primitives.
+- **OS Inventory Update**: Run `python3 scripts/update_os_inventory.py` to scan the local operating system for cryptographic components and update the `known_cbom_catalog.json` inventory. This can be scheduled as a nightly task.
 - **Repository Installer**: Run `bash scripts/install_to_repo.sh [OPTIONS] <TARGET_REPO>` to automatically install generation scripts, verification test harness, AST scanner, and GitHub Actions CI workflow into any target repository.
 - **BOM Verification Harness**: Run `bash scripts/test_boms.sh [BOM_DIR]` to validate that generated SBOM/CBOM artifacts exist, conform to JSON/CycloneDX schemas, and pass cryptographic audits.
 - **Skill Test Suite**: Run `bash tests/run_tests.sh` to run structural validation, CLI checks, and CBOM analyzer unit tests.
@@ -47,7 +48,43 @@ What is the target artifact and objective?
 
 ---
 
+## Procuring Third-Party Metadata
+
+When vetting third-party commercial or open-source image providers, request their cryptographic metadata directly to avoid the overhead of independent scanning. Ask for:
+- **In-Toto Attestation**: Embedded with a `cosign` layer containing the CycloneDX crypto schema.
+- **ORAS Attach Payload**: Flagged with the custom artifact type `application/vnd.cyclonedx+json`.
+
+This ensures that you receive cryptographically signed and verified metadata that is ready for ingestion into your CBOM pipeline.
+
+---
+
+## Distribution Strategies
+
+
+### Production Distribution: OCI Artifacts
+For production environments, it is highly recommended to distribute CBOMs as standalone OCI artifacts rather than embedding them within the container image. This follows the **OCI Distribution Specification (v1.1+)** and the **ORAS (OCI Registry As Storage) graph standard**.
+
+**Benefits:**
+- **Decoupled Lifecycle**: Update or rotate the CBOM independently of the application image.\n- **Native Registry Integration**: Leverage standard registry tools for querying, listing, and verifying CBOMs.\n- **Admission Control**: Facilitate gatekeeping by allowing security scanners to verify the presence and signature of a linked CBOM artifact before deployment.\n
+
+**Implementation Path:**
+1. Generate the CBOM (e.g., `oss/cbom.json`).
+2. Use a tool like `oras` or `skopeo` to push the JSON as an OCI artifact to the registry.\n3. Link the CBOM to the image via OCI annotations or by following a deterministic naming convention (e.g., `my-app:v1.0.0-cbom`).
+
+### Aggregation & Merging (CycloneDX 1.6+)
+
+Leverage the global standardization of OWASP CycloneDX 1.6+ to aggregate multiple CBOMs into a unified primary system mapping.
+
+**Strategy:**
+- **Tooling**: Use generic CycloneDX aggregation tools (e.g., `bom-merge`) to merge retrieved JSON files from various sources (upstream vendors, internal microservices, etc.).
+- **Unified Mapping**: Create a single source of truth for your organization's cryptographic footprint by merging individual component CBOMs into a consolidated master record.
+- **Advantage**: Simplifies cross-component vulnerability analysis and PQC migration planning by providing a holistic view of all cryptographic assets in a standard format.
+
+---
+
 ## Step-by-Step Execution Procedure
+
+
 
 ### Step 1: Environment & Tooling Verification
 
@@ -96,18 +133,20 @@ Alternatively, run the bundled script to execute both steps in a single command:
 bash scripts/generate_boms.sh -t docker -o oss my-demo-app:local
 ```
 
-### Step 4: Audit & Analyze Cryptographic Inventory
+### Step 4: Audit & Analyze Cryptographic Inventory & Supply Chain Coverage
 
-Inspect the generated `cbom.json` for security compliance and Post-Quantum Cryptography (PQC) readiness:
+Inspect the generated `cbom.json` for security compliance, Post-Quantum Cryptography (PQC) readiness, and third-party supply chain confidence:
 
 ```bash
-python3 scripts/analyze_cbom.py oss/cbom.json
+python3 scripts/analyze_cbom.py oss/cbom.json --sbom oss/sbom.cyclonedx.json
 ```
 
 Examine the findings:
-- Identify quantum-vulnerable asymmetric algorithms: `RSA`, `ECDSA`, `ECDH`, `Ed25519`, `DH`.
-- Confirm post-quantum algorithms if applicable: `ML-KEM` (Kyber), `ML-DSA` (Dilithium), `SLH-DSA` (SPHINCS+).
-- Review symmetric key lengths (ensure `AES-256` for long-term security).
+- **First-Party Code Visibility**: Confirms direct AST/SAST scanning across project code (ensuring no custom unvetted crypto).
+- **Third-Party Binary CBOM Assimilation**: Ingests known cryptographic profiles from `scripts/known_cbom_catalog.json` (or upstream CBOM attestations) for third-party dependencies (e.g. Tomcat TLS, RabbitMQ AMQPS, Spring WebClient).
+- **Audit Confidence Score**: Calculates an overall confidence index based on cataloged/verified dependencies vs unassimilated supply chain blind spots, lowering the score when upstream CBOMs are unavailable.
+- **PQC Migration Progress**: Evaluates quantum-vulnerable asymmetric algorithms (`RSA`, `ECDSA`, `ECDH`, `Ed25519`, `DH`) vs post-quantum standards (`ML-KEM`, `ML-DSA`, `SLH-DSA`) with honest zero-baseline handling (`N/A` when no asymmetric assets exist).
+- **Classical Symmetric Security**: Confirms symmetric key lengths (recommending `AES-256` / `SHA-256+` for Grover resistance).
 
 ### Step 5: Implement CI/CD Workflow with Verification Harness
 
