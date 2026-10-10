@@ -167,48 +167,35 @@ def generate_markdown_summary(summary: dict) -> str:
     else:
         md.append("> ⚠️ **No Post-Quantum Ready assets detected.** Immediate migration planning recommended for asymmetric key exchanges and digital signatures.\n")
 
-    # Vulnerable Assets Table
-    md.append("### ⚠️ Quantum-Vulnerable Assets (Action Required)\n")
+    # Quantum-Vulnerable Assets & Remediation Plan (Consolidated & Deduplicated)
+    md.append("### ⚠️ Quantum-Vulnerable Assets & Remediation Plan\n")
     if summary["vulnerable_assets"]:
-        md.append("| Component / Asset Name | Asset Type | Primitive / Algorithm | Key Length / Curve | Recommended PQC Replacement | Location(s) |")
-        md.append("|---|---|---|---|---|---|")
+        md.append("| Component / Algorithm | Type / Primitive | Key Length / Curve | Recommended Target | Source Location(s) & Code Context |")
+        md.append("|---|---|---|---|---|")
         for asset in summary["vulnerable_assets"]:
             algo_u = asset["algorithm"].upper()
             recom = "ML-KEM-768 / Kyber (FIPS 203)" if any(k in algo_u for k in ["RSA", "DH", "ECDH", "X25519"]) and "SIGN" not in asset["primitive"] else \
                     "ML-DSA-65 / Dilithium (FIPS 204)" if any(k in algo_u for k in ["ECDSA", "ED25519", "DSA"]) or "SIGN" in asset["primitive"] else \
                     "ML-KEM (KEM) or ML-DSA (Signatures)"
-            locs_str = format_locations(asset.get("occurrences", []))
-            md.append(f"| `{asset['name']}` | {asset['asset_type']} | {asset['algorithm']} | {asset['key_length']} | **{recom}** | {locs_str} |")
-        md.append("")
-    else:
-        md.append("> ✅ **Zero quantum-vulnerable asymmetric assets found.** All public-key cryptography conforms to post-quantum standards.\n")
-
-    # Detailed Call-Site Remediation Guide for Developers & Security Teams
-    if summary["vulnerable_assets"]:
-        md.append("### 🛠️ Developer & Security Remediation Guide\n")
-        md.append("The following source code locations require cryptographic migration before quantum computing milestones:\n")
-        for asset in summary["vulnerable_assets"]:
-            algo_u = asset["algorithm"].upper()
-            recom = "ML-KEM-768 / Kyber (NIST FIPS 203)" if any(k in algo_u for k in ["RSA", "DH", "ECDH", "X25519"]) and "SIGN" not in asset["primitive"] else \
-                    "ML-DSA-65 / Dilithium (NIST FIPS 204)" if any(k in algo_u for k in ["ECDSA", "ED25519", "DSA"]) or "SIGN" in asset["primitive"] else \
-                    "ML-KEM (KEM) or ML-DSA (Signatures)"
-            md.append(f"#### `{asset['name']}` ({asset['primitive']})")
-            md.append(f"- **Current Algorithm**: `{asset['algorithm']}` (Key/Curve: `{asset['key_length']}`)")
-            md.append(f"- **Recommended Target**: **{recom}**")
             
             occs = asset.get("occurrences", [])
             if occs:
-                md.append("- **Call Sites / Instantiations**:")
+                loc_details = []
                 for occ in occs:
                     loc = occ.get("location", "")
-                    snip = occ.get("snippet", "").strip()
+                    snip = occ.get("snippet", "").strip().replace("|", "\\|")
                     if snip:
-                        md.append(f"  - `{loc}`:\n    ```\n    {snip}\n    ```")
+                        loc_details.append(f"`{loc}`<br><sub><code>{snip}</code></sub>")
                     else:
-                        md.append(f"  - `{loc}`")
+                        loc_details.append(f"`{loc}`")
+                locs_str = "<br><br>".join(loc_details)
             else:
-                md.append("- **Call Sites**: Instantiated via external library dependency.")
-            md.append("")
+                locs_str = "Dependencies / External"
+
+            md.append(f"| **`{asset['name']}`**<br><sub>{asset['algorithm']}</sub> | {asset['asset_type']} / {asset['primitive']} | {asset['key_length']} | **{recom}** | {locs_str} |")
+        md.append("")
+    else:
+        md.append("> ✅ **Zero quantum-vulnerable asymmetric assets found.** All public-key cryptography conforms to post-quantum standards.\n")
 
     # Symmetric Assets Summary
     md.append("### 🔒 Classical Symmetric & Digest Assets\n")
