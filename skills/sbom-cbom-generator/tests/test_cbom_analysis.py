@@ -11,7 +11,7 @@ from pathlib import Path
 SKILL_DIR = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(SKILL_DIR / "scripts"))
 
-from analyze_cbom import analyze_cbom, QUANTUM_VULNERABLE_PATTERNS, POST_QUANTUM_PATTERNS
+from analyze_cbom import analyze_cbom, generate_markdown_summary, QUANTUM_VULNERABLE_PATTERNS, POST_QUANTUM_PATTERNS
 
 
 class TestCBOMAnalysis(unittest.TestCase):
@@ -47,6 +47,14 @@ class TestCBOMAnalysis(unittest.TestCase):
         self.assertEqual(asset_types.get("algorithm"), 5)
         self.assertEqual(asset_types.get("certificate"), 1)
         self.assertEqual(asset_types.get("protocol"), 1)
+
+    def test_markdown_summary_generation(self):
+        result = analyze_cbom(self.fixture_path)
+        md = generate_markdown_summary(result)
+        self.assertIn("Cryptographic Bill of Materials", md)
+        self.assertIn("Post-Quantum Ready (PQC)", md)
+        self.assertIn("Quantum-Vulnerable (Backlog)", md)
+        self.assertIn("ML-KEM-768", md)
 
 
 if __name__ == "__main__":

@@ -16,6 +16,18 @@ from collections import Counter
 import re
 from typing import List, Dict, Any, Optional, Tuple
 
+# Ensure stdout and stderr handle utf-8 characters properly on all platforms (e.g. Windows cp1252)
+if sys.stdout and hasattr(sys.stdout, "reconfigure"):
+    try:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+if sys.stderr and hasattr(sys.stderr, "reconfigure"):
+    try:
+        sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
 QUANTUM_VULNERABLE_PATTERNS = [
     r"\bRSA\b", r"\bECDSA\b", r"\bECDH\b", r"\bDIFFIE[-_ ]?HELLMAN\b",
     r"\bED25519\b", r"\bED448\b", r"\bX25519\b", r"\bX448\b",
@@ -364,6 +376,13 @@ def analyze_cbom(
     }
 
 
+def format_locations(occurrences: list) -> str:
+    if not occurrences:
+        return "Dependencies / External"
+    locs = [f"`{occ.get('location', '')}`" for occ in occurrences if occ.get("location")]
+    return "<br>".join(locs) if locs else "Dependencies / External"
+
+
 def generate_markdown_summary(summary: dict) -> str:
     md = []
     md.append("## 🛡️ Cryptographic Bill of Materials (CBOM) & PQC Migration Assessment\n")
@@ -465,6 +484,18 @@ def generate_markdown_summary(summary: dict) -> str:
     else:
         md.append("> ℹ️ **No classical symmetric assets detected.**\n")
 
+    # Unassimilated Dependencies (Blind Spots) Table
+    if summary["unassimilated_dependencies"]:
+        md.append("### ⚠️ Unassimilated Third-Party Binaries & Cryptographic Blind Spots\n")
+        md.append("> ℹ️ *The following third-party dependencies do not have verified upstream CBOM attestations in the catalog. They lower the audit confidence score until explicit CBOMs or attestations are published.* \n")
+        md.append("| Dependency Name | Version | Package URL (purl) | Status |")
+        md.append("|---|---|---|---|")
+        for dep in summary["unassimilated_dependencies"][:15]:
+            md.append(f"| `{dep['name']}` | {dep['version']} | `{dep['purl'] or 'N/A'}` | 🟡 Unassimilated (No upstream CBOM) |")
+        if len(summary["unassimilated_dependencies"]) > 15:
+            md.append(f"| *... and {len(summary['unassimilated_dependencies']) - 15} more unassimilated dependencies* | | | |")
+        md.append("")
+
     return "\n".join(md)
 
 
@@ -545,7 +576,7 @@ def main():
 
     if args.json:
         json_str = json.dumps(summary, indent=2)
-        if args.json == "STDOUT":
+        if str(args.json) == "STDOUT":
             print(json_str)
         else:
             args.json.parent.mkdir(parents=True, exist_ok=True)
