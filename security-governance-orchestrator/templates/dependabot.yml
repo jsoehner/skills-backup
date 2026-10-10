@@ -1,0 +1,77 @@
+# GitHub Dependabot Configuration with Security Governance Standards
+# Implements security update cadence with the mandatory 7-day cooldown
+version: 2
+updates:
+  # --------------------------------------------------------------------------
+  # GitHub Actions Workflows
+  # --------------------------------------------------------------------------
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 5
+    cooldown:
+      default-days: 7
+    commit-message:
+      prefix: "ci"
+      include: "scope"
+    labels:
+      - "dependencies"
+      - "security-governance"
+
+  # --------------------------------------------------------------------------
+  # Python Dependencies (pip / poetry)
+  # --------------------------------------------------------------------------
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 10
+    cooldown:
+      default-days: 7
+    commit-message:
+      prefix: "chore(deps)"
+    labels:
+      - "dependencies"
+      - "python"
+      - "security-governance"
+
+  # --------------------------------------------------------------------------
+  # Node.js Dependencies (npm)
+  # --------------------------------------------------------------------------
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 10
+    cooldown:
+      default-days: 7
+    commit-message:
+      prefix: "chore(deps)"
+    labels:
+      - "dependencies"
+      - "javascript"
+      - "security-governance"
+
+  # --------------------------------------------------------------------------
+  # Docker / Container Images
+  # --------------------------------------------------------------------------
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 5
+    cooldown:
+      default-days: 7
+    ignore:
+      # Ignore major base image bumps if toolchain restricts upgrades
+      - dependency-name: "eclipse-temurin"
+        update-types: ["version-update:semver-major"]
+    labels:
+      - "dependencies"
+      - "docker"
+      - "security-governance"

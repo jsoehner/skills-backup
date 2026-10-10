@@ -1,0 +1,135 @@
+name: "Security Governance & Automated Gates"
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master, develop ]
+  schedule:
+    # Run weekly security scan every Monday at 04:00 UTC
+    - cron: '0 4 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  security-events: write
+  pull-requests: read
+  actions: read
+
+jobs:
+  # ============================================================================
+  # 1. SECRET SCANNING: Prevent committed credentials and API keys
+  # ============================================================================
+  secret-scan:
+    name: "Secret Leak Detection"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run Gitleaks Secret Scanner
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_ENABLE_UPLOAD_ARTIFACT: true
+          GITLEAKS_ENABLE_SUMMARY: true
+
+  # ============================================================================
+  # 2. SAST SCANNING: Multi-language Static Application Security Testing
+  # ============================================================================
+  sast-scan:
+    name: "Static Application Security Testing (SAST)"
+    runs-on: ubuntu-latest
+    needs: secret-scan
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Run Semgrep SAST Analysis
+        run: |
+          docker run --rm -v "${{ github.workspace }}:/src" returntocorp/semgrep \
+            semgrep scan \
+            --config "p/security-audit" \
+            --config "p/owasp-top-ten" \
+            --config "p/cwe-top-25" \
+            --sarif --output=/src/semgrep-results.sarif || true
+
+      - name: Upload Semgrep SARIF to GitHub Security Tab
+        uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        with:
+          sarif_file: semgrep-results.sarif
+          category: semgrep-sast
+
+  # ============================================================================
+  # 3. DEPENDENCY & SUPPLY CHAIN: Vulnerability and CVE Auditing
+  # ============================================================================
+  dependency-scan:
+    name: "Dependency & Supply Chain Vulnerability Scan"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Run Trivy Vulnerability Scanner (Filesystem / Dependencies)
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+          severity: 'CRITICAL,HIGH'
+
+      - name: Upload Trivy SARIF to GitHub Security Tab
+        uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        with:
+          sarif_file: trivy-results.sarif
+          category: trivy-dependencies
+
+  # ============================================================================
+  # 4. ADR SECURITY GATEKEEPER: Ensure architectural security changes have ADRs
+  # ============================================================================
+  adr-gatekeeper:
+    name: "ADR Security Gatekeeper"
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run ADR Security Gatekeeper
+        run: |
+          if [ -f "scripts/adr_security_gatekeeper.py" ]; then
+            python3 scripts/adr_security_gatekeeper.py --base origin/${{ github.base_ref }} --event ${{ github.event_name }}
+          else
+            echo "Running inline fallback gatekeeper check..."
+            SENSITIVE_PATHS="auth/ crypto/ security/ certs/ .github/workflows/ api/ policy/"
+            CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD)
+            REQUIRES_ADR=false
+            for path in $SENSITIVE_PATHS; do
+              if echo "$CHANGED_FILES" | grep -E "^$path" > /dev/null; then
+                echo "⚠️ Sensitive path modified: $path"
+                REQUIRES_ADR=true
+              fi
+            done
+            if [ "$REQUIRES_ADR" = true ]; then
+              if echo "$CHANGED_FILES" | grep -E "^docs/adr/.*\.md$" > /dev/null; then
+                echo "✅ Security ADR found in PR."
+              else
+                echo "❌ ERROR: Changes touch security-critical architecture ($SENSITIVE_PATHS), but no ADR was updated or added in docs/adr/."
+                exit 1
+              fi
+            else
+              echo "✅ No sensitive architecture paths modified. ADR not required."
+            fi
+          fi
