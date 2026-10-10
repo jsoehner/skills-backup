@@ -76,6 +76,7 @@ jobs:
       - name: Generate PQC Migration Dashboard & Step Summary
         run: |
           python3 scripts/analyze_cbom.py oss/cbom.json \
+            --sbom oss/sbom.spdx.json \
             --json oss/crypto-analysis.json \
             --markdown oss/crypto-summary.md \
             --step-summary

@@ -96,18 +96,20 @@ Alternatively, run the bundled script to execute both steps in a single command:
 bash scripts/generate_boms.sh -t docker -o oss my-demo-app:local
 ```
 
-### Step 4: Audit & Analyze Cryptographic Inventory
+### Step 4: Audit & Analyze Cryptographic Inventory & Supply Chain Coverage
 
-Inspect the generated `cbom.json` for security compliance and Post-Quantum Cryptography (PQC) readiness:
+Inspect the generated `cbom.json` for security compliance, Post-Quantum Cryptography (PQC) readiness, and third-party supply chain confidence:
 
 ```bash
-python3 scripts/analyze_cbom.py oss/cbom.json
+python3 scripts/analyze_cbom.py oss/cbom.json --sbom oss/sbom.cyclonedx.json
 ```
 
 Examine the findings:
-- Identify quantum-vulnerable asymmetric algorithms: `RSA`, `ECDSA`, `ECDH`, `Ed25519`, `DH`.
-- Confirm post-quantum algorithms if applicable: `ML-KEM` (Kyber), `ML-DSA` (Dilithium), `SLH-DSA` (SPHINCS+).
-- Review symmetric key lengths (ensure `AES-256` for long-term security).
+- **First-Party Code Visibility**: Confirms direct AST/SAST scanning across project code (ensuring no custom unvetted crypto).
+- **Third-Party Binary CBOM Assimilation**: Ingests known cryptographic profiles from `scripts/known_cbom_catalog.json` (or upstream CBOM attestations) for third-party dependencies (e.g. Tomcat TLS, RabbitMQ AMQPS, Spring WebClient).
+- **Audit Confidence Score**: Calculates an overall confidence index based on cataloged/verified dependencies vs unassimilated supply chain blind spots, lowering the score when upstream CBOMs are unavailable.
+- **PQC Migration Progress**: Evaluates quantum-vulnerable asymmetric algorithms (`RSA`, `ECDSA`, `ECDH`, `Ed25519`, `DH`) vs post-quantum standards (`ML-KEM`, `ML-DSA`, `SLH-DSA`) with honest zero-baseline handling (`N/A` when no asymmetric assets exist).
+- **Classical Symmetric Security**: Confirms symmetric key lengths (recommending `AES-256` / `SHA-256+` for Grover resistance).
 
 ### Step 5: Implement CI/CD Workflow with Verification Harness
 
