@@ -32,19 +32,59 @@ SYMMETRIC_CLASSICAL = {
 }
 
 
-def load_catalog(catalog_path: Optional[Path]) -> List[Dict[str, Any]]:
-    """Load known third-party CBOM catalog profiles if available."""
+def load_catalog(catalog_path: Optional[Path], external_cboms: Optional[List[Path]] = None) -> List[Dict[str, Any]]:
+    """Load known third-party CBOM catalog profiles and any external/upstream CBOMs."""
     default_path = Path(__file__).parent / "known_cbom_catalog.json"
     path_to_use = catalog_path or (default_path if default_path.exists() else None)
-    if not path_to_use or not path_to_use.exists():
-        return []
-    try:
-        with open(path_to_use, "r", encoding="utf-8") as f:
-            data = json.load(f)
-            return data.get("components", [])
-    except Exception as e:
-        print(f"Warning: Failed to load CBOM catalog {path_to_use}: {e}", file=sys.stderr)
-        return []
+    components = []
+
+    if path_to_use and path_to_use.exists():
+        try:
+            with open(path_to_use, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                components.extend(data.get("components", []))
+        except Exception as e:
+            print(f"Warning: Failed to load CBOM catalog {path_to_use}: {e}", file=sys.stderr)
+
+    # Ingest external or OCI-fetched CBOM files if provided
+    if external_cboms:
+        for ext_file in external_cboms:
+            if ext_file.exists():
+                try:
+                    with open(ext_file, "r", encoding="utf-8") as f:
+                        ext_data = json.load(f)
+                        ext_comps = ext_data.get("components", [])
+                        for ec in ext_comps:
+                            # If it's a full CycloneDX component with cryptoProperties, wrap it into catalog profile
+                            c_name = ec.get("name") or "External Dependency"
+                            c_purl = ec.get("purl") or ""
+                            crypto_props = ec.get("cryptoProperties", {})
+                            c_crypto_assets = []
+                            if crypto_props:
+                                algo_details = crypto_props.get("algorithmProperties", {})
+                                algo_name = str(algo_details.get("name") or c_name)
+                                c_crypto_assets.append({
+                                    "name": f"{c_name} Crypto Asset",
+                                    "primitive": str(algo_details.get("primitive") or "unknown"),
+                                    "algorithm": algo_name,
+                                    "pqc_status": "POST-QUANTUM READY" if any(re.search(p, algo_name.upper()) for p in POST_QUANTUM_PATTERNS) else (
+                                        "QUANTUM-VULNERABLE" if any(re.search(p, algo_name.upper()) for p in QUANTUM_VULNERABLE_PATTERNS) else "CLASSICAL/SYMMETRIC"
+                                    ),
+                                    "key_length": str(algo_details.get("parameterSetIdentifier") or algo_details.get("keyLength") or "N/A"),
+                                    "remediation": "Vendor provided attestation via OCI 1.1 / ORAS CBOM"
+                                })
+                            components.append({
+                                "name": c_name,
+                                "purlPattern": f"^{re.escape(c_purl.split('@')[0])}(@.*)?$" if c_purl else None,
+                                "category": "upstream-vendor-attestation",
+                                "confidence": "HIGH",
+                                "source": f"OCI / Upstream Vendor Attestation ({ext_file.name})",
+                                "cryptoAssets": c_crypto_assets
+                            })
+                except Exception as e:
+                    print(f"Warning: Failed to parse external CBOM {ext_file}: {e}", file=sys.stderr)
+
+    return components
 
 
 def parse_sbom_components(sbom_path: Path) -> List[Dict[str, Any]]:
@@ -177,7 +217,7 @@ def assimilate_third_party_cbom(
     confidence_metrics = {
         "total_dependencies": total_deps,
         "verified_dependencies_count": verified_count,
-        "unassimilated_dependencies_count": len(unassimilated_deps),
+        "unassimilated_dependencies_count": len(unassimilated),
         "coverage_percentage": coverage_pct,
         "confidence_score": confidence_score,
         "confidence_rating": rating,
@@ -185,10 +225,15 @@ def assimilate_third_party_cbom(
         "os_inventory_status": "Updated" if any(c.get("source") == "OS Inventory" for c in catalog) else "Not Updated"
     }
 
-    return assimilated_crypto, verified_inert, unassimilated_deps, confidence_metrics
+    return assimilated_crypto, verified_inert, unassimilated, confidence_metrics
 
 
-def analyze_cbom(cbom_path: Path, sbom_path: Optional[Path] = None, catalog_path: Optional[Path] = None):
+def analyze_cbom(
+    cbom_path: Path,
+    sbom_path: Optional[Path] = None,
+    catalog_path: Optional[Path] = None,
+    external_cboms: Optional[List[Path]] = None
+):
     with open(cbom_path, "r", encoding="utf-8") as f:
         data = json.load(f)
 
@@ -269,7 +314,7 @@ def analyze_cbom(cbom_path: Path, sbom_path: Optional[Path] = None, catalog_path
                 actual_sbom_path = candidate
                 break
 
-    catalog = load_catalog(catalog_path)
+    catalog = load_catalog(catalog_path, external_cboms=external_cboms)
     sbom_components = parse_sbom_components(actual_sbom_path) if actual_sbom_path else []
     assimilated_crypto, verified_inert, unassimilated_deps, confidence_metrics = assimilate_third_party_cbom(
         sbom_components, catalog
@@ -468,6 +513,7 @@ def main():
     parser.add_argument("cbom_file", type=Path, help="Path to CycloneDX CBOM JSON file")
     parser.add_argument("--sbom", type=Path, help="Path to CycloneDX/SPDX SBOM file containing software dependencies")
     parser.add_argument("--catalog", type=Path, help="Path to custom known CBOM catalog JSON")
+    parser.add_argument("--external-cbom", type=Path, action="append", default=[], help="Path to external/upstream CBOM JSON file (can be specified multiple times)")
     parser.add_argument("--json", type=Path, nargs="?", const="STDOUT", help="Output summary as raw JSON to stdout or specified file")
     parser.add_argument("--markdown", type=Path, help="Output markdown assessment report to specified file")
     parser.add_argument("--step-summary", action="store_true", help="Append markdown assessment to $GITHUB_STEP_SUMMARY if available")
@@ -477,7 +523,12 @@ def main():
         print(f"Error: CBOM file not found: {args.cbom_file}", file=sys.stderr)
         sys.exit(1)
 
-    summary = analyze_cbom(args.cbom_file, sbom_path=args.sbom, catalog_path=args.catalog)
+    summary = analyze_cbom(
+        args.cbom_file,
+        sbom_path=args.sbom,
+        catalog_path=args.catalog,
+        external_cboms=args.external_cbom
+    )
     md_content = generate_markdown_summary(summary)
 
     if args.markdown:

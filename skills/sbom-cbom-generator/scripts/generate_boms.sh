@@ -154,22 +154,36 @@ fi
 log "SBOM generated successfully: $SBOM_OUTPUT"
 
 # ------------------------------------------------------------------------------
-# 2. Generate CBOM (using cdxgen with --include-crypto)
+# 2. Discover or Generate CBOM (Cryptographic Bill of Materials)
 # ------------------------------------------------------------------------------
-log "Step 2: Generating Cryptographic Bill of Materials (CBOM)..."
+log "Step 2: Resolving Cryptographic Bill of Materials (CBOM)..."
 
-if [[ ${#CDXGEN_CMD[@]} -eq 0 ]]; then
-    echo "Error: 'cdxgen' or 'npx' is required to generate CBOM with cryptographic inventory." >&2
-    echo "Install via: npm install -g @cyclonedx/cdxgen" >&2
-    exit 1
-fi
-
-log "Running cdxgen with cryptographic discovery (${CDXGEN_CMD[*]})..."
+FETCHED_FROM_OCI=false
 if [[ "$TARGET_TYPE" == "docker" ]]; then
-    "${CDXGEN_CMD[@]}" -t docker --include-crypto -o "$CBOM_OUTPUT" "$TARGET"
-else
-    "${CDXGEN_CMD[@]}" --include-crypto -o "$CBOM_OUTPUT" "$TARGET"
+    FETCH_SCRIPT="${SKILL_DIR}/scripts/fetch_oci_cbom.py"
+    if [[ -f "$FETCH_SCRIPT" ]]; then
+        log "Checking OCI Distribution Spec v1.1+ registry referrers for pre-attached upstream CBOM..."
+        if python3 "$FETCH_SCRIPT" "$TARGET" -o "$CBOM_OUTPUT" 2>/dev/null; then
+            log "✅ Discovered and retrieved pre-attached upstream CBOM via OCI Referrers API / ORAS!"
+            FETCHED_FROM_OCI=true
+        fi
+    fi
 fi
 
-log "CBOM generated successfully: $CBOM_OUTPUT"
+if [[ "$FETCHED_FROM_OCI" == "false" ]]; then
+    if [[ ${#CDXGEN_CMD[@]} -eq 0 ]]; then
+        echo "Error: 'cdxgen' or 'npx' is required to generate CBOM with cryptographic inventory." >&2
+        echo "Install via: npm install -g @cyclonedx/cdxgen" >&2
+        exit 1
+    fi
+
+    log "No pre-attached OCI CBOM found. Running deep cryptographic analysis (${CDXGEN_CMD[*]} --include-crypto)..."
+    if [[ "$TARGET_TYPE" == "docker" ]]; then
+        "${CDXGEN_CMD[@]}" -t docker --include-crypto -o "$CBOM_OUTPUT" "$TARGET"
+    else
+        "${CDXGEN_CMD[@]}" --include-crypto -o "$CBOM_OUTPUT" "$TARGET"
+    fi
+fi
+
+log "CBOM resolved successfully: $CBOM_OUTPUT"
 log "BOM generation process complete."

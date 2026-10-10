@@ -115,6 +115,14 @@ cp "${SKILL_ROOT}/scripts/test_boms.sh" "${REPO_DIR}/scripts/test_boms.sh"
 if [[ -f "${SKILL_ROOT}/scripts/known_cbom_catalog.json" ]]; then
     cp "${SKILL_ROOT}/scripts/known_cbom_catalog.json" "${REPO_DIR}/scripts/known_cbom_catalog.json"
 fi
+if [[ -f "${SKILL_ROOT}/scripts/fetch_oci_cbom.py" ]]; then
+    cp "${SKILL_ROOT}/scripts/fetch_oci_cbom.py" "${REPO_DIR}/scripts/fetch_oci_cbom.py"
+    chmod +x "${REPO_DIR}/scripts/fetch_oci_cbom.py"
+fi
+if [[ -f "${SKILL_ROOT}/scripts/attach_oci_bom.sh" ]]; then
+    cp "${SKILL_ROOT}/scripts/attach_oci_bom.sh" "${REPO_DIR}/scripts/attach_oci_bom.sh"
+    chmod +x "${REPO_DIR}/scripts/attach_oci_bom.sh"
+fi
 if [[ -f "${SKILL_ROOT}/scripts/enrich_sbom_gradle.py" && ( -f "${REPO_DIR}/build.gradle" || -f "${REPO_DIR}/build.gradle.kts" ) ]]; then
     cp "${SKILL_ROOT}/scripts/enrich_sbom_gradle.py" "${REPO_DIR}/scripts/enrich_sbom_gradle.py"
     chmod +x "${REPO_DIR}/scripts/enrich_sbom_gradle.py"
@@ -261,8 +269,13 @@ ${GRADLE_ENRICH}
             elif [ -f oss/sbom.spdx.json ]; then
               SBOM_ARG="--sbom oss/sbom.spdx.json"
             fi
+            EXT_ARG=""
+            if [ -f oss/upstream_cbom.json ]; then
+              EXT_ARG="--external-cbom oss/upstream_cbom.json"
+            fi
             python3 scripts/analyze_cbom.py oss/cbom.json \\
               \$SBOM_ARG \\
+              \$EXT_ARG \\
               --json oss/crypto-analysis.json \\
               --markdown oss/crypto-summary.md \\
               --step-summary
@@ -301,11 +314,16 @@ EOF
 echo "✅ Done"
 
 # 4. Generate Initial Local Audit & Documentation
-echo -n "Generating local cryptographic scan and updating documentation ... "
-python3 "${REPO_DIR}/scripts/scan_crypto_ast.py" "${REPO_DIR}" --cbom "${REPO_DIR}/oss/cbom.json" >/dev/null 2>&1 || true
-python3 "${REPO_DIR}/scripts/analyze_cbom.py" "${REPO_DIR}/oss/cbom.json" --markdown "${REPO_DIR}/oss/crypto-summary.md" >/dev/null 2>&1 || true
-if [[ -f "${REPO_DIR}/oss/crypto-summary.md" ]]; then
-    cp "${REPO_DIR}/oss/crypto-summary.md" "${REPO_DIR}/docs/security/CRYPTOGRAPHIC_AUDIT.md"
+if [[ -f "${REPO_DIR}/oss/cbom.json" ]]; then
+    echo -n "Generating local cryptographic scan and updating documentation ... "
+    python3 "${REPO_DIR}/scripts/scan_crypto_ast.py" "${REPO_DIR}" --cbom "${REPO_DIR}/oss/cbom.json" >/dev/null 2>&1 || true
+    python3 "${REPO_DIR}/scripts/analyze_cbom.py" "${REPO_DIR}/oss/cbom.json" --markdown "${REPO_DIR}/oss/crypto-summary.md" >/dev/null 2>&1 || true
+    if [[ -f "${REPO_DIR}/oss/crypto-summary.md" ]]; then
+        cp "${REPO_DIR}/oss/crypto-summary.md" "${REPO_DIR}/docs/security/CRYPTOGRAPHIC_AUDIT.md"
+    fi
+    echo "✅ Done"
+else
+    echo "Skipping initial audit: No CBOM detected. Please run 'bash scripts/generate_boms.sh' first to populate the oss/ directory."
 fi
 echo "✅ Done"
 

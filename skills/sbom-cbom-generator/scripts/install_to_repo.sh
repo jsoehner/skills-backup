@@ -115,6 +115,14 @@ cp "${SKILL_ROOT}/scripts/test_boms.sh" "${REPO_DIR}/scripts/test_boms.sh"
 if [[ -f "${SKILL_ROOT}/scripts/known_cbom_catalog.json" ]]; then
     cp "${SKILL_ROOT}/scripts/known_cbom_catalog.json" "${REPO_DIR}/scripts/known_cbom_catalog.json"
 fi
+if [[ -f "${SKILL_ROOT}/scripts/fetch_oci_cbom.py" ]]; then
+    cp "${SKILL_ROOT}/scripts/fetch_oci_cbom.py" "${REPO_DIR}/scripts/fetch_oci_cbom.py"
+    chmod +x "${REPO_DIR}/scripts/fetch_oci_cbom.py"
+fi
+if [[ -f "${SKILL_ROOT}/scripts/attach_oci_bom.sh" ]]; then
+    cp "${SKILL_ROOT}/scripts/attach_oci_bom.sh" "${REPO_DIR}/scripts/attach_oci_bom.sh"
+    chmod +x "${REPO_DIR}/scripts/attach_oci_bom.sh"
+fi
 if [[ -f "${SKILL_ROOT}/scripts/enrich_sbom_gradle.py" && ( -f "${REPO_DIR}/build.gradle" || -f "${REPO_DIR}/build.gradle.kts" ) ]]; then
     cp "${SKILL_ROOT}/scripts/enrich_sbom_gradle.py" "${REPO_DIR}/scripts/enrich_sbom_gradle.py"
     chmod +x "${REPO_DIR}/scripts/enrich_sbom_gradle.py"
@@ -261,8 +269,13 @@ ${GRADLE_ENRICH}
             elif [ -f oss/sbom.spdx.json ]; then
               SBOM_ARG="--sbom oss/sbom.spdx.json"
             fi
+            EXT_ARG=""
+            if [ -f oss/upstream_cbom.json ]; then
+              EXT_ARG="--external-cbom oss/upstream_cbom.json"
+            fi
             python3 scripts/analyze_cbom.py oss/cbom.json \\
               \$SBOM_ARG \\
+              \$EXT_ARG \\
               --json oss/crypto-analysis.json \\
               --markdown oss/crypto-summary.md \\
               --step-summary

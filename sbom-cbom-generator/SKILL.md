@@ -12,13 +12,16 @@ Provides workflows, automation scripts, and verification procedures to generate 
 
 This skill bundles automation scripts and technical references to perform generation and audit tasks without cluttering context:
 
-- **Generation Script**: Execute `bash scripts/generate_boms.sh [OPTIONS] <TARGET>` to generate both SBOM and CBOM for Docker images or local source trees.
+- **Generation Script**: Execute `bash scripts/generate_boms.sh [OPTIONS] <TARGET>` to discover attached upstream CBOMs via OCI referrers or generate both SBOM and CBOM for Docker images and local source trees.
+- **OCI / ORAS CBOM Fetcher**: Execute `python3 scripts/fetch_oci_cbom.py <IMAGE_REF> -o oss/upstream_cbom.json` to query OCI 1.1 referrers without pulling or running the full image.
+- **OCI / ORAS Attacher**: Run `bash scripts/attach_oci_bom.sh [OPTIONS] <IMAGE_REF>` to attach generated SBOM/CBOM artifacts to container images in any OCI 1.1 registry.
 - **AST Crypto Scanner & Reconciler**: Run `python3 scripts/scan_crypto_ast.py <REPO_DIR> --cbom <CBOM_PATH>` to perform dual-engine semantic AST discovery across active languages (Python, JS/TS, Go, Java, Rust, C#, C/C++) and guarantee 100% CBOM reconciliation.
-- **CBOM Analyzer & PQC Dashboard**: Run `python3 scripts/analyze_cbom.py <path/to/cbom.json>` to inspect cryptographic assets, evaluate algorithm distributions, calculate PQC migration progress percentages, and identify quantum-vulnerable primitives.
+- **CBOM Analyzer & PQC Dashboard**: Run `python3 scripts/analyze_cbom.py oss/cbom.json --sbom oss/sbom.cyclonedx.json [--external-cbom <PATH>]` to inspect cryptographic assets, evaluate algorithm distributions, assimilate vendor & OSS catalog profiles, calculate PQC migration progress percentages, and identify quantum-vulnerable primitives.
+- **OS Inventory Update**: Run `python3 scripts/update_os_inventory.py` to scan the local operating system for cryptographic components and update the `known_cbom_catalog.json` inventory. This can be scheduled as a nightly task.
 - **Repository Installer**: Run `bash scripts/install_to_repo.sh [OPTIONS] <TARGET_REPO>` to automatically install generation scripts, verification test harness, AST scanner, and GitHub Actions CI workflow into any target repository.
 - **BOM Verification Harness**: Run `bash scripts/test_boms.sh [BOM_DIR]` to validate that generated SBOM/CBOM artifacts exist, conform to JSON/CycloneDX schemas, and pass cryptographic audits.
 - **Skill Test Suite**: Run `bash tests/run_tests.sh` to run structural validation, CLI checks, and CBOM analyzer unit tests.
-- **Workflow Template**: Refer to [references/workflow_template.yml](file://references/workflow_template.yml) for a production-grade, hardened GitHub Actions configuration using `cbomkit/cbomkit-action`.
+- **Workflow Template**: Refer to [references/workflow_template.yml](file://references/workflow_template.yml) for a production-grade, hardened GitHub Actions configuration using `cbomkit/cbomkit-action`, ORAS setup, OCI 1.1 referrer discovery, and upstream assimilation.
 - **Crypto Taxonomy**: Consult [references/cbom_crypto_taxonomy.md](file://references/cbom_crypto_taxonomy.md) for CycloneDX cryptographic property mappings and Post-Quantum Cryptography (PQC) standards.
 
 ---
@@ -36,18 +39,56 @@ This skill bundles automation scripts and technical references to perform genera
 ```
 What is the target artifact and objective?
  ├─ Container Image (.tar, local docker daemon, or registry tag)
- │   ├─ Generate standard software packages/OS dependencies → Syft / anchore/sbom-action (SPDX-JSON)
- │   └─ Generate cryptographic assets, certs, and ciphers → cdxgen -t docker --include-crypto (CycloneDX)
+ │   ├─ 1. Check OCI 1.1 Referrers / ORAS Graph → python3 scripts/fetch_oci_cbom.py <IMAGE_REF>
+ │   │    └─ Discovered? Ingest upstream vendor CBOM without running crypto extraction
+ │   ├─ 2. Generate standard software packages/OS dependencies → Syft / anchore/sbom-action (SPDX-JSON)
+ │   └─ 3. No pre-attached CBOM available? Fallback to deep scan → cdxgen -t docker --include-crypto (CycloneDX)
  ├─ Local Source Code Directory / Repository
  │   ├─ Package-level software dependencies → syft dir:. or cdxgen .
  │   └─ Source code crypto algorithms & dependencies → cbomkit or cdxgen --include-crypto .
  └─ CI/CD Integration
-     └─ Use GitHub Actions workflow with anchore/sbom-action + cbomkit/cbomkit-action + actions/upload-artifact
+     └─ Use GitHub Actions workflow with ORAS + anchore/sbom-action + cbomkit/cbomkit-action + analyze_cbom
 ```
 
 ---
 
+## Procuring Third-Party Metadata
+
+When vetting third-party commercial or open-source image providers, request their cryptographic metadata directly to avoid the overhead of independent scanning. Ask for:
+- **In-Toto Attestation**: Embedded with a `cosign` layer containing the CycloneDX crypto schema.
+- **ORAS Attach Payload**: Flagged with the custom artifact type `application/vnd.cyclonedx+json`.
+
+This ensures that you receive cryptographically signed and verified metadata that is ready for ingestion into your CBOM pipeline.
+
+---
+
+## Distribution Strategies
+
+
+### Production Distribution: OCI Artifacts
+For production environments, it is highly recommended to distribute CBOMs as standalone OCI artifacts rather than embedding them within the container image. This follows the **OCI Distribution Specification (v1.1+)** and the **ORAS (OCI Registry As Storage) graph standard**.
+
+**Benefits:**
+- **Decoupled Lifecycle**: Update or rotate the CBOM independently of the application image.\n- **Native Registry Integration**: Leverage standard registry tools for querying, listing, and verifying CBOMs.\n- **Admission Control**: Facilitate gatekeeping by allowing security scanners to verify the presence and signature of a linked CBOM artifact before deployment.\n
+
+**Implementation Path:**
+1. Generate the CBOM (e.g., `oss/cbom.json`).
+2. Use a tool like `oras` or `skopeo` to push the JSON as an OCI artifact to the registry.\n3. Link the CBOM to the image via OCI annotations or by following a deterministic naming convention (e.g., `my-app:v1.0.0-cbom`).
+
+### Aggregation & Merging (CycloneDX 1.6+)
+
+Leverage the global standardization of OWASP CycloneDX 1.6+ to aggregate multiple CBOMs into a unified primary system mapping.
+
+**Strategy:**
+- **Tooling**: Use generic CycloneDX aggregation tools (e.g., `bom-merge`) to merge retrieved JSON files from various sources (upstream vendors, internal microservices, etc.).
+- **Unified Mapping**: Create a single source of truth for your organization's cryptographic footprint by merging individual component CBOMs into a consolidated master record.
+- **Advantage**: Simplifies cross-component vulnerability analysis and PQC migration planning by providing a holistic view of all cryptographic assets in a standard format.
+
+---
+
 ## Step-by-Step Execution Procedure
+
+
 
 ### Step 1: Environment & Tooling Verification
 
