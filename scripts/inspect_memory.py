@@ -82,13 +82,28 @@ def parse_memory_document(text: str, filename: str = "", default_type: str = "Un
         elif s.lower().startswith("summary:") and not summary:
             summary = s.split(":", 1)[1].strip()
 
-    if not title:
-        title = filename or "Untitled Memory Entry"
+    # Clean up generic title or filename fallback
+    is_generic = (
+        not title
+        or title.lower() in ("okf decision", "# okf decision", "chroma context", "# chroma context", "untitled memory entry")
+        or title == filename
+        or title.endswith(".md")
+    )
 
-    # If title still generic, refine from filename or first sentence
-    if title.lower() in ("okf decision", "# okf decision", "chroma context", "# chroma context"):
-        clean_stem = Path(filename).stem.replace("_", " ").replace("-", " ").title()
-        title = clean_stem if clean_stem else title
+    if is_generic:
+        clean_name = re.sub(r"^\d{4}[-_]\d{2}[-_]\d{2}[-_]?", "", Path(filename).stem)
+        clean_stem = clean_name.replace("_", " ").replace("-", " ").strip()
+        if clean_stem:
+            # Capitalize words while preserving uppercase acronyms (e.g., RAW, DNG, ADCS)
+            words = []
+            for w in clean_stem.split():
+                if w.isupper() and len(w) > 1:
+                    words.append(w)
+                else:
+                    words.append(w.capitalize())
+            title = " ".join(words)
+        else:
+            title = filename or "Untitled Memory Entry"
 
     # Extract summary if not explicitly provided
     if not summary:

@@ -60,20 +60,24 @@ When completing a task or documenting a decision:
 
 1. **Format the Output**:
    Write the knowledge summary into a temporary file or directly into `~/memory_system/inbox/<filename>.md` (or `$MEMORY_INBOX/<filename>.md`).
+   - Use descriptive lowercase slugs for `<filename>` (e.g. `raw_master_preservation_and_viewable_separation.md`).
+   - Do **not** prefix filenames with dates (e.g. avoid `2026-10-04-`); capture dates are tracked automatically by the filesystem and indexing metadata.
 
-2. **Specify Classification Hint (Optional Header)**:
-   Add a header at the top of the file to guide routing if necessary:
+2. **Specify Classification Hint (Header Standard)**:
+   Always provide a descriptive title directly on the header line to guarantee clean display in memory inspection and search tools:
    - For **Source of Truth / Rules / Policies**:
      ```markdown
-     # OKF Decision
+     # OKF Decision: <Descriptive Title>
      Type: Policy / Architecture Standard
-     Summary: ...
+     Domain: <Optional Domain Area>
+     Summary: <Concise executive summary>
      ```
    - For **Logs / Bug Fixes / Technical Snippets**:
      ```markdown
-     # Chroma Context
+     # Chroma Context: <Descriptive Title>
      Type: Troubleshooting / Bug Report
-     Summary: ...
+     Domain: <Optional Domain Area>
+     Summary: <Concise description of the fix or learning>
      ```
 
 3. **Trigger Processing**:
