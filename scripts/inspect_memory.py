@@ -62,10 +62,17 @@ def parse_memory_document(text: str, filename: str = "", default_type: str = "Un
                     summary = line.split(":", 1)[1].strip()
 
     # Extract headers and metadata keys
+    in_code = False
     for line in lines:
         s = line.strip()
         if not s:
             continue
+        if s.startswith("```"):
+            in_code = not in_code
+            continue
+        if in_code:
+            continue
+
         if not title:
             if s.startswith("# OKF Decision:") or s.startswith("# OKF Decision -"):
                 title = s.split(":", 1)[1].strip() if ":" in s else s.split("-", 1)[1].strip()
@@ -75,9 +82,9 @@ def parse_memory_document(text: str, filename: str = "", default_type: str = "Un
                 title = s[2:].strip()
         if s.lower().startswith("title:") and (not title or title in ("# OKF Decision", "OKF Decision", "Chroma Context")):
             title = s.split(":", 1)[1].strip()
-        if s.lower().startswith("type:"):
+        if s.lower().startswith("type:") and doc_type == default_type:
             doc_type = s.split(":", 1)[1].strip()
-        elif s.lower().startswith("domain:"):
+        elif s.lower().startswith("domain:") and not domain:
             domain = s.split(":", 1)[1].strip()
         elif s.lower().startswith("summary:") and not summary:
             summary = s.split(":", 1)[1].strip()
