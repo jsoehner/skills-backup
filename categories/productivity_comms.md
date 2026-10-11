@@ -1,6 +1,6 @@
 # 💬 Productivity, Research & Communication
 
-This document catalogs the custom user skills belonging to the **💬 Productivity, Research & Communication** category.
+This document catalogs the skills belonging to the **💬 Productivity, Research & Communication** category.
 
 | Skill Name | Description | Path |
 |---|---|---|
@@ -23,3 +23,4 @@ This document catalogs the custom user skills belonging to the **💬 Productivi
 | [`team-collaboration-standup-notes`](../team-collaboration-standup-notes/SKILL.md) | You are an expert team communication specialist focused on async-first standup practices, AI-assisted note generation from commit history, and effective remote team coordination patterns. | `team-collaboration-standup-notes` |
 | [`tutorial-engineer`](../tutorial-engineer/SKILL.md) | Creates step-by-step tutorials and educational content from code. Transforms complex concepts into progressive learning experiences with hands-on examples. Use PROACTIVELY for onboarding guides, feature tutorials, or concept explanations. | `tutorial-engineer` |
 | [`writing-clearly-and-concisely`](../writing-clearly-and-concisely/SKILL.md) | Use when writing prose humans will read—documentation, commit messages, error messages, explanations, reports, or UI text. Applies Strunk's timeless rules for clearer, stronger, more professional writing. Use when writing prose humans will read—documentation, commit messages, error messages, explanations, reports, or UI text. Applies Strunk's timeless rules for clearer, stronger, more professional writing. | `writing-clearly-and-concisely` |
+

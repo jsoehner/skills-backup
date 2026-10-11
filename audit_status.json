@@ -124,11 +124,6 @@
     "path": "dependency-lifecycle-orchestrator",
     "categorized": true
   },
-  "dependency-management-deps-audit": {
-    "name": "dependency-management-deps-audit",
-    "path": "dependency-management-deps-audit",
-    "categorized": true
-  },
   "dependency-updater": {
     "name": "dependency-updater",
     "path": "dependency-updater",
@@ -654,19 +649,9 @@
     "path": "agent-orchestration-multi-agent-optimize",
     "categorized": true
   },
-  "ai-engineer": {
-    "name": "ai-engineer",
-    "path": "ai-engineer",
-    "categorized": true
-  },
   "airflow-dag-patterns": {
     "name": "airflow-dag-patterns",
     "path": "airflow-dag-patterns",
-    "categorized": true
-  },
-  "algorithmic-art": {
-    "name": "algorithmic-art",
-    "path": "algorithmic-art",
     "categorized": true
   },
   "alloydb-omni-access-control": {
@@ -789,11 +774,6 @@
     "path": "architecture-decision-records",
     "categorized": true
   },
-  "architecture-governance-orchestrator": {
-    "name": "architecture-governance-orchestrator",
-    "path": "architecture-governance-orchestrator",
-    "categorized": true
-  },
   "architecture-patterns": {
     "name": "architecture-patterns",
     "path": "architecture-patterns",
@@ -827,16 +807,6 @@
   "auth-implementation-patterns": {
     "name": "auth-implementation-patterns",
     "path": "auth-implementation-patterns",
-    "categorized": true
-  },
-  "backend-architect": {
-    "name": "backend-architect",
-    "path": "backend-architect",
-    "categorized": true
-  },
-  "backend-development-feature-development": {
-    "name": "backend-development-feature-development",
-    "path": "backend-development-feature-development",
     "categorized": true
   },
   "backend-security-coder": {
@@ -1094,11 +1064,6 @@
     "path": "code-reviewer",
     "categorized": true
   },
-  "codebase-cleanup-deps-audit": {
-    "name": "codebase-cleanup-deps-audit",
-    "path": "codebase-cleanup-deps-audit",
-    "categorized": true
-  },
   "codebase-cleanup-refactor-clean": {
     "name": "codebase-cleanup-refactor-clean",
     "path": "codebase-cleanup-refactor-clean",
@@ -1249,104 +1214,9 @@
     "path": "customer-support",
     "categorized": true
   },
-  "daily-meeting-update": {
-    "name": "daily-meeting-update",
-    "path": "daily-meeting-update",
-    "categorized": true
-  },
   "data-autocleaning": {
     "name": "data-autocleaning",
     "path": "data-autocleaning",
-    "categorized": true
-  },
-  "data-engineer": {
-    "name": "data-engineer",
-    "path": "data-engineer",
-    "categorized": true
-  },
-  "data-engineering-data-driven-feature": {
-    "name": "data-engineering-data-driven-feature",
-    "path": "data-engineering-data-driven-feature",
-    "categorized": true
-  },
-  "data-engineering-data-pipeline": {
-    "name": "data-engineering-data-pipeline",
-    "path": "data-engineering-data-pipeline",
-    "categorized": true
-  },
-  "data-quality-frameworks": {
-    "name": "data-quality-frameworks",
-    "path": "data-quality-frameworks",
-    "categorized": true
-  },
-  "data-scientist": {
-    "name": "data-scientist",
-    "path": "data-scientist",
-    "categorized": true
-  },
-  "data-storytelling": {
-    "name": "data-storytelling",
-    "path": "data-storytelling",
-    "categorized": true
-  },
-  "database-admin": {
-    "name": "database-admin",
-    "path": "database-admin",
-    "categorized": true
-  },
-  "database-architect": {
-    "name": "database-architect",
-    "path": "database-architect",
-    "categorized": true
-  },
-  "database-cloud-optimization-cost-optimize": {
-    "name": "database-cloud-optimization-cost-optimize",
-    "path": "database-cloud-optimization-cost-optimize",
-    "categorized": true
-  },
-  "database-migration": {
-    "name": "database-migration",
-    "path": "database-migration",
-    "categorized": true
-  },
-  "database-migrations-migration-observability": {
-    "name": "database-migrations-migration-observability",
-    "path": "database-migrations-migration-observability",
-    "categorized": true
-  },
-  "database-migrations-sql-migrations": {
-    "name": "database-migrations-sql-migrations",
-    "path": "database-migrations-sql-migrations",
-    "categorized": true
-  },
-  "database-optimizer": {
-    "name": "database-optimizer",
-    "path": "database-optimizer",
-    "categorized": true
-  },
-  "database-schema-designer": {
-    "name": "database-schema-designer",
-    "path": "database-schema-designer",
-    "categorized": true
-  },
-  "datadog-cli": {
-    "name": "datadog-cli",
-    "path": "datadog-cli",
-    "categorized": true
-  },
-  "dataform-bigquery": {
-    "name": "dataform-bigquery",
-    "path": "dataform-bigquery",
-    "categorized": true
-  },
-  "dbt-bigquery": {
-    "name": "dbt-bigquery",
-    "path": "dbt-bigquery",
-    "categorized": true
-  },
-  "dbt-transformation-patterns": {
-    "name": "dbt-transformation-patterns",
-    "path": "dbt-transformation-patterns",
     "categorized": true
   },
   "debugger": {
@@ -1369,109 +1239,9 @@
     "path": "defi-protocol-templates",
     "categorized": true
   },
-  "dependency-lifecycle-orchestrator": {
-    "name": "dependency-lifecycle-orchestrator",
-    "path": "dependency-lifecycle-orchestrator",
-    "categorized": true
-  },
-  "dependency-management-deps-audit": {
-    "name": "dependency-management-deps-audit",
-    "path": "dependency-management-deps-audit",
-    "categorized": true
-  },
-  "dependency-updater": {
-    "name": "dependency-updater",
-    "path": "dependency-updater",
-    "categorized": true
-  },
-  "dependency-upgrade": {
-    "name": "dependency-upgrade",
-    "path": "dependency-upgrade",
-    "categorized": true
-  },
-  "deployment-engineer": {
-    "name": "deployment-engineer",
-    "path": "deployment-engineer",
-    "categorized": true
-  },
-  "deployment-pipeline-design": {
-    "name": "deployment-pipeline-design",
-    "path": "deployment-pipeline-design",
-    "categorized": true
-  },
-  "deployment-validation-config-validate": {
-    "name": "deployment-validation-config-validate",
-    "path": "deployment-validation-config-validate",
-    "categorized": true
-  },
-  "design-system-starter": {
-    "name": "design-system-starter",
-    "path": "design-system-starter",
-    "categorized": true
-  },
-  "devops-troubleshooter": {
-    "name": "devops-troubleshooter",
-    "path": "devops-troubleshooter",
-    "categorized": true
-  },
-  "difficult-workplace-conversations": {
-    "name": "difficult-workplace-conversations",
-    "path": "difficult-workplace-conversations",
-    "categorized": true
-  },
   "director": {
     "name": "director",
     "path": "director",
-    "categorized": true
-  },
-  "discovering-gcp-data-assets": {
-    "name": "discovering-gcp-data-assets",
-    "path": "discovering-gcp-data-assets",
-    "categorized": true
-  },
-  "distributed-debugging-debug-trace": {
-    "name": "distributed-debugging-debug-trace",
-    "path": "distributed-debugging-debug-trace",
-    "categorized": true
-  },
-  "distributed-tracing": {
-    "name": "distributed-tracing",
-    "path": "distributed-tracing",
-    "categorized": true
-  },
-  "django-pro": {
-    "name": "django-pro",
-    "path": "django-pro",
-    "categorized": true
-  },
-  "docs-architect": {
-    "name": "docs-architect",
-    "path": "docs-architect",
-    "categorized": true
-  },
-  "documentation-generation-doc-generate": {
-    "name": "documentation-generation-doc-generate",
-    "path": "documentation-generation-doc-generate",
-    "categorized": true
-  },
-  "docx": {
-    "name": "docx",
-    "path": "docx",
-    "categorized": true
-  },
-  "domain-name-brainstormer": {
-    "name": "domain-name-brainstormer",
-    "path": "domain-name-brainstormer",
-    "categorized": true
-  },
-  "dotnet-architect": {
-    "name": "dotnet-architect",
-    "path": "dotnet-architect",
-    "categorized": true
-  },
-  "dotnet-backend-patterns": {
-    "name": "dotnet-backend-patterns",
-    "path": "dotnet-backend-patterns",
     "categorized": true
   },
   "draw-io": {
@@ -1514,11 +1284,6 @@
     "path": "error-debugging-error-trace",
     "categorized": true
   },
-  "error-debugging-multi-agent-review": {
-    "name": "error-debugging-multi-agent-review",
-    "path": "error-debugging-multi-agent-review",
-    "categorized": true
-  },
   "error-detective": {
     "name": "error-detective",
     "path": "error-detective",
@@ -1532,11 +1297,6 @@
   "error-diagnostics-error-trace": {
     "name": "error-diagnostics-error-trace",
     "path": "error-diagnostics-error-trace",
-    "categorized": true
-  },
-  "error-diagnostics-orchestrator": {
-    "name": "error-diagnostics-orchestrator",
-    "path": "error-diagnostics-orchestrator",
     "categorized": true
   },
   "error-diagnostics-smart-debug": {
@@ -1604,26 +1364,6 @@
     "path": "flutter-expert",
     "categorized": true
   },
-  "framework-migration-code-migrate": {
-    "name": "framework-migration-code-migrate",
-    "path": "framework-migration-code-migrate",
-    "categorized": true
-  },
-  "framework-migration-deps-upgrade": {
-    "name": "framework-migration-deps-upgrade",
-    "path": "framework-migration-deps-upgrade",
-    "categorized": true
-  },
-  "framework-migration-legacy-modernize": {
-    "name": "framework-migration-legacy-modernize",
-    "path": "framework-migration-legacy-modernize",
-    "categorized": true
-  },
-  "frontend-developer": {
-    "name": "frontend-developer",
-    "path": "frontend-developer",
-    "categorized": true
-  },
   "frontend-mobile-development-component-scaffold": {
     "name": "frontend-mobile-development-component-scaffold",
     "path": "frontend-mobile-development-component-scaffold",
@@ -1644,16 +1384,6 @@
     "path": "frontend-to-backend-requirements",
     "categorized": true
   },
-  "full-stack-orchestration-full-stack-feature": {
-    "name": "full-stack-orchestration-full-stack-feature",
-    "path": "full-stack-orchestration-full-stack-feature",
-    "categorized": true
-  },
-  "game-changing-features": {
-    "name": "game-changing-features",
-    "path": "game-changing-features",
-    "categorized": true
-  },
   "gcloud-auth-verification": {
     "name": "gcloud-auth-verification",
     "path": "gcloud-auth-verification",
@@ -1664,34 +1394,14 @@
     "path": "gcp-composer-troubleshooting",
     "categorized": true
   },
-  "gcp-data-pipelines": {
-    "name": "gcp-data-pipelines",
-    "path": "gcp-data-pipelines",
-    "categorized": true
-  },
-  "gcp-dataflow": {
-    "name": "gcp-dataflow",
-    "path": "gcp-dataflow",
-    "categorized": true
-  },
   "gcp-managed-airflow-migrations": {
     "name": "gcp-managed-airflow-migrations",
     "path": "gcp-managed-airflow-migrations",
     "categorized": true
   },
-  "gcp-pipeline-orchestration": {
-    "name": "gcp-pipeline-orchestration",
-    "path": "gcp-pipeline-orchestration",
-    "categorized": true
-  },
   "gcp-pipeline-resource-provisioning": {
     "name": "gcp-pipeline-resource-provisioning",
     "path": "gcp-pipeline-resource-provisioning",
-    "categorized": true
-  },
-  "gcp-spark": {
-    "name": "gcp-spark",
-    "path": "gcp-spark",
     "categorized": true
   },
   "gcs-security-assessment": {
@@ -1704,34 +1414,9 @@
     "path": "gdpr-data-handling",
     "categorized": true
   },
-  "gemini": {
-    "name": "gemini",
-    "path": "gemini",
-    "categorized": true
-  },
-  "gepetto": {
-    "name": "gepetto",
-    "path": "gepetto",
-    "categorized": true
-  },
   "git-advanced-workflows": {
     "name": "git-advanced-workflows",
     "path": "git-advanced-workflows",
-    "categorized": true
-  },
-  "git-pr-workflows-git-workflow": {
-    "name": "git-pr-workflows-git-workflow",
-    "path": "git-pr-workflows-git-workflow",
-    "categorized": true
-  },
-  "git-pr-workflows-onboard": {
-    "name": "git-pr-workflows-onboard",
-    "path": "git-pr-workflows-onboard",
-    "categorized": true
-  },
-  "git-pr-workflows-pr-enhance": {
-    "name": "git-pr-workflows-pr-enhance",
-    "path": "git-pr-workflows-pr-enhance",
     "categorized": true
   },
   "github-actions-node24": {
@@ -1747,11 +1432,6 @@
   "gitlab-ci-patterns": {
     "name": "gitlab-ci-patterns",
     "path": "gitlab-ci-patterns",
-    "categorized": true
-  },
-  "gitops-workflow": {
-    "name": "gitops-workflow",
-    "path": "gitops-workflow",
     "categorized": true
   },
   "go-concurrency-patterns": {
@@ -1774,11 +1454,6 @@
     "path": "grafana-dashboards",
     "categorized": true
   },
-  "graphql-architect": {
-    "name": "graphql-architect",
-    "path": "graphql-architect",
-    "categorized": true
-  },
   "haskell-pro": {
     "name": "haskell-pro",
     "path": "haskell-pro",
@@ -1797,11 +1472,6 @@
   "humanizer": {
     "name": "humanizer",
     "path": "humanizer",
-    "categorized": true
-  },
-  "hybrid-cloud-architect": {
-    "name": "hybrid-cloud-architect",
-    "path": "hybrid-cloud-architect",
     "categorized": true
   },
   "hybrid-cloud-networking": {
@@ -1824,29 +1494,9 @@
     "path": "hyperframes-registry",
     "categorized": true
   },
-  "hyperframes": {
-    "name": "hyperframes",
-    "path": "hyperframes",
-    "categorized": true
-  },
   "image-enhancer": {
     "name": "image-enhancer",
     "path": "image-enhancer",
-    "categorized": true
-  },
-  "incident-responder": {
-    "name": "incident-responder",
-    "path": "incident-responder",
-    "categorized": true
-  },
-  "incident-response-incident-response": {
-    "name": "incident-response-incident-response",
-    "path": "incident-response-incident-response",
-    "categorized": true
-  },
-  "incident-response-smart-fix": {
-    "name": "incident-response-smart-fix",
-    "path": "incident-response-smart-fix",
     "categorized": true
   },
   "incident-runbook-templates": {
@@ -1867,11 +1517,6 @@
   "invoice-organizer": {
     "name": "invoice-organizer",
     "path": "invoice-organizer",
-    "categorized": true
-  },
-  "ios-developer": {
-    "name": "ios-developer",
-    "path": "ios-developer",
     "categorized": true
   },
   "istio-traffic-management": {
@@ -1924,24 +1569,9 @@
     "path": "kpi-dashboard-design",
     "categorized": true
   },
-  "kubernetes-architect": {
-    "name": "kubernetes-architect",
-    "path": "kubernetes-architect",
-    "categorized": true
-  },
-  "langchain-architecture": {
-    "name": "langchain-architecture",
-    "path": "langchain-architecture",
-    "categorized": true
-  },
   "lead-research-assistant": {
     "name": "lead-research-assistant",
     "path": "lead-research-assistant",
-    "categorized": true
-  },
-  "legacy-modernizer": {
-    "name": "legacy-modernizer",
-    "path": "legacy-modernizer",
     "categorized": true
   },
   "legal-advisor": {
@@ -1957,31 +1587,6 @@
   "linkerd-patterns": {
     "name": "linkerd-patterns",
     "path": "linkerd-patterns",
-    "categorized": true
-  },
-  "llm-application-dev-ai-assistant": {
-    "name": "llm-application-dev-ai-assistant",
-    "path": "llm-application-dev-ai-assistant",
-    "categorized": true
-  },
-  "llm-application-dev-langchain-agent": {
-    "name": "llm-application-dev-langchain-agent",
-    "path": "llm-application-dev-langchain-agent",
-    "categorized": true
-  },
-  "llm-application-dev-prompt-optimize": {
-    "name": "llm-application-dev-prompt-optimize",
-    "path": "llm-application-dev-prompt-optimize",
-    "categorized": true
-  },
-  "llm-evaluation": {
-    "name": "llm-evaluation",
-    "path": "llm-evaluation",
-    "categorized": true
-  },
-  "machine-learning-ops-ml-pipeline": {
-    "name": "machine-learning-ops-ml-pipeline",
-    "path": "machine-learning-ops-ml-pipeline",
     "categorized": true
   },
   "malware-analyst": {
@@ -2044,39 +1649,9 @@
     "path": "mermaid-expert",
     "categorized": true
   },
-  "microservices-patterns": {
-    "name": "microservices-patterns",
-    "path": "microservices-patterns",
-    "categorized": true
-  },
   "minecraft-bukkit-pro": {
     "name": "minecraft-bukkit-pro",
     "path": "minecraft-bukkit-pro",
-    "categorized": true
-  },
-  "ml-best-practices": {
-    "name": "ml-best-practices",
-    "path": "ml-best-practices",
-    "categorized": true
-  },
-  "ml-engineer": {
-    "name": "ml-engineer",
-    "path": "ml-engineer",
-    "categorized": true
-  },
-  "ml-pipeline-workflow": {
-    "name": "ml-pipeline-workflow",
-    "path": "ml-pipeline-workflow",
-    "categorized": true
-  },
-  "mlops-engineer": {
-    "name": "mlops-engineer",
-    "path": "mlops-engineer",
-    "categorized": true
-  },
-  "mobile-developer": {
-    "name": "mobile-developer",
-    "path": "mobile-developer",
     "categorized": true
   },
   "mobile-security-coder": {
@@ -2089,16 +1664,6 @@
     "path": "modern-javascript-patterns",
     "categorized": true
   },
-  "monorepo-architect": {
-    "name": "monorepo-architect",
-    "path": "monorepo-architect",
-    "categorized": true
-  },
-  "monorepo-management": {
-    "name": "monorepo-management",
-    "path": "monorepo-management",
-    "categorized": true
-  },
   "mtls-configuration": {
     "name": "mtls-configuration",
     "path": "mtls-configuration",
@@ -2109,16 +1674,6 @@
     "path": "mui",
     "categorized": true
   },
-  "multi-cloud-architecture": {
-    "name": "multi-cloud-architecture",
-    "path": "multi-cloud-architecture",
-    "categorized": true
-  },
-  "multi-platform-apps-multi-platform": {
-    "name": "multi-platform-apps-multi-platform",
-    "path": "multi-platform-apps-multi-platform",
-    "categorized": true
-  },
   "naming-analyzer": {
     "name": "naming-analyzer",
     "path": "naming-analyzer",
@@ -2127,11 +1682,6 @@
   "nano-banana-pro": {
     "name": "nano-banana-pro",
     "path": "nano-banana-pro",
-    "categorized": true
-  },
-  "network-engineer": {
-    "name": "network-engineer",
-    "path": "network-engineer",
     "categorized": true
   },
   "nextjs-app-router-patterns": {
@@ -2154,39 +1704,9 @@
     "path": "notebook-guidance",
     "categorized": true
   },
-  "notion-intelligence-orchestrator": {
-    "name": "notion-intelligence-orchestrator",
-    "path": "notion-intelligence-orchestrator",
-    "categorized": true
-  },
-  "notion-knowledge-capture": {
-    "name": "notion-knowledge-capture",
-    "path": "notion-knowledge-capture",
-    "categorized": true
-  },
-  "notion-meeting-intelligence": {
-    "name": "notion-meeting-intelligence",
-    "path": "notion-meeting-intelligence",
-    "categorized": true
-  },
-  "notion-research-documentation": {
-    "name": "notion-research-documentation",
-    "path": "notion-research-documentation",
-    "categorized": true
-  },
-  "notion-spec-to-implementation": {
-    "name": "notion-spec-to-implementation",
-    "path": "notion-spec-to-implementation",
-    "categorized": true
-  },
   "nx-workspace-patterns": {
     "name": "nx-workspace-patterns",
     "path": "nx-workspace-patterns",
-    "categorized": true
-  },
-  "observability-engineer": {
-    "name": "observability-engineer",
-    "path": "observability-engineer",
     "categorized": true
   },
   "observability-monitoring-monitor-setup": {
@@ -2219,11 +1739,6 @@
     "path": "parallax-landing-page",
     "categorized": true
   },
-  "payment-integration": {
-    "name": "payment-integration",
-    "path": "payment-integration",
-    "categorized": true
-  },
   "paypal-integration": {
     "name": "paypal-integration",
     "path": "paypal-integration",
@@ -2237,26 +1752,6 @@
   "pdf": {
     "name": "pdf",
     "path": "pdf",
-    "categorized": true
-  },
-  "performance-engineer": {
-    "name": "performance-engineer",
-    "path": "performance-engineer",
-    "categorized": true
-  },
-  "performance-optimization-orchestrator": {
-    "name": "performance-optimization-orchestrator",
-    "path": "performance-optimization-orchestrator",
-    "categorized": true
-  },
-  "performance-testing-review-ai-review": {
-    "name": "performance-testing-review-ai-review",
-    "path": "performance-testing-review-ai-review",
-    "categorized": true
-  },
-  "performance-testing-review-multi-agent-review": {
-    "name": "performance-testing-review-multi-agent-review",
-    "path": "performance-testing-review-multi-agent-review",
     "categorized": true
   },
   "perplexity": {
@@ -2309,11 +1804,6 @@
     "path": "prometheus-configuration",
     "categorized": true
   },
-  "prompt-engineer": {
-    "name": "prompt-engineer",
-    "path": "prompt-engineer",
-    "categorized": true
-  },
   "prompt-engineering-patterns": {
     "name": "prompt-engineering-patterns",
     "path": "prompt-engineering-patterns",
@@ -2364,31 +1854,6 @@
     "path": "raffle-winner-picker",
     "categorized": true
   },
-  "rag-implementation": {
-    "name": "rag-implementation",
-    "path": "rag-implementation",
-    "categorized": true
-  },
-  "react-dev": {
-    "name": "react-dev",
-    "path": "react-dev",
-    "categorized": true
-  },
-  "react-modernization": {
-    "name": "react-modernization",
-    "path": "react-modernization",
-    "categorized": true
-  },
-  "react-native-architecture": {
-    "name": "react-native-architecture",
-    "path": "react-native-architecture",
-    "categorized": true
-  },
-  "react-state-management": {
-    "name": "react-state-management",
-    "path": "react-state-management",
-    "categorized": true
-  },
   "react-useeffect": {
     "name": "react-useeffect",
     "path": "react-useeffect",
@@ -2414,16 +1879,6 @@
     "path": "resemble-detect",
     "categorized": true
   },
-  "reverse-engineer": {
-    "name": "reverse-engineer",
-    "path": "reverse-engineer",
-    "categorized": true
-  },
-  "risk-manager": {
-    "name": "risk-manager",
-    "path": "risk-manager",
-    "categorized": true
-  },
   "risk-metrics-calculation": {
     "name": "risk-metrics-calculation",
     "path": "risk-metrics-calculation",
@@ -2444,19 +1899,9 @@
     "path": "rust-pro",
     "categorized": true
   },
-  "saga-orchestration": {
-    "name": "saga-orchestration",
-    "path": "saga-orchestration",
-    "categorized": true
-  },
   "sales-automator": {
     "name": "sales-automator",
     "path": "sales-automator",
-    "categorized": true
-  },
-  "sast-configuration": {
-    "name": "sast-configuration",
-    "path": "sast-configuration",
     "categorized": true
   },
   "scala-pro": {
@@ -2479,19 +1924,9 @@
     "path": "secrets-management",
     "categorized": true
   },
-  "security-auditor": {
-    "name": "security-auditor",
-    "path": "security-auditor",
-    "categorized": true
-  },
   "security-compliance-compliance-check": {
     "name": "security-compliance-compliance-check",
     "path": "security-compliance-compliance-check",
-    "categorized": true
-  },
-  "security-governance-orchestrator": {
-    "name": "security-governance-orchestrator",
-    "path": "security-governance-orchestrator",
     "categorized": true
   },
   "security-requirement-extraction": {
@@ -2562,11 +1997,6 @@
   "seo-structure-architect": {
     "name": "seo-structure-architect",
     "path": "seo-structure-architect",
-    "categorized": true
-  },
-  "service-mesh-expert": {
-    "name": "service-mesh-expert",
-    "path": "service-mesh-expert",
     "categorized": true
   },
   "service-mesh-observability": {
@@ -2644,44 +2074,9 @@
     "path": "sql-pro",
     "categorized": true
   },
-  "startup-analyst": {
-    "name": "startup-analyst",
-    "path": "startup-analyst",
-    "categorized": true
-  },
-  "startup-business-analyst-business-case": {
-    "name": "startup-business-analyst-business-case",
-    "path": "startup-business-analyst-business-case",
-    "categorized": true
-  },
-  "startup-business-analyst-financial-projections": {
-    "name": "startup-business-analyst-financial-projections",
-    "path": "startup-business-analyst-financial-projections",
-    "categorized": true
-  },
-  "startup-business-analyst-market-opportunity": {
-    "name": "startup-business-analyst-market-opportunity",
-    "path": "startup-business-analyst-market-opportunity",
-    "categorized": true
-  },
-  "startup-financial-modeling": {
-    "name": "startup-financial-modeling",
-    "path": "startup-financial-modeling",
-    "categorized": true
-  },
-  "startup-metrics-framework": {
-    "name": "startup-metrics-framework",
-    "path": "startup-metrics-framework",
-    "categorized": true
-  },
   "stride-analysis-patterns": {
     "name": "stride-analysis-patterns",
     "path": "stride-analysis-patterns",
-    "categorized": true
-  },
-  "stripe-integration": {
-    "name": "stripe-integration",
-    "path": "stripe-integration",
     "categorized": true
   },
   "systems-programming-rust-project": {
@@ -2692,11 +2087,6 @@
   "tailwind-design-system": {
     "name": "tailwind-design-system",
     "path": "tailwind-design-system",
-    "categorized": true
-  },
-  "tdd-orchestrator": {
-    "name": "tdd-orchestrator",
-    "path": "tdd-orchestrator",
     "categorized": true
   },
   "tdd-workflows-tdd-cycle": {
@@ -2929,69 +2319,9 @@
     "path": "yuv-viral-video",
     "categorized": true
   },
-  "ui-ux-designer": {
-    "name": "ui-ux-designer",
-    "path": "ui-ux-designer",
-    "categorized": true
-  },
-  "unity-developer": {
-    "name": "unity-developer",
-    "path": "unity-developer",
-    "categorized": true
-  },
-  "vector-database-engineer": {
-    "name": "vector-database-engineer",
-    "path": "vector-database-engineer",
-    "categorized": true
-  },
-  "video-content-orchestrator": {
-    "name": "video-content-orchestrator",
-    "path": "video-content-orchestrator",
-    "categorized": true
-  },
-  "video-edit": {
-    "name": "video-edit",
-    "path": "video-edit",
-    "categorized": true
-  },
-  "video-to-landing-page": {
-    "name": "video-to-landing-page",
-    "path": "video-to-landing-page",
-    "categorized": true
-  },
-  "workflow-orchestration-patterns": {
-    "name": "workflow-orchestration-patterns",
-    "path": "workflow-orchestration-patterns",
-    "categorized": true
-  },
-  "workflow-patterns": {
-    "name": "workflow-patterns",
-    "path": "workflow-patterns",
-    "categorized": true
-  },
-  "yuv-brand-orchestrator": {
-    "name": "yuv-brand-orchestrator",
-    "path": "yuv-brand-orchestrator",
-    "categorized": true
-  },
-  "yuv-decks": {
-    "name": "yuv-decks",
-    "path": "yuv-decks",
-    "categorized": true
-  },
-  "yuv-design-system": {
-    "name": "yuv-design-system",
-    "path": "yuv-design-system",
-    "categorized": true
-  },
-  "yuv-pilot": {
-    "name": "yuv-pilot",
-    "path": "yuv-pilot",
-    "categorized": true
-  },
-  "yuv-viral-video": {
-    "name": "yuv-viral-video",
-    "path": "yuv-viral-video",
+  "dependency-security-audit": {
+    "name": "dependency-security-audit",
+    "path": "dependency-security-audit",
     "categorized": true
   }
 }

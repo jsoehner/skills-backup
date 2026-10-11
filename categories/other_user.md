@@ -1,6 +1,6 @@
 # 📦 Other User Skills
 
-This document catalogs the custom user skills belonging to the **📦 Other User Skills** category.
+This document catalogs the skills belonging to the **📦 Other User Skills** category.
 
 | Skill Name | Description | Path |
 |---|---|---|
@@ -43,3 +43,4 @@ This document catalogs the custom user skills belonging to the **📦 Other User
 | [`worker`](../worker/SKILL.md) | A built-in agent for executing specific, focused tasks, handling data processing, and performing repetitive operations. | `worker` |
 | [`workflow-orchestration-patterns`](../workflow-orchestration-patterns/SKILL.md) | Design durable workflows with Temporal for distributed systems. Covers workflow vs activity separation, saga patterns, state management, and determinism constraints. Use when building long-running processes, distributed transactions, or microservice orchestration. | `workflow-orchestration-patterns` |
 | [`workflow-patterns`](../workflow-patterns/SKILL.md) | Use this skill when implementing tasks according to Conductor's TDD workflow, handling phase checkpoints, managing git commits for tasks, or understanding the verification protocol. | `workflow-patterns` |
+

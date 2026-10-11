@@ -109,18 +109,22 @@ def show_catalog(category_filter: str = None, search_query: str = None, include_
         print(f"No skills found matching filter (category='{category_filter}', search='{search_query}').")
         return
 
-    # Group skills by category
-    by_category: Dict[str, List[dict]] = {}
+    # Deduplicate skills by name while grouping
+    by_category: Dict[str, Dict[str, dict]] = {}
     for s in all_skills:
         cat = s.get("group_key", "other")
-        by_category.setdefault(cat, []).append(s)
+        name = s.get("name", "unnamed")
+        by_category.setdefault(cat, {})
+        if name not in by_category[cat]:
+            by_category[cat][name] = s
 
+    total_unique = sum(len(v) for v in by_category.values())
     print("=" * 80)
-    print(f"SKILLS CATALOG ({len(all_skills)} skills found)")
+    print(f"SKILLS CATALOG ({total_unique} skills found)")
     print("=" * 80)
 
     for cat_key in sorted(by_category.keys()):
-        skills_in_cat = by_category[cat_key]
+        skills_in_cat = list(by_category[cat_key].values())
         cat_title = (
             USER_CATEGORIES.get(cat_key, {}).get("title")
             or CONFIG_CATEGORIES.get(cat_key, {}).get("title")
@@ -141,9 +145,9 @@ def show_catalog(category_filter: str = None, search_query: str = None, include_
 def show_categories():
     """List all available categories and skill counts."""
     user_skills, config_skills = get_repo_skills()
-    all_skills = user_skills + config_skills
+    unique_skills = { (s.get("name"), s.get("group_key")): s for s in (user_skills + config_skills) }
     counts: Dict[str, int] = {}
-    for s in all_skills:
+    for s in unique_skills.values():
         cat = s.get("group_key", "other")
         counts[cat] = counts.get(cat, 0) + 1
 
@@ -160,7 +164,7 @@ def show_categories():
         )
         print(f"{cat_key:<30} {title:<40} {counts[cat_key]:<5}")
     print("=" * 80)
-    print(f"Total skills across all categories: {len(all_skills)}")
+    print(f"Total skills across all categories: {len(unique_skills)}")
 
 def show_status(client: str = "pi", filter_mode: str = "all", search_query: str = None):
     """

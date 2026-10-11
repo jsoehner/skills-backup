@@ -33,7 +33,7 @@ USER_CATEGORIES = {
     },
     "security_compliance": {
         "title": "🔒 Security, Compliance & Hardening",
-        "patterns": [r"security", r"secrets", r"sast", r"pci", r"threat", r"attack", r"stride", r"reversing", r"binary", r"malware", r"solidity", r"xss", r"wcag", r"audit", r"hardening", r"auth", r"mtls", r"gdpr", r"sbom", r"cbom", r"pqc"]
+        "patterns": [r"security", r"secrets", r"sast", r"pci", r"threat", r"attack", r"stride", r"reversing", r"binary", r"malware", r"solidity", r"xss", r"hardening", r"(?:^|[\-_])auth-implementation", r"mtls", r"gdpr", r"sbom", r"cbom", r"pqc"]
     },
     "devops_cloud": {
         "title": "☁️ DevOps, Cloud & Infrastructure",
@@ -53,7 +53,7 @@ USER_CATEGORIES = {
     },
     "development_testing": {
         "title": "🛠️ Development, Debugging & QA Workflows",
-        "patterns": [r"artifacts", r"mcp", r"skill", r"webapp", r"template", r"dependency", r"changelog", r"commit", r"entropy", r"tdd", r"conductor", r"adr", r"context", r"codebase", r"refactor", r"debug", r"test", r"error", r"diagnostics", r"review", r"qa", r"issue", r"pr-", r"patch", r"performance", r"dx-optimizer", r"memory-"]
+        "patterns": [r"artifacts", r"mcp", r"skill", r"webapp", r"template", r"dependency", r"changelog", r"commit", r"entropy", r"tdd", r"conductor", r"adr", r"context", r"codebase", r"refactor", r"debug", r"test", r"error", r"diagnostics", r"review", r"qa", r"issue", r"pr-", r"patch", r"performance", r"dx-optimizer", r"memory-", r"wcag", r"accessibility"]
     },
     "productivity_comms": {
         "title": "💬 Productivity, Research & Communication",
@@ -70,7 +70,7 @@ CONFIG_CATEGORIES = {
     },
     "security_compliance": {
         "title": "🔒 Security, Compliance & Hardening",
-        "patterns": ["security", "secrets-management", "sast-configuration", "pci-compliance", "threat", 
+        "patterns": ["security", "secrets-management", "sast", "pci-compliance", "threat", 
                      "attack-tree", "stride-analysis", "anti-reversing", "binary-analysis", 
                      "malware-analyst", "solidity-security", "sbom", "cbom", "pqc"]
     },
@@ -256,6 +256,8 @@ def scan_skills_dir(directory, is_config=False):
                 
             if not is_config and (rel_path.startswith("config-skills") or "config-skills" in rel_path.split(os.sep)):
                 continue
+            if not is_config and (rel_path.startswith("skills") or "skills" in rel_path.split(os.sep)):
+                continue
                 
             info = extract_frontmatter(skill_md_path)
             if info:
@@ -304,38 +306,58 @@ def update_all_docs():
         config_by_cat[group].append(skill)
 
     # Helper function to write a category markdown document
-    def write_category_file(cat_key, title, skills, is_config):
+    def write_category_file(cat_key, title, user_skills, config_skills):
         filename = f"{cat_key}.md"
         file_path = os.path.join(categories_dir, filename)
         
         with open(file_path, "w", encoding="utf-8") as f:
             f.write(f"# {title}\n\n")
-            f.write(f"This document catalogs the {'system configuration' if is_config else 'custom user'} skills belonging to the **{title}** category.\n\n")
-            f.write("| Skill Name | Description | Path |\n")
-            f.write("|---|---|---|\n")
-            for skill in skills:
-                skill_link = f"[`{skill['name']}`](../{skill['path']}/SKILL.md)"
-                f.write(f"| {skill_link} | {skill['description']} | `{skill['path']}` |\n")
+            f.write(f"This document catalogs the skills belonging to the **{title}** category.\n\n")
+            
+            if user_skills:
+                if config_skills:
+                    f.write("## Custom User Skills\n\n")
+                f.write("| Skill Name | Description | Path |\n")
+                f.write("|---|---|---|\n")
+                for skill in user_skills:
+                    skill_link = f"[`{skill['name']}`](../{skill['path']}/SKILL.md)"
+                    f.write(f"| {skill_link} | {skill['description']} | `{skill['path']}` |\n")
+                f.write("\n")
 
-    # Write user category documents
-    for cat_key, cat_info in USER_CATEGORIES.items():
-        skills_in_cat = user_by_cat.get(cat_key, [])
-        if skills_in_cat:
-            write_category_file(cat_key, cat_info["title"], skills_in_cat, is_config=False)
+            if config_skills:
+                if user_skills:
+                    f.write("## System Configuration Skills\n\n")
+                f.write("| Skill Name | Description | Path |\n")
+                f.write("|---|---|---|\n")
+                for skill in config_skills:
+                    skill_link = f"[`{skill['name']}`](../{skill['path']}/SKILL.md)"
+                    f.write(f"| {skill_link} | {skill['description']} | `{skill['path']}` |\n")
+                f.write("\n")
+
+    # Combine all known category keys preserving order
+    all_cat_keys = list(USER_CATEGORIES.keys())
+    for ck in CONFIG_CATEGORIES.keys():
+        if ck not in all_cat_keys:
+            all_cat_keys.append(ck)
+
+    for cat_key in all_cat_keys:
+        title = (
+            USER_CATEGORIES.get(cat_key, {}).get("title")
+            or CONFIG_CATEGORIES.get(cat_key, {}).get("title")
+            or f"📁 {cat_key.replace('_', ' ').title()}"
+        )
+        u_skills = user_by_cat.get(cat_key, [])
+        c_skills = config_by_cat.get(cat_key, [])
+        if u_skills or c_skills:
+            write_category_file(cat_key, title, u_skills, c_skills)
 
     other_user = user_by_cat.get("other", [])
     if other_user:
-        write_category_file("other_user", "📦 Other User Skills", other_user, is_config=False)
-
-    # Write config category documents
-    for cat_key, cat_info in CONFIG_CATEGORIES.items():
-        skills_in_cat = config_by_cat.get(cat_key, [])
-        if skills_in_cat:
-            write_category_file(cat_key, cat_info["title"], skills_in_cat, is_config=True)
+        write_category_file("other_user", "📦 Other User Skills", other_user, [])
 
     other_config = config_by_cat.get("other", [])
     if other_config:
-        write_category_file("other_config", "⚙️ Other Config Skills", other_config, is_config=True)
+        write_category_file("other_config", "⚙️ Other Config Skills", [], other_config)
 
     # Build master README links
     readme_addition = "\n\n## 🧠 Local Memory RAG Architecture & Token Flow\n\n"

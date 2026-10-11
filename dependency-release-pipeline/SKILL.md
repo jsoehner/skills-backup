@@ -11,7 +11,7 @@ A single master skill that orchestrates the entire lifecycle of upgrading depend
 
 ```mermaid
 graph TD
-    A[Start: Dependency Audit Trigger] --> B[Phase 1: Dependency Audit<br/>dependency-management-deps-audit]
+    A[Start: Dependency Audit Trigger] --> B[Phase 1: Dependency Audit<br/>dependency-security-audit]
     B -->|Output: Audit & CVE Report| C[Phase 2: Safe Upgrades<br/>dependency-updater & dependency-upgrade]
     C -->|Output: Updated Lockfiles| D[Phase 3: Code Review<br/>code-reviewer]
     D -->|Output: Review Assessment| E[Phase 4: Automated Testing<br/>test-automator]
@@ -23,7 +23,7 @@ graph TD
 ---
 
 ### Phase 1: Dependency Audit & Vulnerability Scan
-* **Skill to Execute**: `dependency-management-deps-audit`
+* **Skill to Execute**: `dependency-security-audit`
 * **Input / Prerequisites**: Project manifest and lockfiles (`package.json`, `requirements.txt`, `Cargo.lock`, `go.mod`).
 * **Execution Protocol**:
   1. Scan for outdated packages, known CVEs, license conflicts, and deprecated dependencies.

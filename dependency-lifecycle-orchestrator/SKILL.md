@@ -22,11 +22,11 @@ Use for any task involving project dependencies, including security audits, vers
 
 1. Identify the dependency task: Security Audit, Version Upgrade, or General Management.
 
-2. For Security Audits: Use `dependency-security-audit` and `dependency-management-deps-audit` to scan for vulnerabilities and license issues.
+2. For Security Audits: Use `dependency-security-audit` to scan for vulnerabilities and license issues.
 
 3. For Version Upgrades: Use `dependency-updater` for safe updates and `dependency-upgrade` for major version transitions.
 
-4. For General Management: Use `dependency-management-deps-audit` for ongoing health checks.
+4. For General Management: Use `dependency-security-audit` for ongoing dependency health checks.
 
 5. Synthesize the results into a clear action plan for the engineering team.
 
