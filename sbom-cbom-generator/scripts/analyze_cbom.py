@@ -185,6 +185,7 @@ def assimilate_third_party_cbom(
                         "component_name": comp["name"],
                         "version": comp["version"],
                         "purl": comp["purl"],
+                        "asset_type": a.get("primitive", "algorithm"),
                         "algorithm": a.get("algorithm", a["name"]),
                         "primitive": a.get("primitive", "unknown"),
                         "key_length": a.get("key_length", "N/A"),
@@ -337,6 +338,10 @@ def analyze_cbom(
         crypto_assets.append(a)
         asset_types_counter[a["asset_type"]] += 1
         algorithm_counter[a["algorithm"]] += 1
+        if a.get("pqc_status") == "POST-QUANTUM READY":
+            pqc_assets.append(a)
+        elif a.get("pqc_status") == "QUANTUM-VULNERABLE":
+            vulnerable_assets.append(a)
 
     symmetric_assets = [a for a in crypto_assets if a["pqc_status"] == "CLASSICAL/SYMMETRIC"]
     asym_total = len(pqc_assets) + len(vulnerable_assets)
