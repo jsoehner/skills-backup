@@ -20,6 +20,7 @@ This directory contains the Architecture Decision Records (ADRs) for the project
 | [0012](0012-project-completion-and-handover.md) | Project Completion and Handover | Accepted | 2026-09-15 |
 | [0013](0013-deploy-skills-root-resolution-and-traversal-hardening.md) | Deploy Skills Root Path Resolution and Directory Traversal Hardening | Accepted | 2026-09-07 |
 | [0014](0014-independent-repository-for-skills-backup.md) | Independent Repository for Skills Backup | Accepted | 2026-09-07 |
+| [0015](0015-powershell-pro-skill-and-harness-interop.md) | Addition of powershell-pro Shell Skill and Harness Interop | Accepted | 2026-10-11 |
 
 ## Lifecycle
 - **Proposed**: The decision is being discussed.

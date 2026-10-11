@@ -45,7 +45,7 @@ USER_CATEGORIES = {
     },
     "software_languages": {
         "title": "💻 Software Engineering & Frameworks",
-        "patterns": [r"python", r"cpp", r"c-pro", r"java", r"javascript", r"typescript", r"golang", r"go-", r"rust", r"elixir", r"php", r"ruby", r"scala", r"haskell", r"angular", r"react", r"nextjs", r"django", r"fastapi", r"api-", r"openapi", r"graphql", r"mui", r"tailwind", r"godot", r"unity", r"flutter", r"ios-", r"dotnet", r"csharp", r"bash", r"shell", r"bats", r"posix", r"frontend", r"backend", r"full-stack", r"mobile", r"web", r"arm-cortex", r"firmware", r"blockchain", r"web3", r"defi", r"nft", r"uv-package"]
+        "patterns": [r"python", r"cpp", r"c-pro", r"java", r"javascript", r"typescript", r"golang", r"go-", r"rust", r"elixir", r"php", r"ruby", r"scala", r"haskell", r"angular", r"react", r"nextjs", r"django", r"fastapi", r"api-", r"openapi", r"graphql", r"mui", r"tailwind", r"godot", r"unity", r"flutter", r"ios-", r"dotnet", r"csharp", r"bash", r"powershell", r"shell", r"bats", r"posix", r"frontend", r"backend", r"full-stack", r"mobile", r"web", r"arm-cortex", r"firmware", r"blockchain", r"web3", r"defi", r"nft", r"uv-package"]
     },
     "business_finance": {
         "title": "📈 Business, Finance & Strategy",
@@ -91,7 +91,7 @@ CONFIG_CATEGORIES = {
         "patterns": ["python", "cpp", "c-pro", "java-pro", "javascript", "typescript", "golang", 
                      "rust", "elixir", "php-pro", "ruby-pro", "scala-pro", "haskell-pro", 
                      "angular-migration", "react", "nextjs", "django-pro", "fastapi", "api-design", 
-                     "api-testing", "openapi-spec", "graphql", "mui", "tailwind-"]
+                     "api-testing", "openapi-spec", "graphql", "mui", "tailwind-", "powershell"]
     },
     "business_finance": {
         "title": "📈 Business & Financial Analysis",
