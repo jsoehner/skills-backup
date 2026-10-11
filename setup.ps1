@@ -157,10 +157,12 @@ if ($IsDisplayAction) {
     }
 
     $PythonVersion = & $PythonExecutable --version 2>&1
+    $CurrentDate = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 
     Write-Host "==================================================" -ForegroundColor Cyan
     Write-Host "Skills Backup Setup" -ForegroundColor Cyan
     Write-Host "==================================================" -ForegroundColor Cyan
+    Write-Host "Date            : $CurrentDate"
     Write-Host "Repository Root : $RepoRoot"
     Write-Host "Target Client   : $Client"
     Write-Host "Python Runtime  : $PythonVersion"

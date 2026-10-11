@@ -11,6 +11,7 @@ import os
 import sys
 import argparse
 import re
+from datetime import datetime
 from typing import Dict, List, Set, Tuple
 
 # Reconfigure stdout/stderr for Unicode support on Windows
@@ -192,6 +193,7 @@ def show_status(client: str = "pi", filter_mode: str = "all", search_query: str 
 
     print("=" * 80)
     print(f"SKILLS STATUS FOR CLIENT: {client.upper()}")
+    print(f"Date            : {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print(f"Target Directory: {client_dir}")
     print("=" * 80)
     print(f"Summary:")
@@ -212,7 +214,17 @@ def show_status(client: str = "pi", filter_mode: str = "all", search_query: str 
             desc = skill.get("description", "")
             if len(desc) > 60:
                 desc = desc[:57] + "..."
-            print(f"  [+] {name:<35} [{cat:<20}] {desc}")
+            repo_path = os.path.join(repo_dir, skill.get("path", "")) if skill.get("path") else ""
+            skill_md = os.path.join(repo_path, "SKILL.md") if repo_path else ""
+            dt_str = ""
+            if skill_md and os.path.exists(skill_md):
+                try:
+                    mtime = os.path.getmtime(skill_md)
+                    dt_str = datetime.fromtimestamp(mtime).strftime("%Y-%m-%d %H:%M:%S")
+                except Exception:
+                    pass
+            date_prefix = f"[{dt_str}] " if dt_str else ""
+            print(f"  {date_prefix}[+] {name:<35} [{cat:<20}] {desc}")
 
     # Show existing / installed skills
     if filter_mode in ("all", "existing", "installed") and existing_names:
@@ -224,14 +236,34 @@ def show_status(client: str = "pi", filter_mode: str = "all", search_query: str 
             desc = skill.get("description", "")
             if len(desc) > 60:
                 desc = desc[:57] + "..."
-            print(f"  [✓] {name:<35} [{cat:<20}] {desc}")
+            inst_path = installed.get(name, "")
+            skill_md = os.path.join(inst_path, "SKILL.md") if inst_path else ""
+            dt_str = ""
+            if skill_md and os.path.exists(skill_md):
+                try:
+                    mtime = os.path.getmtime(skill_md)
+                    dt_str = datetime.fromtimestamp(mtime).strftime("%Y-%m-%d %H:%M:%S")
+                except Exception:
+                    pass
+            date_prefix = f"[{dt_str}] " if dt_str else ""
+            print(f"  {date_prefix}[✓] {name:<35} [{cat:<20}] {desc}")
 
     # Show client only skills
     if filter_mode in ("all", "orphaned") and client_only_names:
         print(f"\n⚠️  CLIENT-ONLY SKILLS ({len(client_only_names)} not found in repo):")
         print("-" * 80)
         for name in client_only_names:
-            print(f"  [?] {name:<35} (Installed in {client} but not tracked in repository)")
+            inst_path = installed.get(name, "")
+            skill_md = os.path.join(inst_path, "SKILL.md") if inst_path else ""
+            dt_str = ""
+            if skill_md and os.path.exists(skill_md):
+                try:
+                    mtime = os.path.getmtime(skill_md)
+                    dt_str = datetime.fromtimestamp(mtime).strftime("%Y-%m-%d %H:%M:%S")
+                except Exception:
+                    pass
+            date_prefix = f"[{dt_str}] " if dt_str else ""
+            print(f"  {date_prefix}[?] {name:<35} (Installed in {client} but not tracked in repository)")
 
     print("\n" + "=" * 80)
 

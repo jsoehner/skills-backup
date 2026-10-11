@@ -3,6 +3,7 @@ import shutil
 import sys
 import argparse
 import re
+from datetime import datetime
 
 def is_safe_subpath(base_dir: str, target_path: str) -> bool:
     """Verify that target_path resides strictly within base_dir."""
@@ -90,7 +91,14 @@ def main():
                 else:
                     shutil.copy2(s, d, follow_symlinks=False)
             
-            print(f"Restored skill [{skill_name}] -> {dest_path}")
+            skill_md_path = os.path.join(root, 'SKILL.md')
+            try:
+                mtime = os.path.getmtime(skill_md_path)
+                date_str = datetime.fromtimestamp(mtime).strftime("%Y-%m-%d %H:%M:%S")
+            except Exception:
+                date_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+            print(f"[{date_str}] Restored skill [{skill_name}] -> {dest_path}")
             count += 1
 
     print(f"Total unique skills restored to {args.client}: {count}")

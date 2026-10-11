@@ -175,6 +175,7 @@ if [[ "$ACTION" == "restore" ]]; then
     echo "=================================================="
     echo "Skills Backup Setup"
     echo "=================================================="
+    echo "Date            : $(date '+%Y-%m-%d %H:%M:%S')"
     echo "Repository Root : $SCRIPT_DIR"
     echo "Target Client   : $CLIENT"
     echo "Python Runtime  : $("$PYTHON_BIN" --version 2>&1)"
