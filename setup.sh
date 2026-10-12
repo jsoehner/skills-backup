@@ -16,6 +16,7 @@ ACTION="restore"
 CATEGORY=""
 SEARCH_QUERY=""
 DETAILS="false"
+TARGET_PATH="."
 EXTRA_ARGS=()
 
 print_usage() {
@@ -32,6 +33,8 @@ Options:
       --installed          Show only existing/installed skills for target client
       --categories         List all available skill categories with counts
   -m, --memory             Show local memory status and list stored OKF & ChromaDB knowledge
+  -p, --preflight [PATH]   Run pre-flight memory retrieval and fork guardrail briefing for PATH (default: .)
+      --check-fork [PATH]  Check repository fork origin, upstream status, and sync availability
   -d, --details            Display full document contents when inspecting memory
   -i, --info               Display repository overview, skills summary, and memory info
   -g, --category NAME      Filter catalog or status by category name
@@ -94,6 +97,26 @@ while [[ $# -gt 0 ]]; do
         -m|--memory|--memory-info)
             ACTION="memory"
             shift
+            ;;
+        -p|--preflight)
+            ACTION="preflight"
+            if [[ -n "${2:-}" && "${2:0:1}" != "-" ]]; then
+                TARGET_PATH="$2"
+                shift 2
+            else
+                TARGET_PATH="."
+                shift
+            fi
+            ;;
+        --check-fork)
+            ACTION="check_fork"
+            if [[ -n "${2:-}" && "${2:0:1}" != "-" ]]; then
+                TARGET_PATH="$2"
+                shift 2
+            else
+                TARGET_PATH="."
+                shift
+            fi
             ;;
         -d|--details)
             DETAILS=true
@@ -201,10 +224,16 @@ if [[ "$ACTION" == "restore" ]]; then
     echo "  • Ingestion Script    : python3 ~/memory_system/capture_knowledge.py <file.md>"
     echo ""
     echo "💡 Helpful Next Commands:"
+    echo "  • Agent Pre-Flight Check : ./setup.sh --preflight"
+    echo "  • Fork Guardrail Check   : ./setup.sh --check-fork"
     echo "  • Check Installed vs New : ./setup.sh --status --client $CLIENT"
     echo "  • Browse Skills Catalog  : ./setup.sh --catalog"
     echo "  • Search Skills          : ./setup.sh --catalog -q <keyword>"
     echo "=================================================="
+elif [[ "$ACTION" == "preflight" ]]; then
+    "$PYTHON_BIN" "$SCRIPT_DIR/scripts/inspect_memory.py" --preflight "$TARGET_PATH" "${EXTRA_ARGS[@]}"
+elif [[ "$ACTION" == "check_fork" ]]; then
+    "$PYTHON_BIN" "$SCRIPT_DIR/scripts/check_fork_guardrail.py" "$TARGET_PATH" "${EXTRA_ARGS[@]}"
 else
     if [[ ! -f "$CATALOG_SCRIPT" ]]; then
         echo "Error: Catalog script not found at '$CATALOG_SCRIPT'." >&2

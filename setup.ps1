@@ -27,6 +27,15 @@
 .PARAMETER Memory
     Switch to show information and host status for the local memory system (OKF + ChromaDB).
 
+.PARAMETER Preflight
+    Switch to run pre-flight memory retrieval and fork guardrail briefing for TargetPath.
+
+.PARAMETER CheckFork
+    Switch to check repository fork origin, upstream status, and sync availability for TargetPath.
+
+.PARAMETER TargetPath
+    Path to target repository for preflight or check-fork inspection (default: .).
+
 .PARAMETER Info
     Switch to display repository overview, skills summary, and local memory architecture info.
 
@@ -72,6 +81,9 @@ param (
     [switch]$Installed,
     [switch]$Categories,
     [switch]$Memory,
+    [switch]$Preflight,
+    [switch]$CheckFork,
+    [string]$TargetPath = ".",
     [switch]$Info,
     [switch]$Details,
 
@@ -88,6 +100,8 @@ $ErrorActionPreference = "Stop"
 $RepoRoot = if ($PSScriptRoot) { $PSScriptRoot } else { Split-Path -Parent $MyInvocation.MyCommand.Path }
 $RestoreScript = Join-Path -Path $RepoRoot -ChildPath "scripts\restore_skills.py"
 $CatalogScript = Join-Path -Path $RepoRoot -ChildPath "scripts\catalog.py"
+$InspectMemoryScript = Join-Path -Path $RepoRoot -ChildPath "scripts\inspect_memory.py"
+$CheckForkScript = Join-Path -Path $RepoRoot -ChildPath "scripts\check_fork_guardrail.py"
 
 # Locate Python 3
 $PythonExecutable = $null
@@ -119,6 +133,24 @@ if (-not $PythonExecutable) {
 }
 
 # Determine action
+if ($Preflight) {
+    if (-not (Test-Path -Path $InspectMemoryScript)) {
+        Write-Error "Error: Memory inspector script not found at '$InspectMemoryScript'."
+        exit 1
+    }
+    & $PythonExecutable $InspectMemoryScript --preflight $TargetPath
+    exit $LASTEXITCODE
+}
+
+if ($CheckFork) {
+    if (-not (Test-Path -Path $CheckForkScript)) {
+        Write-Error "Error: Fork guardrail script not found at '$CheckForkScript'."
+        exit 1
+    }
+    & $PythonExecutable $CheckForkScript $TargetPath
+    exit $LASTEXITCODE
+}
+
 $IsDisplayAction = $Catalog -or $Status -or $New -or $Installed -or $Categories -or $Memory -or $Info -or ($Category -and -not $Restore) -or ($Search -and -not $Restore)
 
 if ($IsDisplayAction) {
@@ -188,6 +220,8 @@ if ($IsDisplayAction) {
         Write-Host "  • Ingestion Script    : python ~/memory_system/capture_knowledge.py <file.md>"
         Write-Host ""
         Write-Host "💡 Helpful Next Commands:" -ForegroundColor Yellow
+        Write-Host "  • Agent Pre-Flight Check : .\setup.ps1 -Preflight"
+        Write-Host "  • Fork Guardrail Check   : .\setup.ps1 -CheckFork"
         Write-Host "  • Check Installed vs New : .\setup.ps1 -Status -Client $Client"
         Write-Host "  • Browse Skills Catalog  : .\setup.ps1 -Catalog"
         Write-Host "  • Search Skills          : .\setup.ps1 -Catalog -Search <keyword>"

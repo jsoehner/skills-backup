@@ -434,11 +434,122 @@ def display_memory(
     print("=" * 80)
     print("💡 Memory Tips & Commands:")
     print("-" * 80)
+    print("  • Agent Pre-flight  : python3 scripts/inspect_memory.py --preflight [repo_dir]")
     print("  • Search memories   : ./setup.sh --memory -q <keyword>")
     print("  • Full text details : ./setup.sh --memory --details")
     print("  • Ingest knowledge  : python3 ~/memory_system/capture_knowledge.py <file.md>")
     print("  • Drop for ingest   : cp <notes.md> ~/memory_system/inbox/")
     print("=" * 80)
+
+def run_preflight(target_dir: str = ".", json_output: bool = False):
+    """
+    Execute a mandatory pre-flight check before modifying repositories or performing tasks:
+    1. Evaluates fork and upstream guardrail.
+    2. Retrieves top organizational OKF policies.
+    3. Retrieves recent lessons learned from ChromaDB.
+    """
+    mem_root, mem_db, mem_okf, _ = get_memory_paths()
+
+    # 1. Fork Guardrail check
+    script_dir = Path(__file__).resolve().parent
+    sys.path.insert(0, str(script_dir))
+    mem_root_str = str(mem_root)
+    if mem_root_str not in sys.path:
+        sys.path.insert(0, mem_root_str)
+
+    try:
+        import check_fork_guardrail
+        guardrail = check_fork_guardrail.evaluate_repo(target_dir)
+    except Exception as e:
+        guardrail = {
+            "target": target_dir,
+            "decision": "UNKNOWN",
+            "allowed_to_modify": True,
+            "reason": f"Guardrail inspection skipped or unavailable: {e}",
+            "recommended_actions": []
+        }
+
+    # 2. Key OKF Policies
+    okf_entries = load_okf_entries(mem_okf)
+    # Highlight governance policies
+    key_okf_slugs = ["forked_repository", "github_actions", "security_governance", "cbom", "enterprise_production"]
+    prioritized_okf = []
+    other_okf = []
+    for entry in okf_entries:
+        fname = entry.get("filename", "").lower()
+        if any(slug in fname for slug in key_okf_slugs):
+            prioritized_okf.append(entry)
+        else:
+            other_okf.append(entry)
+
+    # 3. Recent Lessons Learned
+    _, chroma_entries = load_chroma_entries(mem_db)
+
+    if json_output:
+        preflight_payload = {
+            "preflight_status": "BLOCKED" if not guardrail.get("allowed_to_modify", True) else "READY",
+            "fork_guardrail": guardrail,
+            "mandatory_okf_policies": [
+                {
+                    "title": e["title"],
+                    "file": e["filename"],
+                    "summary": e.get("summary", ""),
+                    "domain": e.get("domain", "")
+                }
+                for e in prioritized_okf
+            ],
+            "recent_lessons_learned": [
+                {
+                    "title": e["title"],
+                    "source": e["source"],
+                    "summary": e.get("summary", "")
+                }
+                for e in chroma_entries[:5]
+            ]
+        }
+        print(json.dumps(preflight_payload, indent=2))
+        if not guardrail.get("allowed_to_modify", True):
+            sys.exit(1)
+        sys.exit(0)
+
+    # Human / Agent readable briefing
+    print("=" * 80)
+    print("🚀 AGENT PRE-FLIGHT BRIEFING (Memory Recall & Fork Governance)")
+    print("=" * 80)
+    print("1. REPOSITORY ORIGIN & GUARDRAIL:")
+    print(f"   • Target Path      : {guardrail.get('target', target_dir)}")
+    print(f"   • Is Fork          : {'YES' if guardrail.get('is_fork') else 'NO'}")
+    if guardrail.get("is_fork"):
+        print(f"   • Upstream Parent  : {guardrail.get('upstream_parent', 'N/A')}")
+        print(f"   • Upstream Status  : {'ARCHIVED' if guardrail.get('upstream_archived') else ('ABANDONED (>18 mo)' if guardrail.get('upstream_abandoned') else 'ACTIVE')}")
+    print(f"   • Modification Gate: {'✅ ALLOWED' if guardrail.get('allowed_to_modify') else '🛑 BLOCKED (UNILATERAL UPDATES PROHIBITED)'}")
+    print(f"   • Rationale        : {guardrail.get('reason')}")
+    if guardrail.get("recommended_actions"):
+        print("   • Direct Actions   :")
+        for act in guardrail.get("recommended_actions"):
+            print(f"     -> {act}")
+
+    print("\n2. MANDATORY ORGANIZATIONAL POLICIES (OKF):")
+    for e in prioritized_okf:
+        print(f"   • {e['title']} ({e['filename']})")
+        if e.get("summary"):
+            print(f"     Summary: {e['summary'][:130]}...")
+
+    print(f"\n3. LOCAL LESSONS LEARNED (ChromaDB - {len(chroma_entries)} stored):")
+    for e in chroma_entries[:4]:
+        print(f"   • {e['title']}")
+        if e.get("summary"):
+            print(f"     Lesson: {e['summary'][:120]}...")
+
+    print("=" * 80)
+    if not guardrail.get("allowed_to_modify", True):
+        print("⚠️  GATE FAILED: You must NOT apply automated updates or PRs to this forked repository.")
+        print("=" * 80)
+        sys.exit(1)
+    else:
+        print("✅ GATE PASSED: Proceed with task while adhering to organizational policies above.")
+        print("=" * 80)
+        sys.exit(0)
 
 def main():
     parser = argparse.ArgumentParser(
@@ -454,15 +565,21 @@ def main():
                         help="Show only ChromaDB semantic memory entries")
     parser.add_argument("--json", action="store_true",
                         help="Output memory records in structured JSON format for agent harnesses")
+    parser.add_argument("--preflight", nargs="?", const=".", default=None,
+                        help="Execute pre-flight memory and fork guardrail briefing for a target directory")
 
     args = parser.parse_args()
-    display_memory(
-        search_query=args.search,
-        show_details=args.details,
-        okf_only=args.okf,
-        chroma_only=args.chroma,
-        json_output=args.json
-    )
+    if args.preflight is not None:
+        run_preflight(target_dir=args.preflight, json_output=args.json)
+    else:
+        display_memory(
+            search_query=args.search,
+            show_details=args.details,
+            okf_only=args.okf,
+            chroma_only=args.chroma,
+            json_output=args.json
+        )
 
 if __name__ == "__main__":
     main()
+

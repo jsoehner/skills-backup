@@ -91,8 +91,19 @@ When completing a task or documenting a decision:
 
 When querying historical agent memory:
 
-- **OKF Direct Search (Rules & Policies)**: Perform keyword or regex search across `~/memory_system/knowledge/okf/*.md` (`$MEMORY_OKF/*.md`) for deterministic architectural policies and rules.
-- **Chroma Vector Retrieval (Troubleshooting & Context)**: Query the persistent ChromaDB collection at `~/memory_system/db` (`$MEMORY_DB`) using semantic similarity search (chunk size: 500–1000 tokens, 150 token overlap).
+- **Unified Agent Pre-Flight (`--preflight`)**: Run pre-flight memory retrieval before starting any development or maintenance task:
+  ```bash
+  python3 ~/memory_system/inspect_memory.py --preflight .
+  ```
+  This automatically checks repository fork guardrails, displays matching OKF architectural standards, and loads recent lessons learned.
+- **OKF Direct Search (Rules & Policies)**: Perform keyword or regex search across `~/memory_system/knowledge/okf/*.md` (`$MEMORY_OKF/*.md`) or use:
+  ```bash
+  python3 ~/memory_system/inspect_memory.py --okf -q "<topic>"
+  ```
+- **Chroma Vector Retrieval (Troubleshooting & Context)**: Query the persistent ChromaDB collection at `~/memory_system/db` (`$MEMORY_DB`) using semantic similarity search or:
+  ```bash
+  python3 ~/memory_system/inspect_memory.py --chroma -q "<error_message>"
+  ```
 - **Metadata Filtering**: Filter vector queries using `filter={"type": "Troubleshooting"}` or `filter={"type": "Policy"}` to isolate specific domain contexts.
 
 ## Classification Standard

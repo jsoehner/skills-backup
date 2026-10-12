@@ -20,6 +20,17 @@ Use for any task involving project dependencies, including security audits, vers
 
 ## Procedure
 
+0. **Pre-Flight Memory Recall & Fork Guardrail Gate**:
+   - Query local memory for dependency standards and prior upgrade incident postmortems:
+     ```bash
+     python3 ~/memory_system/inspect_memory.py --preflight .
+     ```
+   - Verify repository origin:
+     ```bash
+     python3 ~/memory_system/check_fork_guardrail.py .
+     ```
+   - **Active Fork Gate**: If the target repository is a fork of an active upstream project, **HALT automated dependency updates**. Consider refreshing the fork from upstream (`gh repo sync`) instead of making unilateral changes.
+
 1. Identify the dependency task: Security Audit, Version Upgrade, or General Management.
 
 2. For Security Audits: Use `dependency-security-audit` to scan for vulnerabilities and license issues.
@@ -33,6 +44,8 @@ Use for any task involving project dependencies, including security audits, vers
 
 
 ## Pitfalls
+
+- **NEVER** apply automated dependency updates to an active forked repository; refresh from upstream or propose an upstream PR.
 
 - Never perform major version upgrades without a staged rollout and full test suite.
 

@@ -49,10 +49,20 @@ flowchart TD
     P5 --> P6["Phase 6: Knowledge Capture & Memory Sync<br/>(OKF / ChromaDB Sync)"]
 ```
 
-### Phase 0: Repository Profiling & Technology Stack Detection
-1. Inspect root directory to detect languages (`pyproject.toml`, `package.json`, `go.mod`, `pom.xml`, `Cargo.toml`, etc.).
-2. Detect build containers (`Dockerfile`, `docker-compose.yml`).
-3. Check for existing `.github/workflows` to prevent conflicting duplicate actions.
+### Phase 0: Pre-Flight Memory Recall, Fork Guardrail & Repository Profiling
+1. **Mandatory Pre-Flight Memory Recall**: Execute pre-flight memory retrieval to load organizational policies and previous lessons learned:
+   ```bash
+   python3 ~/memory_system/inspect_memory.py --preflight .
+   ```
+2. **Mandatory Fork Guardrail Verification**: Execute fork origin inspection:
+   ```bash
+   python3 ~/memory_system/check_fork_guardrail.py .
+   ```
+   - **Active Fork Gate**: If the repository is a fork with an active upstream source, **HALT pipeline execution immediately**. Do NOT inject CI workflows, commit-lint, auto-manage-prs, or scaffolding. Recommend syncing from upstream (`gh repo sync`) or proposing changes upstream.
+   - **Adopted Fork / Standalone**: If the repository is a standalone project or confirmed abandoned fork, proceed with profiling.
+3. Inspect root directory to detect languages (`pyproject.toml`, `package.json`, `go.mod`, `pom.xml`, `Cargo.toml`, etc.).
+4. Detect build containers (`Dockerfile`, `docker-compose.yml`).
+5. Check for existing `.github/workflows` to prevent conflicting duplicate actions.
 
 ### Phase 1: Documentation & Developer Experience
 1. Scaffold standardized [`CONTRIBUTING.md`](templates/CONTRIBUTING.md) adapted to the repository's technology stack.

@@ -84,88 +84,69 @@ User Input/Scenario
 
 ## Step-by-Step Execution Procedure
 
-
-
-### Step 1: [Phase Name]
-
-- [Instruction in imperative form, e.g., "Analyze the input specifications..."]
-
-- [Instruction, e.g., "Verify that all prerequisites are satisfied..."]
-
-
+### Step 1: Pre-Flight Context, Memory Recall & Fork Guardrail
+- Run pre-flight memory retrieval to load applicable policies and prior lessons learned:
+  ```bash
+  python3 ~/memory_system/inspect_memory.py --preflight .
+  ```
+- If operating on a git repository, verify origin and upstream maintenance status:
+  ```bash
+  python3 ~/memory_system/check_fork_guardrail.py .
+  ```
+  *If target is an active fork, HALT direct updates. Propose upstream PR or sync with `gh repo sync`.*
 
 ### Step 2: [Phase Name]
-
+- [Instruction in imperative form, e.g., "Analyze the input specifications..."]
 - [Instruction, e.g., "Execute the primary utility script..."]
 
-- [Instruction, e.g., "Generate the initial output representation..."]
-
-
-
 ### Step 3: [Phase Name]
-
+- [Instruction, e.g., "Generate the initial output representation..."]
 - [Instruction, e.g., "Perform verification and quality assurance checks..."]
 
-
-
 ---
-
-
 
 ## Critical Anti-Patterns (NEVER List)
 
-
-
 | Anti-Pattern | Description | Alternative / Solution |
-
 | :--- | :--- | :--- |
-
-| **NEVER** [action to avoid] | [Explain the failure mode or consequence of this action.] | [Provide the correct approach or fallback pattern.] |
-
-| **NEVER** [action to avoid] | [Explain the failure mode or consequence of this action.] | [Provide the correct approach or fallback pattern.] |
-
-| **NEVER** [action to avoid] | [Explain the failure mode or consequence of this action.] | [Provide the correct approach or fallback pattern.] |
-
-
+| **NEVER** unilaterally update an active forked repository | Diverges from upstream source of truth, creating conflicts and breaking sync | Refresh fork with `gh repo sync` or submit PR to upstream |
+| **NEVER** bypass local memory pre-flight recall | Causes amnesia and repeats previously solved mistakes or violates OKF policies | Run `inspect_memory.py --preflight .` prior to formulating plan |
+| **NEVER** deploy code changes without test validation | Introduces regressions into default branches | Run test harness before committing |
 
 ---
 
-
-
 ## Common Error Scenarios & Fallbacks
 
-
-
 ### Scenario 1: [Error Trigger / Symptom]
-
 - **Root Cause**: [Explain why this happens.]
-
 - **Fallback**:
-
   1. [Step-by-step fallback action 1]
-
   2. [Step-by-step fallback action 2]
 
-
-
-### Scenario 2: [Error Trigger / Symptom]
-
-- **Root Cause**: [Explain why this happens.]
-
+### Scenario 2: Active Fork Detected During Guardrail Check
+- **Root Cause**: Target repository is a fork of an active open-source project.
 - **Fallback**:
+  1. Refresh the fork from upstream: `gh repo sync <owner>/<repo>`.
+  2. If contributing changes, create a feature branch targeting the upstream parent.
 
-  1. [Step-by-step fallback action 1]
+## Two-Phase Memory Lifecycle
 
-  2. [Step-by-step fallback action 2]
+Every skill must participate in the bi-directional memory protocol:
 
+### Phase 1: Pre-Flight Memory Recall
+Before executing code, modifying files, or planning architecture, retrieve local context and lessons learned:
+```bash
+python3 ~/memory_system/inspect_memory.py --preflight .
+# Or domain search:
+python3 ~/memory_system/inspect_memory.py -q "<domain_keyword>"
+```
 
-## Memory Sync
-
-After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger the local memory capture.
-
+### Phase 2: Post-Execution Memory Capture
+After completing key technical findings, architectural decisions, code refactorings, or risk assessments, you **MUST** trigger local memory capture:
 1. Save the final summary or artifact as a Markdown file in the project directory.
 2. Invoke the capture script:
    ```bash
    python3 ~/memory_system/capture_knowledge.py <file_path>
    ```
 3. This ensures that new learnings, policies, and technical snippets are automatically routed to the correct local storage (OKF or ChromaDB).
+

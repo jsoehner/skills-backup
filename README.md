@@ -75,6 +75,22 @@ python3 scripts/inspect_memory.py --json # Export structured JSON for agent harn
 .\setup.ps1 -Memory -Details            # Display full document contents
 ```
 
+### Agent Pre-Flight Briefing & Fork Guardrail
+Retrieve applicable organizational policies and lessons learned, and verify fork safety before planning or applying code modifications:
+```bash
+./setup.sh --preflight                  # Run agent pre-flight briefing (fork status + OKF policies + ChromaDB context)
+./setup.sh --preflight <target_path>    # Run pre-flight briefing on a specific repository
+./setup.sh --check-fork <target_path>   # Verify if repository is an active fork before modifying
+python3 scripts/inspect_memory.py --preflight .
+python3 scripts/check_fork_guardrail.py .
+```
+
+```powershell
+.\setup.ps1 -Preflight                  # Windows PowerShell pre-flight briefing
+.\setup.ps1 -Preflight -TargetPath <target_path>
+.\setup.ps1 -CheckFork                  # Fork origin and upstream sync check
+```
+
 ## Deployment & Synchronization
 
 The repository provides multi-tiered deployment workflows ranging from automated one-command client installation to bidirectional synchronization and manifest-driven composite packaging.
@@ -176,8 +192,10 @@ Before and after deploying, verify the deployment status across your runtimes:
 - `docs/`: Technical documentation and architecture records.
   - `docs/adr/`: Architecture Decision Records (ADRs) and Governance Strategy.
 - `scripts/`:
-  - `restore_skills.py`: Core restoration logic for agent clients.
+  - `restore_skills.py`: Core restoration logic and governance sync for agent clients.
   - `catalog.py`: Skills catalog engine and status inspector.
+  - `check_fork_guardrail.py`: Fork origin verification, upstream status, and sync availability guardrail.
+  - `inspect_memory.py`: Pre-flight memory briefing (OKF policies & ChromaDB lessons learned) and memory explorer.
   - `sync.py`: Selective bidirectional synchronization.
   - `update_readme.py`: Catalog and documentation generator.
   - `deploy_skills.py`: Manifest-driven deployment packager.
