@@ -45,16 +45,26 @@ def main():
 
     seen_skills = set()
     count = 0
-    # Walk through the backup directory
+    # Walk top-level skill directories first so root-level skills always take precedence
+    # over legacy mirrored subdirectories (skills/ and config-skills/)
+    candidate_roots = []
+    for entry in sorted(os.listdir(source_root)):
+        full_entry = os.path.join(source_root, entry)
+        if os.path.isdir(full_entry) and not entry.startswith('.') and entry not in ('skills', 'config-skills', '__pycache__'):
+            if os.path.isfile(os.path.join(full_entry, 'SKILL.md')):
+                candidate_roots.append((full_entry, ['SKILL.md']))
+
     for root, dirs, files in os.walk(source_root, followlinks=False):
         rel = os.path.relpath(root, source_root)
         parts = rel.split(os.sep)
         if '.git' in parts or '__pycache__' in parts:
             continue
-        # Skip nested subdirectories inside skills
         if ('skills' in parts or 'config-skills' in parts) and len(parts) > 2:
             continue
+        if 'SKILL.md' in files:
+            candidate_roots.append((root, files))
 
+    for root, files in candidate_roots:
         if 'SKILL.md' in files:
             skill_name = os.path.basename(root)
             # Validate skill name format against path injection

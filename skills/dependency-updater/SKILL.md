@@ -36,19 +36,26 @@ Smart dependency management for any language with automatic detection and safe u
 
 ## Quick Start
 
-
-
 ```
-
 update my dependencies
-
 ```
-
-
 
 The skill auto-detects your project type and handles the rest.
 
+---
 
+## Mandatory Pre-Flight: Fork Guardrail & Memory Recall
+Before analyzing or modifying dependencies in any repository:
+1. **Verify Repository Origin**:
+   ```bash
+   python3 ~/memory_system/check_fork_guardrail.py .
+   ```
+   *If the repository is a fork of an active upstream project, **HALT automated dependency updates**. Do not modify dependencies locally; instead, refresh the fork via `gh repo sync` or submit dependency updates to the upstream parent.*
+2. **Retrieve Local Policies & Lessons Learned**:
+   ```bash
+   python3 ~/memory_system/inspect_memory.py --preflight .
+   ```
+   *Ensure compliance with organizational policies (e.g. Dependabot cooldown: default-days: 7).*
 
 ---
 

@@ -40,6 +40,15 @@ Orchestrate a comprehensive git workflow from code review through PR creation, l
 
 ## Phase 1: Pre-Commit Review and Analysis
 
+### 0. Repository Origin & Fork Guardrail Pre-Flight
+- Run pre-flight memory retrieval and fork origin verification:
+  ```bash
+  python3 ~/memory_system/inspect_memory.py --preflight .
+  ```
+- **Active Fork Gate**: Verify whether the target repository is a fork.
+  - If target is an active fork: **Do NOT submit unilateral PRs to the fork's default branch.** Either sync from upstream (`gh repo sync`) or configure the pull request to target the upstream parent repository.
+  - If standalone or confirmed abandoned adopted fork: Proceed with standard workflow.
+
 ### 1. Code Quality Assessment
 - Use Task tool with subagent_type="code-reviewer"
 - Prompt: "Review all uncommitted changes for code quality issues. Check for: 1) Code style violations, 2) Security vulnerabilities, 3) Performance concerns, 4) Missing error handling, 5) Incomplete implementations. Generate a detailed report with severity levels (critical/high/medium/low) and provide specific line-by-line feedback. Output format: JSON with {issues: [], summary: {critical: 0, high: 0, medium: 0, low: 0}, recommendations: []}"

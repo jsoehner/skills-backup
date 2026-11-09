@@ -249,6 +249,8 @@ metadata:
 - `for f in $(ls ...)` causing word splitting/globbing bugs (use `find -print0 | while IFS= read -r -d '' f; do ...; done`)
 - Unquoted variable expansions leading to unexpected behavior
 - Relying on `set -e` without proper error trapping in complex flows
+- Calling bare `clear` or `tput` in interactive TUI scripts under `set -Eeuo pipefail` (exits with code 1 in non-TTY pipes or when `TERM` is unset/`"dumb"`; always guard with `[[ -t 1 && -n "${TERM:-}" && "${TERM:-}" != "dumb" ]] && clear 2>/dev/null || true`)
+- Invoking Python helper scripts from Bash without a pre-flight import check (`"$PYTHON_BIN" -c "import ..." &>/dev/null || "$PYTHON_BIN" -m pip install --user -r "${SCRIPT_DIR}/requirements.txt"`), which causes `ModuleNotFoundError` after host OS Python minor-version upgrades (e.g., Python 3.14 -> 3.15)
 - Using `echo` for data output (prefer `printf` for reliability)
 - Missing cleanup traps for temporary files and directories
 - Unsafe array population (use `readarray`/`mapfile` instead of command substitution)
