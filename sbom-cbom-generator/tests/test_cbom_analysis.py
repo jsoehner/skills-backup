@@ -56,6 +56,21 @@ class TestCBOMAnalysis(unittest.TestCase):
         self.assertIn("Quantum-Vulnerable (Backlog)", md)
         self.assertIn("ML-KEM-768", md)
 
+    def test_python_supply_chain_assimilation(self):
+        from analyze_cbom import load_catalog, assimilate_third_party_cbom
+        catalog = load_catalog(SKILL_DIR / "scripts" / "known_cbom_catalog.json")
+        sbom_components = [
+            {"name": "cryptography", "version": "44.0.0", "purl": "pkg:pypi/cryptography@44.0.0", "type": "library"},
+            {"name": "msal", "version": "1.31.0", "purl": "pkg:pypi/msal@1.31.0", "type": "library"},
+            {"name": "google-auth-oauthlib", "version": "1.2.1", "purl": "pkg:pypi/google-auth-oauthlib@1.2.1", "type": "library"},
+            {"name": "pillow", "version": "11.1.0", "purl": "pkg:pypi/pillow@11.1.0", "type": "library"},
+        ]
+        assimilated_crypto, verified_inert, unassimilated, conf = assimilate_third_party_cbom(sbom_components, catalog)
+        self.assertEqual(len(unassimilated), 0)
+        self.assertEqual(conf["coverage_percentage"], 100.0)
+        self.assertGreaterEqual(len(assimilated_crypto), 4)
+        self.assertEqual(len(verified_inert), 1)
+
 
 if __name__ == "__main__":
     unittest.main()

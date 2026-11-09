@@ -127,6 +127,10 @@ if [[ -f "${SKILL_ROOT}/scripts/enrich_sbom_gradle.py" && ( -f "${REPO_DIR}/buil
     cp "${SKILL_ROOT}/scripts/enrich_sbom_gradle.py" "${REPO_DIR}/scripts/enrich_sbom_gradle.py"
     chmod +x "${REPO_DIR}/scripts/enrich_sbom_gradle.py"
 fi
+if [[ -f "${SKILL_ROOT}/scripts/enrich_sbom_python.py" ]]; then
+    cp "${SKILL_ROOT}/scripts/enrich_sbom_python.py" "${REPO_DIR}/scripts/enrich_sbom_python.py"
+    chmod +x "${REPO_DIR}/scripts/enrich_sbom_python.py"
+fi
 
 chmod +x "${REPO_DIR}/scripts/generate_boms.sh" \
          "${REPO_DIR}/scripts/analyze_cbom.py" \
@@ -165,6 +169,17 @@ if [[ -f "${REPO_DIR}/build.gradle" || -f "${REPO_DIR}/build.gradle.kts" ]]; the
 "
 fi
 
+PYTHON_ENRICH="
+      - name: Enrich SBOM with Python Dependencies
+        run: |
+          if [ -f requirements.txt ]; then
+            python3 -m pip install --quiet -r requirements.txt || true
+          fi
+          if [ -f scripts/enrich_sbom_python.py ]; then
+            python3 scripts/enrich_sbom_python.py oss/sbom.cyclonedx.json .
+          fi
+"
+
 cat <<EOF > "$WORKFLOW_FILE"
 name: Software & Cryptographic Bill of Materials (SBOM & CBOM)
 
@@ -198,6 +213,11 @@ jobs:
 
       - name: Create output directory
         run: mkdir -p oss
+
+      - name: Set up Python for Cryptographic Auditing & Dependency Resolution
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: '3.11'
 ${GRADLE_SETUP}
       # -------------------------------------------------------------
       # 1. Generate SBOM (CycloneDX and SPDX via Anchore / Syft)
@@ -209,7 +229,7 @@ ${GRADLE_SETUP}
           format: cyclonedx-json
           output-file: oss/sbom.cyclonedx.json
           upload-artifact: false
-${GRADLE_ENRICH}
+${GRADLE_ENRICH}${PYTHON_ENRICH}
       - name: Generate SPDX SBOM (Anchore / Syft)
         uses: anchore/sbom-action@006b7ce8314066bdf1765b4500370d40fa6917a3 # v0.24.2
         with:
@@ -227,7 +247,7 @@ ${GRADLE_ENRICH}
         continue-on-error: true
         env:
           CBOMKIT_OUTPUT_DIR: oss
-          CBOMKIT_EXCLUDE: "(^|/)scripts/.*|(^|/)tests/.*"
+          CBOMKIT_EXCLUDE: "(^|/)scripts/(scan_crypto_ast|analyze_cbom|fetch_oci_cbom|update_os_inventory|enrich_sbom).*|(^|/)tests/.*"
 
       - name: Fix permissions for container-generated artifacts
         run: sudo chown -R \$(id -u):\$(id -g) oss/ || true
@@ -235,11 +255,6 @@ ${GRADLE_ENRICH}
       # -------------------------------------------------------------
       # 3. Dual-Engine Semantic AST Crypto Discovery & Reconciliation
       # -------------------------------------------------------------
-      - name: Set up Python for Cryptographic Auditing
-        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
-        with:
-          python-version: '3.11'
-
       - name: Semantic AST Cryptographic Scan & CBOM Reconciliation
         run: |
           if [ -f scripts/scan_crypto_ast.py ]; then
@@ -314,16 +329,18 @@ EOF
 echo "✅ Done"
 
 # 4. Generate Initial Local Audit & Documentation
-if [[ -f "${REPO_DIR}/oss/cbom.json" ]]; then
-    echo -n "Generating local cryptographic scan and updating documentation ... "
-    python3 "${REPO_DIR}/scripts/scan_crypto_ast.py" "${REPO_DIR}" --cbom "${REPO_DIR}/oss/cbom.json" >/dev/null 2>&1 || true
-    python3 "${REPO_DIR}/scripts/analyze_cbom.py" "${REPO_DIR}/oss/cbom.json" --markdown "${REPO_DIR}/oss/crypto-summary.md" >/dev/null 2>&1 || true
-    if [[ -f "${REPO_DIR}/oss/crypto-summary.md" ]]; then
-        cp "${REPO_DIR}/oss/crypto-summary.md" "${REPO_DIR}/docs/security/CRYPTOGRAPHIC_AUDIT.md"
-    fi
-    echo "✅ Done"
-else
-    echo "Skipping initial audit: No CBOM detected. Please run 'bash scripts/generate_boms.sh' first to populate the oss/ directory."
+echo -n "Generating local cryptographic scan and updating documentation ... "
+if [[ -f "${REPO_DIR}/scripts/enrich_sbom_python.py" && ( -f "${REPO_DIR}/requirements.txt" || -f "${REPO_DIR}/pyproject.toml" ) ]]; then
+    python3 "${REPO_DIR}/scripts/enrich_sbom_python.py" "${REPO_DIR}/oss/sbom.cyclonedx.json" "${REPO_DIR}" >/dev/null 2>&1 || true
+fi
+python3 "${REPO_DIR}/scripts/scan_crypto_ast.py" "${REPO_DIR}" --cbom "${REPO_DIR}/oss/cbom.json" --output-json "${REPO_DIR}/oss/crypto-callsites.json" >/dev/null 2>&1 || true
+SBOM_LOCAL_ARG=""
+if [[ -f "${REPO_DIR}/oss/sbom.cyclonedx.json" ]]; then
+    SBOM_LOCAL_ARG="--sbom ${REPO_DIR}/oss/sbom.cyclonedx.json"
+fi
+python3 "${REPO_DIR}/scripts/analyze_cbom.py" "${REPO_DIR}/oss/cbom.json" $SBOM_LOCAL_ARG --json "${REPO_DIR}/oss/crypto-analysis.json" --markdown "${REPO_DIR}/oss/crypto-summary.md" >/dev/null 2>&1 || true
+if [[ -f "${REPO_DIR}/oss/crypto-summary.md" ]]; then
+    cp "${REPO_DIR}/oss/crypto-summary.md" "${REPO_DIR}/docs/security/CRYPTOGRAPHIC_AUDIT.md"
 fi
 echo "✅ Done"
 

@@ -85,7 +85,7 @@ jobs:
         continue-on-error: true
         env:
           CBOMKIT_OUTPUT_DIR: oss
-          CBOMKIT_EXCLUDE: "(^|/)scripts/.*|(^|/)tests/.*"
+          CBOMKIT_EXCLUDE: "(^|/)scripts/(scan_crypto_ast|analyze_cbom|fetch_oci_cbom|update_os_inventory|enrich_sbom).*|(^|/)tests/.*"
 
       - name: Fix permissions for container-generated artifacts
         run: sudo chown -R $(id -u):$(id -g) oss/ || true

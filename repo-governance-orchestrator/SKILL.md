@@ -86,9 +86,11 @@ Deploy the full dual-engine scanning pipeline into the repository:
    - Generates the Post-Quantum Cryptography (PQC) migration scorecard and `$GITHUB_STEP_SUMMARY` (`analyze_cbom.py`).
    - Uploads all artifacts to `oss/` and attaches them to GitHub release tags (`v*`).
 2. **Local Engineering Scripts** (installed into `scripts/` with executable permissions):
-   - `scripts/generate_boms.sh`: Local bash generator supporting container images (`-t docker`) or directory scans (`-t dir`). Automatically runs AST reconciliation.
-   - `scripts/scan_crypto_ast.py`: Multi-language AST parser for Python (`ast`), JS/TS, Go, Java, Rust, C#, and C/C++ regex fallbacks. Reconciles call sites directly into `oss/cbom.json`.
+   - `scripts/generate_boms.sh`: Local bash generator supporting container images (`-t docker`) or directory scans (`-t dir`). Automatically runs Python/Gradle SBOM enrichment and AST reconciliation.
+   - `scripts/enrich_sbom_python.py`: Resolves direct and transitive `pkg:pypi/*` dependencies from `requirements.txt` / `pyproject.toml` and `importlib.metadata` into `oss/sbom.cyclonedx.json`.
+   - `scripts/scan_crypto_ast.py`: Multi-language AST parser for Python (`ast`), JS/TS, Go, Java, Rust, C#, and C/C++ regex fallbacks (including application modules in `scripts/`). Reconciles call sites directly into `oss/cbom.json`.
    - `scripts/analyze_cbom.py`: Analyzes algorithms, key sizes, classical vs PQC inventory, quantum vulnerabilities, and formats Markdown & GitHub Actions Step Summaries.
+   - `scripts/known_cbom_catalog.json`: Curated cryptographic profiles for Java/Maven, Python (`pkg:pypi/*`), OS packages (`deb`/`rpm`/`apk`), and CI GitHub Actions (`pkg:github/*`).
    - `scripts/test_boms.sh`: Automated test harness verifying JSON validity, CycloneDX schema conformity, cryptographic asset counts, and PQC audit execution.
 
 ### Phase 4: Security Pipeline & Node 24 SHA Pinning

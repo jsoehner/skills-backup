@@ -151,14 +151,17 @@ def main():
             "scan_crypto_ast.py",
             "analyze_cbom.py",
             "test_boms.sh",
+            "enrich_sbom_python.py",
+            "known_cbom_catalog.json",
         ]
 
         target_scripts_dir = repo_dir / "scripts"
         for sname in scripts_to_install:
             src_script = scripts_template_dir / sname
             dst_script = target_scripts_dir / sname
+            is_exec = not sname.endswith(".json")
             if is_safe_subpath(dst_script, repo_dir):
-                if copy_file_safe(src_script, dst_script, args.force, args.dry_run, make_executable=True):
+                if copy_file_safe(src_script, dst_script, args.force, args.dry_run, make_executable=is_exec):
                     installed_items.append(f"scripts/{sname}")
 
         # SBOM & CBOM GitHub Action Workflow
