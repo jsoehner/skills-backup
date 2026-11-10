@@ -139,10 +139,13 @@ chmod +x "${REPO_DIR}/scripts/generate_boms.sh" \
 echo "✅ Done"
 
 # 3. Determine workflow filename
-if [[ -f "${REPO_DIR}/.github/workflows/sbom.yml" ]]; then
-    WORKFLOW_FILE="${REPO_DIR}/.github/workflows/sbom.yml"
-elif [[ -f "${REPO_DIR}/.github/workflows/sbom-cbom.yml" ]]; then
+if [[ -f "${REPO_DIR}/.github/workflows/sbom-cbom.yml" ]]; then
     WORKFLOW_FILE="${REPO_DIR}/.github/workflows/sbom-cbom.yml"
+    if [[ -f "${REPO_DIR}/.github/workflows/sbom.yml" ]]; then
+        rm -f "${REPO_DIR}/.github/workflows/sbom.yml"
+    fi
+elif [[ -f "${REPO_DIR}/.github/workflows/sbom.yml" ]]; then
+    WORKFLOW_FILE="${REPO_DIR}/.github/workflows/sbom.yml"
 else
     WORKFLOW_FILE="${REPO_DIR}/.github/workflows/sbom-cbom.yml"
 fi
@@ -215,7 +218,7 @@ jobs:
         run: mkdir -p oss
 
       - name: Set up Python for Cryptographic Auditing & Dependency Resolution
-        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: '3.11'
 ${GRADLE_SETUP}
