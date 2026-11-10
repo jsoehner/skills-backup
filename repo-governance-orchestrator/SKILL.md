@@ -28,7 +28,7 @@ Use this skill whenever you need to:
 
 | Orchestrator Skill | Primary Scope | Key Deliverables & Gates |
 | :--- | :--- | :--- |
-| **`repo-governance-orchestrator`** | **Baseline Repo Scaffolding & Supply Chain DX** | `CONTRIBUTING.md`, PR template, Conventional Commits, `changelog.yml`, dual-engine SBOM/CBOM (`sbom.yml`, `scan_crypto_ast.py`, `analyze_cbom.py`, `test_boms.sh`), baseline SAST/Secret scanning (`security-testing.yml`), Node 24 SHA pinning. |
+| **`repo-governance-orchestrator`** | **Baseline Repo Scaffolding & Supply Chain DX** | `CONTRIBUTING.md`, PR template, Conventional Commits, `changelog.yml`, dual-engine SBOM/CBOM (`sbom-cbom.yml`, `scan_crypto_ast.py`, `analyze_cbom.py`, `test_boms.sh`), baseline SAST/Secret scanning (`security-testing.yml`), Node 24 SHA pinning. |
 | **`security-governance-orchestrator`** | **Comprehensive Security Lifecycle & Compliance** | STRIDE threat modeling, Security ADRs (SecADRs), SARIF export to GitHub Security tab, Dependabot cooldown configuration, and SOC2/CIS compliance posture. |
 | **`adr-governance-orchestrator`** | **Architectural Decision Lifecycle** | Problem discovery, MADR/Nygard authoring, compliance gatekeeping (`adr-gatekeeper`), and index synchronization. |
 | **`architecture-governance-orchestrator`** | **Macro-Level Systems Architecture** | Visual C4 architecture models (Context, Container, Component, Code), cloud/K8s/monorepo blueprints, and ADR cross-referencing. |
@@ -78,16 +78,17 @@ flowchart TD
 
 ### Phase 3: Dual-Engine Supply Chain & Cryptographic Governance (BOM Suite)
 Deploy the full dual-engine scanning pipeline into the repository:
-1. **GitHub Actions Workflow** [`.github/workflows/sbom.yml`](templates/sbom.yml):
-   - Generates CycloneDX and SPDX SBOMs via Anchore / Syft.
+1. **GitHub Actions Workflow** [`.github/workflows/sbom-cbom.yml`](templates/sbom.yml):
+   - Generates CycloneDX and SPDX SBOMs via Anchore / Syft and enriches with Python/npm/Gradle manifests.
+   - Automatically removes legacy duplicate `.github/workflows/sbom.yml` files to prevent parallel workflow collisions.
    - Generates CycloneDX 1.6/1.7 CBOMs via `cbomkit-action` (`cbomkit/cbomkit-action`).
    - Executes multi-language semantic AST call-site discovery (`scan_crypto_ast.py`) to catch instantiated cryptographic calls missed by manifest scanners.
    - Executes the automated CI verification test harness (`test_boms.sh`).
-   - Generates the Post-Quantum Cryptography (PQC) migration scorecard and `$GITHUB_STEP_SUMMARY` (`analyze_cbom.py`).
+   - Generates the Post-Quantum Cryptography (PQC) migration scorecard and `$GITHUB_STEP_SUMMARY` (`analyze_cbom.py`), publishing `docs/security/CRYPTOGRAPHIC_AUDIT.md`.
    - Uploads all artifacts to `oss/` and attaches them to GitHub release tags (`v*`).
 2. **Local Engineering Scripts** (installed into `scripts/` with executable permissions):
-   - `scripts/generate_boms.sh`: Local bash generator supporting container images (`-t docker`) or directory scans (`-t dir`). Automatically runs Python/Gradle SBOM enrichment and AST reconciliation.
-   - `scripts/enrich_sbom_python.py`: Resolves direct and transitive `pkg:pypi/*` dependencies from `requirements.txt` / `pyproject.toml` and `importlib.metadata` into `oss/sbom.cyclonedx.json`.
+   - `scripts/generate_boms.sh`: Local bash generator supporting container images (`-t docker`) or directory scans (`-t dir`). Automatically runs Python/npm/Gradle SBOM enrichment and AST reconciliation.
+   - `scripts/enrich_sbom_python.py`: Resolves direct and transitive `pkg:pypi/*` and `pkg:npm/*` dependencies from `requirements.txt` / `pyproject.toml` / `package-lock.json` / `package.json` into `oss/sbom.cyclonedx.json`.
    - `scripts/scan_crypto_ast.py`: Multi-language AST parser for Python (`ast`), JS/TS, Go, Java, Rust, C#, and C/C++ regex fallbacks (including application modules in `scripts/`). Reconciles call sites directly into `oss/cbom.json`.
    - `scripts/analyze_cbom.py`: Analyzes algorithms, key sizes, classical vs PQC inventory, quantum vulnerabilities, and formats Markdown & GitHub Actions Step Summaries.
    - `scripts/known_cbom_catalog.json`: Curated cryptographic profiles for Java/Maven, Python (`pkg:pypi/*`), OS packages (`deb`/`rpm`/`apk`), and CI GitHub Actions (`pkg:github/*`).

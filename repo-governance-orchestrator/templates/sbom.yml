@@ -32,7 +32,7 @@ jobs:
         run: mkdir -p oss
 
       - name: Set up Python for Cryptographic Auditing & Dependency Resolution
-        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: '3.11'
 
@@ -104,15 +104,46 @@ jobs:
       - name: Generate PQC Migration Dashboard & Step Summary
         run: |
           if [ -f scripts/analyze_cbom.py ]; then
+            SBOM_ARG=""
+            if [ -f oss/sbom.cyclonedx.json ]; then
+              SBOM_ARG="--sbom oss/sbom.cyclonedx.json"
+            elif [ -f oss/sbom.spdx.json ]; then
+              SBOM_ARG="--sbom oss/sbom.spdx.json"
+            fi
+            EXT_ARG=""
+            if [ -f oss/upstream_cbom.json ]; then
+              EXT_ARG="--external-cbom oss/upstream_cbom.json"
+            fi
             python3 scripts/analyze_cbom.py oss/cbom.json \
-              --sbom oss/sbom.cyclonedx.json \
+              $SBOM_ARG \
+              $EXT_ARG \
               --json oss/crypto-analysis.json \
               --markdown oss/crypto-summary.md \
               --step-summary
           fi
 
       # -------------------------------------------------------------
-      # 6. Upload All BOM Artifacts
+      # 6. Publish Cryptographic Audit Report to Repository (docs/security)
+      # -------------------------------------------------------------
+      - name: Publish Cryptographic Audit Report to Repository
+        if: github.event_name == 'push' && !contains(github.event.head_commit.message, '[skip ci]')
+        run: |
+          if [ -f oss/crypto-summary.md ]; then
+            mkdir -p docs/security
+            cp oss/crypto-summary.md docs/security/CRYPTOGRAPHIC_AUDIT.md
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add docs/security/CRYPTOGRAPHIC_AUDIT.md
+            if git diff --staged --quiet; then
+              echo "No changes in cryptographic audit report."
+            else
+              git commit -m "docs(security): update cryptographic audit & PQC migration report [skip ci]"
+              git push
+            fi
+          fi
+
+      # -------------------------------------------------------------
+      # 7. Upload All BOM Artifacts
       # -------------------------------------------------------------
       - name: Upload BOM Artifacts
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2

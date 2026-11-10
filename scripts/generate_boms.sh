@@ -153,10 +153,10 @@ fi
 
 log "SBOM generated successfully: $SBOM_OUTPUT"
 
-# Enrich CycloneDX SBOM with Python or Gradle dependencies when scanning a directory
+# Enrich CycloneDX SBOM with Python, npm, or Gradle dependencies when scanning a directory
 if [[ "$TARGET_TYPE" == "dir" && "$SBOM_FORMAT" == "cyclonedx-json" ]]; then
-    if [[ -f "${SKILL_DIR}/scripts/enrich_sbom_python.py" && ( -f "${TARGET}/requirements.txt" || -f "${TARGET}/pyproject.toml" ) ]]; then
-        log "Enriching CycloneDX SBOM with Python dependencies..."
+    if [[ -f "${SKILL_DIR}/scripts/enrich_sbom_python.py" && ( -f "${TARGET}/requirements.txt" || -f "${TARGET}/pyproject.toml" || -f "${TARGET}/package-lock.json" || -f "${TARGET}/package.json" ) ]]; then
+        log "Enriching CycloneDX SBOM with project manifest dependencies..."
         python3 "${SKILL_DIR}/scripts/enrich_sbom_python.py" "$SBOM_OUTPUT" "$TARGET" || true
     fi
     if [[ -f "${SKILL_DIR}/scripts/enrich_sbom_gradle.py" && ( -f "${TARGET}/build.gradle" || -f "${TARGET}/build.gradle.kts" ) ]]; then

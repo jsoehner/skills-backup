@@ -178,9 +178,11 @@ bash scripts/install_to_repo.sh [OPTIONS] <TARGET_REPO_PATH>
 - `-t, --type <docker|dir>`: `docker` for container-based projects or `dir` for directory-based projects (auto-detected if `Dockerfile` is present)
 
 This installs:
-- `.github/workflows/sbom-cbom.yml` (configured with automated CI verification)
+- `.github/workflows/sbom-cbom.yml` (configured with automated CI verification, Node 24 SHA-pinned actions including `actions/setup-python@v7.0.0`, and automatic cleanup of duplicate `.github/workflows/sbom.yml` files)
 - `scripts/generate_boms.sh` (local generation utility with `npx` fallback)
-- `scripts/analyze_cbom.py` (cryptographic asset & PQC auditor)
+- `scripts/enrich_sbom_python.py` (direct and transitive Python `pkg:pypi/*` and Node.js `pkg:npm/*` lockfile/manifest enricher)
+- `scripts/scan_crypto_ast.py` (dual-engine semantic AST cryptographic call-site scanner and CBOM reconciler)
+- `scripts/analyze_cbom.py` & `scripts/known_cbom_catalog.json` (cryptographic asset & PQC auditor with curated third-party profiles)
 - `scripts/test_boms.sh` (automated verification test harness)
 
 ---
@@ -216,7 +218,9 @@ To ensure reliability, test the skill across these five distinct layers:
 | **NEVER** leave BOMs unversioned or unpersisted | Generating BOM files into transient directories without artifact upload prevents compliance auditing. | Archive output directories (e.g. `oss/`) via CI/CD artifact upload with appropriate retention periods. |
 | **NEVER** use unpinned actions in production pipelines | Using mutable tags (`@main` or `@v1`) can introduce unexpected supply-chain breaks. | Pin GitHub Actions to immutable full commit SHAs with semantic version comments. |
 | **NEVER** blanket-exclude `scripts/` from AST or CBOM scans | Many repositories store production modules in `scripts/`; excluding `(^|/)scripts/.*` or `"scripts"` in `IGNORED_DIRS` blinds the audit to first-party crypto calls. | Exclude only the BOM helper scripts by filename (`scan_crypto_ast.py`, `analyze_cbom.py`, `enrich_sbom_*.py`, etc.). |
-| **NEVER** rely on static Syft alone for unpinned Python `requirements.txt` | Syft's static `requirements.txt` cataloger skips `>=` ranges and omits transitive crypto dependencies (`cryptography`, `pyjwt`, `rsa`, `urllib3`, `certifi`). | Run `python3 scripts/enrich_sbom_python.py oss/sbom.cyclonedx.json .` after `pip install -r requirements.txt` to resolve direct and transitive `pkg:pypi/*` packages. |
+| **NEVER** rely on static Syft alone for unpinned Python `requirements.txt` or local unbuilt Node.js manifests | Syft's static `requirements.txt` cataloger skips `>=` ranges and omits transitive crypto dependencies (`cryptography`, `pyjwt`, `rsa`, `urllib3`, `certifi`), and local runs without `syft` miss `package-lock.json` graphs. | Run `python3 scripts/enrich_sbom_python.py oss/sbom.cyclonedx.json .` to resolve direct and transitive `pkg:pypi/*` and `pkg:npm/*` packages. |
+| **NEVER** leave duplicate `sbom.yml` and `sbom-cbom.yml` workflows in `.github/workflows/` | Co-existing `sbom.yml` and `sbom-cbom.yml` files trigger redundant parallel BOM jobs and git push race conditions on `CRYPTOGRAPHIC_AUDIT.md`. | Standardize on `.github/workflows/sbom-cbom.yml` and remove legacy `.github/workflows/sbom.yml` when upgrading. |
+| **NEVER** downgrade Node 24 GitHub Actions when scaffolding workflows | Using older action SHAs (e.g., `actions/setup-python@v5.6.0`) triggers Node 20 deprecation warnings and conflicts with Dependabot upgrades. | Always pin Node 24 action versions (`actions/checkout@v7.0.1`, `actions/setup-python@v7.0.0` `5fda3b95a4ea91299a34e894583c3862153e4b97`). |
 
 ---
 

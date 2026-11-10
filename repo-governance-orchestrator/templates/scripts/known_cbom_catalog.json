@@ -499,8 +499,142 @@
       "cryptoAssets": []
     },
     {
+      "name": "dbsc-toolkit",
+      "purlPattern": "^pkg:npm/((%40|@)dbsc-toolkit/.*|dbsc-toolkit)(@.*)?$",
+      "category": "auth-protocol",
+      "confidence": "HIGH",
+      "source": "W3C Device Bound Session Credentials (DBSC) Proof-of-Possession Specification",
+      "cryptoAssets": [
+        {
+          "name": "DBSC Hardware-Bound Session Proof-of-Possession JWT (ES256 / RS256)",
+          "primitive": "signature",
+          "algorithm": "ECDSA-P256 / RSA-2048",
+          "pqc_status": "QUANTUM-VULNERABLE",
+          "key_length": "256 / 2048",
+          "remediation": "Migrate DBSC hardware-bound proof-of-possession signatures to hybrid ML-DSA-65 (FIPS 204) as W3C DBSC and WebCrypto PQC standards mature"
+        },
+        {
+          "name": "DBSC Challenge & Session Binding Digest",
+          "primitive": "hash",
+          "algorithm": "SHA-256",
+          "pqc_status": "CLASSICAL/SYMMETRIC",
+          "key_length": "256",
+          "remediation": "SHA-256 challenge binding is quantum-resistant against Grover's algorithm"
+        }
+      ]
+    },
+    {
+      "name": "jose",
+      "purlPattern": "^pkg:npm/jose(@.*)?$",
+      "category": "jwt-library",
+      "confidence": "HIGH",
+      "source": "IETF JOSE (RFC 7515 JWS / RFC 7516 JWE / RFC 7519 JWT) Cryptographic Profile",
+      "cryptoAssets": [
+        {
+          "name": "JOSE Asymmetric JWS / JWE Key Management (ES256 / RS256 / EdDSA / ECDH-ES)",
+          "primitive": "signature",
+          "algorithm": "ECDSA-P256 / RSA-2048 / Ed25519",
+          "pqc_status": "QUANTUM-VULNERABLE",
+          "key_length": "256 / 2048",
+          "remediation": "Adopt IETF JOSE Post-Quantum ML-DSA (FIPS 204) and ML-KEM (FIPS 203) algorithms"
+        },
+        {
+          "name": "JOSE Symmetric JWE Content Encryption & HMAC (A256GCM / HS256)",
+          "primitive": "block-cipher",
+          "algorithm": "AES-256-GCM / HMAC-SHA256",
+          "pqc_status": "CLASSICAL/SYMMETRIC",
+          "key_length": "256",
+          "remediation": "256-bit AEAD and HMAC are quantum-resistant"
+        }
+      ]
+    },
+    {
+      "name": "noble-ciphers",
+      "purlPattern": "^pkg:npm/(%40|@)noble/ciphers(@.*)?$",
+      "category": "crypto-library",
+      "confidence": "HIGH",
+      "source": "Noble Audited JavaScript Ciphers (AES-GCM / ChaCha20-Poly1305)",
+      "cryptoAssets": [
+        {
+          "name": "Noble Authenticated Symmetric Ciphers (AES-256-GCM / ChaCha20-Poly1305 / XChaCha20)",
+          "primitive": "block-cipher",
+          "algorithm": "AES-256-GCM / ChaCha20-Poly1305",
+          "pqc_status": "CLASSICAL/SYMMETRIC",
+          "key_length": "256",
+          "remediation": "256-bit symmetric AEAD ciphers are Grover-resistant"
+        }
+      ]
+    },
+    {
+      "name": "noble-hashes",
+      "purlPattern": "^pkg:npm/(%40|@)noble/hashes(@.*)?$",
+      "category": "crypto-library",
+      "confidence": "HIGH",
+      "source": "Noble Audited JavaScript Hashes & KDFs (SHA-2 / SHA-3 / HKDF / PBKDF2 / scrypt)",
+      "cryptoAssets": [
+        {
+          "name": "Noble Cryptographic Digest & KDF Suite (SHA-256 / SHA-512 / SHA3-256 / HKDF / scrypt)",
+          "primitive": "hash",
+          "algorithm": "SHA-256 / SHA-512 / SHA3-256",
+          "pqc_status": "CLASSICAL/SYMMETRIC",
+          "key_length": "256 / 512",
+          "remediation": "SHA-256+ and SHA-3 digests are quantum-resistant"
+        }
+      ]
+    },
+    {
+      "name": "better-auth",
+      "purlPattern": "^pkg:npm/((%40|@)better-auth/(core|utils)|better-auth)(@.*)?$",
+      "category": "auth-framework",
+      "confidence": "HIGH",
+      "source": "Better Auth Session, OIDC & CSRF Cryptographic Specification",
+      "cryptoAssets": [
+        {
+          "name": "Better Auth Session Token Signing & CSRF HMAC",
+          "primitive": "mac",
+          "algorithm": "HMAC-SHA256",
+          "pqc_status": "CLASSICAL/SYMMETRIC",
+          "key_length": "256",
+          "remediation": "256-bit HMAC session authentication is quantum-resistant"
+        },
+        {
+          "name": "Better Auth OIDC / WebAuthn Asymmetric Verification (ES256 / RS256 / Ed25519)",
+          "primitive": "signature",
+          "algorithm": "ECDSA-P256 / RSA-2048 / Ed25519",
+          "pqc_status": "QUANTUM-VULNERABLE",
+          "key_length": "256 / 2048",
+          "remediation": "Transition asymmetric OIDC/WebAuthn verifiers to ML-DSA (FIPS 204)"
+        }
+      ]
+    },
+    {
+      "name": "cookie-signature",
+      "purlPattern": "^pkg:npm/cookie-signature(@.*)?$",
+      "category": "crypto-utility",
+      "confidence": "HIGH",
+      "source": "Express Cookie HMAC-SHA256 Signing Specification",
+      "cryptoAssets": [
+        {
+          "name": "Express Signed Cookie HMAC-SHA256 MAC",
+          "primitive": "mac",
+          "algorithm": "HMAC-SHA256",
+          "pqc_status": "CLASSICAL/SYMMETRIC",
+          "key_length": "256",
+          "remediation": "Ensure high-entropy 256-bit cookie signing secret"
+        }
+      ]
+    },
+    {
+      "name": "nodejs-web-and-utility-libraries",
+      "purlPattern": "^pkg:npm/((%40|@)better-auth/(drizzle|kysely|memory|mongo|prisma)-adapter|(%40|@)better-auth/telemetry|(%40|@)better-fetch/fetch|(%40|@)pinojs/redact|(%40|@)standard-schema/spec|accepts|atomic-sleep|better-call|better-sqlite3|body-parser|bytes|call-bind-apply-helpers|call-bound|content-disposition|content-type|cookie|cookie-parser|cors|debug|defu|depd|dunder-proto|ee-first|encodeurl|es-define-property|es-errors|es-object-atoms|escape-html|etag|express|express-rate-limit|finalhandler|forwarded|fresh|function-bind|get-caller-file|get-intrinsic|get-proto|gopd|has-symbols|hasown|helmet|http-errors|iconv-lite|inherits|ip-address|ipaddr\\.js|is-promise|kysely|math-intrinsics|media-typer|merge-descriptors|mime-db|mime-types|ms|nanostores|negotiator|node-addon-api|object-assign|object-inspect|on-exit-leak-free|on-finished|once|parseurl|path-to-regexp|pino|pino-abstract-transport|pino-http|pino-std-serializers|process-warning|proxy-addr|qs|quick-format-unescaped|range-parser|raw-body|real-require|rou3|router|safe-stable-stringify|safer-buffer|send|serve-static|set-cookie-parser|setprototypeof|side-channel|side-channel-list|side-channel-map|side-channel-weakmap|sonic-boom|split2|statuses|thread-stream|toidentifier|type-is|unpipe|vary|wrappy|zod)(@.*)?$",
+      "category": "application-library",
+      "confidence": "HIGH",
+      "source": "Verified Cryptographically Inert (HTTP Routing, Middleware, Logging, SQLite/ORM Adapters & Schema Validation)",
+      "cryptoAssets": []
+    },
+    {
       "name": "github-actions-ci-toolchain",
-      "purlPattern": "^pkg:github/(actions|anchore|aquasecurity|cbomkit|docker|gitleaks|returntocorp|semgrep|softprops|wagoid|oras-project)/.*(@.*)?$",
+      "purlPattern": "^pkg:github/(actions|anchore|aquasecurity|cbomkit|docker|github|gitleaks|mathieudutour|ncipollo|oras-project|peter-evans|returntocorp|semgrep|softprops|wagoid)/.*(@.*)?$",
       "category": "ci-cd-action",
       "confidence": "HIGH",
       "source": "Verified CI/CD DevSecOps Pipeline Action (Pinned 40-char Commit SHA)",

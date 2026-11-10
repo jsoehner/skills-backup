@@ -333,13 +333,15 @@ echo "✅ Done"
 
 # 4. Generate Initial Local Audit & Documentation
 echo -n "Generating local cryptographic scan and updating documentation ... "
-if [[ -f "${REPO_DIR}/scripts/enrich_sbom_python.py" && ( -f "${REPO_DIR}/requirements.txt" || -f "${REPO_DIR}/pyproject.toml" ) ]]; then
+if [[ -f "${REPO_DIR}/scripts/enrich_sbom_python.py" && ( -f "${REPO_DIR}/requirements.txt" || -f "${REPO_DIR}/pyproject.toml" || -f "${REPO_DIR}/package-lock.json" || -f "${REPO_DIR}/package.json" ) ]]; then
     python3 "${REPO_DIR}/scripts/enrich_sbom_python.py" "${REPO_DIR}/oss/sbom.cyclonedx.json" "${REPO_DIR}" >/dev/null 2>&1 || true
 fi
 python3 "${REPO_DIR}/scripts/scan_crypto_ast.py" "${REPO_DIR}" --cbom "${REPO_DIR}/oss/cbom.json" --output-json "${REPO_DIR}/oss/crypto-callsites.json" >/dev/null 2>&1 || true
 SBOM_LOCAL_ARG=""
 if [[ -f "${REPO_DIR}/oss/sbom.cyclonedx.json" ]]; then
     SBOM_LOCAL_ARG="--sbom ${REPO_DIR}/oss/sbom.cyclonedx.json"
+elif [[ -f "${REPO_DIR}/oss/sbom.spdx.json" ]]; then
+    SBOM_LOCAL_ARG="--sbom ${REPO_DIR}/oss/sbom.spdx.json"
 fi
 python3 "${REPO_DIR}/scripts/analyze_cbom.py" "${REPO_DIR}/oss/cbom.json" $SBOM_LOCAL_ARG --json "${REPO_DIR}/oss/crypto-analysis.json" --markdown "${REPO_DIR}/oss/crypto-summary.md" >/dev/null 2>&1 || true
 if [[ -f "${REPO_DIR}/oss/crypto-summary.md" ]]; then

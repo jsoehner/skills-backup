@@ -17,7 +17,9 @@ When a GitHub Action runner complains about Node 20 deprecation (`Node.js 20 is 
 
 Bump to these major versions to resolve Node 20 deprecation warnings:
 - `actions/checkout` -> `@v7` (e.g., `3d3c42e5aac5ba805825da76410c181273ba90b1` for `v7.0.1`)
-- `actions/setup-node` -> `@v6`
+- `actions/setup-python` -> `@v7` (e.g., `5fda3b95a4ea91299a34e894583c3862153e4b97` for `v7.0.0`)
+- `actions/setup-node` -> `@v7` (e.g., `949feb2413d6458794dcd2491c4babbbce0c15c1` for `v7.1.0`) or `@v6`
+- `actions/setup-java` -> `@v6` (e.g., `de7274f081f381c8f8158605e0321c36c376e2e6` for `v6.0.1`)
 - `actions/cache/restore` -> `@v5`
 - `actions/cache/save` -> `@v5`
 - `docker/login-action` -> `@v4`

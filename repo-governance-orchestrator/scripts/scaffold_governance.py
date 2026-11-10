@@ -164,11 +164,15 @@ def main():
                 if copy_file_safe(src_script, dst_script, args.force, args.dry_run, make_executable=is_exec):
                     installed_items.append(f"scripts/{sname}")
 
-        # SBOM & CBOM GitHub Action Workflow
-        sbom_wf_dst = repo_dir / ".github" / "workflows" / "sbom.yml"
+        # SBOM & CBOM GitHub Action Workflow (standardized on sbom-cbom.yml)
+        sbom_wf_dst = repo_dir / ".github" / "workflows" / "sbom-cbom.yml"
+        legacy_sbom_wf = repo_dir / ".github" / "workflows" / "sbom.yml"
         if is_safe_subpath(sbom_wf_dst, repo_dir):
             if copy_file_safe(templates_dir / "sbom.yml", sbom_wf_dst, args.force, args.dry_run):
-                installed_items.append(".github/workflows/sbom.yml")
+                installed_items.append(".github/workflows/sbom-cbom.yml")
+                if legacy_sbom_wf.exists() and not args.dry_run:
+                    legacy_sbom_wf.unlink()
+                    print(f"🧹 Removed duplicate legacy workflow: {legacy_sbom_wf}")
 
     print("\n" + "=" * 68)
     if args.dry_run:
