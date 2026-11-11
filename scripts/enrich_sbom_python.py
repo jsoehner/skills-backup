@@ -170,76 +170,11 @@ def discover_python_dependencies(project_dir: Path) -> List[Dict[str, str]]:
     return list(discovered.values())
 
 
-def discover_npm_dependencies(project_dir: Path) -> List[Dict[str, str]]:
-    """Discover direct and transitive npm dependencies from package-lock.json / package.json."""
-    discovered: Dict[str, Dict[str, str]] = {}
-
-    def register_npm(pkg_name: str, version: str, scope: str = "required"):
-        if not pkg_name or not version or version.startswith(("file:", "link:", "workspace:")):
-            return
-        version = re.sub(r"^[\^~>=<v\s]+", "", version).strip()
-        if not version:
-            version = "latest"
-        if pkg_name.startswith("@") and "/" in pkg_name:
-            ns, name = pkg_name.split("/", 1)
-            encoded_ns = "%40" + ns[1:]
-            purl = f"pkg:npm/{encoded_ns}/{name}@{version}"
-        else:
-            name = pkg_name
-            purl = f"pkg:npm/{pkg_name}@{version}"
-        if purl not in discovered:
-            discovered[purl] = {
-                "name": name,
-                "version": version,
-                "purl": purl,
-                "type": "library",
-                "scope": scope,
-                "bom-ref": purl,
-            }
-
-    lock_file = project_dir / "package-lock.json"
-    if lock_file.exists():
-        try:
-            lock_data = json.loads(lock_file.read_text(encoding="utf-8"))
-            packages = lock_data.get("packages", {})
-            if isinstance(packages, dict) and packages:
-                for pkg_path, info in packages.items():
-                    if not pkg_path or not isinstance(info, dict) or info.get("dev"):
-                        continue
-                    # Extract package name after last node_modules/
-                    parts = pkg_path.split("node_modules/")
-                    pkg_name = parts[-1].strip("/")
-                    ver = str(info.get("version") or "")
-                    if pkg_name and ver:
-                        register_npm(pkg_name, ver, scope="required" if len(parts) == 2 else "transitive")
-            else:
-                deps = lock_data.get("dependencies", {})
-                if isinstance(deps, dict):
-                    for pkg_name, info in deps.items():
-                        if isinstance(info, dict) and not info.get("dev"):
-                            register_npm(pkg_name, str(info.get("version") or "latest"))
-        except Exception as e:
-            print(f"Warning: Failed reading {lock_file}: {e}", file=sys.stderr)
-    else:
-        pkg_json = project_dir / "package.json"
-        if pkg_json.exists():
-            try:
-                pkg_data = json.loads(pkg_json.read_text(encoding="utf-8"))
-                for pkg_name, ver in (pkg_data.get("dependencies") or {}).items():
-                    register_npm(pkg_name, str(ver), scope="required")
-            except Exception as e:
-                print(f"Warning: Failed reading {pkg_json}: {e}", file=sys.stderr)
-
-    return list(discovered.values())
-
-
 def enrich_sbom(sbom_path: Path, project_dir: Path = Path(".")):
-    """Merge discovered Python and npm dependencies into CycloneDX SBOM."""
+    """Merge discovered Python dependencies into CycloneDX SBOM."""
     py_deps = discover_python_dependencies(project_dir)
-    npm_deps = discover_npm_dependencies(project_dir)
-    all_deps = py_deps + npm_deps
-    if not all_deps:
-        print("No Python or npm dependencies discovered in project manifests.")
+    if not py_deps:
+        print("No Python dependencies discovered in project manifests.")
         return
 
     sbom_path.parent.mkdir(parents=True, exist_ok=True)
@@ -278,27 +213,21 @@ def enrich_sbom(sbom_path: Path, project_dir: Path = Path(".")):
 
     data["components"] = cleaned_components
     existing_purls = {c.get("purl") for c in cleaned_components if c.get("purl")}
-    existing_pypi_names = {
-        normalize_pypi_name(c.get("name", ""))
-        for c in cleaned_components
-        if c.get("name") and str(c.get("purl", "")).startswith("pkg:pypi/")
-    }
+    existing_names = {normalize_pypi_name(c.get("name", "")) for c in cleaned_components if c.get("name")}
 
     added = 0
-    for dep in sorted(all_deps, key=lambda d: d["purl"]):
-        is_pypi = dep["purl"].startswith("pkg:pypi/")
-        if dep["purl"] not in existing_purls and (not is_pypi or dep["name"] not in existing_pypi_names):
+    for dep in sorted(py_deps, key=lambda d: d["name"]):
+        if dep["purl"] not in existing_purls and dep["name"] not in existing_names:
             cleaned_components.append(dep)
             existing_purls.add(dep["purl"])
-            if is_pypi:
-                existing_pypi_names.add(dep["name"])
+            existing_names.add(dep["name"])
             added += 1
 
     with open(sbom_path, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2)
 
     print(
-        f"✅ Enriched SBOM ({sbom_path}) with {added} dependencies "
+        f"✅ Enriched SBOM ({sbom_path}) with {added} Python dependencies "
         f"(Total SBOM components: {len(cleaned_components)})"
     )
 
