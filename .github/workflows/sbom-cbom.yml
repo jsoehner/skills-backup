@@ -29,10 +29,10 @@ jobs:
         with:
           target-dir: '.'
           output-dir: 'oss'
-          publish_audit_report: 'true'
-          comment_pr: 'true'
-          upload_artifacts: 'true'
-          retention_days: '90'
+          publish-audit-report: 'true'
+          comment-pr: 'true'
+          upload-artifacts: 'true'
+          retention-days: '90'
 
       - name: Fetch OCI Image CBOM
         run: python3 scripts/fetch_oci_cbom.py docker.io/library/alpine:latest
