@@ -1,0 +1,30 @@
+steps:
+  - name: Configure Trusted OSS Cache (mTLS) if TRUSTED_OSS_CACHE_URL is set
+    env:
+      TRUSTED_OSS_CACHE_URL: ${{ vars.TRUSTED_OSS_CACHE_URL }}
+      TRUSTED_OSS_MODE: ${{ vars.TRUSTED_OSS_MODE || 'virtual' }}
+      OSS_MTLS_CLIENT_CERT: ${{ secrets.OSS_MTLS_CLIENT_CERT }}
+      OSS_MTLS_CLIENT_KEY: ${{ secrets.OSS_MTLS_CLIENT_KEY }}
+    run: |
+      CACHE_URL="${TRUSTED_OSS_CACHE_URL%/}"
+      if [[ -z "$CACHE_URL" ]]; then
+        echo "[INFO] TRUSTED_OSS_CACHE_URL is unset; using public upstream OSS repositories."
+        exit 0
+      fi
+      mkdir -p ~/.m2 ~/.oss-tls
+      printf '%s\n' "$OSS_MTLS_CLIENT_CERT" > ~/.oss-tls/client.crt
+      printf '%s\n' "$OSS_MTLS_CLIENT_KEY" > ~/.oss-tls/client.key
+      chmod 0600 ~/.oss-tls/client.key
+      curl -fsSL --cert ~/.oss-tls/client.crt --key ~/.oss-tls/client.key \
+        "${CACHE_URL}/keys/trusted-oss-pubkey.asc" -o ~/.oss-tls/trusted-oss-pubkey.asc
+      gpg --batch --import ~/.oss-tls/trusted-oss-pubkey.asc
+      openssl pkcs12 -export -in ~/.oss-tls/client.crt -inkey ~/.oss-tls/client.key \
+        -out ~/.oss-tls/client.p12 -passout pass:changeit
+      echo "MAVEN_OPTS=-Djavax.net.ssl.keyStore=$HOME/.oss-tls/client.p12 -Djavax.net.ssl.keyStoreType=PKCS12 -Djavax.net.ssl.keyStorePassword=changeit" >> "$GITHUB_ENV"
+      echo "PIP_INDEX_URL=${CACHE_URL}/pypi/${TRUSTED_OSS_MODE}/simple" >> "$GITHUB_ENV"
+      echo "UV_INDEX_URL=${CACHE_URL}/pypi/${TRUSTED_OSS_MODE}/simple" >> "$GITHUB_ENV"
+      cat > ~/.m2/settings.xml <<EOF
+      <settings xmlns="http://maven.apache.org/SETTINGS/1.2.0">
+        <mirrors><mirror><id>trusted-oss-harbor</id><url>${CACHE_URL}/maven/${TRUSTED_OSS_MODE}</url><mirrorOf>*</mirrorOf></mirror></mirrors>
+      </settings>
+      EOF
