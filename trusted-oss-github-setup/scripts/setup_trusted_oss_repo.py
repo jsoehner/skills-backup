@@ -164,7 +164,9 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Configure local & GitHub repo for Trusted OSS Harbor or public default.")
     parser.add_argument("--repo", default=".", help="Local repository path (default: .)")
     parser.add_argument("--github-repo", default="", help="GitHub repo (owner/name) for gh secret/variable setup")
-    parser.add_argument("--url", default=os.getenv("TRUSTED_OSS_CACHE_URL", ""), help="Trusted OSS Cache URL")
+    parser.add_argument("--url", default=os.getenv("TRUSTED_OSS_CACHE_URL", ""), help="Default cache URL if --local-url / --github-url are omitted")
+    parser.add_argument("--local-url", default=os.getenv("TRUSTED_OSS_LOCAL_URL", ""), help="LAN cache URL for local workspace (e.g. http://oss.jsigroup.local:8080)")
+    parser.add_argument("--github-url", default="", help="External WAN mTLS URL for GitHub Actions (e.g. https://jsigroup-oss.duckdns.org)")
     parser.add_argument("--mode", choices=["virtual", "trusted"], default=os.getenv("TRUSTED_OSS_MODE", "virtual"))
     parser.add_argument("--cert", default="", help="Path to mTLS client.crt for OSS_MTLS_CLIENT_CERT")
     parser.add_argument("--key", default="", help="Path to mTLS client.key for OSS_MTLS_CLIENT_KEY")
@@ -173,13 +175,14 @@ def main() -> int:
     parser.add_argument("--json", action="store_true", help="Output JSON")
     args = parser.parse_args()
 
-    target_url = "" if args.public else args.url
-    local_actions = configure_local_repo(Path(args.repo), target_url, args.mode, args.dry_run)
+    local_url = "" if args.public else (args.local_url or args.url)
+    github_url = "" if args.public else (args.github_url or args.url)
+    local_actions = configure_local_repo(Path(args.repo), local_url, args.mode, args.dry_run)
     gh_actions: list[str] = []
     if args.github_repo:
         gh_actions = configure_github_repo(
             args.github_repo,
-            target_url,
+            github_url,
             args.mode,
             Path(args.cert) if args.cert else None,
             Path(args.key) if args.key else None,
