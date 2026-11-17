@@ -14,6 +14,7 @@ from typing import Any
 from urllib.parse import urlparse
 
 
+DEFAULT_GPG_EMAIL = "oss-signing@the-techy.com"
 PUBLIC_BASE_IMAGE = "cgr.dev/chainguard/wolfi-base:latest"
 
 MAVEN_SETTINGS_TEMPLATE = """<?xml version="1.0" encoding="UTF-8"?>
@@ -128,6 +129,7 @@ def configure_github_repo(
     github_repo: str,
     cache_url: str,
     mode: str,
+    gpg_email: str,
     cert_path: Path | None,
     key_path: Path | None,
     dry_run: bool,
@@ -141,7 +143,7 @@ def configure_github_repo(
         actions.append(f"deleted GitHub variable TRUSTED_OSS_CACHE_URL on {github_repo}")
         return actions
 
-    for name, val in [("TRUSTED_OSS_CACHE_URL", norm_url), ("TRUSTED_OSS_MODE", mode)]:
+    for name, val in [("TRUSTED_OSS_CACHE_URL", norm_url), ("TRUSTED_OSS_MODE", mode), ("TRUSTED_OSS_GPG_EMAIL", gpg_email)]:
         if not dry_run:
             subprocess.run(["gh", "variable", "set", name, "--body", val, "-R", github_repo], check=True, capture_output=True)
         actions.append(f"set GitHub variable {name}={val} on {github_repo}")
@@ -168,6 +170,7 @@ def main() -> int:
     parser.add_argument("--local-url", default=os.getenv("TRUSTED_OSS_LOCAL_URL", ""), help="LAN cache URL for local workspace (e.g. http://oss.jsigroup.local:8080)")
     parser.add_argument("--github-url", default="", help="External WAN mTLS URL for GitHub Actions (e.g. https://jsigroup-oss.duckdns.org)")
     parser.add_argument("--mode", choices=["virtual", "trusted"], default=os.getenv("TRUSTED_OSS_MODE", "virtual"))
+    parser.add_argument("--gpg-email", default=os.getenv("TRUSTED_OSS_GPG_EMAIL", DEFAULT_GPG_EMAIL), help="Expected GPG signing key email (default: oss-signing@the-techy.com)")
     parser.add_argument("--cert", default="", help="Path to mTLS client.crt for OSS_MTLS_CLIENT_CERT")
     parser.add_argument("--key", default="", help="Path to mTLS client.key for OSS_MTLS_CLIENT_KEY")
     parser.add_argument("--public", action="store_true", help="Revert to public upstream repos")
@@ -184,6 +187,7 @@ def main() -> int:
             args.github_repo,
             github_url,
             args.mode,
+            args.gpg_email,
             Path(args.cert) if args.cert else None,
             Path(args.key) if args.key else None,
             args.dry_run,

@@ -60,7 +60,7 @@ python3 scripts/setup_trusted_oss_repo.py \
 ```
 This automatically:
 1. Sets GitHub Secrets `OSS_MTLS_CLIENT_CERT` and `OSS_MTLS_CLIENT_KEY` via `gh secret set`.
-2. Sets GitHub Variables `TRUSTED_OSS_CACHE_URL=https://jsigroup-oss.duckdns.org` and `TRUSTED_OSS_MODE=virtual` via `gh variable set`.
+2. Sets GitHub Variables `TRUSTED_OSS_CACHE_URL=https://jsigroup-oss.duckdns.org`, `TRUSTED_OSS_MODE=virtual`, and `TRUSTED_OSS_GPG_EMAIL=oss-signing@the-techy.com` via `gh variable set`.
 3. Configures local `.mvn/settings.xml` + `.mvn/maven.config`, `uv.toml`, and `.env` to use `http://oss.jsigroup.local:8080` (no NAT hairpinning).
 
 *(Note: `--url <URL>` can still be used as a shorthand when `--local-url` and `--github-url` are the same.)*
