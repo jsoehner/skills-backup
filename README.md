@@ -1,6 +1,10 @@
 # My Skills Repository
 
+[![Build Verification](https://img.shields.io/badge/Build%20Verification-Verified%202026--11--20-brightgreen)](docs/BUILD_VERIFICATION.md)
+
 This repository is a comprehensive collection of AI "skills" designed for various AI harnesses, including Pi-agent, Gemini, and AI coding agent.
+
+> **Build Verification:** Last functionally verified on `2026-11-20` by **Jeffs' Automated build and deploy agent** — see [docs/BUILD_VERIFICATION.md](docs/BUILD_VERIFICATION.md).
 
 ## Architecture
 
