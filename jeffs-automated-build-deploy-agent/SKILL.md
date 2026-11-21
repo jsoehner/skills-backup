@@ -134,6 +134,7 @@ Execute repositories **one at a time** to prevent port collisions, Docker resour
 ### Step 5: Verification-Gated Documentation Update
 **ONLY if the repository built and passed functional verification:**
 1. Create/update `docs/BUILD_VERIFICATION.md` with date (`YYYY-MM-DD`), attribution to **"Jeffs' Automated build and deploy agent"**, Trusted OSS summary, exact build/run commands, and functional verification evidence.
+   - **Secret-Scanner-Safe Formatting:** Summarize API/crypto responses in plain prose (e.g., `TLS hybrid PQC key exchange (X25519MLKEM768) enabled`) rather than pasting raw `key: "value"`, `token: "..."`, or `secret: "..."` JSON fragments, which trigger Gitleaks `generic-api-key` false positives or risk leaking session tokens.
 2. Add a concise verification badge/link in `README.md` pointing to `docs/BUILD_VERIFICATION.md`.
 3. Inspect `git status` and `git diff --cached` to confirm **ONLY** documentation files are staged (zero `.env`, zero `uv.toml`, zero `.mvn/settings.xml`, zero test-generated root artifacts, zero keys/secrets).
 4. Commit and push:
