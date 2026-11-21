@@ -75,12 +75,12 @@ Execute repositories **one at a time** to prevent port collisions, Docker resour
   - For multi-module builds where module 1 fails on a CVE gate, run `-pl <remaining> -fae` to surface sibling CVE blocks in one pass.
   - **Distinguish Real CVE 451 vs Transient Scan 451**: Probe the URL with `curl -sS -i -r 0-512 <artifact-url>`. If Harbor returns JSON `Vulnerability gate rejected artifact: High/Critical defect CVSS ...`, treat it as a **genuine security block** — never bypass it; report the artifact, GHSAs, and patched version.
 - **Gradle 7+/9+ (`build.gradle`, `gradlew`)**:
-  - Pass a temporary `--init-script /tmp/gradle-allow-insecure.gradle` that BOTH rewrites `repo.maven.apache.org/maven2` to `http://oss.jsigroup.local:8080/maven/virtual` AND sets `allowInsecureProtocol = true` for `http://oss.jsigroup.local*`.
+  - When using a local LAN HTTP Trusted OSS cache (`TRUSTED_OSS_ENDPOINT` starting with `http://`), pass a temporary `--init-script /tmp/gradle-allow-insecure.gradle` that BOTH rewrites `repo.maven.apache.org/maven2` to `${TRUSTED_OSS_ENDPOINT:-http://oss.jsigroup.local:8080}/maven/virtual` AND sets `allowInsecureProtocol = true`. In CI with HTTPS mTLS (`TRUSTED_OSS_ACTIVE=true`), `GRADLE_OPTS` is already configured.
   - Check host JDK versions (`java -version` vs `JavaLanguageVersion.of(...)` in `build.gradle`).
 - **Python (`pyproject.toml`, `requirements.txt`)**:
   - Run `PYTHONPYCACHEPREFIX=/tmp/pycache-<repo> PYTHONDONTWRITEBYTECODE=1 python3 -m compileall -q ...` early to catch syntax/indentation regressions and avoid root-owned `__pycache__` collisions.
-  - Avoid broken user-local `pytest` shims; create an isolated `/tmp/venv-<repo>` or use `uv run --index-url http://oss.jsigroup.local:8080/pypi/virtual/simple --with pytest pytest -o cache_dir=/tmp/pytest-cache-<repo> --durations=10`.
-  - For sdist-only packages (e.g., `reverse-geocoder==1.5.1`) or CPython 3.15 sdist builds blocked by `uv.toml`'s `no-build = true`, pass `--no-config --index-url http://oss.jsigroup.local:8080/pypi/virtual/simple`.
+  - Avoid broken user-local `pytest` shims; create an isolated `/tmp/venv-<repo>` or use `uv run --with pytest pytest -o cache_dir=/tmp/pytest-cache-<repo> --durations=10` (passing `--index-url "${PIP_INDEX_URL:-http://oss.jsigroup.local:8080/pypi/virtual/simple}"` when Trusted OSS is active).
+  - For sdist-only packages (e.g., `reverse-geocoder==1.5.1`) or CPython 3.15 sdist builds blocked by `uv.toml`'s `no-build = true`, pass `--no-config` (and `--index-url "$PIP_INDEX_URL"` if set).
   - Watch for EOL Python base images (e.g., `python:3.9-slim`) forcing `pip` onto CVE-blocked `urllib3-2.6.3`.
 - **Node.js / TypeScript (`package.json`)**:
   - Trusted OSS Harbor currently returns `404` for `/npm/`; install via `npm ci` (or `--registry=https://registry.npmjs.org --no-package-lock` if a tracked `.npmrc` points to `.local`).
@@ -99,22 +99,36 @@ Execute repositories **one at a time** to prevent port collisions, Docker resour
   - **CI-Driven Release Repos (`nvd-cache`)**: Verify GitHub Releases API via `api_verify.py`, download release artifacts to `/tmp/`, verify SHA-256 digests and archive integrity (`unzip -t`), and check recent scheduled workflow runs.
 
 ### Step 4: Functional Verification (Browser + Curl + Unit Tests)
-1. **Unit / Integration Tests**: Execute native test suites.
-2. **Guided Browser Verification (Web UIs)**:
+1. **Target Repo Config**: If `.jsi-verify.yml` (or a configured file) is present in the repo root, prioritize its declared build, start, and functional verification checks.
+2. **Unit / Integration Tests**: Execute native test suites.
+3. **Guided Browser Verification (Web UIs)** (use `$SKILL_DIR` in CI or `~/.gemini/config/skills/jeffs-automated-build-deploy-agent` locally):
    ```bash
-   python3 ~/.gemini/config/skills/jeffs-automated-build-deploy-agent/scripts/browser_verify.py \
+   python3 "${SKILL_DIR:-$HOME/.gemini/config/skills/jeffs-automated-build-deploy-agent}/scripts/browser_verify.py" \
      "https://localhost:3001/" \
      --expect "Expected Text" \
      --click "#btn-step-1" \
      --click "#btn-step-2" \
-     --screenshot "/tmp/build-verify-<repo>.png"
+     --screenshot-dir "/tmp/jsi-verify/screenshots"
    ```
-   Require `ok: true`, HTTP `200`, non-empty title/DOM, `console_errors: []`, and `exceptions: []`.
-3. **`curl` API Verification**:
+   Use `--screenshot-dir` to automatically capture `00-initial.png`, per-click screenshots (`01-click-*.png`), and `error.png` on failure (add `--full-page` for long scrolling pages).
+   Require `ok: true`, HTTP `200`, non-empty title/DOM, `console_errors: []`, `exceptions: []`, and all `--click` selectors found.
+4. **`curl` API Verification**:
    ```bash
-   python3 ~/.gemini/config/skills/jeffs-automated-build-deploy-agent/scripts/api_verify.py \
+   python3 "${SKILL_DIR:-$HOME/.gemini/config/skills/jeffs-automated-build-deploy-agent}/scripts/api_verify.py" \
      "https://localhost:3001/health" \
      "https://localhost:3001/protected=403"
+   ```
+5. **Structured Verdict Output (CI Mode — MANDATORY)**:
+   Write `/tmp/jsi-verify/verdict.json` with:
+   ```json
+   {
+     "status": "pass | fail | blocked",
+     "summary": "One-sentence summary of verification outcome",
+     "checks": [
+       {"name": "build", "status": "pass | fail | skip | blocked", "details": "..."}
+     ],
+     "failure_reason": ""
+   }
    ```
 
 ### Step 5: Verification-Gated Documentation Update

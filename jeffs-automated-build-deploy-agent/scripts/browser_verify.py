@@ -10,19 +10,23 @@ from __future__ import annotations
 
 import argparse
 import base64
-import hashlib
 import json
 import os
+import re
 import shutil
 import socket
 import struct
 import subprocess
-import sys
 import tempfile
 import time
 import urllib.request
 from pathlib import Path
 from typing import Any
+
+MACOS_CHROME_CANDIDATES = (
+    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "/Applications/Chromium.app/Contents/MacOS/Chromium",
+)
 
 
 def find_chrome() -> str:
@@ -30,7 +34,10 @@ def find_chrome() -> str:
         path = shutil.which(candidate)
         if path:
             return path
-    raise FileNotFoundError("No Chrome/Chromium binary found in PATH")
+    for app_path in MACOS_CHROME_CANDIDATES:
+        if os.path.isfile(app_path) and os.access(app_path, os.X_OK):
+            return app_path
+    raise FileNotFoundError("No Chrome/Chromium binary found in PATH or standard macOS Applications paths")
 
 
 def pick_free_port() -> int:
@@ -146,7 +153,7 @@ class SimpleCDPClient:
                 opcode, data = self._recv_frame()
                 if opcode == 1:
                     self.events.append(json.loads(data.decode("utf-8")))
-            except (socket.timeout, TimeoutError):
+            except TimeoutError:
                 break
 
     def close(self) -> None:
@@ -156,12 +163,87 @@ class SimpleCDPClient:
             pass
 
 
+def evaluate_events(events: list[dict[str, Any]], url: str) -> tuple[int | None, list[str], list[str]]:
+    """Extract document HTTP status, console errors, and uncaught exceptions from CDP events."""
+    http_status: int | None = None
+    console_errors: list[str] = []
+    exceptions: list[str] = []
+
+    for ev in events:
+        m = ev.get("method")
+        p = ev.get("params", {})
+        if m == "Network.responseReceived":
+            resp = p.get("response", {})
+            if resp.get("url", "").rstrip("/") == url.rstrip("/") or http_status is None:
+                if p.get("type") == "Document":
+                    http_status = resp.get("status")
+        elif m == "Runtime.consoleAPICalled" and p.get("type") == "error":
+            args = [str(a.get("value", a.get("description", ""))) for a in p.get("args", [])]
+            console_errors.append(" ".join(args))
+        elif m == "Runtime.exceptionThrown":
+            desc = p.get("exceptionDetails", {}).get("text", "exception")
+            exceptions.append(desc)
+
+    return http_status, console_errors, exceptions
+
+
+def clicks_succeeded(click_result: Any) -> bool:
+    """Return True if no requested click selector was missing."""
+    if click_result is None:
+        return True
+    if isinstance(click_result, str):
+        return click_result == "CLICKED"
+    if isinstance(click_result, list):
+        return all(isinstance(item, dict) and item.get("status") == "CLICKED" for item in click_result)
+    return False
+
+
+def compute_verdict(result: dict[str, Any], allow_console_errors: bool = False) -> bool:
+    """Determine overall pass/fail boolean from collected browser verification results."""
+    status_ok = result["http_status"] is None or (200 <= int(result["http_status"]) < 400)
+    text_ok = result["expect_text_found"] is not False
+    has_content = bool(result["title"] or result["body_snippet"])
+    console_ok = allow_console_errors or not result["console_errors"]
+    clicks_ok = clicks_succeeded(result.get("click_result"))
+    return bool(status_ok and text_ok and has_content and not result["exceptions"] and console_ok and clicks_ok)
+
+
+def _slugify(text: str, max_len: int = 32) -> str:
+    slug = re.sub(r"[^a-zA-Z0-9]+", "-", text).strip("-").lower()
+    return (slug[:max_len].strip("-")) or "step"
+
+
+def capture_screenshot(
+    client: SimpleCDPClient,
+    out_path: str | Path,
+    *,
+    step: str = "final",
+    full_page: bool = False,
+) -> dict[str, Any] | None:
+    """Capture a PNG screenshot via CDP and write it to out_path."""
+    params: dict[str, Any] = {"format": "png"}
+    if full_page:
+        params["captureBeyondViewport"] = True
+    shot = client.send("Page.captureScreenshot", params)
+    b64 = shot.get("result", {}).get("data")
+    if not b64:
+        return None
+    raw = base64.b64decode(b64)
+    out_p = Path(out_path)
+    out_p.parent.mkdir(parents=True, exist_ok=True)
+    out_p.write_bytes(raw)
+    return {"step": step, "path": str(out_p), "bytes": len(raw)}
+
+
 def verify_url(
     url: str,
     wait_seconds: float = 3.0,
     screenshot_path: str | None = None,
+    screenshot_dir: str | None = None,
+    full_page: bool = False,
     click_selectors: list[str] | None = None,
     expect_text: str | None = None,
+    allow_console_errors: bool = False,
 ) -> dict[str, Any]:
     chrome = find_chrome()
     port = pick_free_port()
@@ -192,10 +274,12 @@ def verify_url(
         "exceptions": [],
         "http_status": None,
         "screenshot": screenshot_path,
+        "screenshots": [],
         "expect_text_found": None,
         "click_result": None,
     }
     client: SimpleCDPClient | None = None
+    shot_dir = Path(screenshot_dir) if screenshot_dir else None
     try:
         ws_url = None
         for _ in range(40):
@@ -221,9 +305,14 @@ def verify_url(
         client.send("Page.navigate", {"url": url})
         client.drain_events(wait_seconds)
 
+        if shot_dir:
+            cap = capture_screenshot(client, shot_dir / "00-initial.png", step="initial", full_page=full_page)
+            if cap:
+                result["screenshots"].append(cap)
+
         if click_selectors:
             click_results: list[dict[str, Any]] = []
-            for sel in click_selectors:
+            for idx, sel in enumerate(click_selectors, 1):
                 js_click = f"""(() => {{
                     const el = document.querySelector({json.dumps(sel)});
                     if (!el) return "NOT_FOUND";
@@ -231,8 +320,14 @@ def verify_url(
                     return "CLICKED";
                 }})()"""
                 click_res = client.send("Runtime.evaluate", {"expression": js_click, "returnByValue": True})
-                click_results.append({"selector": sel, "status": click_res.get("result", {}).get("result", {}).get("value")})
+                status_val = click_res.get("result", {}).get("result", {}).get("value")
+                click_results.append({"selector": sel, "status": status_val})
                 client.drain_events(1.0)
+                if shot_dir:
+                    fname = f"{idx:02d}-click-{_slugify(sel)}.png"
+                    cap = capture_screenshot(client, shot_dir / fname, step=f"click:{sel}", full_page=full_page)
+                    if cap:
+                        result["screenshots"].append(cap)
             result["click_result"] = click_results[0]["status"] if len(click_results) == 1 else click_results
 
         expect_expr = json.dumps(expect_text.lower()) if expect_text else "null"
@@ -260,35 +355,34 @@ def verify_url(
         if expect_text:
             result["expect_text_found"] = info.get("expectFound")
 
-        for ev in client.events:
-            m = ev.get("method")
-            p = ev.get("params", {})
-            if m == "Network.responseReceived":
-                resp = p.get("response", {})
-                if resp.get("url", "").rstrip("/") == url.rstrip("/") or result["http_status"] is None:
-                    if p.get("type") == "Document":
-                        result["http_status"] = resp.get("status")
-            elif m == "Runtime.consoleAPICalled" and p.get("type") == "error":
-                args = [str(a.get("value", a.get("description", ""))) for a in p.get("args", [])]
-                result["console_errors"].append(" ".join(args))
-            elif m == "Runtime.exceptionThrown":
-                desc = p.get("exceptionDetails", {}).get("text", "exception")
-                result["exceptions"].append(desc)
+        http_status, console_errors, exceptions = evaluate_events(client.events, url)
+        result["http_status"] = http_status
+        result["console_errors"] = console_errors
+        result["exceptions"] = exceptions
 
         if screenshot_path:
-            shot = client.send("Page.captureScreenshot", {"format": "png"})
-            b64 = shot.get("result", {}).get("data")
-            if b64:
-                out_p = Path(screenshot_path)
-                out_p.parent.mkdir(parents=True, exist_ok=True)
-                out_p.write_bytes(base64.b64decode(b64))
+            cap = capture_screenshot(client, screenshot_path, step="final", full_page=full_page)
+            if cap:
+                result["screenshots"].append(cap)
 
-        status_ok = result["http_status"] is None or (200 <= int(result["http_status"]) < 400)
-        text_ok = result["expect_text_found"] is not False
-        has_content = bool(result["title"] or result["body_snippet"])
-        result["ok"] = bool(status_ok and text_ok and has_content and not result["exceptions"])
+        result["ok"] = compute_verdict(result, allow_console_errors=allow_console_errors)
+        if not result["ok"] and shot_dir and not screenshot_path:
+            try:
+                cap = capture_screenshot(client, shot_dir / "error.png", step="error", full_page=full_page)
+                if cap:
+                    result["screenshots"].append(cap)
+            except Exception:
+                pass
     except Exception as exc:
         result["error"] = str(exc)
+        if client and (shot_dir or screenshot_path):
+            err_target = (shot_dir / "error.png") if shot_dir else Path(screenshot_path)  # type: ignore[arg-type]
+            try:
+                cap = capture_screenshot(client, err_target, step="error", full_page=full_page)
+                if cap:
+                    result["screenshots"].append(cap)
+            except Exception:
+                pass
     finally:
         if client:
             client.close()
@@ -301,21 +395,39 @@ def verify_url(
     return result
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Guided headless Chrome browser verifier (CDP).")
     parser.add_argument("url", help="Target URL to open and verify")
     parser.add_argument("--wait", type=float, default=3.0, help="Seconds to wait after navigation")
-    parser.add_argument("--screenshot", default="", help="Optional PNG path to save screenshot")
+    parser.add_argument("--screenshot", default="", help="Optional PNG path to save final screenshot")
+    parser.add_argument(
+        "--screenshot-dir",
+        default="",
+        help="Optional directory to save multi-step screenshots (00-initial.png, per-click, error.png)",
+    )
+    parser.add_argument(
+        "--full-page",
+        action="store_true",
+        help="Capture full scrollable page beyond the initial viewport",
+    )
     parser.add_argument("--click", action="append", default=[], help="Optional CSS selector(s) to click sequentially after load")
     parser.add_argument("--expect", default="", help="Optional case-insensitive text expected on page")
-    args = parser.parse_args()
+    parser.add_argument(
+        "--allow-console-errors",
+        action="store_true",
+        help="Do not fail verification when console.error messages are recorded",
+    )
+    args = parser.parse_args(argv)
 
     res = verify_url(
         args.url,
         wait_seconds=args.wait,
         screenshot_path=args.screenshot or None,
+        screenshot_dir=args.screenshot_dir or None,
+        full_page=args.full_page,
         click_selectors=args.click or None,
         expect_text=args.expect or None,
+        allow_console_errors=args.allow_console_errors,
     )
     print(json.dumps(res, indent=2))
     return 0 if res.get("ok") else 1

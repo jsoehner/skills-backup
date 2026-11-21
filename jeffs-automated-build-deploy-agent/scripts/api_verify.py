@@ -16,8 +16,28 @@ def parse_expected_statuses(spec: str | None) -> set[int] | None:
     for part in spec.split(","):
         part = part.strip()
         if part.isdigit():
-            out.add(int(part))
+            code = int(part)
+            if 100 <= code <= 599:
+                out.add(code)
     return out or None
+
+
+def split_url_and_expected(url_spec: str, default_expected: set[int] | None) -> tuple[str, set[int] | None]:
+    """Split optional inline =STATUS suffix (e.g. https://localhost:3001/me=403).
+
+    Skips inline splitting when the URL contains a query string ('?') so numeric
+    query parameters such as '?page=200' are never mistaken for status assertions.
+    """
+    if "?" not in url_spec and "=" in url_spec:
+        candidate_url, status_part = url_spec.rsplit("=", 1)
+        parts = [p.strip() for p in status_part.split(",") if p.strip()]
+        if (
+            candidate_url.startswith(("http://", "https://"))
+            and parts
+            and all(p.isdigit() and 100 <= int(p) <= 599 for p in parts)
+        ):
+            return candidate_url, {int(p) for p in parts}
+    return url_spec, default_expected
 
 
 def probe_endpoint(
@@ -28,14 +48,7 @@ def probe_endpoint(
     timeout: int = 10,
     default_expected: set[int] | None = None,
 ) -> dict[str, Any]:
-    # Support optional inline expected status syntax: https://localhost:3001/me=403
-    url = url_spec
-    expected = default_expected
-    if "=" in url_spec and url_spec.rsplit("=", 1)[1].replace(",", "").isdigit():
-        candidate_url, status_part = url_spec.rsplit("=", 1)
-        if candidate_url.startswith(("http://", "https://")):
-            url = candidate_url
-            expected = parse_expected_statuses(status_part)
+    url, expected = split_url_and_expected(url_spec, default_expected)
 
     cmd = [
         "curl",
@@ -68,7 +81,10 @@ def probe_endpoint(
     meta = raw_meta.decode("utf-8", errors="replace")
     parts = meta.split("|")
     code = int(parts[0]) if parts and parts[0].isdigit() else 0
-    elapsed = float(parts[1]) if len(parts) > 1 else 0.0
+    try:
+        elapsed = float(parts[1]) if len(parts) > 1 else 0.0
+    except ValueError:
+        elapsed = 0.0
     ctype = parts[2] if len(parts) > 2 else ""
 
     is_binary = False
@@ -102,19 +118,19 @@ def probe_endpoint(
     }
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Probe one or more API endpoints with curl.")
     parser.add_argument(
         "urls",
         nargs="+",
-        help="Endpoint URL(s) to probe (optionally append =STATUS, e.g. https://localhost:3001/me=403)",
+        help="Endpoint URL(s) to probe (optionally append =STATUS when no query string, e.g. https://localhost:3001/me=403)",
     )
     parser.add_argument("-X", "--method", default="GET")
     parser.add_argument("-d", "--data", default=None)
     parser.add_argument("-H", "--header", action="append", default=[])
     parser.add_argument("--expect-status", default="", help="Comma-separated expected HTTP status codes (e.g. 200 or 401,403)")
     parser.add_argument("--timeout", type=int, default=10)
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
 
     default_expected = parse_expected_statuses(args.expect_status)
     results = [
