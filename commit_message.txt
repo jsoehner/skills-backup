@@ -1,0 +1,4 @@
+feat(config-skills): add pdf skill and resolve github-actions-node24 collision
+
+- Added `pdf` skill to `config-skills` to provide documentation and instructions.
+- Removed duplicate `github_actions_node24` from `config-skills` to resolve path collision with `github-actions-node24`.
