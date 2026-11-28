@@ -102,16 +102,17 @@ The synchronization script (`scripts/sync.py`) maps files between the backup rep
 ## Script Reference
 
 ### `setup.sh` / `setup.ps1`
-Multi-client restoration and inspection script supporting Gemini, Pi, Claude, and OpenCode runtimes.
-- **Restore Skills**: `./setup.sh --client [gemini|pi|claude|opencode]`
+Multi-client backup, restoration, and inspection script supporting Gemini, Pi, Claude, OpenCode, and Hermes runtimes.
+- **Restore Skills**: `./setup.sh --client [gemini|pi|claude|opencode|hermes] [--dry-run] [--clean]`
+- **Backup Local Skills**: `./setup.sh --backup --client [gemini|pi|claude|opencode|hermes] [--dry-run]`
 - **Status Check**: `./setup.sh --status --client [client]`
 - **Catalog Search**: `./setup.sh --catalog`
 - **Memory Diagnostic**: `./setup.sh --memory`
 
 ### `scripts/sync.py`
 The utility to push/pull files between local runtime directories and this repo:
-- **Save Changes (Local -> Repo)**: `python3 scripts/sync.py save`
-- **Deploy Changes (Repo -> Local)**: `python3 scripts/sync.py deploy`
+- **Save Changes & New Skills (Local -> Repo)**: `python3 scripts/sync.py save --client [pi|gemini|claude|opencode|hermes] [--dry-run] [--no-new]`
+- **Deploy Changes (Repo -> Local)**: `python3 scripts/sync.py deploy --client [pi|gemini|claude|opencode|hermes] [--dry-run]`
 - **Category Filtering**: `python3 scripts/sync.py save -g databases_data`
 - **List Categories**: `python3 scripts/sync.py -l`
 

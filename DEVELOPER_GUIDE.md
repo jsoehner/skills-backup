@@ -18,11 +18,11 @@ To add a new skill to the repository:
 4. **Update Catalog**: Add the new skill to the table in `README.md`.
 5. **Validate**: Run `python3 scripts/check_skills.py` to ensure the skill meets our standards.
 
-### 2. Inspecting and Restoring Skills
-To inspect what skills are installed vs new in your local environment, or to restore all skills:
+### 2. Inspecting, Backing Up, and Restoring Skills
+To inspect what skills are installed vs new in your local environment, back up local edits/new skills, or restore all skills:
 ```bash
 # Check new vs installed skills
-./setup.sh --status --client [pi|gemini|claude|opencode]
+./setup.sh --status --client [pi|gemini|claude|opencode|hermes]
 
 # Browse skills catalog
 ./setup.sh --catalog
@@ -30,8 +30,11 @@ To inspect what skills are installed vs new in your local environment, or to res
 # Inspect local memory system (OKF + ChromaDB)
 ./setup.sh --memory
 
-# Restore all skills
-./setup.sh --client [pi|gemini|claude|opencode]
+# Back up local client skills (including new skills) into the repo
+./setup.sh --backup --client [pi|gemini|claude|opencode|hermes] [--dry-run]
+
+# Restore all skills (add --dry-run to preview or --clean to prune stale files)
+./setup.sh --client [pi|gemini|claude|opencode|hermes] [--dry-run] [--clean]
 ```
 
 On Windows PowerShell:
@@ -39,7 +42,8 @@ On Windows PowerShell:
 .\setup.ps1 -Status -Client gemini
 .\setup.ps1 -Catalog
 .\setup.ps1 -Memory
-.\setup.ps1 -Client gemini
+.\setup.ps1 -Backup -Client pi -DryRun
+.\setup.ps1 -Client gemini -DryRun
 ```
 
 ### 3. Synchronizing to Production

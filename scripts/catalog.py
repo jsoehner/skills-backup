@@ -55,13 +55,18 @@ except ImportError:
 
 def get_client_skills_dir(client: str) -> str:
     """Resolve target client skills directory path."""
-    client_map = {
-        "pi": "~/.pi/agent/skills",
-        "gemini": "~/.gemini/config/skills",
-        "claude": "~/.claude/skills",
-        "opencode": "~/.opencode/skills"
-    }
-    path_str = client_map.get(client.lower(), "~/.pi/agent/skills")
+    client_lower = client.lower()
+    if client_lower == "hermes":
+        local_app_data = os.environ.get("LOCALAPPDATA")
+        path_str = os.path.join(local_app_data, "hermes", "skills") if local_app_data else "~/.local/share/hermes/skills"
+    else:
+        client_map = {
+            "pi": "~/.pi/agent/skills",
+            "gemini": "~/.gemini/config/skills",
+            "claude": "~/.claude/skills",
+            "opencode": "~/.opencode/skills"
+        }
+        path_str = client_map.get(client_lower, "~/.pi/agent/skills")
     return os.path.realpath(os.path.abspath(os.path.expanduser(path_str)))
 
 def get_installed_skills(client: str) -> Dict[str, str]:
@@ -175,7 +180,8 @@ def show_status(client: str = "pi", filter_mode: str = "all", search_query: str 
     client_dir = get_client_skills_dir(client)
     installed = get_installed_skills(client)
     user_skills, config_skills = get_repo_skills()
-    all_repo_skills = {s["name"]: s for s in (user_skills + config_skills)}
+    # Root user skills take precedence over config-skills on name collisions
+    all_repo_skills = {s["name"]: s for s in (config_skills + user_skills)}
 
     installed_names = set(installed.keys())
     repo_names = set(all_repo_skills.keys())
@@ -317,7 +323,7 @@ def show_memory_info(search_query: str = None, show_details: bool = False):
 
 def main():
     parser = argparse.ArgumentParser(description="View skills catalog, installation status, and local memory contents.")
-    parser.add_argument("--client", choices=["pi", "gemini", "claude", "opencode"], default="pi",
+    parser.add_argument("--client", choices=["pi", "gemini", "claude", "opencode", "hermes"], default="pi",
                         help="Target AI client to inspect (default: pi)")
     parser.add_argument("-c", "--catalog", action="store_true",
                         help="Show the full skills catalog grouped by category")
@@ -363,4 +369,10 @@ def main():
         show_status(client=args.client, filter_mode="all", search_query=args.search)
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except (BrokenPipeError, OSError) as exc:
+        # Exit cleanly when output is truncated by a downstream pipe (e.g. head / Select-Object -First)
+        if isinstance(exc, BrokenPipeError) or getattr(exc, "errno", None) in (22, 32):
+            sys.exit(0)
+        raise

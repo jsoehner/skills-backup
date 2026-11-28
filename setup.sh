@@ -8,6 +8,7 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 RESTORE_SCRIPT="$SCRIPT_DIR/scripts/restore_skills.py"
+SYNC_SCRIPT="$SCRIPT_DIR/scripts/sync.py"
 CATALOG_SCRIPT="$SCRIPT_DIR/scripts/catalog.py"
 
 # Default configuration
@@ -16,6 +17,8 @@ ACTION="restore"
 CATEGORY=""
 SEARCH_QUERY=""
 DETAILS="false"
+DRY_RUN="false"
+CLEAN="false"
 TARGET_PATH="."
 EXTRA_ARGS=()
 
@@ -26,7 +29,7 @@ Usage: $(basename "$0") [OPTIONS] [-- EXTRA_ARGS]
 Setup, manage, and inspect agent skills and local memory systems for AI clients.
 
 Options:
-  -c, --client CLIENT      Target AI client: pi, gemini, claude, opencode (default: pi)
+  -c, --client CLIENT      Target AI client: pi, gemini, claude, opencode, hermes (default: pi)
   -C, --catalog            Display skills catalog grouped by category
   -s, --status             Show installation status (existing vs new skills) for target client
       --new                Show only new/uninstalled skills for target client
@@ -37,9 +40,12 @@ Options:
       --check-fork [PATH]  Check repository fork origin, upstream status, and sync availability
   -d, --details            Display full document contents when inspecting memory
   -i, --info               Display repository overview, skills summary, and memory info
-  -g, --category NAME      Filter catalog or status by category name
+  -g, --category NAME      Filter catalog, status, or backup by category name
   -q, --search QUERY       Search skills or memory entries by keyword
   -r, --restore            Restore skills to the target client (default action)
+  -b, --backup, --save     Back up local client skills (including new skills) into the repository
+      --dry-run            Preview restore or backup operations without modifying files
+      --clean              Clean destination skill folders before restoring to remove stale files
   -h, --help               Show this help message and exit
 
 Memory & RAG System:
@@ -146,6 +152,18 @@ while [[ $# -gt 0 ]]; do
             ACTION="restore"
             shift
             ;;
+        -b|--backup|--save)
+            ACTION="backup"
+            shift
+            ;;
+        --dry-run)
+            DRY_RUN=true
+            shift
+            ;;
+        --clean)
+            CLEAN=true
+            shift
+            ;;
         -h|--help)
             print_usage
             exit 0
@@ -164,10 +182,10 @@ done
 
 # Validate client choice
 case "$CLIENT" in
-    pi|gemini|claude|opencode)
+    pi|gemini|claude|opencode|hermes)
         ;;
     *)
-        echo "Error: Invalid client '$CLIENT'. Supported clients: pi, gemini, claude, opencode." >&2
+        echo "Error: Invalid client '$CLIENT'. Supported clients: pi, gemini, claude, opencode, hermes." >&2
         exit 1
         ;;
 esac
@@ -205,10 +223,17 @@ if [[ "$ACTION" == "restore" ]]; then
     echo "=================================================="
     echo ""
 
+    RESTORE_CMD=("$PYTHON_BIN" "$RESTORE_SCRIPT" "$SCRIPT_DIR" --client "$CLIENT")
+    if [[ "$DRY_RUN" == "true" ]]; then
+        RESTORE_CMD+=("--dry-run")
+    fi
+    if [[ "$CLEAN" == "true" ]]; then
+        RESTORE_CMD+=("--clean")
+    fi
     if [[ ${#EXTRA_ARGS[@]} -gt 0 ]]; then
-        "$PYTHON_BIN" "$RESTORE_SCRIPT" "$SCRIPT_DIR" --client "$CLIENT" "${EXTRA_ARGS[@]}"
+        "${RESTORE_CMD[@]}" "${EXTRA_ARGS[@]}"
     else
-        "$PYTHON_BIN" "$RESTORE_SCRIPT" "$SCRIPT_DIR" --client "$CLIENT"
+        "${RESTORE_CMD[@]}"
     fi
 
     echo ""
@@ -230,6 +255,23 @@ if [[ "$ACTION" == "restore" ]]; then
     echo "  • Browse Skills Catalog  : ./setup.sh --catalog"
     echo "  • Search Skills          : ./setup.sh --catalog -q <keyword>"
     echo "=================================================="
+elif [[ "$ACTION" == "backup" ]]; then
+    if [[ ! -f "$SYNC_SCRIPT" ]]; then
+        echo "Error: Sync script not found at '$SYNC_SCRIPT'." >&2
+        exit 1
+    fi
+    SYNC_CMD=("$PYTHON_BIN" "$SYNC_SCRIPT" "save" "--client" "$CLIENT")
+    if [[ -n "$CATEGORY" ]]; then
+        SYNC_CMD+=("--group" "$CATEGORY")
+    fi
+    if [[ "$DRY_RUN" == "true" ]]; then
+        SYNC_CMD+=("--dry-run")
+    fi
+    if [[ ${#EXTRA_ARGS[@]} -gt 0 ]]; then
+        "${SYNC_CMD[@]}" "${EXTRA_ARGS[@]}"
+    else
+        "${SYNC_CMD[@]}"
+    fi
 elif [[ "$ACTION" == "preflight" ]]; then
     "$PYTHON_BIN" "$SCRIPT_DIR/scripts/inspect_memory.py" --preflight "$TARGET_PATH" "${EXTRA_ARGS[@]}"
 elif [[ "$ACTION" == "check_fork" ]]; then

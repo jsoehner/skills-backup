@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     Setup and skills management script for Skills Backup repository (Windows PowerShell).
 
@@ -72,7 +72,7 @@
 
 [CmdletBinding()]
 param (
-    [ValidateSet("pi", "gemini", "claude", "opencode", IgnoreCase = $true)]
+    [ValidateSet("pi", "gemini", "claude", "opencode", "hermes", IgnoreCase = $true)]
     [string]$Client = "pi",
 
     [switch]$Catalog,
@@ -90,6 +90,10 @@ param (
     [string]$Category = "",
     [string]$Search = "",
     [switch]$Restore,
+    [switch]$Backup,
+    [switch]$Save,
+    [switch]$DryRun,
+    [switch]$Clean,
 
     [string]$PythonPath = ""
 )
@@ -99,6 +103,7 @@ $ErrorActionPreference = "Stop"
 # Determine script directory
 $RepoRoot = if ($PSScriptRoot) { $PSScriptRoot } else { Split-Path -Parent $MyInvocation.MyCommand.Path }
 $RestoreScript = Join-Path -Path $RepoRoot -ChildPath "scripts\restore_skills.py"
+$SyncScript = Join-Path -Path $RepoRoot -ChildPath "scripts\sync.py"
 $CatalogScript = Join-Path -Path $RepoRoot -ChildPath "scripts\catalog.py"
 $InspectMemoryScript = Join-Path -Path $RepoRoot -ChildPath "scripts\inspect_memory.py"
 $CheckForkScript = Join-Path -Path $RepoRoot -ChildPath "scripts\check_fork_guardrail.py"
@@ -148,6 +153,23 @@ if ($CheckFork) {
         exit 1
     }
     & $PythonExecutable $CheckForkScript $TargetPath
+    exit $LASTEXITCODE
+}
+
+if ($Backup -or $Save) {
+    if (-not (Test-Path -Path $SyncScript)) {
+        Write-Error "Error: Sync script not found at '$SyncScript'."
+        exit 1
+    }
+    $SyncArgs = @($SyncScript, "save", "--client", $Client)
+    if ($Category) {
+        $SyncArgs += "--group"
+        $SyncArgs += $Category
+    }
+    if ($DryRun) {
+        $SyncArgs += "--dry-run"
+    }
+    & $PythonExecutable $SyncArgs
     exit $LASTEXITCODE
 }
 
@@ -202,7 +224,10 @@ if ($IsDisplayAction) {
     Write-Host ""
 
     try {
-        & $PythonExecutable $RestoreScript $RepoRoot --client $Client
+        $RestoreArgs = @($RestoreScript, $RepoRoot, "--client", $Client)
+        if ($DryRun) { $RestoreArgs += "--dry-run" }
+        if ($Clean)  { $RestoreArgs += "--clean" }
+        & $PythonExecutable $RestoreArgs
         if ($LASTEXITCODE -ne 0) {
             Write-Error "Setup failed with exit code $LASTEXITCODE."
             exit $LASTEXITCODE
